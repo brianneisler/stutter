@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+var program = require('commander');
+var package = require('../package.json');
+var stutter = require('../');
+
+program
+  .version(package.version)
+  .usage('[options] <file ...>')
+  .parse(process.argv);
+
+//TODO BRN: if args is empty, fire up REPL
+stutter.run(program.args[0]);

@@ -1,0 +1,12 @@
+#development
+docs
+examples
+src
+test
+.babelrc
+.editorconfig
+.eslintrc.json
+.reciperc
+.travis.yml
+gulpfile.*
+!resources/.reciperc
