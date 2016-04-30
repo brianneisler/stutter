@@ -1,27 +1,12 @@
 import _ from 'lodash';
-import Immutable from 'immutable';
+import { IDENTIFIER, REST } from '../defines';
+import { expression } from '../core';
 
-export function interpret(expression, process) {
-    const ns = expression.get('ns');
-    const identifier = ns.get(0);
-    let identifierFunc = null;
-    if (_.isString(identifier)) {
-        identifierFunc = () => { return identifier };
-    } else {
-        identifierFunc = process(identifier);
-    }
-    const expressions = ns.rest().map((value) => {
-        return process(value);
+export function generate(namespace, context, code) {
+  return expression([IDENTIFIER, REST],
+    (scope, tail, identifier, rest) => {
+      rest(scope, tail);
+      _.set(namespace, identifier.name, context);
+      return context;
     });
-    return (scope) => {
-        const namespace = identifierFunc(scope);
-        if (!_.isString(namespace)) {
-            throw new Error(`UnexpectedValue - expected string`);
-        }
-        const newScope = {};
-        scope = scope.setIn(namespace, newScope);
-        expressions.map((expression) => {
-            return expression(scope);
-        });
-    }
 }

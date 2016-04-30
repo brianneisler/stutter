@@ -1,6 +1,9 @@
-import _ from 'lodash';
-export default _.memoize((key) => {
-  return (...args) => {
-    return {[key]: args }
+import { EXPRESSION } from '../defines';
+
+export default function expression(expect, method) {
+  return {
+    type: EXPRESSION,
+    expect,
+    method
   };
-});
+}

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import Immutable from 'immutable';
 
-export function interpret(expression, process) {
+export function generate(expression, process) {
     const call = expression.get('call');
     const name = call.get(0);
     let nameFunc = null;

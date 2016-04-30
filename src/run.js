@@ -1,23 +1,16 @@
 import _ from 'lodash';
-import vm from 'vm';
-import fs from 'fs';
 import * as lang from './lang';
-import { expression } from './core';
+import { context, keyword, namespace, scope } from './core';
+import generate from './generate';
+import parse from './parse';
+import evaluate from './evaluate';
 
-export function run(path, options) {
-  const context = _.reduce(lang, (reduction, value, key) => {
-    return _.set(reduction, key, expression(key));
+export default function run(path, options) {
+  const keywords = _.reduce(lang, (reduction, value, key) => {
+    return _.set(reduction, key, keyword(key));
   }, {});
-  const code = parse(path, context);
-  const func = interpret(code);
-  console.log(func);
-}
-
-export function parse(path, context) {
-  const data = fs.readFileSync(path);
-  return vm.runInNewContext(data, context, path);
-}
-
-export function interpret(code) {
-
+  const parsedCode = parse(path, keywords);
+  const generatedCode = generate(namespace(), context(), parsedCode);
+  const func = evaluate(generatedCode);
+  return func(scope());
 }
