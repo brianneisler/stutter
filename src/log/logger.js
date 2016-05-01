@@ -12,7 +12,7 @@ const logger = {
     logger.log(type, ERROR, ...logs);
   },
   info: (type, ...logs) => {
-    logger.log(type, ERROR, ...logs);
+    logger.log(type, INFO, ...logs);
   },
   logs: [],
   log: (type, level, ...logs) => {

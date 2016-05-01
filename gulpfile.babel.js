@@ -85,7 +85,9 @@ gulp.task('jest', () => {
       '<rootDir>/src/core/namespace',
       '<rootDir>/src/core/scope',
       '<rootDir>/src/log/index',
-      '<rootDir>/src/log/logger'
+      '<rootDir>/src/log/levels',
+      '<rootDir>/src/log/logger',
+      '<rootDir>/src/log/types'
     ],
     testPathIgnorePatterns: [
       '/node_modules/',

@@ -4,7 +4,7 @@ jest.unmock('../../evaluate');
 import { generate } from '../log';
 import { isExpression } from '../../evaluate';
 import { context, namespace, scope } from '../../core';
-import { logger } from '../../log';
+import { PROGRAM, INFO, logger } from '../../log';
 
 const fixtures = {
   code: {
@@ -26,7 +26,7 @@ describe('log', () => {
   it('generates log expression', () => {
     const expression = generate(namespace(), context(), fixtures.code);
     expression.method(scope(), fixtures.tail, fixtures.methods);
-    expect(logger.logs).toEqual([['method1']]);
+    expect(logger.logs).toEqual([{ type: PROGRAM, level: INFO, logs: ['method1']}]);
     logger.clear();
   });
 });
