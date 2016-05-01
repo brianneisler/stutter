@@ -1,6 +1,6 @@
 {
   "name": "stutter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Functional language for js",
   "main": "index.js",
   "bin": {
