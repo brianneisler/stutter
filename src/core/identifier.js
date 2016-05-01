@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { IDENTIFIER } from '../defines';
 
-export default function(namespace, context, name) {
+export default function identifier(namespace, context, name) {
   return {
     type: IDENTIFIER,
     name,

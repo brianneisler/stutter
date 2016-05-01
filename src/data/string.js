@@ -1,9 +1,14 @@
+import _ from 'lodash';
 import { STRING } from '../defines';
 
-export default function string(namespace, context, value) {
+export function string(value) {
   return {
     type: STRING,
     value,
     method: () => value
   };
 };
+
+export function generate(namespace, context, code) {
+  return string(code.substr(1));
+}

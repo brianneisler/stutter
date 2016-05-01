@@ -50,7 +50,7 @@ function generateIdentifier(namespace, context, name) {
 }
 
 function generateString(namespace, context, value) {
-  return string(namespace, context, value);
+  return string.generate(namespace, context, value);
 }
 
 function isExpression(code) {
