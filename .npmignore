@@ -9,4 +9,3 @@ test
 .reciperc
 .travis.yml
 gulpfile.*
-!resources/.reciperc

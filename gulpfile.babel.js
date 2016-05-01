@@ -2,12 +2,14 @@
 // Requires
 //-------------------------------------------------------------------------------
 
+import del from 'del';
 import gulp from 'gulp';
 import babel from 'gulp-babel';
 import eslint from 'gulp-eslint';
 import recipe from 'gulp-recipe';
 import sourcemaps from 'gulp-sourcemaps';
 import util from 'gulp-util';
+import jest from 'jest-cli';
 
 
 //-------------------------------------------------------------------------------
@@ -37,6 +39,8 @@ gulp.task('prod', ['babel']);
 
 gulp.task('dev', ['babel', 'lint', 'babel-watch', 'lint-watch']);
 
+gulp.task('test', ['lint', 'jest']);
+
 gulp.task('babel', () => {
   return gulp.src(sources.babel)
     .pipe(sourcemaps.init({
@@ -56,9 +60,51 @@ gulp.task('babel', () => {
     });
 });
 
-gulp.task('lint', recipe.get('eslint', sources.eslint));
+gulp.task('clean', () => {
+  return del([
+    'dist'
+  ]);
+});
 
-gulp.task('test', ['lint']);
+gulp.task('jest', () => {
+  return runJest({
+    name: '',
+    scriptPreprocessor: '<rootDir>/node_modules/babel-jest',
+    unmockedModulePathPatterns: [
+      'babel-polyfill',
+      'error-stack-parser',
+      'immutable',
+      'lodash',
+      '<rootDir>/src/defines',
+      '<rootDir>/src/core/context',
+      '<rootDir>/src/core/expression',
+      '<rootDir>/src/core/identifier',
+      '<rootDir>/src/core/index',
+      '<rootDir>/src/core/keyword',
+      '<rootDir>/src/core/namespace',
+      '<rootDir>/src/core/scope',
+      '<rootDir>/src/log/index',
+      '<rootDir>/src/log/logger'
+    ],
+    testPathIgnorePatterns: [
+      '/node_modules/',
+      '/.nvm/'
+    ],
+    testFileExtensions: [
+      'js'
+    ],
+    moduleFileExtensions: [
+      'js'
+    ],
+    modulePathIgnorePatterns: [
+      '/node_modules/',
+      '/.nvm/'
+    ],
+    testDirectoryName: 'tests'
+  });
+});
+
+gulp.task('lint', recipe.get('eslint', sources.eslint));
 
 
 //-------------------------------------------------------------------------------
@@ -83,3 +129,24 @@ gulp.task('lint-watch', () => {
     }
   });
 });
+
+
+//-------------------------------------------------------------------------------
+// Helper Functions
+//-------------------------------------------------------------------------------
+
+function runJest(options) {
+  return new Promise((resolve, reject) => {
+    options = options || {};
+    options.rootDir = options.rootDir || process.cwd();
+    jest.runCLI({
+      config: options
+    }, options.rootDir, (success) => {
+      if (!success) {
+        reject(new util.PluginError('gulp-jest', {message: 'Tests Failed'}));
+      } else {
+        resolve();
+      }
+    });
+  });
+}

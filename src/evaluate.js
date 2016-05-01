@@ -85,14 +85,14 @@ function expectString(code) {
   return evaluateString(code);
 }
 
-function isExpression(code) {
+export function isExpression(code) {
   return _.isObject(code) && code.type === EXPRESSION;
 }
 
-function isIdentifier(code) {
+export function isIdentifier(code) {
   return _.isObject(code) && code.type === IDENTIFIER;
 }
 
-function isString(code) {
+export function isString(code) {
   return _.isObject(code) && code.type === STRING;
 }

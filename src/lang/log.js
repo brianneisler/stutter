@@ -2,6 +2,7 @@ import _ from 'lodash';
 import Immutable from 'immutable';
 import { METHODS } from '../defines';
 import { expression } from '../core';
+import { logger } from '../log';
 
 export function generate(namespace, context, code) {
   return expression([METHODS],
@@ -11,10 +12,10 @@ export function generate(namespace, context, code) {
         return tail;
       });
       if (_.isEmpty(results)) {
-        console.log(tail);
+        logger.log(tail);
         return tail;
       } else {
-        console.log(...results);
+        logger.log(...results);
       }
     });
 }
