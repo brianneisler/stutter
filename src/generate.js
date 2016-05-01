@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import Immutable from 'immutable';
 import * as lang from './lang';
 import { identifier } from './core';
 import { string } from './data';
@@ -24,9 +23,8 @@ function doGenerate(namespace, context, code) {
     return generateIdentifier(namespace, context, code);
   } else if (_.isArray(code)) {
     return generateArray(namespace, context, code);
-  } else {
-    throw new Error(`Unknown value in code ${code}`);
   }
+  throw new Error(`Unknown value in code ${code}`);
 }
 
 function generateArray(namespace, context, array) {

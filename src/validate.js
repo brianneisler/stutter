@@ -1,3 +1,3 @@
-export default function validate(generateation) {
+export default function validate() {
 
 }

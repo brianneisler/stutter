@@ -5,7 +5,7 @@ import generate from './generate';
 import parse from './parse';
 import evaluate from './evaluate';
 
-export default function run(path, options) {
+export default function run(path) {
   const keywords = _.reduce(lang, (reduction, value, key) => {
     return _.set(reduction, key, keyword(key));
   }, {});

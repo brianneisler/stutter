@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { STRING } from '../defines';
 
 export function string(value) {
@@ -7,7 +6,7 @@ export function string(value) {
     value,
     method: () => value
   };
-};
+}
 
 export function generate(namespace, context, code) {
   return string(code.substr(1));

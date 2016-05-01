@@ -4,7 +4,7 @@ jest.unmock('../../evaluate');
 import { generate } from '../log';
 import { isExpression } from '../../evaluate';
 import { context, namespace, scope } from '../../core';
-import { logger } from '../../log'
+import { logger } from '../../log';
 
 const fixtures = {
   code: {
@@ -14,7 +14,7 @@ const fixtures = {
   },
   tail: 'tail',
   methods: [
-    () => { return 'method1' }
+    () => { return 'method1'; }
   ]
 };
 

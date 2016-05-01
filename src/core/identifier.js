@@ -18,4 +18,4 @@ export default function identifier(namespace, context, name) {
       return scope.getIn(name);
     }
   };
-};
+}

@@ -24,6 +24,7 @@ const sources = {
   eslint: [
     '**/*.js',
     '!dist/**',
+    '!examples/**',
     '!node_modules/**'
   ]
 };
