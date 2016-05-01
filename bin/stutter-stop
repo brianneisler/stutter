@@ -1,0 +1,16 @@
+var program = require('commander');
+
+program
+  .description('stop local stutter server')
+  .parse(process.argv);
+
+((options) => {
+  var stopServer = require('../').commands.stopServer;
+  stopServer(options)
+    .then(() => {
+      process.exit();
+    })
+    .catch(() => {
+      process.exit(1);
+    });
+})(program);

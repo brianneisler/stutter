@@ -1,15 +1,13 @@
 import _ from 'lodash';
-import * as lang from './lang';
-import { context, keyword, namespace, scope } from './core';
+import { context, namespace, scope } from './core';
 import generate from './generate';
+import { loadFile } from './loader';
 import parse from './parse';
 import evaluate from './evaluate';
 
-export default function run(path) {
-  const keywords = _.reduce(lang, (reduction, value, key) => {
-    return _.set(reduction, key, keyword(key));
-  }, {});
-  const parsedCode = parse(path, keywords);
+export default async function run(path) {
+  const data = await loadFile(path);
+  const parsedCode = parse(data, path);
   const generatedCode = generate(namespace(), context(), parsedCode);
   const func = evaluate(generatedCode);
   return func(scope());

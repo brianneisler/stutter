@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { METHODS } from '../defines';
 import { expression } from '../core';
-import { logger } from '../log';
+import { PROGRAM, logger } from '../log';
 
 export function generate() {
   return expression([METHODS],
@@ -11,10 +11,10 @@ export function generate() {
         return tail;
       });
       if (_.isEmpty(results)) {
-        logger.log(tail);
+        logger.info(PROGRAM, tail);
         return tail;
       } else {
-        logger.log(...results);
+        logger.info(PROGRAM, ...results);
       }
     });
 }

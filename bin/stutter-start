@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+var program = require('commander');
+
+program
+.description('start local stutter server')
+.parse(process.argv);
+
+((options) => {
+  var startServer = require('../').commands.startServer;
+  startServer(options)
+    .then(() => {
+      process.exit();
+    })
+    .catch(() => {
+      process.exit(1);
+    });
+})(program);

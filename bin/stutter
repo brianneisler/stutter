@@ -2,12 +2,11 @@
 
 var program = require('commander');
 var package = require('../package.json');
-var stutter = require('../');
 
 program
   .version(package.version)
-  .usage('[options] <file ...>')
+  .command('repl', 'start stutter repl')
+  .command('run', 'run stutter js program', {isDefault: true})
+  .command('start', 'start local stutter server')
+  .command('stop', 'stop local stutter server')
   .parse(process.argv);
-
-//TODO BRN: if args is empty, fire up REPL
-stutter.run(program.args[0]);
