@@ -7,7 +7,7 @@ export default _.memoize((key) => {
     const stack = StackParser.parse(new Error(''));
     Error.stackTraceLimit = Infinity;
     const stackFrame = stack[1];
-    const code = { [key]: args };
+    const code = { [key]: resolve(args) };
     Object.defineProperty(code, '_meta', {
       enumerable: false,
       configurable: false,
@@ -17,3 +17,12 @@ export default _.memoize((key) => {
     return code;
   };
 });
+
+function resolve(data) {
+  return _.map(data, (value) => {
+    if (_.isFunction(value)) {
+      return value();
+    }
+    return value;
+  });
+}
