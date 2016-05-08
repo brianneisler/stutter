@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { context, namespace, scope } from '../core';
 import evaluate from '../evaluate';
 import generate from '../generate';
-import { REPL, logger } from '../log';
+import { REPL, logger } from 'stutter-util';
 import parse from '../parse';
 import { prompt } from '../util';
 

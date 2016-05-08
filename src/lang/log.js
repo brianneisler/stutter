@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { METHODS } from '../defines';
 import { expression } from '../core';
-import { PROGRAM, logger } from '../log';
+import { PROGRAM, logger } from 'stutter-util';
 
 export function generate() {
   return expression([METHODS],

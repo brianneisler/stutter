@@ -21,6 +21,11 @@ npm install -g stutter
 stutter path/to/file.js
 ```
 
+### starting REPL
+```bash
+stutter
+```
+
 ## Code Example
 ```js
 ns('lang',
@@ -30,5 +35,4 @@ ns('lang',
 ## Code Parts
 - Strings are identifiers
 - all keywords are simple functions
-- Actual strings are of the format '"my string'
--- Leading double quote "
+- Actual strings are of the format '"my string' with a leading double quote "

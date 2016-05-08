@@ -1,5 +1,5 @@
 import { run } from '../';
-import { COMMAND, logger } from '../log';
+import { COMMAND, logger } from 'stutter-util';
 
 export default async function runProgram(file, options) {
   try {

@@ -8,7 +8,7 @@ program
   .arguments('[file]')
   .parse(process.argv);
 
-((options) => {
+(function(options) {
   var file = _.first(program.args);
   var startRepl = require('../').commands.startRepl;
   startRepl(file, options)

@@ -2,15 +2,16 @@ var program = require('commander');
 
 program
   .description('stop local stutter server')
+  .option('-d, --daemon', 'Run as a daemon')
   .parse(process.argv);
 
-((options) => {
+(function(options) {
   var stopServer = require('../').commands.stopServer;
   stopServer(options)
-    .then(() => {
+    .then(function() {
       process.exit();
     })
-    .catch(() => {
+    .catch(function() {
       process.exit(1);
     });
 })(program);

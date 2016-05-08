@@ -1,10 +1,11 @@
 import { start } from '../server';
-import { COMMAND, logger } from '../log';
+import { COMMAND, logger } from 'stutter-util';
 
 export default async function startServer(options) {
   logger.info(COMMAND, 'checking if stutter server is running...');
-  const state = await start();
-  if (state.running) {
-
+  try {
+    await start(options);
+  } catch(throwable) {
+    logger.debug(COMMAND, throwable.stack);
   }
 }

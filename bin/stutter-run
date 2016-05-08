@@ -6,13 +6,13 @@ program
   .description('run stutter js program')
   .usage('[options] <file>')
   .arguments('<file>')
-  .action((file, options) => {
+  .action(function(file, options) {
     var runProgram = require('../').commands.runProgram;
     runProgram(file, options)
-      .then(() => {
+      .then(function() {
         process.exit();
       })
-      .catch(() => {
+      .catch(function() {
         process.exit(1);
       });
   })
@@ -21,10 +21,10 @@ program
 if (!program.args.length) {
   var startRepl = require('../').commands.startRepl;
   startRepl(null, program)
-    .then(() => {
+    .then(function() {
       process.exit();
     })
-    .catch(() => {
+    .catch(function() {
       process.exit(1);
     });
 }

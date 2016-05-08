@@ -1,5 +1,5 @@
 import { stop } from '../server';
-import { COMMAND, logger } from '../log';
+import { COMMAND, logger } from 'stutter-util';
 
 export default async function stopServer(option) {
   logger.info(COMMAND, 'attempting to stop stutter server...');
