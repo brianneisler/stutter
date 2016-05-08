@@ -4,7 +4,7 @@ jest.unmock('../../evaluate');
 import { generate } from '../log';
 import { isExpression } from '../../evaluate';
 import { context, namespace, scope } from '../../core';
-import { PROGRAM, INFO, logger } from '../../log';
+import { PROGRAM, INFO, logger } from 'stutter-util';
 
 const fixtures = {
   code: {

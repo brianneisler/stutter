@@ -72,10 +72,10 @@ gulp.task('jest', () => {
     name: '',
     scriptPreprocessor: '<rootDir>/node_modules/babel-jest',
     unmockedModulePathPatterns: [
-      'babel-polyfill',
       'error-stack-parser',
       'immutable',
       'lodash',
+      'stutter-util',
       '<rootDir>/src/defines',
       '<rootDir>/src/core/context',
       '<rootDir>/src/core/expression',
