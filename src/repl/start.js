@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { context, namespace, scope } from '../core';
 import evaluate from '../evaluate';
 import generate from '../generate';
@@ -21,9 +20,9 @@ export default async function start(file) {
     const result = await prompt(schema);
     if (result.code !== 'exit') {
       const parsedCode = parse(result.code, '');
-      const generatedCode = generate(_namespace, _context, parsedCode);
-      const func = evaluate(generatedCode);
-      logger.info(REPL, func(scope()));
+      const generatedCode = generate(parsedCode);
+      const result = await evaluate(_context, _namespace, scope(), generatedCode);
+      logger.info(REPL, result);
     } else {
       done = true;
     }

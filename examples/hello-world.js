@@ -1,2 +1,2 @@
 ns('lang',
-  log(str('"Hello', '" world!')))
+  log('"Hello world!'))

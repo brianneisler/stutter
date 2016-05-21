@@ -1,3 +1,3 @@
 ns('lang',
-  str('"Hello', '" world!'),
+  '"Hello world!',
   log)

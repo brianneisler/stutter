@@ -7,6 +7,7 @@ export * as def from './def';
 export * as fn from './fn';
 export * as iif from './iif';
 export * as imp from './imp';
+export * as llet from './llet';
 export * as log from './log';
 export * as not from './not';
 export * as ns from './ns';

@@ -1,5 +1,6 @@
-import _ from 'lodash';
+import * as _ from '../util';
 import StackParser from 'error-stack-parser';
+import resolve from './resolve';
 
 export default _.memoize((key) => {
   return (...args) => {
@@ -7,7 +8,10 @@ export default _.memoize((key) => {
     const stack = StackParser.parse(new Error(''));
     Error.stackTraceLimit = Infinity;
     const stackFrame = stack[1];
-    const code = { [key]: resolve(args) };
+    const code = {
+      '@key': key,
+      '@children': resolve(args)
+    };
     Object.defineProperty(code, '_meta', {
       enumerable: false,
       configurable: false,
@@ -17,12 +21,3 @@ export default _.memoize((key) => {
     return code;
   };
 });
-
-function resolve(data) {
-  return _.map(data, (value) => {
-    if (_.isFunction(value)) {
-      return value();
-    }
-    return value;
-  });
-}

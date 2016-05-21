@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+
+var program = require('commander');
+
+program
+  .description('parse a stutter js file')
+  .usage('[options] <file>')
+  .arguments('<file>')
+  .action(function(file, options) {
+    var parseFile = require('../').commands.parseFile;
+    parseFile(file, options)
+      .then(function() {
+        process.exit();
+      })
+      .catch(function() {
+        process.exit(1);
+      });
+  })
+  .parse(process.argv);

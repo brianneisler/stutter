@@ -1,20 +1,23 @@
-import _ from 'lodash';
-import { METHODS } from '../defines';
-import { expression } from '../core';
 import { PROGRAM, logger } from 'stutter-util';
+import { expression } from '../codes';
+import { EXPRESSIONS } from '../defines';
+import { map, resolve } from '../runtime';
+import * as _ from '../util';
 
 export function generate() {
-  return expression([METHODS],
-    (scope, tail, methods) => {
-      const results = _.map(methods, (method) => {
-        tail = method(scope, tail);
-        return tail;
-      });
-      if (_.isEmpty(results)) {
-        logger.info(PROGRAM, tail);
-        return tail;
-      } else {
-        logger.info(PROGRAM, ...results);
-      }
-    });
+  return expression([EXPRESSIONS], log);
+}
+
+function *log(scope, tail, expressions) {
+  const results = yield map(expressions, mapLog);
+  if (_.isEmpty(results)) {
+    logger.info(PROGRAM, tail);
+    return tail;
+  } else {
+    logger.info(PROGRAM, ...results);
+  }
+}
+
+function *mapLog(scope, tail, expression) {
+  return yield resolve(expression);
 }

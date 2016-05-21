@@ -1,5 +1,4 @@
-import _ from 'lodash';
-import Immutable from 'immutable';
+import * as _ from '../util';
 
 export function generate(expression, process) {
     const call = expression.get('call');

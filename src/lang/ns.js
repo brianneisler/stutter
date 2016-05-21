@@ -1,12 +1,17 @@
-import _ from 'lodash';
-import { IDENTIFIER, REST } from '../defines';
-import { expression } from '../core';
+import * as _ from '../util';
+import { expression } from '../code';
+import { EXPRESSIONS, IDENTIFIER } from '../defines';
+import { each, resolve } from '../runtime';
 
-export function generate(namespace, context) {
-  return expression([IDENTIFIER, REST],
-    (scope, tail, identifier, rest) => {
-      rest(scope, tail);
-      _.set(namespace, identifier.name, context);
-      return context;
-    });
+export function generate() {
+  return expression([IDENTIFIER, EXPRESSIONS], ns);
+}
+
+function *ns(scope, tail, identifier, expressions) {
+  yield each(expressions, eachNs);
+  _.set(this.namespace, identifier.name, this.context);
+}
+
+function *eachNs(scope, tail, expression) {
+  return yield resolve(expression);
 }

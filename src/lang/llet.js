@@ -1,5 +1,4 @@
-import _ from 'lodash';
-import Immutable from 'immutable';
+import { IDENTIFIER } from '../defines';
 
 export function generate(expression) {
   return {
