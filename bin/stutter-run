@@ -1,30 +1,30 @@
 #!/usr/bin/env node
 
-var program = require('commander');
+var program = require('commander')
 
 program
   .description('run stutter js program')
   .usage('[options] <file>')
   .arguments('<file>')
   .action(function(file, options) {
-    var runProgram = require('../').commands.runProgram;
-    runProgram(file, options)
+    var run = require('../').commands.run
+    run(file, options)
       .then(function() {
-        process.exit();
+        process.exit()
       })
       .catch(function() {
-        process.exit(1);
-      });
+        process.exit(1)
+      })
   })
-  .parse(process.argv);
+  .parse(process.argv)
 
 if (!program.args.length) {
-  var startRepl = require('../').commands.startRepl;
-  startRepl(null, program)
+  var repl = require('../').commands.repl
+  repl(null, program)
     .then(function() {
-      process.exit();
+      process.exit()
     })
     .catch(function() {
-      process.exit(1);
-    });
+      process.exit(1)
+    })
 }

@@ -1,4 +1,4 @@
-import { RESOLVE } from '../defines';
+import { RESOLVE } from '../defines'
 
 export function resolve(value) {
   return {
@@ -6,5 +6,5 @@ export function resolve(value) {
     payload: {
       value
     }
-  };
+  }
 }

@@ -1,13 +1,20 @@
-import _ from 'lodash';
-import { context, namespace, scope } from './core';
-import generate from './generate';
-import { loadFile } from './loader';
-import parse from './parse';
-import evaluate from './evaluate';
+import _ from 'mudash'
+import { loadFile } from './loader'
+import parse from './parse'
+import evaluate from './evaluate'
+import * as lang from './lang'
 
-export default async function run(path) {
-  const data        = await loadFile(path);
-  const statement   = parse(data, path);
-  const code        = generate(statement);
-  return await evaluate(context(), namespace(), scope(), code);
+export default async function run(path, options) {
+  options = {
+    ...options,
+    lang: {
+      ...lang,
+      ...options.lang
+    },
+    path
+  }
+  const code = _.isString(path) ? await loadFile(path) : path
+  const ast  = _.isString(code) ? parse(code, options) : code
+  console.log('ast:', ast)
+  return await evaluate(ast, options)
 }

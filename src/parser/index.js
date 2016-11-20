@@ -1,6 +1,2 @@
-export { default as isKeyword } from './isKeyword';
-export { default as keyword } from './keyword';
-export { default as keywordsMap } from './keywordsMap';
-export { default as parseData } from './parseData';
-export { default as proxyKeyword } from './proxyKeyword';
-export { default as resolve } from './resolve';
+export * as parsers from './parsers'
+export { default as parseCode } from './parseCode'

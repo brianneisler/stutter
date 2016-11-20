@@ -1,3 +1,11 @@
-export { default as context } from './context';
-export { default as namespace } from './namespace';
-export { default as scope } from './scope';
+export { default as alias } from './alias'
+export { default as chain } from './chain'
+export { default as getKeyword } from './getKeyword'
+export { default as getKeywords } from './getKeywords'
+export { default as getMethods } from './getMethods'
+export { default as isKeyword } from './isKeyword'
+export { default as isLang } from './isLang'
+export { default as keyword } from './keyword'
+export { default as lang } from './lang'
+export { default as makeAst } from './makeAst'
+export * from './defines'

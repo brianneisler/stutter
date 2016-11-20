@@ -1,4 +1,5 @@
-export { default as runProgram } from './runProgram';
-export { default as startRepl } from './startRepl';
-export { default as startServer } from './startServer';
-export { default as stopServer } from './stopServer';
+export { default as evaluate } from './evaluateCommand'
+export { default as generate } from './generateCommand'
+export { default as parse } from './parseCommand'
+export { default as repl } from './replCommand'
+export { default as run } from './runCommand'

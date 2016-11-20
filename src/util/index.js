@@ -1,23 +1,2 @@
-export { default as assign } from './assign';
-export { default as each } from './each';
-export { default as first } from './first';
-export { default as get } from './get';
-export { default as has } from './has';
-export { default as isArray } from './isArray';
-export { default as isBoolean } from './isBoolean';
-export { default as isEmpty } from './isEmpty';
-export { default as isFunction } from './isFunction';
-export { default as isGenerator } from './isGenerator';
-export { default as isNil } from './isNil';
-export { default as isNull } from './isNull';
-export { default as isNumber } from './isNumber';
-export { default as isObject } from './isObject';
-export { default as isString } from './isString';
-export { default as isUndefined } from './isUndefined';
-export { default as keys } from './keys';
-export { default as map } from './map';
-export { default as memoize } from './memoize';
-export { default as prompt } from './prompt';
-export { default as reduce } from './reduce';
-export { default as set } from './set';
-export { default as startsWith } from './startsWith';
+export * from './log'
+export * from './prompt'

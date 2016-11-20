@@ -1,21 +1,21 @@
 #!/usr/bin/env node
 
-var program = require('commander');
+var program = require('commander')
 
 program
   .description('start stutter repl')
   .usage('[options] [file]')
   .arguments('[file]')
-  .parse(process.argv);
+  .parse(process.argv)
 
 (function(options) {
-  var file = _.first(program.args);
-  var startRepl = require('../').commands.startRepl;
-  startRepl(file, options)
+  var file = _.first(program.args)
+  var repl = require('../').commands.repl
+  repl(file, options)
     .then(() => {
-      process.exit();
+      process.exit()
     })
     .catch(() => {
-      process.exit(1);
-    });
-})(program);
+      process.exit(1)
+    })
+})(program)

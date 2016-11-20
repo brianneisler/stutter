@@ -1,4 +1,4 @@
-import { SET } from '../defines';
+import { SET } from '../defines'
 
 export function resolve(name, value) {
   return {
@@ -7,5 +7,5 @@ export function resolve(name, value) {
       name,
       value
     }
-  };
+  }
 }

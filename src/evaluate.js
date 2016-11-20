@@ -1,5 +1,5 @@
-import { evaluateCode } from './evaluator';
+import { evalAst } from './evaluator'
 
-export default async function evaluate(context, namespace, scope, code) {
-  return await evaluateCode(context, namespace, scope, null, code);
+export default async function evaluate(ast, options) {
+  return await evalAst(ast, options)
 }

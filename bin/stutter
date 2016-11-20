@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-var program = require('commander');
-var package = require('../package.json');
+var program = require('commander')
+var _package = require('../package.json')
 
 program
-  .version(package.version)
-  .command('parse', 'parse a stutter js file')
+  .version(_package.version)
+  .command('evaluate', 'evaluate an ast')
+  .command('generate', 'generate a stutter file from ast')
+  .command('parse', 'parse a stutter file to ast')
   .command('repl', 'start stutter repl')
-  .command('run', 'run stutter js program', {isDefault: true})
-  .command('start', 'start local stutter server')
-  .command('stop', 'stop local stutter server')
-  .parse(process.argv);
+  .command('run', 'run stutter program', { isDefault: true })
+  .parse(process.argv)

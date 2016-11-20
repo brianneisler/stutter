@@ -1,4 +1,4 @@
-import { EACH } from '../defines';
+import { EACH } from '../defines'
 
 export function each(expressions, iteratee) {
   return {
@@ -7,5 +7,5 @@ export function each(expressions, iteratee) {
       expressions,
       iteratee
     }
-  };
+  }
 }

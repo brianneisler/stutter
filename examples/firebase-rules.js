@@ -3,8 +3,8 @@ lang('firebase',
 ns('my-rules',
   path('/some/path')
     .validate(['value', 'previous'],
-      iif(call('doesNotExist', 'value'),
-        rreturn(true)
+      _if(call('doesNotExist', 'value'),
+        _return(true)
       )
       lt('previous', 'value')),
 

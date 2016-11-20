@@ -1,5 +1,6 @@
-import { generateCode } from './generator';
+import { generateCode } from './generator'
 
-export default function generate(statement) {
-  return generateCode(statement);
+//Go from AST back to code
+export default function generate(ast, options) {
+  return generateCode(ast, options)
 }

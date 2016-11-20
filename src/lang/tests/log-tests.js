@@ -1,10 +1,10 @@
-jest.unmock('../log');
-jest.unmock('../../evaluate');
+jest.unmock('../log')
+jest.unmock('../../evaluate')
 
-import { generate } from '../log';
-import { isExpressionCode } from '../../evaluate';
-import { context, namespace, scope } from '../../core';
-import { PROGRAM, INFO, logger } from 'stutter-util';
+import { generate } from '../log'
+import { isExpressionCode } from '../../evaluate'
+import { context, namespace, scope } from '../../core'
+import { PROGRAM, INFO, logger } from 'stutter-util'
 
 const fixtures = {
   code: {
@@ -14,19 +14,19 @@ const fixtures = {
   },
   tail: 'tail',
   methods: [
-    () => { return 'method1'; }
+    () => { return 'method1' }
   ]
-};
+}
 
 describe('log', () => {
   it('generates an expression', () => {
-    const expression = generate(fixtures.code);
-    expect(isExpressionCode(expression)).toBeTruthy();
-  });
+    const expression = generate(fixtures.code)
+    expect(isExpressionCode(expression)).toBeTruthy()
+  })
   it('generates log expression', () => {
-    const expression = generate(fixtures.code);
-    expression.method(scope(), fixtures.tail, fixtures.methods);
-    expect(logger.logs).toEqual([{ type: PROGRAM, level: INFO, logs: ['method1']}]);
-    logger.clear();
-  });
-});
+    const expression = generate(fixtures.code)
+    expression.method(scope(), fixtures.tail, fixtures.methods)
+    expect(logger.logs).toEqual([{ type: PROGRAM, level: INFO, logs: ['method1']}])
+    logger.clear()
+  })
+})

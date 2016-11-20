@@ -1,30 +1,31 @@
-import { context, namespace, scope } from '../core';
-import evaluate from '../evaluate';
-import generate from '../generate';
-import { REPL, logger } from 'stutter-util';
-import parse from '../parse';
-import { prompt } from '../util';
+import evaluate from '../evaluate'
+import parse from '../parse'
+import run from '../run'
+import { logger, prompt, REPL } from '../util'
 
-export default async function start(file) {
-  let done = false;
-  const _namespace = namespace();
-  const _context = context();
-  while (!done) {
-    const schema = {
-      properties: {
-        code: {
-          description: '>'
-        }
+export default async function start(file, options) {
+  let done = false
+  let context = {}
+  let result = null
+  if (file) {
+    result = run(file)
+  }
+  const schema = {
+    properties: {
+      code: {
+        description: '>'
       }
-    };
-    const result = await prompt(schema);
-    if (result.code !== 'exit') {
-      const parsedCode = parse(result.code, '');
-      const generatedCode = generate(parsedCode);
-      const result = await evaluate(_context, _namespace, scope(), generatedCode);
-      logger.info(REPL, result);
+    }
+  }
+  while (!done) {
+    const input = await prompt(schema)
+    if (input.code !== 'exit') {
+      const ast = parse(input.code)
+      result = await evaluate(ast, context)
+      context = result.context
+      logger.info(REPL, result.return)
     } else {
-      done = true;
+      done = true
     }
   }
 }

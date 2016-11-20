@@ -1,6 +1,3 @@
-import _ from 'lodash';
-import Immutable from 'immutable';
-
-export function generate(expression, process) {
-
-}
+import { alias } from '../core'
+import * as thread from './thread'
+export default alias(thread, '_')
