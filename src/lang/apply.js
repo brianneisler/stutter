@@ -9,7 +9,7 @@ const APPLY = keyword('apply', function* (payload) {
 })
 
 const generator = (node) => {
-  // const { payload } = getKeyword(node)
+  // const { payload } = node
   // return `call()`
 }
 

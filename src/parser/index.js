@@ -1,2 +1,2 @@
 export * as parsers from './parsers'
-export { default as parseCode } from './parseCode'
+export { default as doParse } from './doParse'

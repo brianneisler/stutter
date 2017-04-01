@@ -1,6 +1,5 @@
 export { default as alias } from './alias'
 export { default as chain } from './chain'
-export { default as getKeyword } from './getKeyword'
 export { default as getKeywords } from './getKeywords'
 export { default as getMethods } from './getMethods'
 export { default as isKeyword } from './isKeyword'

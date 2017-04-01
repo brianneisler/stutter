@@ -1,2 +1,2 @@
-export { default as evalAst } from './evalAst'
+export { default as doEvaluate } from './doEvaluate'
 export { default as evalPromise } from './evalPromise'

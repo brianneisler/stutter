@@ -1,6 +1,6 @@
 import _ from 'mudash'
 import _path from 'path'
-import { parseCode } from './parser'
+import { doParse } from './parser'
 
 export default function parse(code, options) {
   const { path, type } = options
@@ -11,5 +11,5 @@ export default function parse(code, options) {
       type: ext.substr(1)
     }
   }
-  return parseCode(code, options)
+  return doParse(code, options)
 }

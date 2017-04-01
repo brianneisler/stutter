@@ -2,8 +2,8 @@ import _ from 'mudash'
 import invariant from 'invariant'
 import * as _parsers from './parsers'
 
-export default function parseCode(code, options = {}) {
-  console.log('parseCode options:', options)
+export default function doParse(code, options = {}) {
+  console.log('doParse options:', options)
   const { type } = options
   const parsers = {
     ..._parsers,
@@ -15,7 +15,7 @@ export default function parseCode(code, options = {}) {
 function parser(parsers, type = 'js') {
   invariant(
     _.has(parsers, type),
-    `parseCode: could not find parser for type ${type}`
+    `doParse: could not find parser for type ${type}`
   )
   return parsers[type]
 }
