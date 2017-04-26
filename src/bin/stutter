@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+if (!global._babelPolyfill) {
+  require('babel-polyfill')
+}
+require('source-map-support').install()
+
+const vorpal = require('vorpal')()
+
+vorpal
+  .command('foo', 'Outputs "bar".')
+  .action(function(args, callback) {
+    this.log('bar')
+    callback()
+  })
+
+vorpal
+  .delimiter('stutter$')
+  .show()

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Brian Neisler. http://brianneisler.com
+ * Copyright (c) 2017 Brian Neisler. http://brianneisler.com
  *
  * stutter may be freely distributed under the MIT license.
  */

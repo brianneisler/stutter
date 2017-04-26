@@ -1,21 +1,21 @@
 language: node_js
 node_js:
+- '4.0'
+- '5.0'
 - '6.0'
-cache:
-  directories:
-  - node_modules
-  - "$HOME/.npm"
-  - "$HOME/.gem"
-before_install:
-- npm install -g gulp
-script:
-- gulp test
-- gulp
+- '7.0'
+cache: yarn
+after_success:
+  - npm run build
+before_deploy:
+  - cd dist
 deploy:
   provider: npm
   email: me@brianneisler.com
   skip_cleanup: true
   on:
+    branch: master
     tags: true
+    repo: brianneisler/stutter
   api_key:
     secure: FVtH5qL9OHJMMipCsMwr5HhsA+wbMU/0z/pEupT1pPBtkaDUJhfqKnJZo8/oiZUjKOQm3vLL/jE9fyx5hE/VnpXBEW/cs9Iw49v7MEjpTHjm3FBihOExJ2XOIv8+qis/nqmu08xSdzZZQWiUxLCvOrzZ9iUvUor0YO6LV2Jlh/UAMHJOdMFl4kTLfk3sifUZ29eIGBm41u5xiqyGY/ss2J/WJDzL/rM41m05rzQlgbyvy0Y7N7589ib0iDrF2CWlR+v8m7463aZtFVlwoEOBQZzp970AmQxBQuAjBBfc6qrPIukOYPmif1M/O9djJhIXqUlJNtYOLKXyelM2dZGrc37PKDZEFC7MyoVjOj5Q8qRhRcEfwbpXLsECJN0Px3NVoGnP0ohwT6bjarE7Dk6V9EA+DW48djh9J3/H5RwgZ2JysR3CkdJz+GrxpEYrvrlnwyOMB4UrOEEG3UsXbr4UPYJFQppK8b5u6CHm6lbrxRAO658ndiKPdUiWXI1wOrPxjSXV5svF/TaSMcZIntWWa7LtsW9uF0bIkq0gstCBr4WBALB7BC4TlXPbD/MfyWJlySyh16lkXiqroAXpw+R6b3YpEq0PMmM/k9kBH1pE66lkuLV6l1hcN7cm5knQ5c8bl/e0y6xEi0b2nrz2boyA8zkmL+EiLT+JaZHLacCSlmk=

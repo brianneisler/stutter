@@ -1,9 +1,0 @@
-[
-  {
-    "@apply": {
-      "func": {
-        "@js": "() => console.log('Hello world!')"
-      }
-    }
-  }
-]

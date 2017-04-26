@@ -1,0 +1,18 @@
+#development
+.babelrc
+.editorconfig
+.eslintrc.json
+.travis.yml
+__tests__
+docs
+examples
+scripts
+src
+test
+yarn.lock
+
+# IntelliJ resources
+.idea/
+*.iml
+*.ipr
+*.iws

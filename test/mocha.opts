@@ -1,0 +1,4 @@
+--require babel-polyfill
+--grep .*\/__tests__\/.*\.js
+--compilers js:babel-core/register
+--recursive

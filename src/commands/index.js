@@ -1,5 +1,0 @@
-export { default as evaluate } from './evaluateCommand'
-export { default as generate } from './generateCommand'
-export { default as parse } from './parseCommand'
-export { default as repl } from './replCommand'
-export { default as run } from './runCommand'
