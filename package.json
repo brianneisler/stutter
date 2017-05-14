@@ -4,11 +4,11 @@
   "scripts": {
     "build": "./scripts/build.sh",
     "clean": "./scripts/clean.sh",
-    "lint": "eslint .",
-    "prepublish": "npm run build",
+    "lint": "./scripts/lint.sh",
+    "prepublish": "./scripts/prepublish.sh",
     "postinstall": "./scripts/postinstall.sh",
-    "test": "mocha .",
-    "watch": "mkdir -p dist && babel -w src -d dist --source-maps"
+    "test": "./scripts/test.sh",
+    "watch": "./scripts/watch.sh"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

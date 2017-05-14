@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+if (!global._babelPolyfill) {
+  require('babel-polyfill')
+}
+require('source-map-support').install()
+
+const cli = require('vorpal')()
+const stutter = require('../stutter')
+const modules = require('@stutter/modules')
+
+stutter({
+  cli: cli,
+  modules: modules
+}).start()

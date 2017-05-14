@@ -1,0 +1,17 @@
+#development
+.babelrc
+.editorconfig
+.eslintrc.json
+.travis.yml
+__tests__
+config
+docs
+examples
+gulpfile.*
+src
+
+# IntelliJ resources
+.idea/
+*.iml
+*.ipr
+*.iws

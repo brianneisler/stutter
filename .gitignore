@@ -15,10 +15,6 @@ results
 node_modules
 npm-debug.log
 
-# gulp recipes
-.recipe
-.reciperc
-
 # IntelliJ resources
 *.iml
 *.ipr

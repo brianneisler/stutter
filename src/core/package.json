@@ -1,0 +1,27 @@
+{
+  "name": "stutter",
+  "version": "0.2.0",
+  "description": "Functional library for Immutable.js",
+  "main": "index.js",
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "immutable": "4.0.0-rc.2"
+  },
+  "author": "Brian Neisler <me@brianneisler.com>",
+  "homepage": "https://github.com/brianneisler/stutter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brianneisler/stutter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/brianneisler/stutter/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "common",
+    "functional",
+    "immutable",
+    "lang",
+    "library"
+  ]
+}
