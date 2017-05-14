@@ -1,11 +1,11 @@
-import { defapp, fn, go } from 'stutter'
+import { defapp, defn, go } from 'stutter'
 import { Https, Route } from 'stutter/components'
 
-const makeUppercase = fn((text) => {
+const makeUppercase = defn((text) => {
   return text.toUpperCase()
 })
 
-const upperDirrect = fn(async (req, res) => {
+const upperDirrect = defn(async (req, res) => {
   const { text } = req.query
 
   const upper = makeUppercase(text) // This is a direct call in code

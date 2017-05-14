@@ -1,5 +1,16 @@
 # stutter
-Functional language built on Javascript
+Functional library built for [Immutable.JS](https://facebook.github.io/immutable-js/)
+
+
+## Benefits
+- Supports both Immutable.JS data types and standard JS values
+- Introduces custom data types for Immutable.js
+- Converts types based on data hinting
+- Supports mixed nested data types making it easier to process values of mixed Immutable.JS/mutable data objects
+- All functions have been written to be fully immutable and side-effect free (for both standard JS values and Immutable.JS data types)
+- All functions are automatically curried.
+- Parameters are arranged for convenient currying (data last parameter ordering).
+
 
 ## Build Status
 
@@ -8,31 +19,32 @@ Functional language built on Javascript
 [![NPM](https://nodei.co/npm/stutter.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/stutter/)
 
 
+## Documentation
+
+[Full API documentation](docs/API.md) - Learn about each method
+
+
 ## Install
 
 ```js
-npm install -g stutter
+npm install --save stutter
 ```
+
 
 ## Usage
 
-### running a program
-```bash
-stutter path/to/file.js
-```
-
-### starting REPL
-```bash
-stutter
-```
-
-## Code Example
 ```js
-ns('lang',
-  log('"Hello World!'))
-```
+import { set } from 'stutter'
+import Immutable from 'immutable'
 
-## Code Parts
-- Strings are identifiers
-- all keywords are simple functions
-- Actual strings are of the format '"my string' with a leading double quote "
+// Immutable.JS example
+const map = Immutable.Map({ a:1, b:2 })
+set('c', 3, map)    // returns Map { "a": 1, "b": 2, "c": 3 }
+set('c', 3)(map)   // returns Map { "a": 1, "b": 2, "c": 3 }
+
+
+// Standard JS Object example
+const obj = { a:1, b:2 }
+set('c', 3, obj)    // returns { "a": 1, "b": 2, "c": 3 }
+set('c', 3)(obj)   // returns { "a": 1, "b": 2, "c": 3 }
+```

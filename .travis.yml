@@ -8,7 +8,7 @@ cache: yarn
 after_success:
   - npm run build
 before_deploy:
-  - cd dist
+  - cd dist/core
 deploy:
   provider: npm
   email: me@brianneisler.com
