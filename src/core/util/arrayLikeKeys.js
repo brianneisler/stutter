@@ -1,12 +1,13 @@
 import _ from 'lodash'
 import { contextHasOwnProperty, String } from '../context'
-import baseTimes from '../base/baseTimes'
 import isArray from '../isArray'
 import isIndex from '../isIndex'
+import baseIsArguments from './baseIsArguments'
+import baseTimes from './baseTimes'
 
 export default function arrayLikeKeys(value, inherited) {
   const isArr = isArray(value)
-  const isArg = !isArr && _.isArguments(value)
+  const isArg = !isArr && baseIsArguments(value)
   const isBuff = !isArr && !isArg && _.isBuffer(value)
   const isType = !isArr && !isArg && !isBuff && _.isTypedArray(value)
   const skipIndexes = isArr || isArg || isBuff || isType

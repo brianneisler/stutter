@@ -1,7 +1,6 @@
 //TODO BRN: This all needs to be fixed. context should be specifiable
 import defaults from '../defaults'
 import pick from '../pick'
-import ES6Symbol from 'es6-symbol'
 import moduleExports from './moduleExports'
 import root from './root'
 
@@ -38,7 +37,7 @@ const funcProto   = Function.prototype
 const objectProto = Object.prototype
 
 const Buffer = moduleExports ? context.Buffer : undefined
-const Symbol = context.Symbol || ES6Symbol
+const Symbol = context.Symbol
 
 const allocUnsafe = Buffer ? Buffer.allocUnsafe : undefined
 const objectCreate = Object.create

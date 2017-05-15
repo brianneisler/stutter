@@ -1,3 +1,5 @@
+import eq from '../eq'
+import baseEqualArrays from './baseEqualArrays'
 import {
   ARRAY_BUFFER_TAG,
   BOOL_TAG,
@@ -12,13 +14,11 @@ import {
   SET_TAG,
   STRING_TAG,
   SYMBOL_TAG
-} from '../constants'
-import { Uint8Array } from '../context'
-import nativeSymbolValueOf from '../native/nativeSymbolValueOf'
-import mapToArray from '../util/mapToArray'
-import setToArray from '../util/setToArray'
-import eq from '../eq'
-import baseEqualArrays from './baseEqualArrays'
+} from './constants'
+import { Uint8Array } from './context'
+import nativeSymbolValueOf from './nativeSymbolValueOf'
+import mapToArray from './mapToArray'
+import setToArray from './setToArray'
 
 export default function baseEqualByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
   let convert

@@ -1,15 +1,15 @@
-import baseForOwn from './baseForOwn'
+import ForEachable from '../protocols/ForEachable'
 import count from '../count'
 import getKey from '../getKey'
 import isArrayLike from '../isArrayLike'
-import { isForEachable } from '../util'
+import baseForOwn from './baseForOwn'
 
 export default function baseEach(data, iteratee) {
   if (data == null) {
     return data
   }
   if (!isArrayLike(data)) {
-    if (isForEachable(data)) {
+    if (ForEachable.is(data)) {
       data.forEach(iteratee)
       return data
     }

@@ -1,5 +1,8 @@
 import { Array } from './util/context'
+import fn from './fn'
 
-export default function isArray(data) {
+const isArray = fn((value) => {
   return Array.isArray(data)
-}
+})
+
+export default isArray

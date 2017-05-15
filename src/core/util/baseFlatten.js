@@ -1,10 +1,10 @@
-import mutationPush from '../mutations/mutationPush'
-import mutationPushAll from '../mutations/mutationPushAll'
-import withMutations from '../with/withMutations'
 import count from '../count'
 import getKey from '../getKey'
 import hintConvert from '../hintConvert'
 import isFlattenable from '../isFlattenable'
+import mutationPush from './mutationPush'
+import mutationPushAll from './mutationPushAll'
+import withMutations from './withMutations'
 
 const recurFlatten = (result, indexed, depth, predicate, isStrict) => {
   let index = -1

@@ -1,4 +1,4 @@
-import { Array } from '../context'
+import { Array } from './context'
 
 export default function baseTimes(n, iteratee) {
   let index = -1

@@ -1,7 +1,4 @@
 import Immutable from 'immutable'
-import cacheHas from '../cache/cacheHas'
-import mutationPush from '../mutations/mutationPush'
-import withMutations from '../with/withMutations'
 import count from '../count'
 import getKey from '../getKey'
 import hintConvert from '../hintConvert'
@@ -9,6 +6,10 @@ import map from '../map'
 import baseIncludes from './baseIncludes'
 import baseIncludesWith from './baseIncludesWith'
 import baseUnary from './baseUnary'
+import cacheHas from './cacheHas'
+import mutationPush from './mutationPush'
+import withMutations from './withMutations'
+
 
 const findDifference = withMutations((result, indexed, values, iteratee, comparator, includes) => {
   let index = -1

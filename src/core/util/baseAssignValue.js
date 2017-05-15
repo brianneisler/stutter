@@ -1,4 +1,4 @@
-import nativeDefineProperty from '../native/nativeDefineProperty'
+import nativeDefineProperty from './nativeDefineProperty'
 
 export default function baseAssignValue(object, key, value) {
   if (key == '__proto__' && nativeDefineProperty) {

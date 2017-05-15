@@ -1,10 +1,10 @@
-import { Stack } from '../cache'
-import { COMPARE_PARTIAL_FLAG, COMPARE_UNORDERED_FLAG } from '../constants'
-import { _Object } from '../context'
 import count from '../count'
 import getKey from '../getKey'
 import hasKeyIn from '../hasKeyIn'
 import baseIsEqual from './baseIsEqual'
+import { COMPARE_PARTIAL_FLAG, COMPARE_UNORDERED_FLAG } from './constants'
+import { _Object } from './context'
+import Stack from './Stack'
 
 export default function baseIsMatch(object, source, matchData, customizer) {
   let index = count(matchData)

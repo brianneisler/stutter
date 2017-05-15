@@ -1,8 +1,7 @@
-import nativeMax from '../native/nativeMax'
 import count from '../count'
 import isString from '../isString'
 import baseIndexOf from './baseIndexOf'
-
+import nativeMax from './nativeMax'
 
 export default function baseIncludes(indexed, value, fromIndex) {
   const length = count(indexed)

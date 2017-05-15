@@ -5,6 +5,7 @@ import contextHasOwnProperty from '../context/contextHasOwnProperty'
 import copyObject from '../util/copyObject'
 import getTag from '../util/getTag'
 import isArray from '../isArray'
+import isBuffer from '../isBuffer'
 import baseEqualArrays from './baseEqualArrays'
 import baseEqualByTag from './baseEqualByTag'
 import baseEqualObjects from './baseEqualObjects'
@@ -30,8 +31,8 @@ export default function baseIsEqualDeep(object, other, bitmask, customizer, equa
   const othIsObj = othTag == OBJECT_TAG
   const isSameTag = objTag == othTag
 
-  if (isSameTag && _.isBuffer(object)) {
-    if (!_.isBuffer(other)) {
+  if (isSameTag && isBuffer(object)) {
+    if (!isBuffer(other)) {
       return false
     }
     objIsArr = true

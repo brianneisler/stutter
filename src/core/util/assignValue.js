@@ -1,7 +1,6 @@
-import { contextHasOwnProperty } from '../context'
-import baseAssignValue from '../base/baseAssignValue'
 import eq from '../eq'
-
+import baseAssignValue from './baseAssignValue'
+import contextHasOwnProperty from './contextHasOwnProperty'
 
 export default function assignValue(object, key, value) {
   const objValue = object[key]

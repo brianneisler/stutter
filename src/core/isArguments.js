@@ -1,6 +1,6 @@
-import { ARGS_TAG } from './util/constants'
-import getTag from './util/getTag'
+import baseIsArguments from './util/baseIsArguments'
+import fn from './fn'
 
-export default function isArguments(value) {
-  return typeof value === 'object' && value !== null && getTag(value) === ARGS_TAG
-}
+const isArguments = fn(baseIsArguments)
+
+export default isArguments
