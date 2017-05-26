@@ -1,19 +1,6 @@
-const { NODE_ENV } = process.env
+import baseExpect from './util/baseExpect'
+import fn from './fn'
 
-export default function expect(condition, format, ...args) {
-  if (NODE_ENV !== 'production') {
-    if (format === undefined) {
-      throw new Error('expect requires an error message argument')
-    }
-  }
+const expect = fn(baseExpect, 2)
 
-  if (!condition) {
-    let argIndex = 0
-    const error = new Error(
-      format.replace(/%s/g, () => args[argIndex++])
-    )
-    error.name = 'Expectation Violation'
-    error.framesToPop = 1
-    throw error
-  }
-}
+export default expect

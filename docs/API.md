@@ -1,14 +1,7 @@
 # API
 
-*NOTES*
-* These API docs are still being written. However, we have attempted to stick to the Lodash signature as much as possible. So, in most cases, the [lodash documentation](https://lodash.com/docs) is a good point of reference.
-* All mudash methods are immutable. The [signatures of a few methods](./FAQ.md#what-functions-are-different-from-lodash) are different from Lodash.
-* mudash uses data type hinting to determine return type. In most cases if a method receives an Immutable data type it will return the result in an Immutable form and equivalent for mutable data.
-* A few additional methods exist beyond what is provided by Lodash. These have been documented here.
-
 *Legend*
 * *&ast;TODO* - Immutable.JS support still needs to be implemented
-* *&ast;Lo* - No changes from Lodash method required (passthrough to Lodash)
 
 ## TOC
 * [Array and Immutable.List](#array-and-immutablelist)
@@ -123,37 +116,37 @@
   + [`sortBy()`](#sortby) *&ast;TODO*
   + [`walk()`](#walk)
 * [Date](#date)
-  + [`now()`](#now) *&ast;Lo*
+  + [`now()`](#now)
 * [Function](#function)
-  + [`after()`](#after) *&ast;Lo*
+  + [`after()`](#after)
   + [`apply()`](#apply)
-  + [`ary()`](#ary) *&ast;Lo*
+  + [`ary()`](#ary)
   + [`before()`](#before)
-  + [`bind()`](#bind) *&ast;Lo*
-  + [`bindKey()`](#bindkey) *&ast;Lo*
+  + [`bind()`](#bind)
+  + [`bindKey()`](#bindkey)
   + [`call()`](#call)
   + [`circ()`](#circ)
   + [`compose()`](#compose)
-  + [`curry()`](#curry) *&ast;Lo*
-  + [`curryRight()`](#curryright) *&ast;Lo*
-  + [`debounce()`](#debounce) *&ast;Lo*
-  + [`defer()`](#defer) *&ast;Lo*
-  + [`delay()`](#delay) *&ast;Lo*
-  + [`flip()`](#flip) *&ast;Lo*
+  + [`curry()`](#curry)
+  + [`curryRight()`](#curryright)
+  + [`debounce()`](#debounce)
+  + [`defer()`](#defer)
+  + [`delay()`](#delay)
+  + [`flip()`](#flip)
   + [`memoize()`](#memoize)
-  + [`negate()`](#negate) *&ast;Lo*
-  + [`once()`](#once) *&ast;Lo*
+  + [`negate()`](#negate)
+  + [`once()`](#once)
   + [`overArg()`](#overarg)
-  + [`overArgs()`](#overargs) *&ast;Lo*
-  + [`partial()`](#partial) *&ast;Lo*
-  + [`partialRight()`](#partialright) *&ast;Lo*
-  + [`rearg()`](#rearg) *&ast;Lo*
-  + [`rest()`](#rest) *&ast;Lo*
+  + [`overArgs()`](#overargs)
+  + [`partial()`](#partial)
+  + [`partialRight()`](#partialright)
+  + [`rearg()`](#rearg)
+  + [`rest()`](#rest)
   + [`select()`]('#select')
-  + [`spread()`](#spread) *&ast;Lo*
-  + [`throttle()`](#throttle) *&ast;Lo*
-  + [`unary()`](#unary) *&ast;Lo*
-  + [`wrap()`](#wrap) *&ast;Lo*
+  + [`spread()`](#spread)
+  + [`throttle()`](#throttle)
+  + [`unary()`](#unary)
+  + [`wrap()`](#wrap)
 * [Lang](#lang)
   + [`castArray()`](#castarray) *&ast;TODO*
   + [`clone()`](#clone)
@@ -164,22 +157,22 @@
   + [`eq()`](#eq)
   + [`gt()`](#gt)
   + [`gte()`](#gte)
-  + [`isArguments()`](#isarguments) *&ast;Lo*
+  + [`isArguments()`](#isarguments)
   + [`isArray()`](#isarray)
-  + [`isArrayBuffer()`](#isarraybuffer) *&ast;Lo*
+  + [`isArrayBuffer()`](#isarraybuffer)
   + [`isArrayLike()`](#isarraylike)
-  + [`isArrayLikeObject()`](#isarraylikeobject) *&ast;Lo*
+  + [`isArrayLikeObject()`](#isarraylikeobject)
   + [`isAssociative()`](#isassociative)
   + [`isBatchable()`](#isbatchable)
   + [`isBoolean()`](#isboolean)
-  + [`isBuffer()`](#isbuffer) *&ast;Lo*
-  + [`isDate()`](#isdate) *&ast;Lo*
-  + [`isElement()`](#iselement) *&ast;Lo*
+  + [`isBuffer()`](#isbuffer)
+  + [`isDate()`](#isdate)
+  + [`isElement()`](#iselement)
   + [`isEmpty()`](#isempty)
   + [`isEqual()`](#isequal)
   + [`isEqualWith()`](#isequalwith)
-  + [`isError()`](#iserror) *&ast;Lo*
-  + [`isFinite()`](#isfinite) *&ast;Lo*
+  + [`isError()`](#iserror)
+  + [`isFinite()`](#isfinite)
   + [`isFunction()`](#isfunction)
   + [`isGenerator()`](#isgenerator)
   + [`isGeneratorFunction()`](#isgeneratorfunction)
@@ -209,36 +202,36 @@
   + [`isImStack()`](#isimstack)
   + [`isIndex()`](#isindex)
   + [`isIndexed()`](#isindexed)
-  + [`isInteger()`](#isinteger) *&ast;Lo*
+  + [`isInteger()`](#isinteger)
   + [`isIterable()`](#isiterable)
   + [`isIterateeCall()`](#isiterateecall)
   + [`isKey()`](#iskey)
   + [`isKeyable()`](#iskeyable)
   + [`isKeyed()`](#iskeyed)
   + [`isLength()`](#islength)
-  + [`isMap()`](#ismap) *&ast;Lo*
+  + [`isMap()`](#ismap)
   + [`isMatch()`](#ismatch)
   + [`isMatchWith()`](#ismatchwith) *&ast;TODO*
   + [`isMutable()`](#ismutable)
-  + [`isNaN()`](#isnan) *&ast;Lo*
-  + [`isNative()`](#isnative) *&ast;Lo*
+  + [`isNaN()`](#isnan)
+  + [`isNative()`](#isnative)
   + [`isNil()`](#isnil)
-  + [`isNull()`](#isnull) *&ast;Lo*
+  + [`isNull()`](#isnull)
   + [`isNumber()`](#isnumber)
   + [`isObject()`](#isobject)
   + [`isObjectLike()`](#isobjectlike)
-  + [`isPlainObject()`](#isplainobject) *&ast;Lo*
+  + [`isPlainObject()`](#isplainobject)
   + [`isPrototype()`](#isprototype)
-  + [`isRegExp()`](#isregexp) *&ast;Lo*
-  + [`isSafeInteger()`](#issafeinteger) *&ast;Lo*
-  + [`isSet()`](#isset) *&ast;Lo*
+  + [`isRegExp()`](#isregexp)
+  + [`isSafeInteger()`](#issafeinteger)
+  + [`isSet()`](#isset)
   + [`isShallowEqual()`](#isshallowequal)
   + [`isString()`](#isstring)
   + [`isSymbol()`](#issymbol)
-  + [`isTypedArray()`](#istypedarray) *&ast;Lo*
-  + [`isUndefined()`](#isundefined) *&ast;Lo*
-  + [`isWeakMap()`](#isweakmap) *&ast;Lo*
-  + [`isWeakSet()`](#isweakset) *&ast;Lo*
+  + [`isTypedArray()`](#istypedarray)
+  + [`isUndefined()`](#isundefined)
+  + [`isWeakMap()`](#isweakmap)
+  + [`isWeakSet()`](#isweakset)
   + [`iterable()`](#iterable)
   + [`iterator()`](#iterator)
   + [`isImSet()`](#isimset)
@@ -273,34 +266,34 @@
   + [`toIndexed()`](#toindexed)
   + [`toInteger()`](#tointeger)
   + [`toIterable()`](#toiterable)
-  + [`toLength()`](#tolength) *&ast;Lo*
+  + [`toLength()`](#tolength)
   + [`toMutable()`](#tomutable)
   + [`toNumber()`](#tonumber)
   + [`toObject()`](#toobject)
-  + [`toPlainObject()`](#toplainobject) *&ast;Lo*
-  + [`toSageInteger()`](#tosafeinteger) *&ast;Lo*
+  + [`toPlainObject()`](#toplainobject)
+  + [`toSageInteger()`](#tosafeinteger)
   + [`toSource()`](#tosource)
-  + [`toString()`](#tostring) *&ast;Lo*
+  + [`toString()`](#tostring)
 * [Math](#math)
-  + [`add()`](#add) *&ast;Lo*
-  + [`ceil()`](#ceil) *&ast;Lo*
-  + [`divide()`](#divide) *&ast;Lo*
-  + [`floor()`](#floor) *&ast;Lo*
-  + [`max()`](#max) *&ast;Lo*
-  + [`maxBy()`](#maxby) *&ast;Lo*
-  + [`mean()`](#mean) *&ast;Lo*
-  + [`meanBy()`](#meanby) *&ast;Lo*
-  + [`min()`](#min) *&ast;Lo*
-  + [`minBy()`](#minby) *&ast;Lo*
-  + [`multiply()`](#multiply) *&ast;Lo*
-  + [`round()`](#round) *&ast;Lo*
-  + [`subtract()`](#subtract) *&ast;Lo*
-  + [`sum()`](#sum) *&ast;Lo*
-  + [`sumBy()`](#sumby) *&ast;Lo*
+  + [`add()`](#add)
+  + [`ceil()`](#ceil)
+  + [`divide()`](#divide)
+  + [`floor()`](#floor)
+  + [`max()`](#max)
+  + [`maxBy()`](#maxby)
+  + [`mean()`](#mean)
+  + [`meanBy()`](#meanby)
+  + [`min()`](#min)
+  + [`minBy()`](#minby)
+  + [`multiply()`](#multiply)
+  + [`round()`](#round)
+  + [`subtract()`](#subtract)
+  + [`sum()`](#sum)
+  + [`sumBy()`](#sumby)
 * [Number](#number)
-  + [`clamp()`](#clamp) *&ast;Lo*
-  + [`inRange()`](#inrange) *&ast;Lo*
-  + [`random()`](#random) *&ast;Lo*
+  + [`clamp()`](#clamp)
+  + [`inRange()`](#inrange)
+  + [`random()`](#random)
 * [Object and Immutable.Map](#object-and-immutablemap)
   + [`assign()`](#assign)
   + [`assignIn()`](#assignin) *&ast;TODO*
@@ -320,7 +313,7 @@
   + [`forInRight()`](#forinright) *&ast;TODO*
   + [`forOwn()`](#forown) *&ast;TODO*
   + [`forOwnRight()`](#forownright) *&ast;TODO*
-  + [`functions()`](#functions) *&ast;Lo*
+  + [`functions()`](#functions)
   + [`functionsIn()`](#functionsin) *&ast;TODO*
   + [`get()`](#get)
   + [`getPrototype()`](#getprototype)
@@ -352,48 +345,48 @@
   + [`values()`](#values)
   + [`valuesIn()`](#valuesin) *&ast;TODO*
 * [Seq](#seq)
-  + [`_()`](#_) *&ast;Lo*
+  + [`_()`](#_)
   + [`chain()`](#chain) *&ast;TODO*
-  + [`tap()`](#tap) *&ast;Lo*
-  + [`thru()`](#thru) *&ast;Lo*
+  + [`tap()`](#tap)
+  + [`thru()`](#thru)
 * [String](#string)
-  + [`camelCase()`](#camelcase) *&ast;Lo*
-  + [`capitalize()`](#capitalize) *&ast;Lo*
-  + [`deburr()`](#deburr) *&ast;Lo*
-  + [`endsWith()`](#endswith) *&ast;Lo*
-  + [`escape()`](#escape) *&ast;Lo*
-  + [`escapeRegExp()`](#escaperegexp) *&ast;Lo*
-  + [`kebabCase()`](#kebabcase) *&ast;Lo*
-  + [`lowerCase()`](#lowercase) *&ast;Lo*
-  + [`lowerFirst()`](#lowerfirst) *&ast;Lo*
-  + [`pad()`](#pad) *&ast;Lo*
-  + [`padEnd()`](#padend) *&ast;Lo*
-  + [`padStart()`](#padstart) *&ast;Lo*
-  + [`parseInt()`](#parseint) *&ast;Lo*
-  + [`repeat()`](#repeat) *&ast;Lo*
-  + [`replace()`](#replace) *&ast;Lo*
-  + [`snakeCase()`](#snakecase) *&ast;Lo*
-  + [`split()`](#split) *&ast;Lo*
-  + [`startCase()`](#startcase) *&ast;Lo*
-  + [`startsWith()`](#startswith) *&ast;Lo*
-  + [`template()`](#template) *&ast;Lo*
-  + [`toLower()`](#tolower) *&ast;Lo*
-  + [`toUpper()`](#toupper) *&ast;Lo*
-  + [`trim()`](#trim) *&ast;Lo*
-  + [`trimEnd()`](#trimend) *&ast;Lo*
-  + [`trimStart()`](#trimstart) *&ast;Lo*
-  + [`truncate()`](#truncate) *&ast;Lo*
-  + [`unescape()`](#unescape) *&ast;Lo*
-  + [`upperCase()`](#uppercase) *&ast;Lo*
-  + [`upperFirst()`](#upperfirst) *&ast;Lo*
-  + [`words()`](#words) *&ast;Lo*
+  + [`camelCase()`](#camelcase)
+  + [`capitalize()`](#capitalize)
+  + [`deburr()`](#deburr)
+  + [`endsWith()`](#endswith)
+  + [`escape()`](#escape)
+  + [`escapeRegExp()`](#escaperegexp)
+  + [`kebabCase()`](#kebabcase)
+  + [`lowerCase()`](#lowercase)
+  + [`lowerFirst()`](#lowerfirst)
+  + [`pad()`](#pad)
+  + [`padEnd()`](#padend)
+  + [`padStart()`](#padstart)
+  + [`parseInt()`](#parseint)
+  + [`repeat()`](#repeat)
+  + [`replace()`](#replace)
+  + [`snakeCase()`](#snakecase)
+  + [`split()`](#split)
+  + [`startCase()`](#startcase)
+  + [`startsWith()`](#startswith)
+  + [`template()`](#template)
+  + [`toLower()`](#tolower)
+  + [`toUpper()`](#toupper)
+  + [`trim()`](#trim)
+  + [`trimEnd()`](#trimend)
+  + [`trimStart()`](#trimstart)
+  + [`truncate()`](#truncate)
+  + [`unescape()`](#unescape)
+  + [`upperCase()`](#uppercase)
+  + [`upperFirst()`](#upperfirst)
+  + [`words()`](#words)
 * [Util](#util)
-  + [`attempt()`](#attempt) *&ast;Lo*
+  + [`attempt()`](#attempt)
   + [`bindAll()`](#bindall) *&ast;TODO*
   + [`cond()`](#cond) *&ast;TODO*
   + [`conforms()`](#conforms) *&ast;TODO*
-  + [`constant()`](#constant) *&ast;Lo*
-  + [`defaultTo()`](#defaultTo) *&ast;Lo*
+  + [`constant()`](#constant)
+  + [`defaultTo()`](#defaultTo)
   + [`flow()`](#flow) *&ast;TODO*
   + [`flowRight()`](#flowright) *&ast;TODO*
   + [`hint`](#hint)
@@ -403,18 +396,18 @@
   + [`matchesProperty()`](#matchesproperty)
   + [`method()`](#method) *&ast;TODO*
   + [`methodOf()`](#methodof) *&ast;TODO*
-  + [`mixin()`](#mixin) *&ast;Lo*
-  + [`noConflict()`](#noconflict) *&ast;Lo*
-  + [`noop()`](#noop) *&ast;Lo*
-  + [`nthArg()`](#ntharg) *&ast;Lo*
+  + [`mixin()`](#mixin)
+  + [`noConflict()`](#noconflict)
+  + [`noop()`](#noop)
+  + [`nthArg()`](#ntharg)
   + [`over()`](#over) *&ast;TODO*
   + [`overEvery()`](#overevery) *&ast;TODO*
   + [`overSome()`](#oversome) *&ast;TODO*
   + [`property()`](#property)
   + [`propertyOf()`](#propertyof)
-  + [`range()`](#range) *&ast;Lo*
-  + [`rangeRight()`](#rangeright) *&ast;Lo*
-  + [`runInContext()`](#runincontext) *&ast;Lo*
+  + [`range()`](#range)
+  + [`rangeRight()`](#rangeright)
+  + [`runInContext()`](#runincontext)
   + [`stubArray()`](#stubarray)
   + [`stubFalse()`](#stubfalse)
   + [`stubImmutableIndexedSeq()`](#stubimmutableindexedseq)
@@ -435,7 +428,7 @@
   + [`symbol()`](#symbol)
   + [`times()`](#times)
   + [`toPath()`](#topath) *&ast;TODO*
-  + [`uniqueId()`](#uniqueid) *&ast;Lo*
+  + [`uniqueId()`](#uniqueid)
   + [`times()`](#times)
 
 

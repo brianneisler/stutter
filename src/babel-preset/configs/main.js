@@ -6,6 +6,7 @@ module.exports = {
   comments: false,
   compact: true,
   plugins: resolvePlugins([
+    ['extensible-destructuring', { mode: 'optout', impl: 'immutable' }],
     'syntax-async-functions',
     'syntax-class-properties',
     'syntax-trailing-function-commas',
@@ -27,8 +28,8 @@ module.exports = {
     'transform-object-assign',
     'transform-object-rest-spread',
     'transform-react-display-name',
-    ["transform-react-jsx", {
-      "pragma": "newcomp" // default pragma is React.createElement
+    ['transform-react-jsx', {
+      pragma: 'newcomp' // default pragma is React.createElement
     }],
     'transform-regenerator',
     ['transform-es2015-for-of', { loose: true }],
@@ -40,5 +41,5 @@ module.exports = {
     },
   },
   retainLines: true,
-  sourceMaps: false,
+  sourceMaps: false
 };

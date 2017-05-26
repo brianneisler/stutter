@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import { contextHasOwnProperty, String } from '../context'
+import isArguments from '../isArguments'
 import isArray from '../isArray'
 import isIndex from '../isIndex'
 import baseIsArguments from './baseIsArguments'

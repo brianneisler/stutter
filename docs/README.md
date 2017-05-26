@@ -113,37 +113,37 @@
   + [`sortBy()`](./API.md#sortby) *&ast;TODO*
   + [`walk()`](./API.md#walk)
 * [Date](./API.md#date)
-  + [`now()`](./API.md#now) *&ast;Lo*
+  + [`now()`](./API.md#now)
 * [Function](./API.md#function)
-  + [`after()`](./API.md#after) *&ast;Lo*
+  + [`after()`](./API.md#after)
   + [`apply()`](./API.md#apply)
-  + [`ary()`](./API.md#ary) *&ast;Lo*
+  + [`ary()`](./API.md#ary)
   + [`before()`](./API.md#before)
-  + [`bind()`](./API.md#bind) *&ast;Lo*
-  + [`bindKey()`](./API.md#bindkey) *&ast;Lo*
+  + [`bind()`](./API.md#bind)
+  + [`bindKey()`](./API.md#bindkey)
   + [`call()`](./API.md#call)
   + [`circ()`](./API.md#circ)
   + [`compose()`](./API.md#compose)
-  + [`curry()`](./API.md#curry) *&ast;Lo*
-  + [`curryRight()`](./API.md#curryright) *&ast;Lo*
-  + [`debounce()`](./API.md#debounce) *&ast;Lo*
-  + [`defer()`](./API.md#defer) *&ast;Lo*
-  + [`delay()`](./API.md#delay) *&ast;Lo*
-  + [`flip()`](./API.md#flip) *&ast;Lo*
+  + [`curry()`](./API.md#curry)
+  + [`curryRight()`](./API.md#curryright)
+  + [`debounce()`](./API.md#debounce)
+  + [`defer()`](./API.md#defer)
+  + [`delay()`](./API.md#delay)
+  + [`flip()`](./API.md#flip)
   + [`memoize()`](./API.md#memoize)
-  + [`negate()`](./API.md#negate) *&ast;Lo*
-  + [`once()`](./API.md#once) *&ast;Lo*
+  + [`negate()`](./API.md#negate)
+  + [`once()`](./API.md#once)
   + [`overArg()`](./API.md#overarg)
-  + [`overArgs()`](./API.md#overargs) *&ast;Lo*
-  + [`partial()`](./API.md#partial) *&ast;Lo*
-  + [`partialRight()`](./API.md#partialright) *&ast;Lo*
-  + [`rearg()`](./API.md#rearg) *&ast;Lo*
-  + [`rest()`](./API.md#rest) *&ast;Lo*
+  + [`overArgs()`](./API.md#overargs)
+  + [`partial()`](./API.md#partial)
+  + [`partialRight()`](./API.md#partialright)
+  + [`rearg()`](./API.md#rearg)
+  + [`rest()`](./API.md#rest)
   + [`select()`]('./API.md#select')
-  + [`spread()`](./API.md#spread) *&ast;Lo*
-  + [`throttle()`](./API.md#throttle) *&ast;Lo*
-  + [`unary()`](./API.md#unary) *&ast;Lo*
-  + [`wrap()`](./API.md#wrap) *&ast;Lo*
+  + [`spread()`](./API.md#spread)
+  + [`throttle()`](./API.md#throttle)
+  + [`unary()`](./API.md#unary)
+  + [`wrap()`](./API.md#wrap)
 * [Lang](./API.md#lang)
   + [`castArray()`](./API.md#castarray) *&ast;TODO*
   + [`clone()`](./API.md#clone)
@@ -152,24 +152,24 @@
   + [`cloneWith()`](./API.md#clonewith)
   + [`conformsTo()`](./API.md#conformsto) *&ast;TODO*
   + [`eq()`](./API.md#eq)
-  + [`gt()`](./API.md#gt) *&ast;Lo*
-  + [`gte()`](./API.md#gte) *&ast;Lo*
-  + [`isArguments()`](./API.md#isarguments) *&ast;Lo*
+  + [`gt()`](./API.md#gt)
+  + [`gte()`](./API.md#gte)
+  + [`isArguments()`](./API.md#isarguments)
   + [`isArray()`](./API.md#isarray)
-  + [`isArrayBuffer()`](./API.md#isarraybuffer) *&ast;Lo*
+  + [`isArrayBuffer()`](./API.md#isarraybuffer)
   + [`isArrayLike()`](./API.md#isarraylike)
-  + [`isArrayLikeObject()`](./API.md#isarraylikeobject) *&ast;Lo*
+  + [`isArrayLikeObject()`](./API.md#isarraylikeobject)
   + [`isAssociative()`](./API.md#isassociative)
   + [`isBatchable()`](./API.md#isbatchable)
   + [`isBoolean()`](./API.md#isboolean)
-  + [`isBuffer()`](./API.md#isbuffer) *&ast;Lo*
-  + [`isDate()`](./API.md#isdate) *&ast;Lo*
-  + [`isElement()`](./API.md#iselement) *&ast;Lo*
+  + [`isBuffer()`](./API.md#isbuffer)
+  + [`isDate()`](./API.md#isdate)
+  + [`isElement()`](./API.md#iselement)
   + [`isEmpty()`](./API.md#isempty)
   + [`isEqual()`](./API.md#isequal)
   + [`isEqualWith()`](./API.md#isequalwith)
-  + [`isError()`](./API.md#iserror) *&ast;Lo*
-  + [`isFinite()`](./API.md#isfinite) *&ast;Lo*
+  + [`isError()`](./API.md#iserror)
+  + [`isFinite()`](./API.md#isfinite)
   + [`isFunction()`](./API.md#isfunction)
   + [`isGenerator()`](./API.md#isgenerator)
   + [`isGeneratorFunction()`](./API.md#isgeneratorfunction)
@@ -199,41 +199,41 @@
   + [`isImStack()`](./API.md#isimstack)
   + [`isIndex()`](./API.md#isindex)
   + [`isIndexed()`](./API.md#isindexed)
-  + [`isInteger()`](./API.md#isinteger) *&ast;Lo*
+  + [`isInteger()`](./API.md#isinteger)
   + [`isIterable()`](./API.md#isiterable)
   + [`isIterateeCall()`](./API.md#isiterateecall)
   + [`isKey()`](./API.md#iskey)
   + [`isKeyable()`](./API.md#iskeyable)
   + [`isKeyed()`](./API.md#iskeyed)
   + [`isLength()`](./API.md#islength)
-  + [`isMap()`](./API.md#ismap) *&ast;Lo*
+  + [`isMap()`](./API.md#ismap)
   + [`isMatch()`](./API.md#ismatch)
   + [`isMatchWith()`](./API.md#ismatchwith) *&ast;TODO*
   + [`isMutable()`](./API.md#ismutable)
-  + [`isNaN()`](./API.md#isnan) *&ast;Lo*
-  + [`isNative()`](./API.md#isnative) *&ast;Lo*
+  + [`isNaN()`](./API.md#isnan)
+  + [`isNative()`](./API.md#isnative)
   + [`isNil()`](./API.md#isnil)
-  + [`isNull()`](./API.md#isnull) *&ast;Lo*
+  + [`isNull()`](./API.md#isnull)
   + [`isNumber()`](./API.md#isnumber)
   + [`isObject()`](./API.md#isobject)
   + [`isObjectLike()`](./API.md#isobjectlike)
-  + [`isPlainObject()`](./API.md#isplainobject) *&ast;Lo*
+  + [`isPlainObject()`](./API.md#isplainobject)
   + [`isPrototype()`](./API.md#isprototype)
-  + [`isRegExp()`](./API.md#isregexp) *&ast;Lo*
-  + [`isSafeInteger()`](./API.md#issafeinteger) *&ast;Lo*
-  + [`isSet()`](./API.md#isset) *&ast;Lo*
+  + [`isRegExp()`](./API.md#isregexp)
+  + [`isSafeInteger()`](./API.md#issafeinteger)
+  + [`isSet()`](./API.md#isset)
   + [`isShallowEqual()`](./API.md#isshallowequal)
   + [`isString()`](./API.md#isstring)
   + [`isSymbol()`](./API.md#issymbol)
-  + [`isTypedArray()`](./API.md#istypedarray) *&ast;Lo*
-  + [`isUndefined()`](./API.md#isundefined) *&ast;Lo*
-  + [`isWeakMap()`](./API.md#isweakmap) *&ast;Lo*
-  + [`isWeakSet()`](./API.md#isweakset) *&ast;Lo*
+  + [`isTypedArray()`](./API.md#istypedarray)
+  + [`isUndefined()`](./API.md#isundefined)
+  + [`isWeakMap()`](./API.md#isweakmap)
+  + [`isWeakSet()`](./API.md#isweakset)
   + [`iterable()`](./API.md#iterable)
   + [`iterator()`](./API.md#iterator)
   + [`isImSet()`](./API.md#isimset)
-  + [`lt()`](./API.md#lt) *&ast;Lo*
-  + [`lte()`](./API.md#lte) *&ast;Lo*
+  + [`lt()`](./API.md#lt)
+  + [`lte()`](./API.md#lte)
   + [`toArray()`](./API.md#toarray)
   + [`toFinite()`](./API.md#tofinite)
   + [`toIm()`](./API.md#toim)
@@ -263,34 +263,34 @@
   + [`toIndexed()`](./API.md#toindexed)
   + [`toInteger()`](./API.md#tointeger)
   + [`toIterable()`](./API.md#toiterable)
-  + [`toLength()`](./API.md#tolength) *&ast;Lo*
+  + [`toLength()`](./API.md#tolength)
   + [`toMutable()`](./API.md#tomutable)
   + [`toNumber()`](./API.md#tonumber)
   + [`toObject()`](./API.md#toobject)
-  + [`toPlainObject()`](./API.md#toplainobject) *&ast;Lo*
-  + [`toSageInteger()`](./API.md#tosafeinteger) *&ast;Lo*
+  + [`toPlainObject()`](./API.md#toplainobject)
+  + [`toSageInteger()`](./API.md#tosafeinteger)
   + [`toSource()`](./API.md#tosource)
-  + [`toString()`](./API.md#tostring) *&ast;Lo*
+  + [`toString()`](./API.md#tostring)
 * [Math](./API.md#math)
-  + [`add()`](./API.md#add) *&ast;Lo*
-  + [`ceil()`](./API.md#ceil) *&ast;Lo*
-  + [`divide()`](./API.md#divide) *&ast;Lo*
-  + [`floor()`](./API.md#floor) *&ast;Lo*
-  + [`max()`](./API.md#max) *&ast;Lo*
-  + [`maxBy()`](./API.md#maxby) *&ast;Lo*
-  + [`mean()`](./API.md#mean) *&ast;Lo*
-  + [`meanBy()`](./API.md#meanby) *&ast;Lo*
-  + [`min()`](./API.md#min) *&ast;Lo*
-  + [`minBy()`](./API.md#minby) *&ast;Lo*
-  + [`multiply()`](./API.md#multiply) *&ast;Lo*
-  + [`round()`](./API.md#round) *&ast;Lo*
-  + [`subtract()`](./API.md#subtract) *&ast;Lo*
-  + [`sum()`](./API.md#sum) *&ast;Lo*
-  + [`sumBy()`](./API.md#sumby) *&ast;Lo*
+  + [`add()`](./API.md#add)
+  + [`ceil()`](./API.md#ceil)
+  + [`divide()`](./API.md#divide)
+  + [`floor()`](./API.md#floor)
+  + [`max()`](./API.md#max)
+  + [`maxBy()`](./API.md#maxby)
+  + [`mean()`](./API.md#mean)
+  + [`meanBy()`](./API.md#meanby)
+  + [`min()`](./API.md#min)
+  + [`minBy()`](./API.md#minby)
+  + [`multiply()`](./API.md#multiply)
+  + [`round()`](./API.md#round)
+  + [`subtract()`](./API.md#subtract)
+  + [`sum()`](./API.md#sum)
+  + [`sumBy()`](./API.md#sumby)
 * [Number](./API.md#number)
-  + [`clamp()`](./API.md#clamp) *&ast;Lo*
-  + [`inRange()`](./API.md#inrange) *&ast;Lo*
-  + [`random()`](./API.md#random) *&ast;Lo*
+  + [`clamp()`](./API.md#clamp)
+  + [`inRange()`](./API.md#inrange)
+  + [`random()`](./API.md#random)
 * [Object and Immutable.Map](./API.md#object-and-immutablemap)
   + [`assign()`](./API.md#assign)
   + [`assignIn()`](./API.md#assignin) *&ast;TODO*
@@ -310,7 +310,7 @@
   + [`forInRight()`](./API.md#forinright) *&ast;TODO*
   + [`forOwn()`](./API.md#forown) *&ast;TODO*
   + [`forOwnRight()`](./API.md#forownright) *&ast;TODO*
-  + [`functions()`](./API.md#functions) *&ast;Lo*
+  + [`functions()`](./API.md#functions)
   + [`functionsIn()`](./API.md#functionsin) *&ast;TODO*
   + [`get()`](./API.md#get)
   + [`getPrototype()`](./API.md#getprototype)
@@ -342,48 +342,48 @@
   + [`values()`](./API.md#values)
   + [`valuesIn()`](./API.md#valuesin) *&ast;TODO*
 * [Seq](./API.md#seq)
-  + [`_()`](./API.md#_) *&ast;Lo*
+  + [`_()`](./API.md#_)
   + [`chain()`](./API.md#chain) *&ast;TODO*
-  + [`tap()`](./API.md#tap) *&ast;Lo*
-  + [`thru()`](./API.md#thru) *&ast;Lo*
+  + [`tap()`](./API.md#tap)
+  + [`thru()`](./API.md#thru)
 * [String](./API.md#string)
-  + [`camelCase()`](./API.md#camelcase) *&ast;Lo*
-  + [`capitalize()`](./API.md#capitalize) *&ast;Lo*
-  + [`deburr()`](./API.md#deburr) *&ast;Lo*
-  + [`endsWith()`](./API.md#endswith) *&ast;Lo*
-  + [`escape()`](./API.md#escape) *&ast;Lo*
-  + [`escapeRegExp()`](./API.md#escaperegexp) *&ast;Lo*
-  + [`kebabCase()`](./API.md#kebabcase) *&ast;Lo*
-  + [`lowerCase()`](./API.md#lowercase) *&ast;Lo*
-  + [`lowerFirst()`](./API.md#lowerfirst) *&ast;Lo*
-  + [`pad()`](./API.md#pad) *&ast;Lo*
-  + [`padEnd()`](./API.md#padend) *&ast;Lo*
-  + [`padStart()`](./API.md#padstart) *&ast;Lo*
-  + [`parseInt()`](./API.md#parseint) *&ast;Lo*
-  + [`repeat()`](./API.md#repeat) *&ast;Lo*
-  + [`replace()`](./API.md#replace) *&ast;Lo*
-  + [`snakeCase()`](./API.md#snakecase) *&ast;Lo*
-  + [`split()`](./API.md#split) *&ast;Lo*
-  + [`startCase()`](./API.md#startcase) *&ast;Lo*
-  + [`startsWith()`](./API.md#startswith) *&ast;Lo*
-  + [`template()`](./API.md#template) *&ast;Lo*
-  + [`toLower()`](./API.md#tolower) *&ast;Lo*
-  + [`toUpper()`](./API.md#toupper) *&ast;Lo*
-  + [`trim()`](./API.md#trim) *&ast;Lo*
-  + [`trimEnd()`](./API.md#trimend) *&ast;Lo*
-  + [`trimStart()`](./API.md#trimstart) *&ast;Lo*
-  + [`truncate()`](./API.md#truncate) *&ast;Lo*
-  + [`unescape()`](./API.md#unescape) *&ast;Lo*
-  + [`upperCase()`](./API.md#uppercase) *&ast;Lo*
-  + [`upperFirst()`](./API.md#upperfirst) *&ast;Lo*
-  + [`words()`](./API.md#words) *&ast;Lo*
+  + [`camelCase()`](./API.md#camelcase)
+  + [`capitalize()`](./API.md#capitalize)
+  + [`deburr()`](./API.md#deburr)
+  + [`endsWith()`](./API.md#endswith)
+  + [`escape()`](./API.md#escape)
+  + [`escapeRegExp()`](./API.md#escaperegexp)
+  + [`kebabCase()`](./API.md#kebabcase)
+  + [`lowerCase()`](./API.md#lowercase)
+  + [`lowerFirst()`](./API.md#lowerfirst)
+  + [`pad()`](./API.md#pad)
+  + [`padEnd()`](./API.md#padend)
+  + [`padStart()`](./API.md#padstart)
+  + [`parseInt()`](./API.md#parseint)
+  + [`repeat()`](./API.md#repeat)
+  + [`replace()`](./API.md#replace)
+  + [`snakeCase()`](./API.md#snakecase)
+  + [`split()`](./API.md#split)
+  + [`startCase()`](./API.md#startcase)
+  + [`startsWith()`](./API.md#startswith)
+  + [`template()`](./API.md#template)
+  + [`toLower()`](./API.md#tolower)
+  + [`toUpper()`](./API.md#toupper)
+  + [`trim()`](./API.md#trim)
+  + [`trimEnd()`](./API.md#trimend)
+  + [`trimStart()`](./API.md#trimstart)
+  + [`truncate()`](./API.md#truncate)
+  + [`unescape()`](./API.md#unescape)
+  + [`upperCase()`](./API.md#uppercase)
+  + [`upperFirst()`](./API.md#upperfirst)
+  + [`words()`](./API.md#words)
 * [Util](./API.md#util)
-  + [`attempt()`](./API.md#attempt) *&ast;Lo*
+  + [`attempt()`](./API.md#attempt)
   + [`bindAll()`](./API.md#bindall) *&ast;TODO*
   + [`cond()`](./API.md#cond) *&ast;TODO*
   + [`conforms()`](./API.md#conforms) *&ast;TODO*
-  + [`constant()`](./API.md#constant) *&ast;Lo*
-  + [`defaultTo()`](./API.md#defaultTo) *&ast;Lo*
+  + [`constant()`](./API.md#constant)
+  + [`defaultTo()`](./API.md#defaultTo)
   + [`flow()`](./API.md#flow) *&ast;TODO*
   + [`flowRight()`](./API.md#flowright) *&ast;TODO*
   + [`hint`](./API.md#hint)
@@ -393,18 +393,18 @@
   + [`matchesProperty()`](./API.md#matchesproperty)
   + [`method()`](./API.md#method) *&ast;TODO*
   + [`methodOf()`](./API.md#methodof) *&ast;TODO*
-  + [`mixin()`](./API.md#mixin) *&ast;Lo*
-  + [`noConflict()`](./API.md#noconflict) *&ast;Lo*
-  + [`noop()`](./API.md#noop) *&ast;Lo*
-  + [`nthArg()`](./API.md#ntharg) *&ast;Lo*
+  + [`mixin()`](./API.md#mixin)
+  + [`noConflict()`](./API.md#noconflict)
+  + [`noop()`](./API.md#noop)
+  + [`nthArg()`](./API.md#ntharg)
   + [`over()`](./API.md#over) *&ast;TODO*
   + [`overEvery()`](./API.md#overevery) *&ast;TODO*
   + [`overSome()`](./API.md#oversome) *&ast;TODO*
   + [`property()`](./API.md#property)
   + [`propertyOf()`](./API.md#propertyof)
-  + [`range()`](./API.md#range) *&ast;Lo*
-  + [`rangeRight()`](./API.md#rangeright) *&ast;Lo*
-  + [`runInContext()`](./API.md#runincontext) *&ast;Lo*
+  + [`range()`](./API.md#range)
+  + [`rangeRight()`](./API.md#rangeright)
+  + [`runInContext()`](./API.md#runincontext)
   + [`stubArray()`](./API.md#stubarray)
   + [`stubFalse()`](./API.md#stubfalse)
   + [`stubImmutableIndexedSeq()`](./API.md#stubimmutableindexedseq)
@@ -425,5 +425,5 @@
   + [`symbol()`](./API.md#symbol)
   + [`times()`](./API.md#times)
   + [`toPath()`](./API.md#topath) *&ast;TODO*
-  + [`uniqueId()`](./API.md#uniqueid) *&ast;Lo*
+  + [`uniqueId()`](./API.md#uniqueid)
   + [`times()`](./API.md#times)

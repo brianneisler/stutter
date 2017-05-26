@@ -1,23 +1,21 @@
-import first from './first'
+import baseCompose from './util/baseCompose'
+import withCurry from './util/withCurry'
+import withFns from './util/withFns'
 import flatten from './flatten'
-import identity from './identity'
-import last from './last'
-import reduceRight from './reduceRight'
-import size from './size'
-import slice from './slice'
+import fn from './fn'
+import recompose from './recompose'
 
-export default function compose(...funcs) {
+
+const enhance = recompose(
+  withCurry(2),
+  withFns({
+    flatten
+  })
+)
+
+const compose = enhance(({ flatten }) => fn((...funcs) => {
   funcs = flatten(funcs)
-  const length = size(funcs)
-  if (length === 0) {
-    return identity
-  }
+  return baseCompose(...funcs)
+})
 
-  if (length === 1) {
-    return first(funcs)
-  }
-
-  const lastFunc = last(funcs)
-  const rest = slice(funcs, 0, -1)
-  return (...args) => reduceRight(rest, (composed, func) => func(composed), lastFunc(...args))
-}
+export default compose

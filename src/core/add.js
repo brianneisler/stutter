@@ -1,13 +1,25 @@
-import arrayReduce from './arrayReduce'
-import withArgsToNumber from './util/withArgsToNumber'
-import withDefaultValue from './util/withDefaultValue'
-import compose from './compose'
+import withCurry from './util/withCurry'
+import withFns from './util/withFns'
 import fn from './fn'
+import recompose from './recompose'
+import reduce from './reduce'
+import toNumber from './toNumber'
 
-const enhance = compose(
-  withDefaultValue(0),
-  withArgsToNumber()
+
+const enhance = recompose(
+  withCurry(2),
+  withFns({
+    reduce, // TODO BRN: limit this down to reduce of array type to improve performance
+    toNumber
+  })
 )
-const add = (...args) => arrayReduce(args, (acc, val) => acc + val, 0, true)
 
-export default fn(enhance(add), 2)
+// TODO BRN: Add built in fractioning to allow for accurate addition of decimal
+const add = enhance(({ reduce, toNumber }) => fn((...args) => {
+  if (args.length === 0) {
+    return 0
+  }
+  return reduce(args, (acc, val) => acc + toNumber(val), 0))
+})
+
+export default add

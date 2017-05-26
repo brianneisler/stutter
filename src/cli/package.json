@@ -14,8 +14,7 @@
     "fs-promise": "^2.0.2",
     "immutable": "^3.8.1",
     "source-map-support": "^0.4.14",
-    "stutter": "^0.2.0",
-    "vorpal": "^1.12.0"
+    "stutter": "^0.2.0"
   },
   "author": "Brian Neisler <me@brianneisler.com>",
   "homepage": "https://github.com/brianneisler/stutter",

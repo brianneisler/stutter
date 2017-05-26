@@ -252,6 +252,5 @@ export { default as walk } from './walk'
 export { default as withMutations } from './withMutations'
 export { default as wrapperValue } from './wrapperValue'
 
-export * as commands from './commands'
 export * as protocols from './protocols'
 export * as types from './types'

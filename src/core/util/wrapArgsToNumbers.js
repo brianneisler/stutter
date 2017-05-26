@@ -1,6 +1,6 @@
 import toNumber from '../toNumber'
 
-export default function withArgsToNumbers() {
+export default function wrapArgsToNumbers() {
   return (fn) => (...args) => {
     args = args.map(toNumber)
     return fn(...args)

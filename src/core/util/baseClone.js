@@ -7,7 +7,7 @@ export default function baseClone(data) {
     : _.clone(data)
 }
 
-import Stack from '../cache/Stack'
+import Stack from './Stack'
 import arrayEach from './arrayEach'
 import assignValue from './assignValue'
 import baseAssign from './baseAssign'
