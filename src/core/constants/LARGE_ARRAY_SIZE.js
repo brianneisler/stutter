@@ -1,0 +1,2 @@
+const LARGE_ARRAY_SIZE = 200
+export default LARGE_ARRAY_SIZE

@@ -1,20 +1,20 @@
+import FLAG_COMPARE_PARTIAL from '../constants/FLAG_COMPARE_PARTIAL'
+import FLAG_COMPARE_UNORDERED from '../constants/FLAG_COMPARE_UNORDERED'
+import TAG_ARRAY_BUFFER from '../constants/TAG_ARRAY_BUFFER'
+import TAG_BOOLEAN from '../constants/TAG_BOOLEAN'
+import TAG_DATA_VIEW from '../constants/TAG_DATA_VIEW'
+import TAG_DATE from '../constants/TAG_DATE'
+import TAG_ERROR from '../constants/TAG_ERROR'
+import TAG_MAP from '../constants/TAG_MAP'
+import TAG_NUMBER from '../constants/TAG_NUMBER'
+import TAG_REGEXP from '../constants/TAG_REGEXP'
+import TAG_SET from '../constants/TAG_SET'
+import TAG_STRING from '../constants/TAG_STRING'
+import TAG_SYMBOL from '../constants/TAG_SYMBOL'
+
+
 import eq from '../eq'
 import baseEqualArrays from './baseEqualArrays'
-import {
-  ARRAY_BUFFER_TAG,
-  BOOL_TAG,
-  COMPARE_PARTIAL_FLAG,
-  COMPARE_UNORDERED_FLAG,
-  DATA_VIEW_TAG,
-  DATE_TAG,
-  ERROR_TAG,
-  MAP_TAG,
-  NUMBER_TAG,
-  REGEXP_TAG,
-  SET_TAG,
-  STRING_TAG,
-  SYMBOL_TAG
-} from './constants'
 import { Uint8Array } from './context'
 import nativeSymbolValueOf from './nativeSymbolValueOf'
 import mapToArray from './mapToArray'
@@ -24,44 +24,44 @@ export default function baseEqualByTag(object, other, tag, bitmask, customizer, 
   let convert
   let result
   let stacked
-  const isPartial = bitmask & COMPARE_PARTIAL_FLAG
+  const isPartial = bitmask & FLAG_COMPARE_PARTIAL
 
   switch (tag) {
-    case DATA_VIEW_TAG:
+    case TAG_DATA_VIEW:
       if ((object.byteLength != other.byteLength) ||
       (object.byteOffset != other.byteOffset)) {
         return false
       }
       object = object.buffer
       other = other.buffer
-    case ARRAY_BUFFER_TAG:
+    case TAG_ARRAY_BUFFER:
       if ((object.byteLength != other.byteLength) ||
       !equalFunc(new Uint8Array(object), new Uint8Array(other))) {
         return false
       }
       return true
 
-    case BOOL_TAG:
-    case DATE_TAG:
-    case NUMBER_TAG:
+    case TAG_BOOLEAN:
+    case TAG_DATE:
+    case TAG_NUMBER:
       // Coerce booleans to `1` or `0` and dates to milliseconds.
       // Invalid dates are coerced to `NaN`.
       return eq(+object, +other)
 
-    case ERROR_TAG:
+    case TAG_ERROR:
       return object.name == other.name && object.message == other.message
 
-    case REGEXP_TAG:
-    case STRING_TAG:
+    case TAG_REGEXP:
+    case TAG_STRING:
       // Coerce regexes to strings and treat strings, primitives and objects,
       // as equal. See http://www.ecma-international.org/ecma-262/7.0/#sec-regexp.prototype.tostring
       // for more details.
       return object == (other + '')
 
-    case MAP_TAG:
+    case TAG_MAP:
       convert = mapToArray
 
-    case SET_TAG:
+    case TAG_SET:
       convert || (convert = setToArray)
 
       if (object.size != other.size && !isPartial) {
@@ -72,7 +72,7 @@ export default function baseEqualByTag(object, other, tag, bitmask, customizer, 
       if (stacked) {
         return stacked == other
       }
-      bitmask |= COMPARE_UNORDERED_FLAG
+      bitmask |= FLAG_COMPARE_UNORDERED
 
       // Recursively compare objects (susceptible to call stack limits).
       stack.set(object, other)
@@ -80,7 +80,7 @@ export default function baseEqualByTag(object, other, tag, bitmask, customizer, 
       stack['delete'](object)
       return result
 
-    case SYMBOL_TAG:
+    case TAG_SYMBOL:
       if (nativeSymbolValueOf) {
         return nativeSymbolValueOf.call(object) == nativeSymbolValueOf.call(other)
       }

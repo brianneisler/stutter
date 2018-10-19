@@ -1,0 +1,2 @@
+const WRAP_PARTIAL_RIGHT_FLAG = 64
+export default WRAP_PARTIAL_RIGHT_FLAG

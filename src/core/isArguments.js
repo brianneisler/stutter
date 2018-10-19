@@ -1,4 +1,4 @@
-import { ARGS_TAG } from './util/constants'
+import TAG_ARGS from './constants/TAG_ARGS'
 import getTag from './util/getTag'
 import withCurry from './util/withCurry'
 import fn from './fn'
@@ -10,7 +10,7 @@ const enhance = recompose(
 )
 
 const isArguments = enhance(() => fn((value) => {
-  return typeof value === 'object' && value !== null && getTag(value) === ARGS_TAG
+  return typeof value === 'object' && value !== null && getTag(value) === TAG_ARGS
 }))
 
 export default isArguments

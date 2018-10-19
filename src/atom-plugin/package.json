@@ -1,0 +1,18 @@
+{
+  "name": "stutter",
+  "main": "./index.js",
+  "version": "0.0.1",
+  "description": "Atom plugin for stutter lang",
+  "keywords": [],
+  "activationCommands": {
+    "atom-workspace": "sourcefetch:fetch"
+  },
+  "repository": "https://github.com/brianneisler/stutter",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+
+  }
+}

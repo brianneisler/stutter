@@ -1,0 +1,2 @@
+const MAX_MEMOIZE_SIZE = 500
+export default MAX_MEMOIZE_SIZE

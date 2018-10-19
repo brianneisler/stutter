@@ -29,7 +29,8 @@ const {
   String,
   TypeError,
   Uint8Array,
-  WeakMap
+  WeakMap,
+  parseInt
 } = context
 
 const arrayProto  = Array.prototype
@@ -80,5 +81,7 @@ export {
   spreadableSymbol,
 
   coreJsData,
-  maskSrcKey
+  maskSrcKey,
+
+  parseInt
 }

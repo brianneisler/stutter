@@ -1,0 +1,2 @@
+const IS_INDEXED_SENTINEL = '@@__IMMUTABLE_INDEXED__@@'
+export default IS_INDEXED_SENTINEL

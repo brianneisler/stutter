@@ -1,6 +1,5 @@
-import withCurry from './util/withCurry'
-import withFns from './util/withFns'
-import fn from './fn'
+import withCurry from './recomposers/withCurry'
+import withFns from './recomposers/withFns'
 import recompose from './recompose'
 import reduce from './reduce'
 import toNumber from './toNumber'
@@ -19,7 +18,7 @@ const add = enhance(({ reduce, toNumber }) => fn((...args) => {
   if (args.length === 0) {
     return 0
   }
-  return reduce(args, (acc, val) => acc + toNumber(val), 0))
-})
+  return reduce(args, (acc, val) => acc + toNumber(val), 0)
+}))
 
 export default add

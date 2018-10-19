@@ -1,0 +1,2 @@
+const WRAP_CURRY_RIGHT_FLAG = 16
+export default WRAP_CURRY_RIGHT_FLAG

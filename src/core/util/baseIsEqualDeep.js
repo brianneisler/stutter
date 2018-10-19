@@ -1,6 +1,8 @@
-import _ from 'lodash'
-import { Stack } from '../cache'
-import { ARRAY_TAG, ARGS_TAG, COMPARE_PARTIAL_FLAG, OBJECT_TAG } from '../constants'
+import COMPARE_PARTIAL_FLAG from '../constants/FLAG_COMPARE_PARTIAL'
+import TAG_ARGS from '../constants/TAG_ARGS'
+import TAG_ARRAY from '../constants/TAG_ARRAY'
+import TAG_OBJECT from '../constants/TAG_OBJECT'
+import Stack from './Stack'
 import contextHasOwnProperty from '../context/contextHasOwnProperty'
 import copyObject from '../util/copyObject'
 import getTag from '../util/getTag'
@@ -15,20 +17,20 @@ import baseKeys from './baseKeys'
 export default function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
   let objIsArr    = isArray(object)
   const othIsArr  = isArray(other)
-  let objTag      = objIsArr ? ARRAY_TAG : getTag(object)
-  let othTag      = othIsArr ? ARRAY_TAG : getTag(other)
+  let objTag      = objIsArr ? TAG_ARRAY : getTag(object)
+  let othTag      = othIsArr ? TAG_ARRAY : getTag(other)
 
-  if (objTag == ARGS_TAG) {
-    objTag = OBJECT_TAG
+  if (objTag == TAG_ARGS) {
+    objTag = TAG_OBJECT
     object = copyObject(object, baseKeys(object))
   }
-  if (othTag == ARGS_TAG) {
-    othTag = OBJECT_TAG
+  if (othTag == TAG_ARGS) {
+    othTag = TAG_OBJECT
     other = copyObject(other, baseKeys(other))
   }
 
-  let objIsObj = objTag == OBJECT_TAG
-  const othIsObj = othTag == OBJECT_TAG
+  let objIsObj = objTag == TAG_OBJECT
+  const othIsObj = othTag == TAG_OBJECT
   const isSameTag = objTag == othTag
 
   if (isSameTag && isBuffer(object)) {

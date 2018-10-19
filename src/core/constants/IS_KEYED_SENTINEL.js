@@ -1,0 +1,2 @@
+const IS_KEYED_SENTINEL = '@@__IMMUTABLE_KEYED__@@'
+export default IS_KEYED_SENTINEL

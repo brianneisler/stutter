@@ -1,0 +1,2 @@
+const MAX_INTEGER = 1.7976931348623157e+308
+export default MAX_INTEGER

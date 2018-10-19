@@ -1,7 +1,7 @@
 {
-  "name": "@stutter/babel-preset",
+  "name": "@cloudless/babel-preset",
   "version": "0.0.1",
-  "description": "Babel preset for stutter applications",
+  "description": "Babel preset for cloudless applications",
   "main": "index.js",
   "repository": "https://github.com/brianneisler/stutter/tree/master/src/babel-preset",
   "keywords": [

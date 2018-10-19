@@ -1,0 +1,2 @@
+const IS_RECORD_SENTINEL = '@@__IMMUTABLE_RECORD__@@'
+export default IS_RECORD_SENTINEL

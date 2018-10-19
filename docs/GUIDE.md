@@ -1,31 +1,74 @@
 # Guide
 
-Stutter is built on top of javascript generators. It uses these to evaluate and execute your stutter code. Stutter is just javascript.
+Stutter is built on top of javascript. It uses javascript to evaluate and execute your stutter code.
+
+
+## Just Functions
+
+Stutter is simple. It is composed entirely of functions. You can write entire applications using just functions chained together in the right ways.
+
 ```js
-function* () {
-  yield your_stutter_javascript
+import { add, div, mul } from 'stutter'
+
+add(
+  div(4, 2),
+  mul(3, 2))  // 8
+```
+
+
+## Concepts
+
+Stutter makes use of a few simple concepts to yield ultimate power!
+
+- [Lazy Evaluation](#lazy-evaluation)
+- [Recomposable Chaining](#recomposable-chaining)
+- [Immutability]
+
+### Lazy Evaluation
+
+
+### Recomposable Chaining
+
+Every stutter function can be chained together to give you the flavor of functional javascript that you want.
+
+```js
+fn1.fn2.fn3('a', 'b', 'c')
+
+// is the same as...
+const fn1 = (fn) => (...args) => fn(...args)
+const fn2 = (fn) => (...args) => fn(...args)
+const fn3 = (arg1, arg2, arg3) => {
+  arg1  // 'a'
+  arg2  // 'b'
+  arg3  // 'c'
 }
+fn1(fn2(fn3))('a', 'b', 'c')
 ```
 
-Each stutter function has a data last, data first and lazy evaluatable form.
 
-- Data last form
+
+
+## Curried Functions
 ```js
-import { set } from 'stutter'
+import { curry } from 'stutter'
 
-set('.foo', 'bar', {}))  // { foo: 'bar' }
+const add2 = curry.add(2)
+add2(3) // 5
 ```
-- Data first form
-```js
-import { _set } from 'stutter'
 
-_set({}, '.foo', 'bar'))  // { foo: 'bar' }
+##
+
+## Thread
+```js
+import { _ } from 'stutter'
+
+_.set({}, '.foo', 'bar'))  // { foo: 'bar' }
 ```
 - Lazy evaluated form
 ```js
-import { $set } from 'stutter'
+import { $ } from 'stutter'
 
-$set({}, '.foo', 'bar'))  // { foo: 'bar' }
+$.set({}, '.foo', 'bar'))  // { foo: 'bar' }
 ```
 
 Data last is useful for composability
@@ -46,327 +89,38 @@ const composed = compose)
 
 
 
+### Generators, Async and Standard Functions
 
-## Methods by comparison
+Stutter supports all forms of functions and uses them in conjunction to create powerful flexible concepts.
 
-## add
+```js
+import { add } from 'stutter'
 
-**clojure**
-```clojure
-(+ 1 2 3)   ; 6
+add(1, 2, 3)  // 6
 ```
+
+
+
+
+## let
+```js
+_let(({}))
+```
+
+
+## eval
 
 **stutter**
 ```js
-$add(1, 2, 3)     // => 6
-$(add, 1, 2, 3)   // => 6
-add(1, 2, 3)      // 6
-_add(1, 2, 3)     // 6
-_(add, 1, 2, 3)   // 6
+const form = $(add, 1, 2)
+eval(form)  // 3
 ```
 
-
-## if
-
-**clojure**
-```clojure
-(if true
-  "By Zeus's hammer!"
-  "By Aquaman's trident!")
-```
-
-**stutter**
 ```js
-$($.if, true,
-  "By Zeus's hammer!",
-  "By Aquaman's trident!")
-
-$if(true,
-  "By Zeus's hammer!",
-  "By Aquaman's trident!")
-```
-
-
-## print
-
-**clojure**
-```clojure
-(print "foo")  ; > foo
-```
-
-**stutter**
-In javascript this will fallback to `console.log` if `process.stdout.write` is not available
-```js
-$(print, "foo")
-
-$print("foo")
-```
-
-
-## println
-
-Same as print with a new line `\n` added to the end
-
-**clojure**
-```clojure
-(println "foo")     ; > "foo"
-```
-
-**stutter**
-In javascript this will fallback to `console.log` if `process.stdout.write` is not available
-```js
-$(println, "foo")   // => > 'foo\n'
-$println("foo")     // => > 'foo\n'
-println("foo")      // > 'foo\n'
-```
-
-
-## do
-
-Evaluates multiple expressions and returns the last value. Returns `null` if not expressions are supplied.
-
-**clojure**
-```clojure
-(do (print "Success!")
-    "By Zeus's hammer!")
-```
-
-**stutter**
-```js
-$($.do, $(print, "Success!")
-  "By Zeus's hammer!")
-
-$do($print("Success!"),
-  "By Zeus's hammer!")
-```
-
-
-## when
-
-**clojure**
-```clojure
-(when true
-  (println "Success!")
-  "abra cadabra")
-```
-
-**stutter**
-```js
-$(when, true,
-  $(println, "Success!"),
-  "abra cadabra")
-
-$when(true,
-  $println("Success!"),
-  "abra cadabra")
-```
-
-
-## nil
-
-**clojure**
-```clojure
-(nil? 1)    ; => false
-
-(nil? nil)  ; => true
-```
-
-**stutter**
-```js
-$(nil, 1)   // => false
-$nil(1)     // => false
-nil(1)      // false
-
-$(nil, null)  // => true
-$nil(null)    // => true
-nil(null)     // true  
-
-$(nil, undefined)   // => true
-$nil(undefined)     // => true
-nil(undefined)      // true
-```
-
-
-## eq
-
-Equality operator
-
-**clojure**
-```clojure
-(= 1 1)     ; => true
-
-(= nil nil) ; => true
-
-(= 1 2)     ; => false
-```
-
-**stutter**
-```js
-$(eq, 1, 1) // => true
-$eq(1, 1)   // => true
-eq(1, 1)    // true
-
-$(eq, null, null)   // => true
-$eq(null, null)     // => true
-eq(null, null)      // true
-
-$(eq, 1, 2)  // => false
-$eq(1, 2)    // => false
-eq(1, 2)     // false
-```
-
-
-## or
-
-Evaluates expressions one at a time, from left to right. Returns the first value that evaluates to a logical true value, otherwise it returns the value of the last expression. If no expressions exist it returns `null`. Expressions after the first `true` are not evaluated. Expressions are not coerced to a boolean, instead their value is returned.
-
-**clojure**
-```clojure
-(or nil nil)    ; nil
-(or false nil)  ; nil
-(or true nil)   ; true
-
-;; or doesn't evaluate if the first value is true
-(or true (println "foo"))   ; true
-
-;; order matters
-(or (println "foo") true)   ; 'foo'  true
-
-;; does not coerce a given value to a boolean true, returns the value
-(or false 42)       ; 42
-(or false 42 9999)  ; 42
-(or 42 9999)        ; 42
-```
-
-**stutter**
-```js
-$or(null, null)    // => null
-$or(false, null)   // => null
-$or(true, nil)     // => true
-
-// or doesn't evaluate if the first value is true
-$or(true, $println("foo"))   // => true
-
-// order matters
-$or($println("foo"), true)   // => > 'foo' true
-
-// does not coerce a given value to a boolean true, returns the value
-$or(false, 42)        // => 42
-$or(false, 42, 9999)  // => 42
-$or(42, 9999)         // => 42
-```
-
-
-## and
-
-Evaluates expressions one at a time, from left to right. Returns the first value that evaluates to a logical `false` value, otherwise it returns the value of the last expression. If no expressions exist it returns `null`. Expressions after the first `false` are not evaluated. Expressions are not coerced to a boolean, instead their value is returned.
-
-
-**clojure**
-```clojure
-(and true true)   ; true
-
-(and true false)  ; false
-
-(and null false)  ; null
-```
-
-**stutter**
-```js
-$(and, true, true)  // => true
-$.and(true, true)    // => true
-and(true, true)     // true
-
-$(and, true, false) // => false
-$and(true, false)   // => false
-and(true, false)    // false
-
-$(and, null, false) // => null
-$and(null, false)   // => null
-$and(null, false)   // null
-```
-
-
-## def
-
-Creates a global var in the current namespace with the given name.
-
-**clojure**
-```clojure
-(def myVal 5)
-```
-
-**stutter**
-```js
-$(def, 'myVal', 5)
-$def('myVal', 5)
-def('myVal', 5)
-```
-
-
-## Threading
-
-Thread first macro
-
-**clojure**
-```clojure
-(-> person
-    (assoc :hair-color :gray)
-    (update :age inc))
-```
-
-**stutter**
-```js
-_(person)
-  .assoc('.hairColor', 'gray')
-  .update('.age', inc)
-
-_(person,
-  assoc('.hairColor', 'gray'),
-  update('.age', inc))
-
-$._(person,
-  assoc('.hairColor', 'gray'),
-  update('.age', inc))
-```
-
-
-Thread last macro
-
-**clojure**
-```clojure
-(->> (range 10)
-        (filter odd?)
-        (map #(* % %))
-        (reduce +)))
-```
-
-**stutter**
-```js
-last._(range(10))
-  .filter(odd)
-  .map(pow(_, 2))
-
-_(person,
-  assoc('.hairColor', 'gray'),
-  update('.age', inc))
-
-$._(person,
-  assoc('.hairColor', 'gray'),
-  update('.age', inc))
-```
-
-NOTE: Thread gets run before every invocation of the next function
-
-**clojure**
-```clojure
-(as-> [:foo :bar] v
-  (map name v)
-  (first v)
-  (.substring v 1))
-```
-
-**stutter**
-```js
-stutter.as()._()
+eval(
+  $.add(1, 2),
+  $.mul(2, 3)
+)
+// 3
+// 6
 ```

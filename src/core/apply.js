@@ -15,12 +15,12 @@ const enhance = recompose(
   })
 )
 
-const apply = enhance(({ expect, satisfies }) => fn((applicable, args) {
+const apply = enhance(({ expect, satisfies }) => fn((applicable, args) => {
   expect(
     satisfies(applicable, Applicable),
     `${applicable} does not implement Applicable protocol`
   )
   return method.apply(null, args)
-})))
+}))
 
 export default apply

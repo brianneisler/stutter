@@ -1,0 +1,39 @@
+{
+	"name": "stutter",
+	"version": "0.0.1",
+	"description": "Stutter CLI",
+  "main": "index.js",
+  "bin": {
+    "stutter": "./bin/stutter",
+    "str": "./bin/stutter"
+  },
+	"scripts": {
+    "build": "./scripts/build.sh",
+    "clean": "./scripts/clean.sh",
+    "cleanse": "./scripts/cleanse.sh",
+    "lint": "./scripts/lint.sh",
+    "predeploy": "./scripts/predeploy.sh",
+    "test": "./scripts/test.sh",
+    "watch": "./scripts/watch.sh"
+  },
+  "dependencies": {
+    "@stutter/sdk": "file:../../projects/sdk",
+		"babel-polyfill": "^6.23.0",
+		"source-map-support": "^0.4.14"
+  },
+  "author": "Brian Neisler <me@brianneisler.com>",
+  "homepage": "https://stutter.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brianneisler/stutter/tree/master/projects/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/brianneisler/stutter/issues"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "lang",
+    "functional",
+    "common"
+  ]
+}

@@ -5,12 +5,16 @@ import push from './push'
 import slice from './slice'
 import toInteger from './toInteger'
 
-export default function chunk(data, size, guard) {
-  if ((guard ? isIterateeCall(data, size, guard) : size === undefined)) {
-    size = 1
-  } else {
-    size = Math.max(toInteger(size), 0)
-  }
+/**
+ * Creates an array or list of elements split into groups the length of `size`. If `data` can't be split evenly, the final chunk will be the remaining elements.
+ *
+ * @static
+ * @param {Indexed<T>} data
+ * @param {number} size
+ * @returns {Indexed<T>}
+ */
+export default function chunk(data, size) {
+  size = Math.max(toInteger(size), 0)
   const length = data ? count(data) : 0
   if (!length || size < 1) {
     return hintConvert(data, [])

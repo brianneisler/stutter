@@ -1,0 +1,2 @@
+const IS_ORDERED_SENTINEL = '@@__IMMUTABLE_ORDERED__@@'
+export default IS_ORDERED_SENTINEL

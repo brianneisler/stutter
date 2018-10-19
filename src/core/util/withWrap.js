@@ -10,7 +10,7 @@ var baseSetData = require('./_baseSetData'),
     toInteger = require('./toInteger');
 
 /** Error message constants. */
-var FUNC_ERROR_TEXT = 'Expected a function';
+var ERROR_TEXT_FUNC = 'Expected a function';
 
 /** Used to compose bitmasks for function metadata. */
 var
@@ -46,7 +46,7 @@ var nativeMax = Math.max;
 function createWrap(func, bitmask, thisArg, partials, holders, argPos, ary, arity) {
   var isBindKey = bitmask & WRAP_BIND_KEY_FLAG;
   if (!isBindKey && typeof func != 'function') {
-    throw new TypeError(FUNC_ERROR_TEXT);
+    throw new TypeError(ERROR_TEXT_FUNC);
   }
   var length = partials ? partials.length : 0;
   if (!length) {

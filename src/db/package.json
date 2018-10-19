@@ -1,0 +1,22 @@
+{
+  "name": "@stutter/db",
+  "version": "0.0.1",
+  "description": "DB that backs stutter programs",
+  "main": "index.js",
+  "dependencies": {
+  },
+  "author": "Brian Neisler <me@brianneisler.com>",
+  "homepage": "https://github.com/brianneisler/stutter/blog/master/src/db",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brianneisler/stutter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/brianneisler/stutter/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "db",
+    "stutter"
+  ]
+}

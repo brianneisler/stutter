@@ -1,0 +1,30 @@
+{
+  "name": "@stutter/react",
+  "version": "0.2.0",
+  "description": "React bindings for Stutter",
+  "main": "index.js",
+  "dependencies": {
+    "recompose": "^0.23.4",
+    "stutter": "^0.2.0"
+  },
+  "peerDependencies": {
+    "stydux": "^0.0.2",
+    "react": "^16.0.0-0"
+  },
+  "author": "Brian Neisler <me@brianneisler.com>",
+  "homepage": "https://github.com/brianneisler/stutter/blog/master/src/react",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brianneisler/stutter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/brianneisler/stutter/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "reactjs",
+    "react-native",
+    "stutter"
+  ]
+}

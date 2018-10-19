@@ -28,6 +28,6 @@ const ary = enhance(({ expect, isFunction, isNumber }) => fn((func, n) => {
   return function(...args) {
     return func(n >= args.length ? args : args.slice(0, n))
   }
-})))
+}))
 
 export default ary

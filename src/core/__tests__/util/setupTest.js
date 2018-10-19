@@ -15,7 +15,7 @@ export default function setupTest() {
   const LARGE_ARRAY_SIZE = 200
 
   /** Used as the `TypeError` message for 'Functions' methods. */
-  const FUNC_ERROR_TEXT = 'Expected a function'
+  const ERROR_TEXT_FUNC = 'Expected a function'
 
   /** Used as the maximum memoize cache size. */
   const MAX_MEMOIZE_SIZE = 500
@@ -700,7 +700,7 @@ export default function setupTest() {
   // })
 
   return {
-    FUNC_ERROR_TEXT,
+    ERROR_TEXT_FUNC,
     HOT_COUNT,
     LARGE_ARRAY_SIZE,
     MAX_ARRAY_INDEX,

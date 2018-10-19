@@ -4,7 +4,7 @@
 * *&ast;TODO* - Immutable.JS support still needs to be implemented
 
 ## TOC
-* [Array and Immutable.List](#array-and-immutablelist)
+* [stutter.core](#stutter-core)
   + [`butLast()`](#butlast)
   + [`chunk()`](#chunk)
   + [`circularShift()`](#circularshift)
@@ -35,6 +35,7 @@
   + [`lastIndexOf()`](#lastindexof)
   + [`nth()`](#nth) *&ast;TODO*
   + [`pop()`](#pop)
+  + [`print()`](#print)
   + [`pull()`](#pull)
   + [`pullAll()`](#pullall)
   + [`pullAllBy()`](#pullallby)
@@ -432,18 +433,7 @@
   + [`times()`](#times)
 
 
-## Array and Immutable.List
-
-### `chunk()`
-
-```js
-chunk(
-  data: Array | List,
-  size: number
-): Array | List
-```
-
-Creates an array or list of elements split into groups the length of `size`. If `data` can't be split evenly, the final chunk will be the remaining elements.
+## Stutter Core
 
 
 ### `difference()`
@@ -545,6 +535,31 @@ dropWhile(
 
 Creates a slice of `data` excluding elements dropped from the beginning.
 Elements are dropped until `predicate` returns falsey.
+
+
+### `print()`
+
+```js
+print(
+  ...values: Array<Any>
+)
+```
+
+Prints values to the stdout. In javascript this will fallback to `console.log` if `process.stdout.write` is not available.
+
+**Examples**
+```js
+// Log a string to the stdout
+
+print("foo")
+```
+
+```js
+// Create a function that prints a string
+
+$(print, "foo")   // () => print("foo")
+```
+
 
 
 ## Collection and Immutable.Iterable

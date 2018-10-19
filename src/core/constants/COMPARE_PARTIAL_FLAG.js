@@ -1,0 +1,2 @@
+const COMPARE_PARTIAL_FLAG = 1
+export default COMPARE_PARTIAL_FLAG

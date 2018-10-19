@@ -9,6 +9,6 @@ const enhance = recompose(
 
 const arg2 = enhance(() => fn((arg1, arg2) => {
   return arg2
-})))
+}))
 
 export default arg2
