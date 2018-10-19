@@ -1,4 +1,5 @@
 export * as _ from './_';
+export * as aas from './aas';
 export * as apply from './apply';
 export * as call from './call';
 export * as ccatch from './ccatch';

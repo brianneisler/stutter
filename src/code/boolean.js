@@ -1,10 +1,11 @@
 import { BOOLEAN } from '../defines';
+import * as _ from '../util';
 
-export const type = BOOLEAN;
+export const code = BOOLEAN;
 
 export function boolean(value) {
   return {
-    code: BOOLEAN,
+    code,
     value
   };
 }

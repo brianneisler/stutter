@@ -1,6 +1,6 @@
-ns('lang',
-  iif(false
-    log('"Never gonna run!'))
-    eelse(
-      log('"Made it here!')
+ns('lang'
+  else(
+    if(false
+      log('Never gonna run!'))
+    log('"Made it here!')
     ))

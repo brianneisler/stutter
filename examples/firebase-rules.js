@@ -1,14 +1,13 @@
-lang('firebase',
+lang('firebase'
 
-ns('my-rules',
+ns('my-rules'
   path('/some/path')
-    .validate(['value', 'previous'],
-      iif(call('doesNotExist', 'value'),
-        rreturn(true)
-      )
-      lt('previous', 'value')),
+    .validate([value previous]
+      if(doesNotExist(value)
+        return(true))
+      lt(previous value))
 
-  fn('doesExist', ['value'],
-    notEqual('value', null)),
-  fn('doesNotExist', ['value'],
-    equal('value', null)))))
+  fn(doesExist [value]
+    notEqual(value null))
+  fn(doesNotExist [value]
+    equal(value null)))))

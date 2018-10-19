@@ -1,6 +1,12 @@
+import { CALL } from '../defines';
 import * as _ from '../util';
 
-export function generate(expression, process) {
+export const lang = CALL;
+export const keywords = {
+  call: lang
+};
+
+export function generate(statement) {
     const call = expression.get('call');
     const name = call.get(0);
     let nameFunc = null;

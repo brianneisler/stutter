@@ -1,4 +1,10 @@
+import { CATCH } from '../defines';
 
-export function generate(expression, process) {
+export const lang = CATCH;
+export const keywords = {
+  ccatch: lang
+};
+
+export function generate(statement) {
 
 }

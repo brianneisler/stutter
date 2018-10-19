@@ -1,7 +1,12 @@
-import * as _ from '../util';
 import { expression } from '../code';
-import { EXPRESSIONS, IDENTIFIER } from '../defines';
+import { EXPRESSIONS, IDENTIFIER, NAMESPACE } from '../defines';
 import { each, resolve } from '../runtime';
+import * as _ from '../util';
+
+export const lang = NAMESPACE;
+export const keywords = {
+  ns: lang
+};
 
 export function generate() {
   return expression([IDENTIFIER, EXPRESSIONS], ns);

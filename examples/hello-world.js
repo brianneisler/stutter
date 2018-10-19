@@ -1,2 +1,2 @@
-ns('lang',
-  log('"Hello world!'))
+ns('lang'
+  log('Hello world!'))

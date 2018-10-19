@@ -1,6 +1,10 @@
-import _ from 'lodash';
-import Immutable from 'immutable';
+import { CHAIN } from '../defines';
 
-export function generate(expression, process) {
+export const lang = CHAIN;
+export const keywords = [
+  '_'
+];
+
+export function generate(statement) {
 
 }

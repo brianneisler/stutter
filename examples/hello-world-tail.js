@@ -1,3 +1,3 @@
-ns('lang',
-  '"Hello world!',
-  log)
+ns('lang'
+  'Hello world!'
+  .log())

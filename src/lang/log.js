@@ -1,14 +1,14 @@
 import { PROGRAM, logger } from 'stutter-util';
 import { expression } from '../codes';
-import { EXPRESSIONS } from '../defines';
+import { EXPRESSIONS, LOG } from '../defines';
 import { map, resolve } from '../runtime';
 import * as _ from '../util';
 
-export function generate() {
-  return expression([EXPRESSIONS], log);
-}
+export const lang       = LOG;
+export const keywords   = ['log'];
+export const expects    = [EXPRESSIONS];
 
-function *log(scope, tail, expressions) {
+export function *evaluate(scope, tail, expressions) {
   const results = yield map(expressions, mapLog);
   if (_.isEmpty(results)) {
     logger.info(PROGRAM, tail);

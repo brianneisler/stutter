@@ -1,9 +1,14 @@
-import * as _ from '../util';
 import Immutable from 'immutable';
 import { expression } from '../core';
 import { string } from '../data';
-import { EXPRESSIONS } from '../defines';
+import { EXPRESSIONS, STRING } from '../defines';
 import { map, resolve } from '../runtime';
+import * as _ from '../util';
+
+export const lang = STRING;
+export const keywords = {
+  str: lang
+};
 
 export function generate(namespace, context, code) {
   return expression([EXPRESSIONS], str);

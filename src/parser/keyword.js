@@ -8,16 +8,16 @@ export default _.memoize((key) => {
     const stack = StackParser.parse(new Error(''));
     Error.stackTraceLimit = Infinity;
     const stackFrame = stack[1];
-    const code = {
+    const statement = {
       '@key': key,
       '@children': resolve(args)
     };
-    Object.defineProperty(code, '_meta', {
+    Object.defineProperty(statement, '_meta', {
       enumerable: false,
       configurable: false,
       writeable: false,
       value: { file: stackFrame.getFileName(), lineNumber:stackFrame.getLineNumber() }
     });
-    return code;
+    return statement;
   };
 });

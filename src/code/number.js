@@ -1,10 +1,11 @@
 import { NUMBER } from '../defines';
+import * as _ from '../util';
 
-export const type = NUMBER;
+export const code = NUMBER;
 
 export function number(value) {
   return {
-    code: NUMBER,
+    code,
     value
   };
 }

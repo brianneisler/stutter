@@ -1,4 +1,10 @@
+import { CONST } from '../defines';
 
-export function generate(expression, process) {
+export const lang = CONST;
+export const keywords = {
+  cnst: lang
+};
+
+export function generate(statement) {
 
 }

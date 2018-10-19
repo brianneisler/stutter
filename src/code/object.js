@@ -1,10 +1,10 @@
 import { OBJECT } from '../defines';
 
-export const type = OBJECT;
+export const code = OBJECT;
 
 export function object(value) {
   return {
-    code: OBJECT,
+    code,
     value
   };
 }

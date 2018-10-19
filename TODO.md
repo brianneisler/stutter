@@ -1,3 +1,10 @@
+Parser
+- Use babel as parser for stutter engine.
+- Create a babel plugin
+-- remove commas from language
+-- convert JS keywords in to functions
+-- convert operators in to functions 
+
 Features
 - Switch runtime engine to using generators
 - Add function chaining

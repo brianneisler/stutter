@@ -1,4 +1,10 @@
+import { IF } from '../defines';
 
-export function generate(expression, process) {
+export const lang = IF;
+export const keywords = {
+  iif: lang
+};
+
+export function generate(statement) {
 
 }

@@ -1,4 +1,10 @@
-import { IDENTIFIER } from '../defines';
+import { LET } from '../defines';
+import * as _ from '../util';
+
+export const lang = LET;
+export const keywords = {
+  llet: lang
+};
 
 export function generate(expression) {
   return {

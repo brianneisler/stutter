@@ -1,3 +1,3 @@
-ns('lang',
+ns('lang'
   if(true
-    log('"Hello world!')))
+    log('Hello world!')))

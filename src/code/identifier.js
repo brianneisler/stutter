@@ -1,10 +1,11 @@
 import { IDENTIFIER } from '../defines';
+import * as _ from '../util';
 
-export const type = IDENTIFIER;
+export const code = IDENTIFIER;
 
 export function identifier(name) {
   return {
-    code: IDENTIFIER,
+    code,
     name
   };
 }

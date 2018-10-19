@@ -1,4 +1,10 @@
+import { FUNCTION } from '../defines';
 import * as _ from '../util';
+
+export const lang = FUNCTION;
+export const keywords = {
+  fn: lang
+};
 
 export function generate(expression, process) {
     const fn = expression.get('fn');

@@ -1,10 +1,10 @@
 import { STRING } from '../defines';
 
-export const type = STRING;
+export const code = STRING;
 
 export function string(value) {
   return {
-    code: STRING,
+    code,
     value
   };
 }

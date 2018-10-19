@@ -20,4 +20,5 @@ export { default as memoize } from './memoize';
 export { default as prompt } from './prompt';
 export { default as reduce } from './reduce';
 export { default as set } from './set';
+export { default as slice } from './slice';
 export { default as startsWith } from './startsWith';

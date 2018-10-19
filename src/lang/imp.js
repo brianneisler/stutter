@@ -1,5 +1,10 @@
-import _ from 'lodash';
-import Immutable from 'immutable';
+import { IMPORT } from '../defines';
+import * as _ from '../util';
+
+export const lang = IMPORT;
+export const keywords = {
+  imp: lang
+};
 
 export function generate(expression, process) {
     const call = expression.get('call');

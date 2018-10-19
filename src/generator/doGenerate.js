@@ -1,42 +1,39 @@
 import * from '../defines';
+import { registry } from '../registry';
 import * as _ from '../util';
-import * as registry from './registry';
+
+const codeRegistry = registry('code');
 
 export default function doGenerate(statement) {
-  const generator = registry.get(statementType(statement));
+  const generator = codeRegistry.get(statementType(statement));
   return generator.generate(statement);
 }
 
-function isAccessorStatement(statement) {
-  return isStirng(statement) && _.startsWith(statement, '.');
-}
 
-function isArrayStatement(statement) {
-  return isArray(statement);
-}
+
 
 function isBooleanStatement(statement) {
-  return isBoolean(statement);
+  return _.isBoolean(statement);
 }
 
 function isExpressionStatement(statement) {
-  return isObject(statement) && _.has(statement, '@key');
+  return _.isObject(statement) && _.has(statement, '@key');
 }
 
 function isIdentifierStatement(statement) {
-  return isString(statement) && !isStringCode(statement);
+  return _.isString(statement) && !isStringCode(statement);
 }
 
 function isNumberStatement(statement) {
-  return isNumber(statement);
+  return _.sNumber(statement);
 }
 
 function isObjectStatement(statement) {
-  return isObject(statement) && !isExpressionStatement(statement);
+  return _.isObject(statement) && !isExpressionStatement(statement);
 }
 
 function isStringStatement(statement) {
-  return isString(statement) && _.startsWith(statement, '"');
+  return _.isString(statement) && _.startsWith(statement, '"');
 }
 
 function statementType(statement) {
