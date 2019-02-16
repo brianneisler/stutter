@@ -1,1 +1,3 @@
-mocha .
+#!/usr/bin/env bash
+set -e
+jest "$@"

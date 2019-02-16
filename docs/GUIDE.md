@@ -1,11 +1,6 @@
 # Guide
 
-Stutter is built on top of javascript generators. It uses these to evaluate and execute your stutter code. Stutter is just javascript.
-```js
-function* () {
-  yield your_stutter_javascript
-}
-```
+Stutter is built with javascript generators in mind. 
 
 Each stutter function has a data last, data first and lazy evaluatable form.
 
@@ -13,19 +8,19 @@ Each stutter function has a data last, data first and lazy evaluatable form.
 ```js
 import { set } from 'stutter'
 
-set('.foo', 'bar', {}))  // { foo: 'bar' }
+set('foo', 'bar', {}))  // { foo: 'bar' }
 ```
 - Data first form
 ```js
-import { _set } from 'stutter'
+import { set } from 'stutter'
 
-_set({}, '.foo', 'bar'))  // { foo: 'bar' }
+set({}, 'foo', 'bar'))  // { foo: 'bar' }
 ```
 - Lazy evaluated form
 ```js
-import { $set } from 'stutter'
+import { set } from 'stutter'
 
-$set({}, '.foo', 'bar'))  // { foo: 'bar' }
+$(set, {}, 'foo', 'bar'))()  // { foo: 'bar' }
 ```
 
 Data last is useful for composability
@@ -33,7 +28,7 @@ Data last is useful for composability
 ```js
 import { set } from 'stutter'
 
-set('.foo', 'bar', {}))  // { foo: 'bar' }
+set('foo', 'bar', {}))  // { foo: 'bar' }
 
 const setFooBar = set('.foo', 'bar') // curried function
 setFooBar({}) // { foo: 'bar' }
