@@ -1,14 +1,20 @@
 language: node_js
+sudo: false
 node_js:
-- '4.0'
-- '5.0'
-- '6.0'
-- '7.0'
-cache: yarn
-after_success:
-  - npm run build
-before_deploy:
-  - cd dist/core
+- 10
+- 8
+- 6
+os:
+- linux
+- osx
+- windows
+before_install:
+- npm run setup:ci
+install:
+- npm run setup
+script:
+- npm run lint
+- npm run test:ci
 deploy:
   provider: npm
   email: me@brianneisler.com
