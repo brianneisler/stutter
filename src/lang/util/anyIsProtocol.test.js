@@ -1,0 +1,50 @@
+import Protocol from './js/Protocol'
+import anyIsProtocol from './anyIsProtocol'
+
+describe('anyIsProtocol', () => {
+  test('returns true for a Protocol', () => {
+    const protocol = new Protocol({
+      foo: []
+    })
+    expect(anyIsProtocol(protocol)).toBe(true)
+  })
+
+  test('returns false for all other values', () => {
+    expect(anyIsProtocol(undefined)).toBe(false)
+    expect(anyIsProtocol(null)).toBe(false)
+    expect(anyIsProtocol('')).toBe(false)
+    expect(anyIsProtocol('abc')).toBe(false)
+    expect(anyIsProtocol(false)).toBe(false)
+    expect(anyIsProtocol(true)).toBe(false)
+    expect(anyIsProtocol(0)).toBe(false)
+    expect(anyIsProtocol(-1)).toBe(false)
+    expect(anyIsProtocol(1)).toBe(false)
+    expect(anyIsProtocol(NaN)).toBe(false)
+    expect(anyIsProtocol(Infinity)).toBe(false)
+    expect(anyIsProtocol(-Infinity)).toBe(false)
+    expect(anyIsProtocol({})).toBe(false)
+    expect(anyIsProtocol([])).toBe(false)
+    expect(anyIsProtocol(new Array(0))).toBe(false)
+    expect(anyIsProtocol([0])).toBe(false)
+    expect(anyIsProtocol(/abc/)).toBe(false)
+    expect(anyIsProtocol(async () => {})).toBe(false)
+    expect(anyIsProtocol(() => {})).toBe(false)
+    expect(anyIsProtocol(function() {})).toBe(false)
+    expect(anyIsProtocol((function*() {})())).toBe(false)
+    expect(anyIsProtocol(Symbol('abc'))).toBe(false)
+    expect(anyIsProtocol(Symbol.for('def'))).toBe(false)
+    expect(anyIsProtocol(new ArrayBuffer(2))).toBe(false)
+    expect(anyIsProtocol(new Boolean(false))).toBe(false)
+    expect(anyIsProtocol(new Boolean(true))).toBe(false)
+    expect(anyIsProtocol(new Date())).toBe(false)
+    expect(anyIsProtocol(new Error())).toBe(false)
+    expect(anyIsProtocol(new Map())).toBe(false)
+    expect(anyIsProtocol(new Number(1))).toBe(false)
+    expect(anyIsProtocol(new Promise(() => {}))).toBe(false)
+    expect(anyIsProtocol(new Proxy({}, {}))).toBe(false)
+    expect(anyIsProtocol(new Set())).toBe(false)
+    expect(anyIsProtocol(new String('abc'))).toBe(false)
+    expect(anyIsProtocol(new WeakMap())).toBe(false)
+    expect(anyIsProtocol(new WeakSet())).toBe(false)
+  })
+})
