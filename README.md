@@ -109,3 +109,24 @@ _(obj, set('c', 3))
 _(obj).set('c', 3)  
 //=> Object { "a": 1, "b": 2, "c": 3 }
 ```
+
+
+`function (arg1) {
+      const exception = (0, _buildException.default)(source).expected.arg(arg1, 0).toMatchParameter(source.parameters[0]);
+      expect(exception).toBeInstanceOf(_Exception.default);
+      expect(exception).toMatchObject({
+        source,
+        target: {
+          type: 'Argument',
+          index: 0,
+          value: 'foo'
+        },
+        expected: {
+          expectation: 'toMatchParameter',
+          data: {
+            parameter: source.parameters[0]
+          }
+        },
+        code: 'Expected:Argument:toMatchParameter'
+      });
+    }`

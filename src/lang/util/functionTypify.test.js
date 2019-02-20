@@ -34,6 +34,23 @@ describe('functionTypify', () => {
     expect(func.length).toBe(1)
   })
 
+  test('typifies an anonymous function with fixed parameters', () => {
+    const func = functionTypify(
+      function(n) {
+        return n
+      },
+      [Number, () => Number]
+    )
+    expect(func.parameters).toEqual([
+      {
+        name: 'n',
+        type: Number
+      }
+    ])
+    expect(func.returns).toBe(Number)
+    expect(func.length).toBe(1)
+  })
+
   test('typifies a function with default type Any if no type definitions are provided', () => {
     const func = functionTypify((foo, bar) => {
       return bar

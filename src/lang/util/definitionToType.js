@@ -1,4 +1,3 @@
-import { Protocol } from './js'
 import Map from './js/Map'
 import SYMBOL_ITERATOR from '../constants/SYMBOL_ITERATOR'
 import Type from './js/Type'
@@ -40,7 +39,6 @@ const definitionToType = (definition) => {
   const protocolsMap = new Map()
 
   if (protocols) {
-    // TODO BRN: reshape protocols into Map using the Protocol as a key
     const iter = protocols[SYMBOL_ITERATOR]()
 
     let next = iter.next()

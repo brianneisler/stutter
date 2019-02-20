@@ -31,6 +31,16 @@ describe('anyIsIterator', () => {
     ).toBe(true)
   })
 
+  test('returns true for async iterator', () => {
+    expect(
+      anyIsIterator({
+        next: async () => ({
+          done: true
+        })
+      })
+    ).toBe(true)
+  })
+
   test('returns false for all other values', () => {
     expect(anyIsIterator(undefined)).toBe(false)
     expect(anyIsIterator(null)).toBe(false)

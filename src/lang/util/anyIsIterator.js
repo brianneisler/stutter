@@ -1,7 +1,9 @@
-import anyIsPlainFunction from './anyIsPlainFunction'
+import anyIsFunction from './anyIsFunction'
 
 /**
- * Checks if `value` is an Iterator. An Iterator is classified as having a property named `next` that is a plain function.
+ * Checks if `any` is an `Iterator`. An `Iterator` is classified as having a property named `next` that is a function.
+ *
+ * Note, this method returns `true` for async Iterators.
  *
  * @private
  * @function
@@ -20,6 +22,6 @@ import anyIsPlainFunction from './anyIsPlainFunction'
  * })
  * //=> true
  */
-const anyIsIterator = (value) => value != null && anyIsPlainFunction(value.next)
+const anyIsIterator = (value) => value != null && anyIsFunction(value.next)
 
 export default anyIsIterator
