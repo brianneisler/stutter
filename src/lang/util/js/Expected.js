@@ -4,15 +4,32 @@ import anyToName from '../anyToName'
 import anyToStringTag from '../anyToStringTag'
 import functionToParameterNames from '../functionToParameterNames'
 
-const newToMatchParameterTypeError = (not) =>
+const newTypeErrorToMatchParameter = (not, exception) =>
   new TypeError(`
-          ${anyToStringTag(exception.source)} ${anyToName(exception.source)} expected ${
-          exception.target.type
-        } for Parameter ${anyToName(this.data.parameter)} to ${not ? 'NOT ' : ''} be a ${
-          this.data.parameter.type
-        }. Instead was given ${exception.target.value}.
-        `)
+    ${anyToStringTag(exception.source)} ${anyToName(exception.source)} expected ${
+    exception.target.type
+  } for Parameter ${anyToName(this.data.parameter)} to ${not ? 'NOT ' : ''} be a ${
+    this.data.parameter.type
+  }. Instead was given ${exception.target.value}.
+  `)
+
+const newTypeErrorToMatchRegex = (not, exception) => {
+  const parameterName = functionToParameterNames(exception.source)[exception.target.index]
+  return new TypeError(`
+    ${anyToStringTag(exception.source)} ${anyToName(exception.source)} expected ${
+    exception.target.type
+  } for Parameter '${parameterName}' ${not ? 'NOT ' : ''} to match regex ${
+    this.data.regex
+  }. Instead was given ${exception.target.value}.
+  `)
 }
+
+const newTypeErrorToBeEmpty = (not, exception) =>
+  new TypeError(`
+  ${anyToStringTag(exception.source)} ${anyToName(exception.source)} expected ${
+    not ? 'at least one Parameter' : 'no Parameters'
+  }.
+  `)
 
 class Expected {
   constructor({ data, expectation }) {
@@ -25,46 +42,18 @@ class Expected {
   }
 
   toError(exception) {
+    const parts = this.expectation.split('.')
+    const expectation = parts.length === 1 ? parts[0] : parts[1]
+    const not = parts[0] === 'not'
+
     // TODO BRN: Find a better implementation for this switch statement
-    switch (this.expectation) {
-      case 'not.toMatchParameter':
-        return
+    switch (expectation) {
       case 'toMatchParameter':
-        return new TypeError(`
-          ${anyToStringTag(exception.source)} ${anyToName(exception.source)} expected ${
-          exception.target.type
-        } for Parameter ${anyToName(this.data.parameter)} to be a ${
-          this.data.parameter.type
-        }. Instead was given ${exception.target.value}.
-        `)
-      case 'not.toMatchRegex':
-        const parameterName = functionToParameterNames(exception.source)[exception.target.index]
-        return new TypeError(`
-          ${anyToStringTag(exception.source)} ${anyToName(exception.source)} expected ${
-          exception.target.type
-        } for Parameter '${parameterName}' NOT to match regex ${
-          this.data.regex
-        }. Instead was given ${exception.target.value}.
-        `)
+        return newTypeErrorToMatchParameter(not, exception)
       case 'toMatchRegex':
-        const parameterName = functionToParameterNames(exception.source)[exception.target.index]
-        return new TypeError(`
-          ${anyToStringTag(exception.source)} ${anyToName(exception.source)} expected ${
-          exception.target.type
-        } for Parameter '${parameterName}' to match regex ${this.data.regex}. Instead was given ${
-          exception.target.value
-        }.
-        `)
-      case 'not.toBeEmpty':
-        return new TypeError(`
-        ${anyToStringTag(exception.source)} ${anyToName(
-          exception.source
-        )} expected at least one Parameter.
-        `)
+        return newTypeErrorToMatchRegex(not, exception)
       case 'toBeEmpty':
-        return new TypeError(`
-        ${anyToStringTag(exception.source)} ${anyToName(exception.source)} expected no Parameters.
-        `)
+        return newTypeErrorToBeEmpty(not, exception)
     }
 
     throw new Error('Could not find matching error for exception')

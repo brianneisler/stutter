@@ -1,4 +1,4 @@
-import { values } from '../../../../tests'
+import { values } from '../../../tests'
 import Exception from './js/Exception'
 import Expected from './js/Expected'
 import anyIsException from './anyIsException'

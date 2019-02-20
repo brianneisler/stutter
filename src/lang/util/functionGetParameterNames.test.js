@@ -23,7 +23,7 @@ describe('functionGetParameterNames', () => {
     expect(functionGetParameterNames(function* foo(arg) {})).toEqual(['arg'])
   })
 
-  test('returns an array with name on a function with one parameters', () => {
+  test('returns an array with names on a function with two parameters', () => {
     expect(functionGetParameterNames((arg, arg2) => {})).toEqual(['arg', 'arg2'])
     expect(functionGetParameterNames(async (arg, arg2) => {})).toEqual(['arg', 'arg2'])
     expect(functionGetParameterNames(function(arg, arg2) {})).toEqual(['arg', 'arg2'])
@@ -50,5 +50,36 @@ describe('functionGetParameterNames', () => {
     expect(functionGetParameterNames((arg, arg2 = 'foo') => {})).toEqual(['arg'])
     expect(functionGetParameterNames((arg, arg2 = 'foo', arg3) => {})).toEqual(['arg'])
     expect(functionGetParameterNames((arg, arg2, arg3 = 'foo') => {})).toEqual(['arg', 'arg2'])
+  })
+
+  test('handles args with objects as defaults', () => {
+    expect(functionGetParameterNames((arg = {}) => {})).toEqual([])
+    expect(functionGetParameterNames((arg, arg2 = {}) => {})).toEqual(['arg'])
+  })
+
+  test('handles multi line functions', () => {
+    expect(
+      functionGetParameterNames((arg) => {
+        return arg
+      })
+    ).toEqual(['arg'])
+    expect(
+      functionGetParameterNames((arg, arg2) => {
+        return arg2
+      })
+    ).toEqual(['arg', 'arg2'])
+  })
+
+  test('handles functions with comments in parameters', () => {
+    expect(
+      functionGetParameterNames((arg /* foo */) => {
+        return arg
+      })
+    ).toEqual(['arg'])
+    expect(
+      functionGetParameterNames((arg, /* foo */ arg2 /* foo */) => {
+        return arg2
+      })
+    ).toEqual(['arg', 'arg2'])
   })
 })

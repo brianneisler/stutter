@@ -5,7 +5,7 @@ module.exports = {
       {
         useBuiltIns: 'usage',
         targets: {
-          node: '6'
+          node: '8'
         }
       }
     ]

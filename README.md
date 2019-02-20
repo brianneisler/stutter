@@ -1,11 +1,38 @@
-# stutter
+```
+            $$\                 $$\     $$\                         
+            $$ |                $$ |    $$ |                        
+ $$$$$$$\ $$$$$$\   $$\   $$\ $$$$$$\ $$$$$$\    $$$$$$\   $$$$$$\  
+$$  _____|\_$$  _|  $$ |  $$ |\_$$  _|\_$$  _|  $$  __$$\ $$  __$$\ 
+\$$$$$$\    $$ |    $$ |  $$ |  $$ |    $$ |    $$$$$$$$ |$$ |  \__|
+ \____$$\   $$ |$$\ $$ |  $$ |  $$ |$$\ $$ |$$\ $$   ____|$$ |      
+$$$$$$$  |  \$$$$  |\$$$$$$  |  \$$$$  |\$$$$  |\$$$$$$$\ $$ |      
+\_______/    \____/  \______/    \____/  \____/  \_______|\__|      
+```
+
 
 Functional programming framework built for Javascript
 
 [Website](https://stutter.io) •
 
 
-## Benefits
+## Why?
+
+We're big fans of both lodash and ramda. But after years of use there are
+particular sets of problems that we wanted solutions to.
+- Autocurrying is a pitfall without helpful guiderails
+- Sometimes you want data first, sometimes you want function first. There's use
+  cases for both!
+- Why is support for promises not built in? Do I really need yet another library
+  (`async`)?
+- How come I can't use these functions with generators?
+- Why do I need separate functions for sync and async?
+- When using curried functions, it's impossible to tell where in my code an
+  error really came from.
+- Why don't I get an meaningful error when I accidentally feed the wrong type to
+  a function.
+
+
+## Features
 
 - Supports both data first AND function first (lodash style and ramda style)
   - We're able to do this because stutter supports multi-functions.
@@ -14,9 +41,12 @@ Functional programming framework built for Javascript
   structures but supports both Immutable.JS data types and standard JS values.
 - Introduces custom data types for [Immutable.JS](https://facebook.github.io/immutable-js/)
 - Converts types based on data hinting
+  - If a deep operation is performed on an immutable data type that generates a
+    new "object" then that object will be an ImmutableMap
 - Supports mixed nested data types making it easier to process values of mixed Immutable.JS/mutable data objects
 - All functions are fully immutable and side-effect free (for both standard JS values and Immutable.JS data types)
 - All functions are automatically curried.
+  - Automatic currying works for all forms 
 
 
 ## Project Status
