@@ -1,4 +1,5 @@
 import anyIsException from './anyIsException'
+import functionCatchWith from './functionCatchWith'
 import functionCopyMeta from './functionCopyMeta'
 
 /**
@@ -15,16 +16,12 @@ import functionCopyMeta from './functionCopyMeta'
  *
  */
 const functionHandleExceptions = (func) => {
-  const override = function() {
-    try {
-      return func.apply(this, arguments)
-    } catch (thrown) {
-      if (anyIsException(thrown)) {
-        throw thrown.toError()
-      }
-      throw thrown
+  const override = functionCatchWith(func, (thrown) => {
+    if (anyIsException(thrown)) {
+      throw thrown.toError()
     }
-  }
+    throw thrown
+  })
   return functionCopyMeta(override, func)
 }
 

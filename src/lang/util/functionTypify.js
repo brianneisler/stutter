@@ -60,7 +60,7 @@ const functionTypify = (func, definitions) => {
       if (!anyIsType(type)) {
         if (!anyIsFunction(type)) {
           throw new Error(
-            `paraemterizeFunction expected a Type for parameter '${name}' but instead was given ${type}`
+            `functionTypify expected a Type for parameter '${name}' but instead was given ${type}`
           )
         }
 

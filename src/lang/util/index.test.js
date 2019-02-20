@@ -117,6 +117,7 @@ describe('lang.util index', () => {
       findTypeForClass: expect.any(Function),
       functionArity: expect.any(Function),
       functionAry: expect.any(Function),
+      functionCatchWith: expect.any(Function),
       functionCopyMeta: expect.any(Function),
       functionCurry: expect.any(Function),
       functionCurryArity: expect.any(Function),

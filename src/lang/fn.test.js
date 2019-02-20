@@ -45,6 +45,11 @@ describe('fn', () => {
     expect(() => foo('foo')).toThrow(TypeError)
   })
 
+  it('Throws a TypeError when return value does not match expected Type and function is last in stack', async () => {
+    const foo = fn([Number, () => Number], (num) => `foo-${num}`)
+    expect(() => foo(123)).toThrow(TypeError)
+  })
+
   it('throws a TypeError when argument does not match expected Type and function is last in stack after async value is resolved', async () => {
     const foo = fn([Number], (num) => {
       expect(num).toBe(123)
