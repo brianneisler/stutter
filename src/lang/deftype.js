@@ -90,29 +90,35 @@ import type from './type'
  *   'Number'
  * )
  */
-const deftype = fn(
-  [String, String, Object, () => Type],
-  (name, description, definition) => {
-    const definedType = def(name, description, type(definition))
-    if (anyIsFunction(definedType.class) && anyIsObject(definedType.protocols)) {
-      let protocols = definedType.class.prototype[SYMBOL_PROTOCOLS]
-      if (!protocols) {
-        protocols = {}
+const deftype = def(
+  'lang.deftype',
+  fn(
+    [String, String, Object, () => Type],
+    (name, description, definition) => {
+      const definedType = def(name, description, type(definition))
+      if (anyIsFunction(definedType.class) && anyIsObject(definedType.protocols)) {
+        let protocols = definedType.class.prototype[SYMBOL_PROTOCOLS]
+        if (!protocols) {
+          protocols = {}
+        }
+        // TODO BRN: Might be good to check for previous protocols with the same name?
+        definedType.class.prototype[SYMBOL_PROTOCOLS] = objectAssign(
+          protocols,
+          definedType.protocols
+        )
       }
-      // TODO BRN: Might be good to check for previous protocols with the same name?
-      definedType.class.prototype[SYMBOL_PROTOCOLS] = objectAssign(protocols, definedType.protocols)
-    }
-    return definedType
-  },
+      return definedType
+    },
 
-  [String, Object, () => Type],
-  (name, definition) => deftype(name, '', definition),
+    [String, Object, () => Type],
+    (name, definition) => deftype(name, '', definition),
 
-  [String, String, () => Type],
-  (name, description) => deftype(name, description, {}),
+    [String, String, () => Type],
+    (name, description) => deftype(name, description, {}),
 
-  [String, () => Type],
-  (name) => deftype(name, '', {})
+    [String, () => Type],
+    (name) => deftype(name, '', {})
+  )
 )
 
 export default deftype

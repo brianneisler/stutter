@@ -36,6 +36,19 @@ const buildException = (source) => {
               },
               expected
             )
+        ),
+      returned: (returned) =>
+        buildExpected(
+          'Returned',
+          (expected) =>
+            new Exception(
+              source,
+              {
+                type: 'Returned',
+                value: returned
+              },
+              expected
+            )
         )
     }
   }

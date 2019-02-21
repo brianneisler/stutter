@@ -1,4 +1,5 @@
 import Exception from './js/Exception'
+import Number from '../types/Number'
 import buildException from './buildException'
 import functionTypify from './functionTypify'
 
@@ -26,7 +27,7 @@ describe('buildException', () => {
       })
     })
 
-    // source('foo')
+    source('foo')
   })
 
   test('builds a new Expected:Argument:toMatchRegex Exception', () => {
@@ -52,6 +53,82 @@ describe('buildException', () => {
         code: 'Expected:Argument:toMatchRegex'
       })
     }
+
+    source('foo')
+  })
+
+  test('builds a new Expected:Arguments:toBeEmpty Exception', () => {
+    const source = function() {
+      const exception = buildException(source)
+        .expected.arguments(arguments)
+        .toBeEmpty()
+      expect(exception).toBeInstanceOf(Exception)
+      expect(exception).toMatchObject({
+        source,
+        target: {
+          type: 'Arguments',
+          value: arguments
+        },
+        expected: {
+          expectation: 'toBeEmpty'
+        },
+        code: 'Expected:Arguments:toBeEmpty'
+      })
+    }
+
+    source('foo')
+  })
+
+  test('builds a new Expected:Arguments:toBeOfMinLength Exception', () => {
+    const source = function() {
+      const exception = buildException(source)
+        .expected.arguments(arguments)
+        .toBeOfMinLength(2)
+      expect(exception).toBeInstanceOf(Exception)
+      expect(exception).toMatchObject({
+        source,
+        target: {
+          type: 'Arguments',
+          value: arguments
+        },
+        expected: {
+          expectation: 'toBeOfMinLength',
+          data: {
+            length: 2
+          }
+        },
+        code: 'Expected:Arguments:toBeOfMinLength'
+      })
+    }
+
+    source('foo')
+  })
+
+  test('builds a new Expected:Arguments:toBeOfMinLength Exception', () => {
+    const source = functionTypify(
+      function() {
+        const returned = 'foo'
+        const exception = buildException(source)
+          .expected.returned(returned)
+          .toMatchReturns(source.returns)
+        expect(exception).toBeInstanceOf(Exception)
+        expect(exception).toMatchObject({
+          source,
+          target: {
+            type: 'Returned',
+            value: 'foo'
+          },
+          expected: {
+            expectation: 'toMatchReturns',
+            data: {
+              returns: source.returns
+            }
+          },
+          code: 'Expected:Returned:toMatchReturns'
+        })
+      },
+      [() => Number]
+    )
 
     source('foo')
   })

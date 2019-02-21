@@ -14,7 +14,8 @@ describe('anyIsException', () => {
     }
     const expected = new Expected({
       expectation: 'foo',
-      data: {}
+      data: {},
+      exceptionToError: () => {}
     })
     expect(anyIsException(new Exception(source, target, expected))).toBe(true)
   })

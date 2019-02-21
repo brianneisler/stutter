@@ -133,6 +133,7 @@ describe('lang.util index', () => {
       functionToFunctionName: expect.any(Function),
       functionToParameterNames: expect.any(Function),
       functionToString: expect.any(Function),
+      functionTypeCheck: expect.any(Function),
       functionTypify: expect.any(Function),
       // hasUnicode: expect.any(Function),
       indexEndOffset: expect.any(Function),

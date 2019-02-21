@@ -2,6 +2,7 @@ import Any from '../types/Any'
 import Array from './js/Array'
 import arrayConcat from './arrayConcat'
 import arrayLikeSlice from './arrayLikeSlice'
+import functionCopyMeta from './functionCopyMeta'
 import functionDefineParameters from './functionDefineParameters'
 import functionTypify from './functionTypify'
 
@@ -57,9 +58,12 @@ const functionArity = (func, number) => {
       ? arrayLikeSlice(func.parameters, 0, number)
       : arrayConcat(func.parameters, repeatDefaultParams(number - length, length))
 
-  return functionDefineParameters(function() {
-    return func.apply(this, arguments)
-  }, parameters)
+  return functionDefineParameters(
+    functionCopyMeta(function() {
+      return func.apply(this, arguments)
+    }, func),
+    parameters
+  )
 }
 
 export default functionArity

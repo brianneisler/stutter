@@ -2,6 +2,7 @@ import definitionsToParameterizedFunctions from './definitionsToParameterizedFun
 import functionCurry from './functionCurry'
 import functionHandleExceptions from './functionHandleExceptions'
 import functionResolve from './functionResolve'
+import functionTypeCheck from './functionTypeCheck'
 import functionsToMultiFunction from './functionsToMultiFunction'
 
 /**
@@ -35,7 +36,9 @@ const definitionsToFn = (definitions) => {
   } else {
     func = funcs[0]
   }
-  return functionCurry(func, (targetFunc) => functionHandleExceptions(functionResolve(targetFunc)))
+  return functionCurry(functionTypeCheck(func), (targetFunc) =>
+    functionHandleExceptions(functionResolve(targetFunc))
+  )
 }
 
 export default definitionsToFn

@@ -12,7 +12,8 @@ describe('js:Exception', () => {
       }
       const expected = new Expected({
         expectation: 'foo',
-        data: {}
+        data: {},
+        exceptionToError: () => {}
       })
       const instance = new Exception(source, target, expected)
       expect(instance).toBeInstanceOf(Exception)

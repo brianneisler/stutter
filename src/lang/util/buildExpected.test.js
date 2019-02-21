@@ -4,6 +4,58 @@ import String from '../types/String'
 import buildExpected from './buildExpected'
 
 describe('buildExpected', () => {
+  it('builds a new Arguments:toBeEmpty Expected', () => {
+    const next = jest.fn((expected) => expected)
+    const result = buildExpected('Arguments', next).toBeEmpty()
+
+    expect(result).toBeInstanceOf(Expected)
+    expect(result).toMatchObject({
+      expectation: 'toBeEmpty',
+      data: {}
+    })
+    expect(next).toHaveBeenCalledWith(expect.any(Expected))
+  })
+
+  it('builds a new Arguments:not.toBeEmpty Expected', () => {
+    const next = jest.fn((expected) => expected)
+    const result = buildExpected('Arguments', next).not.toBeEmpty()
+
+    expect(result).toBeInstanceOf(Expected)
+    expect(result).toMatchObject({
+      expectation: 'not.toBeEmpty',
+      data: {}
+    })
+    expect(next).toHaveBeenCalledWith(expect.any(Expected))
+  })
+
+  it('builds a new Arguments:toBeOfMinLength Expected', () => {
+    const next = jest.fn((expected) => expected)
+    const result = buildExpected('Arguments', next).toBeOfMinLength(1)
+
+    expect(result).toBeInstanceOf(Expected)
+    expect(result).toMatchObject({
+      expectation: 'toBeOfMinLength',
+      data: {
+        length: 1
+      }
+    })
+    expect(next).toHaveBeenCalledWith(expect.any(Expected))
+  })
+
+  it('builds a new Arguments:not.toBeOfMinLength Expected', () => {
+    const next = jest.fn((expected) => expected)
+    const result = buildExpected('Arguments', next).not.toBeOfMinLength(1)
+
+    expect(result).toBeInstanceOf(Expected)
+    expect(result).toMatchObject({
+      expectation: 'not.toBeOfMinLength',
+      data: {
+        length: 1
+      }
+    })
+    expect(next).toHaveBeenCalledWith(expect.any(Expected))
+  })
+
   it('builds a new  Argument:toMatchParameter Expected', () => {
     const parameter = new Parameter('foo', String)
     const next = jest.fn((expected) => expected)
@@ -64,26 +116,32 @@ describe('buildExpected', () => {
     expect(next).toHaveBeenCalledWith(expect.any(Expected))
   })
 
-  it('builds a new Arguments:toBeEmpty Expected', () => {
+  it('builds a new Returned:toMatchReturns Expected', () => {
+    const returns = String
     const next = jest.fn((expected) => expected)
-    const result = buildExpected('Arguments', next).toBeEmpty()
+    const result = buildExpected('Returned', next).toMatchReturns(returns)
 
     expect(result).toBeInstanceOf(Expected)
     expect(result).toMatchObject({
-      expectation: 'toBeEmpty',
-      data: {}
+      expectation: 'toMatchReturns',
+      data: {
+        returns
+      }
     })
     expect(next).toHaveBeenCalledWith(expect.any(Expected))
   })
 
-  it('builds a new Arguments:not.toBeEmpty Expected', () => {
+  it('builds a new Returned:not.toMatchReturns Expected', () => {
+    const returns = String
     const next = jest.fn((expected) => expected)
-    const result = buildExpected('Arguments', next).not.toBeEmpty()
+    const result = buildExpected('Returned', next).not.toMatchReturns(returns)
 
     expect(result).toBeInstanceOf(Expected)
     expect(result).toMatchObject({
-      expectation: 'not.toBeEmpty',
-      data: {}
+      expectation: 'not.toMatchReturns',
+      data: {
+        returns
+      }
     })
     expect(next).toHaveBeenCalledWith(expect.any(Expected))
   })
