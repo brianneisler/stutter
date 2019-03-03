@@ -2,6 +2,16 @@ import { Any, Number, String } from './types'
 import fn from './fn'
 
 describe('fn', () => {
+  it('maintains context of function', () => {
+    const test = {
+      func: fn(function() {
+        expect(this).toBe(test)
+        return 'baz'
+      })
+    }
+    expect(test.func()).toBe('baz')
+  })
+
   it('resolves async values when executed', async () => {
     const foo = fn((arg) => {
       expect(arg).toBe('foo')

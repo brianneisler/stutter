@@ -22,7 +22,7 @@ To setup the project for development run the below commands. After these have be
 
 ```sh
 git clone https://github.com/brianneisler/stutter.git
-cd utils
+cd stutter
 npm run setup
 ```
 
@@ -88,3 +88,8 @@ Run docs generation for the project
 ```sh
 npm run docs:gen
 ```
+
+
+
+- validation
+- 

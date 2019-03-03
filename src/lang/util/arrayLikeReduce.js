@@ -43,7 +43,7 @@ const baseArrayLikeReduce = (arrayLike, accum, iteratee, index = 0) => {
 }
 
 /**
- * Reduces over an array like value
+ * Reduces over an `ArrayLike` value
  *
  * @private
  * @function

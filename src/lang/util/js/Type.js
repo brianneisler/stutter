@@ -1,3 +1,4 @@
+import ImmutableMap from './ImmutableMap'
 import anyIsFunction from '../anyIsFunction'
 
 /**
@@ -5,11 +6,11 @@ import anyIsFunction from '../anyIsFunction'
  */
 class Type {
   /**
-   * @param {{ class: Class, protocols: Map<Protocol>}} definition
+   * @param {{ class: Class, protocols: ImmutableMap<Protocol, Object>}} definition
    */
   constructor(definition) {
     this.class = definition.class
-    this.protocols = definition.protocols
+    this.protocols = definition.protocols || ImmutableMap({})
 
     if (anyIsFunction(definition.is)) {
       this.is = definition.is
@@ -18,6 +19,13 @@ class Type {
     if (anyIsFunction(definition.to)) {
       this.to = definition.to
     }
+  }
+
+  /**
+   * @returns {ImmutableMap<Protocol, Object>}
+   */
+  getProtocols() {
+    return this.protocols
   }
 
   is() {

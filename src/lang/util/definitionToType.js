@@ -1,4 +1,4 @@
-import Map from './js/Map'
+import ImmutableMap from './js/ImmutableMap'
 import SYMBOL_ITERATOR from '../constants/SYMBOL_ITERATOR'
 import Type from './js/Type'
 import anyIsObject from './anyIsObject'
@@ -29,14 +29,14 @@ const validateProtocols = (protocols) => {
  *   class: Number,
  *   is: anyIsNumber,
  *   to: anyToNumber,
- *   protocols: new Map([
+ *   protocols: new ImmutableMap([
  *     [Incramentable, { inc: (num) => num + 1 }]
  *   ])
  * })
  */
 const definitionToType = (definition) => {
   const { protocols } = definition
-  const protocolsMap = new Map()
+  let protocolsMap = new ImmutableMap()
 
   if (protocols) {
     const iter = protocols[SYMBOL_ITERATOR]()
@@ -64,7 +64,7 @@ const definitionToType = (definition) => {
           }`
         )
       }
-      protocolsMap.set(protocol, implementation)
+      protocolsMap = protocolsMap.set(protocol, implementation)
       next = iter.next()
     }
 

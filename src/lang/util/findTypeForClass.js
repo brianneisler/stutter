@@ -1,23 +1,15 @@
-import anyIsType from './anyIsType'
 import functionMemoizeWith from './functionMemoizeWith'
-import namespacesFilter from './namespacesFilter'
+import namespacesFilterTypes from './namespacesFilterTypes'
 import root from './root'
-
-const namespacesFilterTypes = functionMemoizeWith((namespaces) =>
-  namespacesFilter(namespaces, (defined) => anyIsType(defined.value))
-)
 
 const namespacesFindTypeForClass = functionMemoizeWith((namespaces, Class) => {
   const types = namespacesFilterTypes(namespaces)
-  const result = types.find((defined) => defined.value.class === Class)
-  if (result) {
-    return result.value
-  }
+  return types.find((type) => type.class === Class)
 })
 
 /**
- * Scan through all of the existing namespaces to find a matching Type for the
- * given JS class.
+ * Scan through all of the existing `Namespace`s to find a matching `Type` for the
+ * given js `Class`.
  *
  * @private
  * @function

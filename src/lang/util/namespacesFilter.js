@@ -9,6 +9,7 @@ import Seq from './js/Seq'
  * @category lang.util
  * @param {ImmutableMap<Namespace>} namespaces An `ImmutableMap` of `Namespace`s
  * @param {Function} func The filter function
+ * @returns {Seq<Any>}
  */
 const namespacesFilter = (namespaces, func) =>
   namespaces.reduce((results, namespace) => results.concat(namespace.filter(func)), Seq([]))

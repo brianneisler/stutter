@@ -72,6 +72,10 @@ const newDispatcher = (funcs) => ({
           }
         }
       } else {
+        // TODO BRN: Instead of having to loop over and potentially check the
+        // same types multiple times, we should generate a decision tree of type checks
+        // to perform. The leaves of the tree are the results of the match. This
+        // way each type involved only needs to be tested once.
         const match = matchArgsToParams(args, func, options)
         if (match) {
           return match

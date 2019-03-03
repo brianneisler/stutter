@@ -1,82 +1,85 @@
 # Guide
 
-Stutter is built with javascript generators in mind. 
+Stutter is built with Javascript in mind but is heavily inspired by Clojure.
+Stutter aims to make functional programming easier by introducing support for functional
+concepts while still maintaining direct compatibility with native javascript.
+There are some conceptual differences that you should be aware of while working
+with `stutter`
 
-Each stutter function has a data last, data first and lazy evaluatable form.
 
-- Data last form
+## Concepts
+
+### Falsy
+
+In javascript the following values are `false`
 ```js
-import { set } from 'stutter'
-
-set('foo', 'bar', {}))  // { foo: 'bar' }
-```
-- Data first form
-```js
-import { set } from 'stutter'
-
-set({}, 'foo', 'bar'))  // { foo: 'bar' }
-```
-- Lazy evaluated form
-```js
-import { set } from 'stutter'
-
-$(set, {}, 'foo', 'bar'))()  // { foo: 'bar' }
+false
+null
+undefined
+''
+0
+NaN
 ```
 
-Data last is useful for composability
+When performing falsy checks in `stutter` the following Javascript values are considered
+`false`
 
 ```js
-import { set } from 'stutter'
-
-set('foo', 'bar', {}))  // { foo: 'bar' }
-
-const setFooBar = set('.foo', 'bar') // curried function
-setFooBar({}) // { foo: 'bar' }
-
-const setBarBaz = set('.bar', 'baz')
-
-const composed = compose)
-
+false
+null
+undefined
+NaN
 ```
-
-
 
 
 ## Methods by comparison
 
 ## add
 
+**javascript**
+```js
+1 + 2 + 3
+// => 6
+```
+
 **clojure**
 ```clojure
-(+ 1 2 3)   ; 6
+(+ 1 2 3)   
+;; => 6
 ```
 
 **stutter**
 ```js
-$add(1, 2, 3)     // => 6
-$(add, 1, 2, 3)   // => 6
-add(1, 2, 3)      // 6
-_add(1, 2, 3)     // 6
-_(add, 1, 2, 3)   // 6
+add(1, 2, 3)     
+// => 6
 ```
 
 
 ## if
+
+**javascript**
+```js
+if (true) {
+  return "By Zeus's hammer!"
+} else {
+  return "By Aquaman's trident!"
+}
+;; => "By Zeus's hammer!"
+```
 
 **clojure**
 ```clojure
 (if true
   "By Zeus's hammer!"
   "By Aquaman's trident!")
+;; => "By Zeus's hammer!"
 ```
 
 **stutter**
 ```js
-$($.if, true,
-  "By Zeus's hammer!",
-  "By Aquaman's trident!")
+import $ from 'stutter'
 
-$if(true,
+$.if(true,
   "By Zeus's hammer!",
   "By Aquaman's trident!")
 ```
@@ -84,17 +87,24 @@ $if(true,
 
 ## print
 
+Prints a value to standard out.
+
+**javascript**
+```js
+process.stdout.write('foo')  
+// => 'foo'
+```
+
 **clojure**
 ```clojure
-(print "foo")  ; > foo
+(print "foo")  
+; > foo
 ```
 
 **stutter**
 In javascript this will fallback to `console.log` if `process.stdout.write` is not available
 ```js
-$(print, "foo")
-
-$print("foo")
+print('foo')
 ```
 
 
@@ -104,21 +114,21 @@ Same as print with a new line `\n` added to the end
 
 **clojure**
 ```clojure
-(println "foo")     ; > "foo"
+(println "foo")     
+; > "foo"
 ```
 
 **stutter**
 In javascript this will fallback to `console.log` if `process.stdout.write` is not available
 ```js
-$(println, "foo")   // => > 'foo\n'
-$println("foo")     // => > 'foo\n'
-println("foo")      // > 'foo\n'
+println("foo")      
+// > 'foo\n'
 ```
 
 
 ## do
 
-Evaluates multiple expressions and returns the last value. Returns `null` if not expressions are supplied.
+Evaluates multiple expressions and returns the last value. Returns `null` if no expressions are supplied.
 
 **clojure**
 ```clojure
@@ -128,11 +138,9 @@ Evaluates multiple expressions and returns the last value. Returns `null` if not
 
 **stutter**
 ```js
-$($.do, $(print, "Success!")
+(, $(print, "Success!")
   "By Zeus's hammer!")
 
-$do($print("Success!"),
-  "By Zeus's hammer!")
 ```
 
 

@@ -12,6 +12,8 @@ $$$$$$$  |  \$$$$  |\$$$$$$  |  \$$$$  |\$$$$  |\$$$$$$$\ $$ |
 
 Functional programming framework built for Javascript
 
+
+
 [Website](https://stutter.io) •
 
 
@@ -34,19 +36,124 @@ particular sets of problems that we wanted solutions to.
 
 ## Features
 
-- Supports both data first AND function first (lodash style and ramda style)
-  - We're able to do this because stutter supports multi-functions.
-    Multi-functions in stutter are matched based upon parameter types.
-- Built on top of [Immutable.JS](https://facebook.github.io/immutable-js/) data
-  structures but supports both Immutable.JS data types and standard JS values.
-- Introduces custom data types for [Immutable.JS](https://facebook.github.io/immutable-js/)
-- Converts types based on data hinting
-  - If a deep operation is performed on an immutable data type that generates a
-    new "object" then that object will be an ImmutableMap
-- Supports mixed nested data types making it easier to process values of mixed Immutable.JS/mutable data objects
-- All functions are fully immutable and side-effect free (for both standard JS values and Immutable.JS data types)
+### Supports async AND generator functions
+
+We believe you shouldn't have to use different `map` functions when you're
+mapping using an async function, generator function or a standard function. The
+method should be able to naturally upgrade to match the requirements based upon
+the iteratee function that YOU give it. That's why our functions will support
+any of these options and return you the appropriate matching type. This makes
+stutter compatible for use with such libraries as `redux-saga` 
+
+**Standard function will run synchronously**
+```js
+import { map } from 'stutter'
+
+map([1, 2, 3], (value) => value + 1)
+//=> [2, 3, 4]
+```
+
+**Async functions will upgrade and return a Promise**
+```js
+const result = await map([1, 2, 3], async (value) => value + 1)
+//=> [2, 3, 4]
+```
+
+**Generator functions will upgrade and return a Generator**
+```js
+const result = yield* map([1, 2, 3], function* (value) {
+  return value + 1
+})
+//=> [2, 3, 4]
+```
+
+
+### Data first AND function first
+
+Stutter supports both data first AND function first (lodash style and ramda
+style. We're able to do this because stutter supports multi-functions.
+Multi-functions in stutter are matched based upon parameter types which means it
+can tell when you've put the function first and when you've put the data first.
+
+**function first**
+```js
+import { reduce } from 'stutter'
+
+reduce(
+  (accum, value) => accum + value,
+  0,
+  [1, 2, 3]
+)
+// => 6
+```
+
+**data first**
+```js
+import { reduce } from 'stutter'
+
+reduce(
+  [1, 2, 3],
+  0,
+  (accum, value) => accum + value
+)
+// => 6
+```
+
+### All operations are Immutable
+
+Built on top of [Immutable.JS](https://facebook.github.io/immutable-js/) data
+  structures but supports both Immutable.JS data types and standard JS values
+  (including Map, WeakMap, Set and WeakSet).
+- Introduces custom data types for
+  [Immutable.JS](https://facebook.github.io/immutable-js/)
+
+
+
+### 
+
+### Contagion support
+
+Types are contagious across deep operations. When a deep operation is performed
+on a value that generates a new value, that new value will be of the same or similar
+"type". For instance, if you do a deep `assocIn` to an `ImmutableMap` the newly
+generated nested object will be an ImmutableMap
+
+```js
+import { assocIn } from 'stutter'
+import Immutable from 'immutable'
+
+assocIn(Immutable.Map({}), ['foo', 'bar'], 'baz')
+//=> ImmutableMap { foo : ImmutableMap { bar: 'baz' }}
+
+assocIn(Map(), ['foo', 'bar'], 'baz')
+//=> Map { foo : Map { bar: 'baz' }}
+
+assocIn({}, ['foo', 'bar'], 'baz')
+//=> Object { foo : Object { bar: 'baz' }}
+```
+
+### Protocols
+
+Having a library with built in support for common data types like native JS
+types is great. However, there are times you want to extend the type of data
+that a function can support without having to write your own and then replace all
+of the uses of that function. Using Protocols you can easily teach `stutter` how
+to deal with new types of data.
+
+
+### Type support
+
+Stutter's methods are capable of accepting type defintitions so that it knows
+what kind of data a function is meant to handle. 
+- Alerts you to problems when wrong type of data is encountered or when a matching
+  type signature cannot be found
+- Makes it easy to  mixed nested data types making it easier to process values of mixed Immutable.JS/mutable data objects
+
+
+
+### Auto curried with type hinting
 - All functions are automatically curried.
-  - Automatic currying works for all forms 
+  - Automatic currying works for all forms of a multi-function
 
 
 ## Project Status

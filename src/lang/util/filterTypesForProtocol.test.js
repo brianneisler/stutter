@@ -1,21 +1,44 @@
+import ImmutableList from './js/ImmutableList'
 import ImmutableMap from './js/ImmutableMap'
 import Namespace from './js/Namespace'
 import Number from './js/Number'
+import Protocol from './js/Protocol'
+import Self from '../types/Self'
 import String from './js/String'
 import Type from './js/Type'
-import findTypeForClass from './findTypeForClass'
+import filterTypesForProtocol from './filterTypesForProtocol'
+import fn from '../fn'
 
-describe('findTypeForClass', () => {
+describe('filterTypesForProtocol', () => {
   test('integration test - find a type defined using deftype', () => {
     // jest.mock('./root', () => ({}))
     // const deftype = require('../deftype')
     // deftype()
   })
 
-  test('find a Type in an ImmutableMap of Namespaces', () => {
+  test('filter Protocols in an ImmutableMap of Namespaces', () => {
     const NumberType = new Type({
       class: Number
     })
+
+    const BarProtocol = new Protocol(
+      ImmutableMap({
+        'foo.bar': ImmutableList([Self, NumberType])
+      })
+    )
+
+    const StringType = new Type({
+      class: String,
+      protocols: ImmutableMap([
+        [
+          BarProtocol,
+          {
+            'foo.bar': fn([Self, NumberType], () => {})
+          }
+        ]
+      ])
+    })
+
     const namespaces = ImmutableMap({
       foo: new Namespace(
         'foo',
@@ -26,9 +49,11 @@ describe('findTypeForClass', () => {
           },
           String: {
             description: '',
-            value: new Type({
-              class: String
-            })
+            value: StringType
+          },
+          BarProtocol: {
+            description: '',
+            value: BarProtocol
           },
           [123]: {
             description: '',
@@ -50,6 +75,7 @@ describe('findTypeForClass', () => {
         })
       )
     })
-    expect(findTypeForClass(Number, namespaces)).toBe(NumberType)
+    const results = filterTypesForProtocol(BarProtocol, namespaces)
+    expect(results).toEqual(ImmutableList([StringType]))
   })
 })

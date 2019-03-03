@@ -1,6 +1,4 @@
 import Type from './js/Type'
-import Typed from '../protocols/Typed'
-import anySatisfies from './anySatisfies'
 
 /**
  * Checks if `any` is classified as a `Type`
@@ -19,6 +17,6 @@ import anySatisfies from './anySatisfies'
  * anyIsType('abc')
  * //=> false
  */
-const anyIsType = (any) => any instanceof Type || anySatisfies(any, Typed)
+const anyIsType = (any) => any instanceof Type
 
 export default anyIsType

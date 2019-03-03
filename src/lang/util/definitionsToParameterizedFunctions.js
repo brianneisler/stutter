@@ -43,7 +43,6 @@ const definitionsToParameterizedFunctions = (definitions) => {
     )
   }
   const iter = definitions[SYMBOL_ITERATOR]()
-
   const funcs = []
   let next = iter.next()
   let func
@@ -56,7 +55,7 @@ const definitionsToParameterizedFunctions = (definitions) => {
       next = iter.next()
       if (next.done) {
         throw new Error(
-          'definitionsToParameterizedFunctions method expects a function after a paramter type declaration.'
+          'definitionsToParameterizedFunctions method expects a function after a parameter type declaration.'
         )
       }
     }

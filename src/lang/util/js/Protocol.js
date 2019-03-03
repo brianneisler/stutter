@@ -3,14 +3,14 @@
  */
 class Protocol {
   /**
-   * @param {Object} definitions
+   * @param {ImmutableMap<String, ImmutableList<Type>>} definitions
    */
   constructor(definitions) {
     this.definitions = definitions
   }
 
   /**
-   * @returns {Object}
+   * @returns {ImmutableMap<String, ImmutableList<Type>>}
    */
   getDefinitions() {
     return this.definitions

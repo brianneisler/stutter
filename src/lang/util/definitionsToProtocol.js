@@ -1,4 +1,5 @@
 import Protocol from './js/Protocol'
+import anyToImmutable from './anyToImmutable'
 
 /**
  * Converts the given `definitions` to an anonymous `Protocol`
@@ -16,6 +17,6 @@ import Protocol from './js/Protocol'
  *   set: [Self, Key, Any, () => Self],
  * })
  */
-const definitionsToProtocol = (definitions) => new Protocol(definitions)
+const definitionsToProtocol = (definitions) => new Protocol(anyToImmutable(definitions))
 
 export default definitionsToProtocol
