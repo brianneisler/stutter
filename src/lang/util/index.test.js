@@ -89,6 +89,7 @@ describe('lang.util index', () => {
       anyToObject: expect.any(Function),
       anyToString: expect.any(Function),
       anyToStringTag: expect.any(Function),
+      argumentsMatchToFunction: expect.any(Function),
       arrayClone: expect.any(Function),
       arrayConcat: expect.any(Function),
       arrayDifference: expect.any(Function),
