@@ -1,9 +1,9 @@
-import definitionsToParameterizedFunctions from './definitionsToParameterizedFunctions'
-import functionCurry from './functionCurry'
+import definitionsToFns from './definitionsToFns'
+import fnsToMultiFn from './fnsToMultiFn'
+import functionCurry from './fnCurry'
 import functionHandleExceptions from './functionHandleExceptions'
 import functionResolve from './functionResolve'
 import functionTypeCheck from './functionTypeCheck'
-import functionsToMultiFunction from './functionsToMultiFunction'
 
 /**
  * Converts a definitions Array into an `Fn` function.
@@ -26,17 +26,19 @@ import functionsToMultiFunction from './functionsToMultiFunction'
  *
  */
 const definitionsToFn = (definitions) => {
-  const funcs = definitionsToParameterizedFunctions(definitions)
-  if (funcs.length === 0) {
+  const fns = definitionsToFns(definitions)
+  if (fns.length === 0) {
     throw new Error('fn method expects at least one function')
   }
-  let func
-  if (funcs.length > 1) {
-    func = functionsToMultiFunction(funcs)
+  let fn
+  if (fns.length > 1) {
+    fn = fnsToMultiFn(fns)
   } else {
-    func = funcs[0]
+    fn = fns[0]
   }
-  return functionCurry(functionTypeCheck(func), (targetFunc) =>
+
+  // TODO BRN: inject these as defined wrappers instead of composing the function
+  return functionCurry(functionTypeCheck(fn), (targetFunc) =>
     functionHandleExceptions(functionResolve(targetFunc))
   )
 }

@@ -1,4 +1,5 @@
-import objectDefineProperty from './objectDefineProperty'
+import Fn from './js/Fn'
+import fnApply from './fnApply'
 
 /**
  * Define a multi function using a `Dispatcher`
@@ -7,13 +8,13 @@ import objectDefineProperty from './objectDefineProperty'
  * @function
  * @since v0.1.0
  * @category lang.util
- * @param {Dispatcher} dispatcher The dispatcher that will dispatch the function
- * call to the function.
- * @return {Function} The new multi Function.
+ * @param {Dispatcher} dispatcher The dispatcher that will dispatch to the function.
+ * @return {Fn} The new multi Fn.
  * @example
  *
  */
-const dispatcherToMultiFunction = (dispatcher, options = { multi: false, partial: false }) => {
+const dispatcherToMultiFn = (dispatcher, options = { multi: false, partial: false }) => {
+  //
   const multiFunc = function() {
     // TODO BRN: In the event that this results in a no match error, we should
     // try to identify the closest match that was likely intended and do a
@@ -29,13 +30,11 @@ const dispatcherToMultiFunction = (dispatcher, options = { multi: false, partial
       // NOTE BRN: In the event of multiple matches, we execute the first match
       match = match[0]
     }
-    return match.func.apply(this, arguments)
+    return fnApply(match.fn, arguments)
   }
-  objectDefineProperty(multiFunc, 'dispatcher', {
-    value: dispatcher,
-    configurable: true
+  return new Fn(multiFunc, {
+    dispatcher
   })
-  return multiFunc
 }
 
-export default dispatcherToMultiFunction
+export default dispatcherToMultiFn

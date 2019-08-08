@@ -1,18 +1,18 @@
-import { Any, Self, String } from './types'
-import {
-  anySatisfies,
-  dispatcherToMultiFunction,
-  filterTypesForProtocol,
-  functionMemoizeWith,
-  propGetNamespace,
-  stringParseNames
-} from './util'
+import Any from './types/Any'
+import Self from './type/Self'
 import Seq from './util/js/Seq'
+import String from './types/String'
+import anySatisfies from './util/anySatisfies'
 import def from './def'
+import dispatcherToMultiFn from './util/dispatcherToMultiFn'
 import filterProtocolsForFunctionName from './util/filterProtocolsForFunctionName'
+import filterTypesForProtocol from './util/filterTypesForProtocol'
 import fn from './fn'
-import functionsToMultiFunctionDispatcher from './util/functionsToMultiFunctionDispatcher'
+import fnsToMultiFnDispatcher from './util/fnsToMultiFnDispatcher'
+import functionMemoizeWith from './util/functionMemoizeWith'
+import propGetNamespace from './util/propGetNamespace'
 import root from './util/root'
+import stringParseNames from './util/stringParseNames'
 
 // NOTE BRN: This code may be useful
 // const { namespaceName, valueName } = stringParseNames(name)
@@ -40,7 +40,7 @@ const groupProtocols = functionMemoizeWith((protocols, functionName) =>
   })
 )
 
-const namespacesReduceFunctionsByProtocolFunctionName = functionMemoizeWith((namespaces, name) => {
+const namespacesReduceFnsByProtocolFnName = functionMemoizeWith((namespaces, name) => {
   const functionProtocols = filterProtocolsForFunctionName(name)
 
   // Protocols should dispatch the same way that functions do. The only
@@ -48,7 +48,6 @@ const namespacesReduceFunctionsByProtocolFunctionName = functionMemoizeWith((nam
   // implements the protocol
 
   const groupedProtocols = groupProtocols(functionProtocols, name)
-
   return groupedProtocols.reduce(
     (accum, protocols, idx) =>
       protocols.reduce((accum2, protocol) => {
@@ -70,8 +69,15 @@ const protocolDispatcher = (name, namespaces = root.namespaces) => {
       // namespace is immutable. This way in case the namespace has changed, we
       // will get the latest Protocols.
 
-      const funcs = namespacesReduceFunctionsByProtocolFunctionName(namespaces, name)
-      const dispatcher = functionsToMultiFunctionDispatcher(funcs)
+      const funcs = namespacesReduceFnsByProtocolFnName(namespaces, name)
+
+      // TODO BRN: At the moment this does not work. We can't treat these
+      // protocol Fns like normal typed Fns because they contain a Self type.
+      // This type has no way of knowing what type is meant by "Self". Instead,
+      // the defined types should be swapped out with specific ones that replace
+      // the Self type. This should happen when the protocol implementation is
+      // defined.
+      const dispatcher = fnsToMultiFnDispatcher(funcs)
 
       // NOTE BRN: Remember that in order for a Protocol method to be matched,
       // not only does the Self arg need to be matched but so do the rest of the
@@ -124,7 +130,7 @@ const protocolDispatcher = (name, namespaces = root.namespaces) => {
 const defn = fn(
   [String, String, Any],
   (name, description, ...definitions) =>
-    def(name, description, fn(...definitions, dispatcherToMultiFunction(protocolDispatcher(name)))),
+    def(name, description, fn(...definitions, dispatcherToMultiFn(protocolDispatcher(name)))),
 
   [String, Any],
   (name, ...definitions) => defn(name, '', ...definitions)

@@ -1,4 +1,4 @@
-import argumentsMatchToFunction from './argumentsMatchToFunction'
+import argumentsMatchToFn from './argumentsMatchToFn'
 
 const errorNoMatch = () => {
   // TODO BRN: Enhance this error so that we know what we were working with.
@@ -9,17 +9,17 @@ const errorNoMatch = () => {
   return err
 }
 
-const functionsToMultiFunctionDispatcher = (funcs) => ({
+const fnsToMultiFnDispatcher = (fns) => ({
   dispatch: (args, options) => {
-    const { length } = funcs
+    const { length } = fns
     if (options.multi) {
       let matches = []
       for (let idx = 0; idx < length; idx++) {
-        const func = funcs[idx]
-        if (func.dispatcher) {
-          matches = matches.concat(func.dispatcher.dispatch(args, options))
+        const fn = fns[idx]
+        if (fn.dispatcher) {
+          matches = matches.concat(fn.dispatcher.dispatch(args, options))
         } else {
-          const match = argumentsMatchToFunction(args, func, options)
+          const match = argumentsMatchToFn(args, fn, options)
           if (match) {
             matches.push(match)
           }
@@ -29,10 +29,10 @@ const functionsToMultiFunctionDispatcher = (funcs) => ({
     }
 
     for (let idx = 0; idx < length; idx++) {
-      const func = funcs[idx]
-      if (func.dispatcher) {
+      const fn = fns[idx]
+      if (fn.dispatcher) {
         try {
-          return func.dispatcher.dispatch(args, options)
+          return fn.dispatcher.dispatch(args, options)
         } catch (error) {
           if (error.code !== 'NO_MATCH') {
             throw error
@@ -43,7 +43,7 @@ const functionsToMultiFunctionDispatcher = (funcs) => ({
         // same types multiple times, we should generate a decision tree of type checks
         // to perform. The leaves of the tree are the results of the match. This
         // way each type involved only needs to be tested once.
-        const match = argumentsMatchToFunction(args, func, options)
+        const match = argumentsMatchToFn(args, fn, options)
         if (match) {
           return match
         }
@@ -53,4 +53,4 @@ const functionsToMultiFunctionDispatcher = (funcs) => ({
   }
 })
 
-export default functionsToMultiFunctionDispatcher
+export default fnsToMultiFnDispatcher

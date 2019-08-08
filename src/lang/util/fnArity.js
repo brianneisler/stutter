@@ -2,9 +2,7 @@ import Any from '../types/Any'
 import Array from './js/Array'
 import arrayConcat from './arrayConcat'
 import arrayLikeSlice from './arrayLikeSlice'
-import functionCopyMeta from './functionCopyMeta'
-import functionDefineParameters from './functionDefineParameters'
-import functionTypify from './functionTypify'
+import fnSetParameters from './fnSetParameters'
 
 const repeatDefaultParams = (number, startAt) => {
   let idx = 0
@@ -29,41 +27,35 @@ const repeatDefaultParams = (number, startAt) => {
  * @function
  * @since v0.1.0
  * @category lang.util
- * @param {Function} func The function to modify.
- * @param {Number} number The desired arity of the function.
- * @returns {Function} The given `func` with parameter length adjusted to `number`.
+ * @param {Fn} fn The `Fn` to modify.
+ * @param {Number} number The desired arity of the `Fn`.
+ * @returns {Fn} The given `fn` with parameter length adjusted to `number`.
  * @example
  *
- * const takesNArgs = (...args) => [ ...args ]
+ * const takesNArgs = new Fn((...args) => [ ...args ])
  *
- * takesNArgs.length
+ * takesNArgs.parameters.length
  * //=> 0
  *
  * takesNArgs(1, 2)
  * //=> [1, 2]
  *
- * const takesTwoArgs = functionArity(takesNArgs, 2)
- * takesTwoArgs.length
+ * const takesTwoArgs = fnArity(takesNArgs, 2)
+ * takesTwoArgs.parameters.length
  * //=> 2
  *
  * // All arguments are passed to the wrapped function
  * takesTwoArgs(1, 2, 3)
  * //=> [1, 2, 3]
  */
-const functionArity = (func, number) => {
-  func = functionTypify(func)
-  const { length } = func.parameters
+const fnArity = (fn, number) => {
+  const { length } = fn.parameters
   const parameters =
     length >= number
-      ? arrayLikeSlice(func.parameters, 0, number)
-      : arrayConcat(func.parameters, repeatDefaultParams(number - length, length))
+      ? arrayLikeSlice(fn.parameters, 0, number)
+      : arrayConcat(fn.parameters, repeatDefaultParams(number - length, length))
 
-  return functionDefineParameters(
-    functionCopyMeta(function() {
-      return func.apply(this, arguments)
-    }, func),
-    parameters
-  )
+  return fnSetParameters(fn, parameters)
 }
 
-export default functionArity
+export default fnArity

@@ -1,5 +1,5 @@
 import Array from './js/Array'
-import functionArity from './functionArity'
+import functionArity from './fnArity'
 import functionCopyMeta from './functionCopyMeta'
 
 const functionCopyMetaAndSetArity = (func, source, number) =>

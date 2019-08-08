@@ -1,5 +1,5 @@
-import functionArity from './functionArity'
-import functionCurry from './functionCurry'
+import functionArity from './fnArity'
+import functionCurry from './fnCurry'
 
 /**
  * Returns a curried equivalent of the provided function but limited to an arity

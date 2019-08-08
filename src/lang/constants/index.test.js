@@ -24,6 +24,7 @@ describe('constants index', () => {
       REGEX_STRING_VARIATION_SELECTORS_RANGE: expect.any(String),
       REGEX_UINT: expect.any(RegExp),
       REGEX_UNICODE: expect.any(RegExp),
+      SYMBOL_FN: expect.anything(),
       SYMBOL_ITERATOR: expect.anything(),
       SYMBOL_META: expect.anything(),
       SYMBOL_OP: expect.anything(),

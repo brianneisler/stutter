@@ -10,6 +10,7 @@ describe('lang.util.js index', () => {
       Error: expect.any(Function),
       Exception: expect.any(Function),
       Expected: expect.any(Function),
+      Fn: expect.any(Function),
       Function: expect.any(Function),
       ImmutableList: expect.any(Function),
       ImmutableMap: expect.any(Function),

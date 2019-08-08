@@ -1,7 +1,7 @@
 import Any from '../types/Any'
 import Number from '../types/Number'
+import functionDefineTypes from './functionDefineTypes'
 import functionMemoize from './functionMemoize'
-import functionTypify from './functionTypify'
 
 describe('functionMemoize', () => {
   test('memoizes a function', () => {
@@ -26,7 +26,7 @@ describe('functionMemoize', () => {
   })
 
   test('preserves parameters and return type of function', () => {
-    const func = functionTypify(
+    const func = functionDefineTypes(
       (foo, bar) => {
         return bar
       },

@@ -1,11 +1,11 @@
 import Any from '../types/Any'
 import Number from '../types/Number'
 import String from '../types/String'
-import definitionsToParameterizedFunctions from './definitionsToParameterizedFunctions'
+import definitionsToFns from './definitionsToFns'
 
-describe('definitionsToParameterizedFunctions', () => {
+describe('definitionsToFns', () => {
   test('parameterized multipe functions with fixed parameters', () => {
-    const funcs = definitionsToParameterizedFunctions([
+    const fns = definitionsToFns([
       [Number, String],
       (num, str) => {
         return str
@@ -16,9 +16,9 @@ describe('definitionsToParameterizedFunctions', () => {
         return any
       }
     ])
-    expect(funcs).toBeInstanceOf(Array)
-    expect(funcs.length).toBe(2)
-    expect(funcs[0].parameters).toEqual([
+    expect(fns).toBeInstanceOf(Array)
+    expect(fns.length).toBe(2)
+    expect(fns[0].parameters).toEqual([
       {
         name: 'num',
         type: Number
@@ -28,26 +28,24 @@ describe('definitionsToParameterizedFunctions', () => {
         type: String
       }
     ])
-    expect(funcs[0].length).toBe(2)
 
-    expect(funcs[1].parameters).toEqual([
+    expect(fns[1].parameters).toEqual([
       {
         name: 'any',
         type: Any
       }
     ])
-    expect(funcs[1].length).toBe(1)
   })
 
   test('parameterizes functions with defaults', () => {
-    const funcs = definitionsToParameterizedFunctions([
+    const fns = definitionsToFns([
       (foo, bar) => {
         return bar
       }
     ])
-    expect(funcs).toBeInstanceOf(Array)
-    expect(funcs.length).toBe(1)
-    expect(funcs[0].parameters).toEqual([
+    expect(fns).toBeInstanceOf(Array)
+    expect(fns.length).toBe(1)
+    expect(fns[0].parameters).toEqual([
       {
         name: 'foo',
         type: Any
@@ -57,6 +55,5 @@ describe('definitionsToParameterizedFunctions', () => {
         type: Any
       }
     ])
-    expect(funcs[0].length).toBe(2)
   })
 })
