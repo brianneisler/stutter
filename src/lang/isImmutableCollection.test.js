@@ -1,0 +1,51 @@
+import Immutable from 'immutable'
+import isImmutableCollection from './isImmutableCollection'
+
+describe('isImmutableCollection', () => {
+  test('Returns true for an Immutable Map', () => {
+    expect(isImmutableCollection(Immutable.Map())).toBe(true)
+  })
+
+  test('Returns true for an Immutable Set', () => {
+    expect(isImmutableCollection(Immutable.Set())).toBe(true)
+  })
+
+  test('returns false for all other values', () => {
+    expect(isImmutableCollection(undefined)).toBe(false)
+    expect(isImmutableCollection(null)).toBe(false)
+    expect(isImmutableCollection('')).toBe(false)
+    expect(isImmutableCollection('abc')).toBe(false)
+    expect(isImmutableCollection(false)).toBe(false)
+    expect(isImmutableCollection(true)).toBe(false)
+    expect(isImmutableCollection(0)).toBe(false)
+    expect(isImmutableCollection(-1)).toBe(false)
+    expect(isImmutableCollection(1)).toBe(false)
+    expect(isImmutableCollection(NaN)).toBe(false)
+    expect(isImmutableCollection(Infinity)).toBe(false)
+    expect(isImmutableCollection(-Infinity)).toBe(false)
+    expect(isImmutableCollection([])).toBe(false)
+    expect(isImmutableCollection(new Array(0))).toBe(false)
+    expect(isImmutableCollection([0])).toBe(false)
+    expect(isImmutableCollection({})).toBe(false)
+    expect(isImmutableCollection(/abc/)).toBe(false)
+    expect(isImmutableCollection(async () => {})).toBe(false)
+    expect(isImmutableCollection(() => {})).toBe(false)
+    expect(isImmutableCollection(function() {})).toBe(false)
+    expect(isImmutableCollection((function*() {})())).toBe(false)
+    expect(isImmutableCollection(new ArrayBuffer(2))).toBe(false)
+    expect(isImmutableCollection(new Boolean(false))).toBe(false)
+    expect(isImmutableCollection(new Boolean(true))).toBe(false)
+    expect(isImmutableCollection(new Date())).toBe(false)
+    expect(isImmutableCollection(new Error())).toBe(false)
+    expect(isImmutableCollection(new Map())).toBe(false)
+    expect(isImmutableCollection(new Number(1))).toBe(false)
+    expect(isImmutableCollection(new Promise(() => {}))).toBe(false)
+    expect(isImmutableCollection(new Proxy({}, {}))).toBe(false)
+    expect(isImmutableCollection(new Set())).toBe(false)
+    expect(isImmutableCollection(new String('abc'))).toBe(false)
+    expect(isImmutableCollection(Symbol('abc'))).toBe(false)
+    expect(isImmutableCollection(Symbol.for('def'))).toBe(false)
+    expect(isImmutableCollection(new WeakMap())).toBe(false)
+    expect(isImmutableCollection(new WeakSet())).toBe(false)
+  })
+})

@@ -1,32 +1,10 @@
 {
-  "name": "stutter-build",
-  "private": true,
-  "scripts": {
-    "build": "./scripts/build.sh",
-    "clean": "./scripts/clean.sh",
-    "lint": "./scripts/lint.sh",
-    "prepublish": "./scripts/prepublish.sh",
-    "postinstall": "./scripts/postinstall.sh",
-    "test": "./scripts/test.sh",
-    "watch": "./scripts/watch.sh"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
-    "babel-eslint": "^7.2.3",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-1": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "chai": "^3.5.0",
-    "del": "^2.2.2",
-    "eslint": "^3.10.1",
-    "eslint-cli": "^1.1.0",
-    "immutable-devtools": "0.0.7",
-    "lodash": "^4.17.4",
-    "mocha": "^3.2.0"
-  },
-  "author": "Brian Neisler <me@brianneisler.com>",
-  "homepage": "https://github.com/brianneisler/stutter",
+  "name": "stutter",
+  "version": "0.1.0",
+  "description": "Functional programming framework for JavaScript",
+  "author": "Brian Neisler <hello@brianneisler.com>",
+  "license": "Apache-2.0",
+  "homepage": "https://stutter.io",
   "repository": {
     "type": "git",
     "url": "https://github.com/brianneisler/stutter.git"
@@ -34,5 +12,64 @@
   "bugs": {
     "url": "https://github.com/brianneisler/stutter/issues"
   },
-  "license": "MIT"
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">6.0"
+  },
+  "scripts": {
+    "build": "bash ./scripts/build.sh",
+    "clean": "bash ./scripts/clean.sh",
+    "cleanse": "bash ./scripts/cleanse.sh",
+    "docs:gen": "bash ./scripts/docs-gen.sh",
+    "lint": "bash ./scripts/lint.sh",
+    "lint:staged": "bash ./scripts/lint-staged.sh",
+    "setup": "bash ./scripts/setup.sh",
+    "setup:ci": "bash ./scripts/setup-ci.sh",
+    "test": "bash ./scripts/test.sh",
+    "test:ci": "bash ./scripts/test-ci.sh",
+    "watch": "bash ./scripts/watch.sh"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "buffer": "^5.2.1",
+    "cross-fetch": "^3.0.1",
+    "crypto-js": "^3.1.9-1",
+    "graphlib": "^2.1.7",
+    "immutable": "^4.0.0-rc.12",
+    "is-url": "^1.2.4",
+    "mime-types": "^2.1.22",
+    "source-map-support": "^0.5.5",
+    "string-to-stream": "^1.1.1",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
+    "@babel/preset-env": "^7.3.1",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.1.0",
+    "dox": "^0.9.0",
+    "eslint": "^5.14.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-sort-imports-es6-autofix": "^0.3.0",
+    "fs-extra": "^7.0.1",
+    "glob": "^7.1.3",
+    "jest": "^24.1.0",
+    "lint-staged": "^8.1.4",
+    "markdown-magic": "^0.1.25",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.16.4",
+    "ramda": "^0.26.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "pre-commit": [
+    "lint:staged"
+  ]
 }
