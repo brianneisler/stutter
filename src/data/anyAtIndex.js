@@ -43,6 +43,7 @@ const anyAtIndex = curry(
       idx = 0
     }
 
+    console.log('idx:', idx)
     while (idx < length) {
       const result = fn(list[idx], idx)
       if (isPromise(result)) {
