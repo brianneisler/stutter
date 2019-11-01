@@ -1,7 +1,7 @@
 import SYMBOL_ITERATOR from '../constants/SYMBOL_ITERATOR'
 import anyIsArray from './anyIsArray'
 import anyIsFunction from './anyIsFunction'
-import functionTypify from './functionTypify'
+import buildFn from './buildFn'
 
 /**
  * Convert param type and function definitions into parameterized functions
@@ -11,51 +11,48 @@ import functionTypify from './functionTypify'
  * @since v0.1.0
  * @category lang.util
  * @param {Array<(Array<Type> | Function)>} definitions
- * @return {Array<Function>} A new Array of Functions with the given parameter
- * Types attached.
+ * @return {Array<Fn>} A new Array of Fns with the given definitions attached.
  * @example
  *
- * definitionsToParameterizedFunctions([
+ * definitionsToFns([
  *   [Any, String], (foo, bar) => {},
  *   [Number, String], (baz, bop) => {},
  * ])
  * //=> [
- * //   Function {
+ * //   Fn {
  * //     paramters: [
  * //       { name: 'foo', type: Any },
  * //       { name: 'bar', type: String },
  * //     ],
- * //     length: 2
+ * //     returns: Any
  * //   },
- * //   Function {
+ * //   Fn {
  * //     paramters: [
  * //       { name: 'baz', type: Number },
  * //       { name: 'bop', type: String },
  * //     ],
- * //     length: 2
+ * //     returns: Any
  * //   }
  * // ]
  */
-const definitionsToParameterizedFunctions = (definitions) => {
+const definitionsToFns = (definitions) => {
   if (!anyIsArray(definitions) || definitions.length === 0) {
-    throw new TypeError(
-      'definitionsToParameterizedFunctions method expects an Array containing at least one function'
-    )
+    throw new TypeError('definitionsToFns method expects an Array containing at least one function')
   }
   const iter = definitions[SYMBOL_ITERATOR]()
-  const funcs = []
+  const fns = []
   let next = iter.next()
   let func
-  let paramTypes
+  let definition
   while (!next.done) {
-    func = null
-    paramTypes = null
+    func = undefined
+    definition = undefined
     if (anyIsArray(next.value)) {
-      paramTypes = next.value
+      definition = next.value
       next = iter.next()
       if (next.done) {
         throw new Error(
-          'definitionsToParameterizedFunctions method expects a function after a parameter type declaration.'
+          'definitionsToFns method expects a function after a parameter type declaration.'
         )
       }
     }
@@ -63,15 +60,13 @@ const definitionsToParameterizedFunctions = (definitions) => {
       func = next.value
     } else {
       throw new Error(
-        `definitionsToParameterizedFunctions method expected a Function in the Array. Instead found ${
-          next.value
-        }`
+        `definitionsToFns method expected a Function in the Array. Instead found ${next.value}`
       )
     }
-    funcs.push(functionTypify(func, paramTypes))
+    fns.push(buildFn(func, definition))
     next = iter.next()
   }
-  return funcs
+  return fns
 }
 
-export default definitionsToParameterizedFunctions
+export default definitionsToFns

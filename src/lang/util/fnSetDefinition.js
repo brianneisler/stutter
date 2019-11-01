@@ -1,66 +1,49 @@
 import Any from '../types/Any'
+import Fn from './js/Fn'
 import Parameter from './js/Parameter'
 import anyIsFunction from './anyIsFunction'
 import anyIsType from './anyIsType'
 import findTypeForClass from './findTypeForClass'
-import functionDefineParameters from './functionDefineParameters'
-import functionDefineReturns from './functionDefineReturns'
 import functionGetParameterNames from './functionGetParameterNames'
 
 /**
- * Apply parameter and return types to a function.
+ * Set `parameters` and `returns` type definitions for the given `fn`
  *
  * @private
  * @function
  * @since v0.1.0
  * @category lang.util
- * @param {Function} func The function to parameterize.
- * @param {Array} definitions The type definitions to apply to the function.
- * @return {Function} The function passed in `func` with parameters attached.
+ * @param {Function} fn The Fn to set the given type definitions on.
+ * @param {Array} definition The Parameter and Return type definitions to set on the Fn.
+ * @returns {Fn} The function passed in `func` with parameters attached.
  * @example
  *
- * functionTypify((foo, bar) => 123, [Any, String, () => Number])
- * //=> Function {
+ * const fn = buildFn((foo, bar) => 123)
+ * fnSetDefinition(fn, [Any, String, () => Number])
+ * //=> Fn {
  * //   paramters: [
  * //     { name: 'foo', type: Any },
  * //     { name: 'bar', type: String },
  * //   ],
- * //   length: 2,
  * //   returns: Number
- * // }
- *
- * functionTypify((foo, bar) => {})
- * //=> Function {
- * //   paramters: [
- * //     { name: 'foo', type: Any },
- * //     { name: 'bar', type: Any },
- * //   ],
- * //   length: 2,
- * //   returns: Any
+ * //   func: (foo, bar) => 123
  * // }
  */
-const functionTypify = (func, definitions) => {
-  if (func.parameters || func.dispatcher) {
-    if (definitions) {
-      throw new Error(`Trying to parameterize an already parametered function ${func}`)
-    }
-    return func
-  }
-  const parameterNames = functionGetParameterNames(func)
+const fnSetDefinition = (fn, definition = []) => {
+  const parameterNames = functionGetParameterNames(fn.func)
   const parameters = []
-  let returnType = Any
-  definitions = definitions || []
+  let returns = Any
   const length =
-    definitions.length >= parameterNames.length ? definitions.length : parameterNames.length
+    definition.length >= parameterNames.length ? definition.length : parameterNames.length
   let index = 0
   while (index < length) {
     const name = parameterNames[index] || `arg${index}`
-    let type = definitions[index]
+    let type = definition[index]
     if (type) {
       if (!anyIsType(type)) {
         if (!anyIsFunction(type)) {
           throw new Error(
-            `functionTypify expected a Type for parameter '${name}' but instead was given ${type}`
+            `fnSetDefinition expected a Type for parameter '${name}' but instead was given ${type}`
           )
         }
 
@@ -76,11 +59,11 @@ const functionTypify = (func, definitions) => {
           // type. Set the returned value as the return type.
           const returnedReturnType = type()
           if (anyIsFunction(returnedReturnType)) {
-            returnType = findTypeForClass(returnedReturnType)
+            returns = findTypeForClass(returnedReturnType)
           } else {
-            returnType = returnedReturnType
+            returns = returnedReturnType
           }
-          if (!anyIsType(returnType)) {
+          if (!anyIsType(returns)) {
             throw new Error(
               `parameterizeFunction expected return type to be a function that returns a Type. Instead this value was returned ${returnedReturnType}`
             )
@@ -101,7 +84,11 @@ const functionTypify = (func, definitions) => {
     }
     index += 1
   }
-  return functionDefineReturns(functionDefineParameters(func, parameters), returnType)
+  return new Fn(fn.func, {
+    ...fn.meta,
+    parameters,
+    returns
+  })
 }
 
-export default functionTypify
+export default fnSetDefinition

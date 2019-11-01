@@ -5,24 +5,25 @@ import arrayMap from './arrayMap'
 import arraySlice from './arraySlice'
 import buildException from './buildException'
 import functionCopyMeta from './functionCopyMeta'
-import functionDefineParameters from './functionDefineParameters'
-import functionsToMultiFunction from './functionsToMultiFunction'
+import functionDefineParameters from './functionDefineLength'
+import functionsToMultiFunction from './fnsToMultiFn'
 import objectDefineProperty from './objectDefineProperty'
 
 const identity = (arg) => arg
 
-const curryParameterizedFunction = (
-  func,
+const curryParameterizedFn = (
+  fn,
   wrap = identity,
-  parameters = func.parameters,
+  parameters = fn.parameters,
   placeholders = [],
   received = []
 ) => {
+  // TODO BRN: Replace the wrapping mechanism
   const override = wrap(
     functionCopyMeta(function() {
       const { length } = arguments
       if (length === 0) {
-        throw buildException(func)
+        throw buildException(fn)
           .expected.arguments(arguments)
           .not.toBeEmpty()
       }
@@ -47,7 +48,7 @@ const curryParameterizedFunction = (
           newParameters.push(parameter)
         } else {
           if (parameter && !parameter.type.is(arg)) {
-            throw buildException(func)
+            throw buildException(fn)
               .expected.arg(arguments, idx)
               .toMatchParameter(parameter)
           }
@@ -64,12 +65,12 @@ const curryParameterizedFunction = (
       }
       if (length < parameters.length) {
         newParameters = arrayConcat(newParameters, arraySlice(parameters, length))
-        return curryParameterizedFunction(func, wrap, newParameters, newPlaceholders, newReceived)
+        return curryParameterizedFn(fn, wrap, newParameters, newPlaceholders, newReceived)
       } else if (newPlaceholders.length > 0) {
-        return curryParameterizedFunction(func, wrap, newParameters, newPlaceholders, newReceived)
+        return curryParameterizedFn(fn, wrap, newParameters, newPlaceholders, newReceived)
       }
-      return func.apply(this, newReceived)
-    }, func)
+      return fn.func.apply(this, newReceived)
+    }, fn)
   )
   const cFunc = functionDefineParameters(functionCopyMeta(override, func), parameters)
   objectDefineProperty(cFunc, 'curried', { value: true, configurable: true })
@@ -87,7 +88,7 @@ const findExactMatch = (matches) => {
   }
 }
 
-const curryMultiFunction = (func, wrap) => {
+const curryMultiFn = (fn, wrap) => {
   const override = wrap(function() {
     const matches = func.dispatcher.dispatch(arguments, { partial: true, multi: true })
     const exactMatch = findExactMatch(matches)
@@ -162,7 +163,7 @@ const functionCurry = (func, wrap = identity) => {
     }
     return curryParameterizedFunction(func, wrap)
   }
-  throw new Error('Function must either be a multi function or a parameterized function')
+  throw new Error('Function must either have a dispatcher function or have parameters')
 }
 
 export default functionCurry

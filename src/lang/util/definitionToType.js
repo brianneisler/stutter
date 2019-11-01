@@ -59,9 +59,7 @@ const definitionToType = (definition) => {
         implementation = next.value
       } else {
         throw new Error(
-          `definitionsToParameterizedFunctions method expected a Function in the Array. Instead found ${
-            next.value
-          }`
+          `definitionToType method expected a Function in the Array. Instead found ${next.value}`
         )
       }
       protocolsMap = protocolsMap.set(protocol, implementation)

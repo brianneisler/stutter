@@ -1,6 +1,4 @@
 import DEFAULT_NAMESPACE_NAME from '../constants/DEFAULT_NAMESPACE_NAME'
-import Exception from './js/Exception'
-import buildException from './buildException'
 import stringSubstring from './stringSubstring'
 
 const REGEX_NAME = /^((?:[a-zA-Z0-9_-]*\.)*)([a-zA-Z0-9_-]+)$/

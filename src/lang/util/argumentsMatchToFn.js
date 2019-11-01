@@ -1,7 +1,7 @@
 import anyIsPlaceholder from './anyIsPlaceholder'
 
-const argumentsMatchToFunction = (args, func, options) => {
-  const { parameters } = func
+const argumentsMatchToFn = (args, fn, options) => {
+  const { parameters } = fn
   let { length } = parameters
   let partial = false
   if (args.length < parameters.length) {
@@ -26,9 +26,9 @@ const argumentsMatchToFunction = (args, func, options) => {
     }
   }
   return {
-    func,
+    fn,
     partial
   }
 }
 
-export default argumentsMatchToFunction
+export default argumentsMatchToFn

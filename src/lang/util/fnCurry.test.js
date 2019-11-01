@@ -1,35 +1,36 @@
 import FUNCTIONAL_PLACEHOLDER from '../constants/FUNCTIONAL_PLACEHOLDER'
+import Fn from './js/Fn'
 import Number from '../types/Number'
 import String from '../types/String'
-import functionCurry from './functionCurry'
-import functionTypify from './functionTypify'
-import functionsToMultiFunction from './functionsToMultiFunction'
+import buildFn from './buildFn'
+import fnCurry from './fnCurry'
+import fnsToMultiFn from './fnsToMultiFn'
 
-describe('functionCurry', () => {
+describe('fnCurry', () => {
   const __ = FUNCTIONAL_PLACEHOLDER
 
   test('should return the same function if param length is 0', () => {
-    const func = functionTypify(() => {})
-    const cFunc = functionCurry(func)
-    expect(cFunc).toBe(func)
+    const fn = buildFn(() => {})
+    const curriedFn = fnCurry(fn)
+    expect(curriedFn).toBe(curriedFn)
   })
 
   test('should support placeholder on position 0', () => {
-    const func = functionTypify(
+    const fn = buildFn(
       (argA) => {
         expect(argA).toBe('a')
         return 0
       },
       [String]
     )
-    const cFunc = functionCurry(func)
-    const result = cFunc(__)
-    expect(result).toBeInstanceOf(Function)
+    const curriedFn = fnCurry(fn)
+    const result = curriedFn(__)
+    expect(result).toBeInstanceOf(Fn)
     expect(result('a')).toBe(0)
   })
 
   test('should support placeholder replacing placeholder', () => {
-    const func = functionTypify(
+    const func = buildFn(
       (argA) => {
         expect(argA).toBe('a')
         return 0
@@ -47,7 +48,7 @@ describe('functionCurry', () => {
   })
 
   test('should support more than one placeholder', () => {
-    const func = functionTypify(
+    const func = buildFn(
       (argA, argB, argC) => {
         expect(argA).toBe('a')
         expect(argB).toBe('b')
@@ -66,7 +67,7 @@ describe('functionCurry', () => {
   })
 
   test('should support placeholders mixed with args', () => {
-    const func = functionTypify(
+    const func = functionDefineTypes(
       (argA, argB, argC) => {
         expect(argA).toBe('a')
         expect(argB).toBe('b')
@@ -82,7 +83,7 @@ describe('functionCurry', () => {
   })
 
   test('should auto curry parameterized function of length 1', () => {
-    const func = functionTypify((argA) => {
+    const func = functionDefineTypes((argA) => {
       expect(argA).toBe('a')
       return 0
     })
@@ -91,7 +92,7 @@ describe('functionCurry', () => {
   })
 
   test('should auto curry parameterized function of length 2', () => {
-    const func = functionTypify((argA, argB) => {
+    const func = functionDefineTypes((argA, argB) => {
       expect(argA).toBe('a')
       expect(argB).toBe('b')
       return 0
@@ -102,7 +103,7 @@ describe('functionCurry', () => {
   })
 
   test('should auto curry parameterized function of length 3', () => {
-    const func = functionTypify((argA, argB, argC) => {
+    const func = functionDefineTypes((argA, argB, argC) => {
       expect(argA).toBe('a')
       expect(argB).toBe('b')
       expect(argC).toBe('c')
@@ -116,7 +117,7 @@ describe('functionCurry', () => {
   })
 
   test('should auto curry parameterized function of length 4', () => {
-    const func = functionTypify((argA, argB, argC, argD) => {
+    const func = functionDefineTypes((argA, argB, argC, argD) => {
       expect(argA).toBe('a')
       expect(argB).toBe('b')
       expect(argC).toBe('c')
@@ -136,14 +137,14 @@ describe('functionCurry', () => {
 
   test('should support placeholder at position 0 in a curried multi function', () => {
     const func = functionsToMultiFunction([
-      functionTypify(
+      functionDefineTypes(
         (argA) => {
           expect(argA).toBe('a')
           return 0
         },
         [String]
       ),
-      functionTypify(
+      functionDefineTypes(
         (argA) => {
           expect(argA).toBe(1)
           return 1
@@ -160,14 +161,14 @@ describe('functionCurry', () => {
 
   test('should support placeholder replacing placeholder in a curried multi function', () => {
     const func = functionsToMultiFunction([
-      functionTypify(
+      functionDefineTypes(
         (argA) => {
           expect(argA).toBe('a')
           return 0
         },
         [String]
       ),
-      functionTypify(
+      functionDefineTypes(
         (argA) => {
           expect(argA).toBe(1)
           return 1
@@ -188,7 +189,7 @@ describe('functionCurry', () => {
 
   test('should support more than one placeholder in a curried multi function', () => {
     const func = functionsToMultiFunction([
-      functionTypify(
+      functionDefineTypes(
         (argA, argB, argC) => {
           expect(argA).toBe('a')
           expect(argB).toBe('b')
@@ -197,7 +198,7 @@ describe('functionCurry', () => {
         },
         [String, String, String]
       ),
-      functionTypify(
+      functionDefineTypes(
         (arg1, arg2, arg3) => {
           expect(arg1).toBe(1)
           expect(arg2).toBe(2)
@@ -224,7 +225,7 @@ describe('functionCurry', () => {
 
   test('should support placeholders mixed with args in a curried multi function', () => {
     const func = functionsToMultiFunction([
-      functionTypify(
+      functionDefineTypes(
         (argA, argB, argC) => {
           expect(argA).toBe('a')
           expect(argB).toBe('b')
@@ -233,7 +234,7 @@ describe('functionCurry', () => {
         },
         [String, String, String]
       ),
-      functionTypify(
+      functionDefineTypes(
         (argA, arg2, argC) => {
           expect(argA).toBe('a')
           expect(arg2).toBe(2)
@@ -253,7 +254,7 @@ describe('functionCurry', () => {
 
   test('should execute exact matches in a curried multi function', () => {
     const func = functionsToMultiFunction([
-      functionTypify(
+      functionDefineTypes(
         (argA, argB) => {
           expect(argA).toBe('a')
           expect(argB).toBe('b')
@@ -261,7 +262,7 @@ describe('functionCurry', () => {
         },
         [String, String]
       ),
-      functionTypify(
+      functionDefineTypes(
         (argA) => {
           expect(argA).toBe('a')
           return 1
@@ -280,14 +281,14 @@ describe('functionCurry', () => {
 
   // test('should execute exact matches with exact number of parameters in a curried multi function', () => {
   //   const func = functionsToMultiFunction([
-  //     functionTypify(
+  //     functionDefineTypes(
   //       (argA) => {
   //         expect(argA).toBe('a')
   //         return 0
   //       },
   //       [String]
   //     ),
-  //     functionTypify(
+  //     functionDefineTypes(
   //       (argA, argB) => {
   //         expect(argA).toBe('a')
   //         expect(argB).toBe('b')
@@ -304,14 +305,14 @@ describe('functionCurry', () => {
 
   test('should auto curry multi function of length 1', () => {
     const func = functionsToMultiFunction([
-      functionTypify(
+      functionDefineTypes(
         (argA) => {
           expect(argA).toBe('a')
           return 0
         },
         [String]
       ),
-      functionTypify(
+      functionDefineTypes(
         (arg1) => {
           expect(arg1).toBe(1)
           return 1
@@ -328,7 +329,7 @@ describe('functionCurry', () => {
 
   test('should auto curry parameterized function of length 2', () => {
     const func = functionsToMultiFunction([
-      functionTypify(
+      functionDefineTypes(
         (argA, argB) => {
           expect(argA).toBe('a')
           expect(argB).toBe('b')
@@ -336,7 +337,7 @@ describe('functionCurry', () => {
         },
         [String, String]
       ),
-      functionTypify(
+      functionDefineTypes(
         (arg1, arg2) => {
           expect(arg1).toBe(1)
           expect(arg2).toBe(2)
@@ -356,7 +357,7 @@ describe('functionCurry', () => {
 
   test('should auto curry parameterized function of length 3', () => {
     const func = functionsToMultiFunction([
-      functionTypify(
+      functionDefineTypes(
         (argA, argB, argC) => {
           expect(argA).toBe('a')
           expect(argB).toBe('b')
@@ -365,7 +366,7 @@ describe('functionCurry', () => {
         },
         [String, String, String]
       ),
-      functionTypify(
+      functionDefineTypes(
         (arg1, arg2, arg3) => {
           expect(arg1).toBe(1)
           expect(arg2).toBe(2)
@@ -390,7 +391,7 @@ describe('functionCurry', () => {
 
   test('should auto curry parameterized function of length 4', () => {
     const func = functionsToMultiFunction([
-      functionTypify(
+      functionDefineTypes(
         (argA, argB, argC, argD) => {
           expect(argA).toBe('a')
           expect(argB).toBe('b')
@@ -400,7 +401,7 @@ describe('functionCurry', () => {
         },
         [String, String, String, String]
       ),
-      functionTypify(
+      functionDefineTypes(
         (arg1, arg2, arg3, arg4) => {
           expect(arg1).toBe(1)
           expect(arg2).toBe(2)

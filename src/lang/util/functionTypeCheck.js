@@ -15,13 +15,13 @@ import functionCopyMeta from './functionCopyMeta'
  * @example
  *
  * const func = functionTypeCheck(
- *   functionTypify((foo, bar) => {}, [Number, Number])
+ *   functionDefineTypes((foo, bar) => {}, [Number, Number])
  * )
  * func('foo', 123)
  * //=> throws TypeError
  *
  * const func = functionTypeCheck(
- *   functionTypify(() => 'foo', [() => Number])
+ *   functionDefineTypes(() => 'foo', [() => Number])
  * )
  * func()
  * //=> throws TypeError

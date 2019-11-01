@@ -1,7 +1,7 @@
 import Number from '../types/Number'
 import String from '../types/String'
+import functionDefineTypes from './functionDefineTypes'
 import functionToParameterNames from './functionToParameterNames'
-import functionTypify from './functionTypify'
 
 describe('functionToParameterNames', () => {
   it('returns an empty Array for a function that has no parameters', () => {
@@ -17,7 +17,7 @@ describe('functionToParameterNames', () => {
   })
 
   it('returns an array of Parameters based on the param names for a function that is parameterized', () => {
-    const func = functionTypify(
+    const func = functionDefineTypes(
       function test(foo, bar) {
         return bar
       },

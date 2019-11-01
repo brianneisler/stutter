@@ -24,6 +24,7 @@ export {
 } from './REGEX_STRING_VARIATION_SELECTORS_RANGE'
 export { default as REGEX_UINT } from './REGEX_UINT'
 export { default as REGEX_UNICODE } from './REGEX_UNICODE'
+export { default as SYMBOL_FN } from './SYMBOL_FN'
 export { default as SYMBOL_ITERATOR } from './SYMBOL_ITERATOR'
 export { default as SYMBOL_META } from './SYMBOL_META'
 export { default as SYMBOL_OP } from './SYMBOL_OP'

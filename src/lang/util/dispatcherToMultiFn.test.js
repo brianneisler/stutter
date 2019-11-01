@@ -1,8 +1,10 @@
-import dispatcherToMultiFunction from './dispatcherToMultiFunction'
+import buildFn from './buildFn'
+import dispatcherToMultiFn from './dispatcherToMultiFn'
+import fnCall from './fnCall'
 
-describe('dispatcherToMultiFunction', () => {
+describe('dispatcherToMultiFn', () => {
   test('generates a simple multi function from the given disptacher', () => {
-    const testFunction = jest.fn(() => {})
+    const testFn = buildFn(jest.fn(() => {}))
     const dispatcher = {
       dispatch: (args, options) => {
         expect(args[0]).toBe('foo')
@@ -12,22 +14,23 @@ describe('dispatcherToMultiFunction', () => {
           partial: false
         })
         return {
-          func: testFunction
+          fn: testFn,
+          partial: false
         }
       }
     }
-    const multiFunction = dispatcherToMultiFunction(dispatcher, {
+    const multiFn = dispatcherToMultiFn(dispatcher, {
       multi: false,
       partial: false
     })
 
-    multiFunction('foo', 'bar')
-    expect(testFunction).toHaveBeenCalledTimes(1)
-    expect(testFunction).toHaveBeenCalledWith('foo', 'bar')
+    fnCall(multiFn, 'foo', 'bar')
+    expect(testFn.func).toHaveBeenCalledTimes(1)
+    expect(testFn.func).toHaveBeenCalledWith('foo', 'bar')
   })
 
   test('handles an array when the multi option is true', () => {
-    const testFunction = jest.fn(() => {})
+    const testFn = buildFn(jest.fn(() => {}))
     const dispatcher = {
       dispatch: (args, options) => {
         expect(args[0]).toBe('foo')
@@ -38,18 +41,19 @@ describe('dispatcherToMultiFunction', () => {
         })
         return [
           {
-            func: testFunction
+            fn: testFn,
+            partial: false
           }
         ]
       }
     }
-    const multiFunction = dispatcherToMultiFunction(dispatcher, {
+    const multiFn = dispatcherToMultiFn(dispatcher, {
       multi: true,
       partial: false
     })
 
-    multiFunction('foo', 'bar')
-    expect(testFunction).toHaveBeenCalledTimes(1)
-    expect(testFunction).toHaveBeenCalledWith('foo', 'bar')
+    fnCall(multiFn, 'foo', 'bar')
+    expect(testFn.func).toHaveBeenCalledTimes(1)
+    expect(testFn.func).toHaveBeenCalledWith('foo', 'bar')
   })
 })

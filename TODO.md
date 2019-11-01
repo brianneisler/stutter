@@ -6,6 +6,9 @@ FOCUS
 
 TASKS
 - [ ] Implement protocol support for `Fn`s
+- 
+
+
 - [ ] refactor all methods in lang folder to use `defn`
   - use namespaces names
   - add descriptions

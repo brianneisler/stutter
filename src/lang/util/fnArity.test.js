@@ -1,9 +1,9 @@
 import Any from '../types/Any'
-import functionArity from './functionArity'
+import fnArity from './fnArity'
 
-describe('functionArity', () => {
+describe('fnArity', () => {
   test('sets arity of 0 with spread', () => {
-    const func = functionArity((argA, argB, argC) => {
+    const func = fnArity((argA, argB, argC) => {
       expect(argA).toBe('a')
       expect(argB).toBe('b')
       expect(argC).toBe('c')

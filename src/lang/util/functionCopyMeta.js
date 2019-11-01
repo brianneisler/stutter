@@ -1,5 +1,5 @@
 import SYMBOL_META from '../constants/SYMBOL_META'
-import functionTypify from './functionTypify'
+import functionDefineTypes from './functionDefineTypes'
 import objectDefineProperty from './objectDefineProperty'
 
 /**
@@ -16,7 +16,7 @@ import objectDefineProperty from './objectDefineProperty'
  *
  */
 const functionCopyMeta = (func, sourceFunc) => {
-  sourceFunc = functionTypify(sourceFunc)
+  sourceFunc = functionDefineTypes(sourceFunc)
   if (sourceFunc[SYMBOL_META] !== undefined && func[SYMBOL_META] !== sourceFunc[SYMBOL_META]) {
     objectDefineProperty(func, SYMBOL_META, { value: sourceFunc[SYMBOL_META], configurable: true })
   }

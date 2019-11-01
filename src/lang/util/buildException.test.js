@@ -1,11 +1,12 @@
 import Exception from './js/Exception'
 import Number from '../types/Number'
 import buildException from './buildException'
-import functionTypify from './functionTypify'
+import buildFn from './buildFn'
+import fnCall from './fnCall'
 
 describe('buildException', () => {
   test('builds a new Expected:Argument:toMatchParameter Exception', () => {
-    const source = functionTypify(function(arg1) {
+    const source = buildFn(function(arg1) {
       const exception = buildException(source)
         .expected.arg(arg1, 0)
         .toMatchParameter(source.parameters[0])
@@ -27,11 +28,11 @@ describe('buildException', () => {
       })
     })
 
-    source('foo')
+    fnCall(source, 'foo')
   })
 
   test('builds a new Expected:Argument:toMatchRegex Exception', () => {
-    const source = function(arg1) {
+    const source = buildFn(function(arg1) {
       const regex = /^bar$/
       const exception = buildException(source)
         .expected.arg(arg1, 0)
@@ -52,13 +53,13 @@ describe('buildException', () => {
         },
         code: 'Expected:Argument:toMatchRegex'
       })
-    }
+    })
 
-    source('foo')
+    fnCall(source, 'foo')
   })
 
   test('builds a new Expected:Arguments:toBeEmpty Exception', () => {
-    const source = function() {
+    const source = buildFn(function() {
       const exception = buildException(source)
         .expected.arguments(arguments)
         .toBeEmpty()
@@ -74,13 +75,13 @@ describe('buildException', () => {
         },
         code: 'Expected:Arguments:toBeEmpty'
       })
-    }
+    })
 
-    source('foo')
+    fnCall(source, 'foo')
   })
 
   test('builds a new Expected:Arguments:toBeOfMinLength Exception', () => {
-    const source = function() {
+    const source = buildFn(function() {
       const exception = buildException(source)
         .expected.arguments(arguments)
         .toBeOfMinLength(2)
@@ -99,13 +100,13 @@ describe('buildException', () => {
         },
         code: 'Expected:Arguments:toBeOfMinLength'
       })
-    }
+    })
 
-    source('foo')
+    fnCall(source, 'foo')
   })
 
   test('builds a new Expected:Arguments:toBeOfMinLength Exception', () => {
-    const source = functionTypify(
+    const source = buildFn(
       function() {
         const returned = 'foo'
         const exception = buildException(source)
@@ -130,6 +131,6 @@ describe('buildException', () => {
       [() => Number]
     )
 
-    source('foo')
+    fnCall(source, 'foo')
   })
 })

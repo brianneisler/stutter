@@ -1,12 +1,12 @@
 import Number from '../types/Number'
 import SYMBOL_META from '../constants/SYMBOL_META'
 import functionCopyMeta from './functionCopyMeta'
-import functionTypify from './functionTypify'
+import functionDefineTypes from './functionDefineTypes'
 import objectDefineProperty from './objectDefineProperty'
 
 describe('functionCopyMeta', () => {
   test('copies meta to an empty anonymous function', () => {
-    const func = functionTypify(
+    const func = functionDefineTypes(
       (n) => {
         return n
       },
@@ -28,7 +28,7 @@ describe('functionCopyMeta', () => {
   })
 
   test('does not error out if copy is called twice', () => {
-    const func = functionTypify(
+    const func = functionDefineTypes(
       (n) => {
         return n
       },
