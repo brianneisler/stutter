@@ -1,5 +1,4 @@
 import anyResolveAllWith from './anyResolveAllWith'
-import functionCopyMeta from './functionCopyMeta'
 
 /**
  * Wrap the given function with another function that will resolve the
@@ -19,11 +18,9 @@ import functionCopyMeta from './functionCopyMeta'
  * })
  * await func(Promise.resolve('foo'), 123)
  */
-const functionResolve = (func) => {
-  const override = function() {
+const functionResolve = (func) =>
+  function() {
     return anyResolveAllWith(arguments, (resolvedArgs) => func.apply(this, resolvedArgs))
   }
-  return functionCopyMeta(override, func)
-}
 
 export default functionResolve

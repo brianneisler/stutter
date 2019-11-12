@@ -43,6 +43,7 @@ import anyResolveWith from './anyResolveWith'
  */
 const anyResolveAll = (any) =>
   anyResolveWith(any, (resolvedAny) => {
+    // TODO BRN: Add support for immutable objects here
     let result
     if (anyIsArray(resolvedAny) || anyIsArguments(resolvedAny) || anyIsIterator(resolvedAny)) {
       result = []

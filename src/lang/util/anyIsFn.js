@@ -1,5 +1,6 @@
 import Fn from './js/Fn'
-import anyIsObjectLike from './anyIsObjectLike'
+import SYMBOL_FN from '../constants/SYMBOL_FN'
+import anyIsObject from './anyIsObject'
 
 /**
  * Checks if `any` is an `Fn`.
@@ -15,12 +16,18 @@ import anyIsObjectLike from './anyIsObjectLike'
  * anyIsFn(new Fn(() => {}))
  * // => true
  *
+ * anyIsFn(buildFn(() => {}))
+ * // => true
+ *
  * anyIsFn(() => {})
  * // => false
  */
 const anyIsFn = (any) => {
-  if (!anyIsObjectLike(any)) {
+  if (!anyIsObject(any)) {
     return false
+  }
+  if (any[SYMBOL_FN]) {
+    return any[SYMBOL_FN] instanceof Fn
   }
   return any instanceof Fn
 }

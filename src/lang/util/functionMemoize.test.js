@@ -1,6 +1,3 @@
-import Any from '../types/Any'
-import Number from '../types/Number'
-import functionDefineTypes from './functionDefineTypes'
 import functionMemoize from './functionMemoize'
 
 describe('functionMemoize', () => {
@@ -23,19 +20,5 @@ describe('functionMemoize', () => {
     expect(fn1.length).toBe(1)
     const fn2 = functionMemoize((n1, n2) => n2)
     expect(fn2.length).toBe(2)
-  })
-
-  test('preserves parameters and return type of function', () => {
-    const func = functionDefineTypes(
-      (foo, bar) => {
-        return bar
-      },
-      [Any, Number, () => Number]
-    )
-    const mFunc = functionMemoize(func)
-
-    expect(mFunc.length).toBe(2)
-    expect(mFunc.parameters).toEqual([{ name: 'foo', type: Any }, { name: 'bar', type: Number }])
-    expect(mFunc.returns).toEqual(Number)
   })
 })

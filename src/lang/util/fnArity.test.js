@@ -15,7 +15,7 @@ describe('fnArity', () => {
   })
 
   test('sets arity of 1 with spread', () => {
-    const func = functionArity((argA, argB, argC) => {
+    const func = fnArity((argA, argB, argC) => {
       expect(argA).toBe('a')
       expect(argB).toBe('b')
       expect(argC).toBe('c')
@@ -27,7 +27,7 @@ describe('fnArity', () => {
   })
 
   test('sets arity greater than number of parameters in function', () => {
-    const func = functionArity((argA) => {
+    const func = fnArity((argA) => {
       expect(argA).toBe('a')
       return 1
     }, 3)
@@ -47,7 +47,7 @@ describe('fnArity', () => {
       expect(argC).toBe('c')
       return 1
     }
-    const func1 = functionArity(func, 1)
+    const func1 = fnArity(func, 1)
     expect(func).not.toBe(func1)
     expect(func.length).toBe(3)
     expect(func1.length).toBe(1)

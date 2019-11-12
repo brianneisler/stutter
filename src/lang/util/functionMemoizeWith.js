@@ -1,7 +1,6 @@
 import WeakMap from './js/WeakMap'
 import cacheChain from './cacheChain'
-
-const identity = (arg) => arg
+import functionDefineLength from './functionDefineLength'
 
 /**
  * A customisable version of [`functionMemoize`](#functionMemoize).
@@ -38,15 +37,15 @@ const identity = (arg) => arg
  * count
  * //=> 1
  */
-const functionMemoizeWith = (func, cacheFunc = cacheChain, wrap = identity) => {
+const functionMemoizeWith = (func, cacheFunc = cacheChain) => {
   const cache = new WeakMap()
-  return wrap(function() {
+  return functionDefineLength(function() {
     const key = cacheFunc.apply(this, arguments)
     if (!cache.has(key)) {
       cache.set(key, func.apply(this, arguments))
     }
     return cache.get(key)
-  }, func)
+  }, func.length)
 }
 
 export default functionMemoizeWith

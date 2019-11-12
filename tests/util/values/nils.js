@@ -1,4 +1,4 @@
-import { keys, map } from '../../../src/lang/util/'
+import { keys, map } from 'ramda'
 
 const valueMap = {
   null: null,

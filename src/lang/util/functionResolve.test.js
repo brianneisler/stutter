@@ -1,6 +1,3 @@
-import Number from '../types/Number'
-import String from '../types/String'
-import functionDefineTypes from './functionDefineTypes'
 import functionResolve from './functionResolve'
 
 describe('functionResolve', () => {
@@ -25,10 +22,13 @@ describe('functionResolve', () => {
     expect(result).toBe('baz')
   })
 
-  test("Preserves a function's parameters", () => {
-    const func = functionDefineTypes((foo, bar) => bar, [String, Number])
+  test("Preserves a function's context", () => {
+    const context = {}
+    const func = function(foo, bar) {
+      expect(this).toBe(context)
+      return bar
+    }
     const rFunc = functionResolve(func)
-    expect(rFunc.parameters).toEqual([{ name: 'foo', type: String }, { name: 'bar', type: Number }])
-    expect(rFunc.length).toBe(2)
+    expect(rFunc.call(context, 1, 2)).toBe(2)
   })
 })

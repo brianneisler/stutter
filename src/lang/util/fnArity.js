@@ -2,7 +2,7 @@ import Any from '../types/Any'
 import Array from './js/Array'
 import arrayConcat from './arrayConcat'
 import arrayLikeSlice from './arrayLikeSlice'
-import fnSetParameters from './fnSetParameters'
+import fnGetMeta from './fnGetMeta'
 
 const repeatDefaultParams = (number, startAt) => {
   let idx = 0
@@ -32,16 +32,16 @@ const repeatDefaultParams = (number, startAt) => {
  * @returns {Fn} The given `fn` with parameter length adjusted to `number`.
  * @example
  *
- * const takesNArgs = new Fn((...args) => [ ...args ])
+ * const takesNArgs = buildFn((...args) => [ ...args ])
  *
- * takesNArgs.parameters.length
+ * takesNArgs.length
  * //=> 0
  *
  * takesNArgs(1, 2)
  * //=> [1, 2]
  *
  * const takesTwoArgs = fnArity(takesNArgs, 2)
- * takesTwoArgs.parameters.length
+ * takesTwoArgs.length
  * //=> 2
  *
  * // All arguments are passed to the wrapped function
@@ -49,13 +49,14 @@ const repeatDefaultParams = (number, startAt) => {
  * //=> [1, 2, 3]
  */
 const fnArity = (fn, number) => {
-  const { length } = fn.parameters
-  const parameters =
+  let { parameters } = fnGetMeta(fn)
+  const { length } = parameters
+  parameters =
     length >= number
-      ? arrayLikeSlice(fn.parameters, 0, number)
-      : arrayConcat(fn.parameters, repeatDefaultParams(number - length, length))
+      ? arrayLikeSlice(parameters, 0, number)
+      : arrayConcat(parameters, repeatDefaultParams(number - length, length))
 
-  return fnSetParameters(fn, parameters)
+  return fn.update({ parameters })
 }
 
 export default fnArity

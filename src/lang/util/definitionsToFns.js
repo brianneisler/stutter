@@ -1,7 +1,8 @@
 import SYMBOL_ITERATOR from '../constants/SYMBOL_ITERATOR'
 import anyIsArray from './anyIsArray'
+import anyIsFn from './anyIsFn'
 import anyIsFunction from './anyIsFunction'
-import buildFn from './buildFn'
+import definitionToFn from './definitionToFn'
 
 /**
  * Convert param type and function definitions into parameterized functions
@@ -56,14 +57,19 @@ const definitionsToFns = (definitions) => {
         )
       }
     }
-    if (anyIsFunction(next.value)) {
+    if (anyIsFn(next.value)) {
+      if (definition) {
+        throw new Error(`Cannot redefine an already defined Fn with new parameter types`)
+      }
+      fns.push(next.value)
+    } else if (anyIsFunction(next.value)) {
       func = next.value
+      fns.push(definitionToFn(func, definition))
     } else {
       throw new Error(
         `definitionsToFns method expected a Function in the Array. Instead found ${next.value}`
       )
     }
-    fns.push(buildFn(func, definition))
     next = iter.next()
   }
   return fns

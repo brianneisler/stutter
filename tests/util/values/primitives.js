@@ -1,4 +1,4 @@
-import { arrayFlatten } from '../../../src/lang/util'
+import { flatten, map, pick, values } from 'ramda'
 import booleanObjects from './booleanObjects'
 import booleans from './booleans'
 import nils from './nils'
@@ -9,17 +9,17 @@ import strings from './strings'
 import symbols from './symbols'
 
 const typeMap = {
-  booleans,
   booleanObjects,
+  booleans,
   nils,
-  numbers,
   numberObjects,
-  strings,
+  numbers,
   stringObjects,
+  strings,
   symbols
 }
 
 const primitives = (selected = ['booleans', 'nils', 'numbers', 'strings', 'symbols']) =>
-  arrayFlatten(arrayMap(objectValues(objectPick(typeMap, selected)), (type) => type(context)))
+  flatten(map((type) => type(), values(pick(selected, typeMap))))
 
 export default primitives

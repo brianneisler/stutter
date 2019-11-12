@@ -10,8 +10,8 @@ describe('buildExpected', () => {
 
     expect(result).toBeInstanceOf(Expected)
     expect(result).toMatchObject({
-      expectation: 'toBeEmpty',
-      data: {}
+      data: {},
+      expectation: 'toBeEmpty'
     })
     expect(next).toHaveBeenCalledWith(expect.any(Expected))
   })
@@ -22,8 +22,8 @@ describe('buildExpected', () => {
 
     expect(result).toBeInstanceOf(Expected)
     expect(result).toMatchObject({
-      expectation: 'not.toBeEmpty',
-      data: {}
+      data: {},
+      expectation: 'not.toBeEmpty'
     })
     expect(next).toHaveBeenCalledWith(expect.any(Expected))
   })
@@ -34,10 +34,10 @@ describe('buildExpected', () => {
 
     expect(result).toBeInstanceOf(Expected)
     expect(result).toMatchObject({
-      expectation: 'toBeOfMinLength',
       data: {
         length: 1
-      }
+      },
+      expectation: 'toBeOfMinLength'
     })
     expect(next).toHaveBeenCalledWith(expect.any(Expected))
   })
@@ -48,10 +48,10 @@ describe('buildExpected', () => {
 
     expect(result).toBeInstanceOf(Expected)
     expect(result).toMatchObject({
-      expectation: 'not.toBeOfMinLength',
       data: {
         length: 1
-      }
+      },
+      expectation: 'not.toBeOfMinLength'
     })
     expect(next).toHaveBeenCalledWith(expect.any(Expected))
   })
@@ -63,10 +63,10 @@ describe('buildExpected', () => {
 
     expect(result).toBeInstanceOf(Expected)
     expect(result).toMatchObject({
-      expectation: 'toMatchParameter',
       data: {
         parameter
-      }
+      },
+      expectation: 'toMatchParameter'
     })
     expect(next).toHaveBeenCalledWith(expect.any(Expected))
   })
@@ -78,10 +78,10 @@ describe('buildExpected', () => {
 
     expect(result).toBeInstanceOf(Expected)
     expect(result).toMatchObject({
-      expectation: 'not.toMatchParameter',
       data: {
         parameter
-      }
+      },
+      expectation: 'not.toMatchParameter'
     })
     expect(next).toHaveBeenCalledWith(expect.any(Expected))
   })
@@ -93,10 +93,10 @@ describe('buildExpected', () => {
 
     expect(result).toBeInstanceOf(Expected)
     expect(result).toMatchObject({
-      expectation: 'toMatchRegex',
       data: {
         regex
-      }
+      },
+      expectation: 'toMatchRegex'
     })
     expect(next).toHaveBeenCalledWith(expect.any(Expected))
   })
@@ -108,10 +108,10 @@ describe('buildExpected', () => {
 
     expect(result).toBeInstanceOf(Expected)
     expect(result).toMatchObject({
-      expectation: 'not.toMatchRegex',
       data: {
         regex
-      }
+      },
+      expectation: 'not.toMatchRegex'
     })
     expect(next).toHaveBeenCalledWith(expect.any(Expected))
   })
@@ -123,10 +123,10 @@ describe('buildExpected', () => {
 
     expect(result).toBeInstanceOf(Expected)
     expect(result).toMatchObject({
-      expectation: 'toMatchReturns',
       data: {
         returns
-      }
+      },
+      expectation: 'toMatchReturns'
     })
     expect(next).toHaveBeenCalledWith(expect.any(Expected))
   })
@@ -138,10 +138,10 @@ describe('buildExpected', () => {
 
     expect(result).toBeInstanceOf(Expected)
     expect(result).toMatchObject({
-      expectation: 'not.toMatchReturns',
       data: {
         returns
-      }
+      },
+      expectation: 'not.toMatchReturns'
     })
     expect(next).toHaveBeenCalledWith(expect.any(Expected))
   })

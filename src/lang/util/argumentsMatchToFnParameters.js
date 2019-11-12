@@ -1,7 +1,11 @@
 import anyIsPlaceholder from './anyIsPlaceholder'
+import fnGetMeta from './fnGetMeta'
 
-const argumentsMatchToFn = (args, fn, options) => {
-  const { parameters } = fn
+const argumentsMatchToFnParameters = (args, fn, options) => {
+  const { parameters } = fnGetMeta(fn)
+  if (!parameters) {
+    throw new Error(`parameter 'fn' must be a parameterized Fn instance`)
+  }
   let { length } = parameters
   let partial = false
   if (args.length < parameters.length) {
@@ -13,6 +17,12 @@ const argumentsMatchToFn = (args, fn, options) => {
       return false
     }
   }
+
+  let exact = false
+  if (args.length === parameters.length) {
+    exact = true
+  }
+
   for (let idx = 0; idx < length; idx++) {
     const parameter = parameters[idx]
     const arg = args[idx]
@@ -26,9 +36,11 @@ const argumentsMatchToFn = (args, fn, options) => {
     }
   }
   return {
+    delta: args.length - parameters.length,
+    exact,
     fn,
     partial
   }
 }
 
-export default argumentsMatchToFn
+export default argumentsMatchToFnParameters

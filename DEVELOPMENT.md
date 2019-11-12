@@ -2,15 +2,13 @@
 
 ## Requirements
 
-* node.js 6.0+
-* npm 6.0+
+* node.js 10.0+
+* npm 10.0+
 
 _NOTE:_ we recommend using [nvm](https://github.com/creationix/nvm)
 
 ```sh
 brew install nvm
-nvm install 8.12
-nvm use 8.12
 ```
 
 ## Tasks
@@ -23,6 +21,8 @@ To setup the project for development run the below commands. After these have be
 ```sh
 git clone https://github.com/brianneisler/stutter.git
 cd stutter
+nvm install
+nvm use
 npm run setup
 ```
 
@@ -88,8 +88,3 @@ Run docs generation for the project
 ```sh
 npm run docs:gen
 ```
-
-
-
-- validation
-- 

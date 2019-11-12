@@ -1,6 +1,9 @@
-import { Function, Number } from './types'
-import { functionCurryArity } from './util'
+import Fn from './types/Fn'
+import Function from './types/Function'
+import Number from './types/Number'
+import definitionToFn from './util/definitionToFn'
 import defn from './defn'
+import fnCurryArity from './util/fnCurryArity'
 
 /**
  * Returns a curried equivalent of the provided function, with the specified arity. The curried function has two unusual capabilities. First, its arguments needn't be provided one at a time. If `g` is `curryN(3, f)`, the following are equivalent:
@@ -23,12 +26,28 @@ import defn from './defn'
  * @function
  * @since v0.1.0
  * @category lang
+ *
+ * @signature curryN:(length: Number, fn: Fn(...Any) => Any) => Fn(length...Any) => Any
  * @param {Number} length The arity for the returned function.
- * @param {Function} fn The function to curry.
+ * @param {Fn} fn The Fn to curry.
  * @return {Function} A new, curried function.
  * @example
  *
- * const sumArgs = (...args) => sum(args)
+ * const sumArgs = fn((...args) => sum(args))
+ *
+ * const curriedAddFourNumbers = curryN(4, sumArgs)
+ * const f = curriedAddFourNumbers(1, 2)
+ * const g = f(3)
+ * g(4)
+ * //=> 10
+ *
+ * @signature curryN:(fn: Fn(...Any) => Any, length: Number) => Fn(length...Any) => Any
+ * @param {Number} length The arity for the returned function.
+ * @param {Fn} fn The Fn to curry.
+ * @return {Function} A new, curried function.
+ * @example
+ *
+ * const sumArgs = fn((...args) => sum(args))
  *
  * const curriedAddFourNumbers = curryN(4, sumArgs)
  * const f = curriedAddFourNumbers(1, 2)
@@ -38,10 +57,16 @@ import defn from './defn'
  */
 const curryN = defn(
   'curryN',
+
+  [Number, Fn],
+  (n, fn) => fnCurryArity(fn, n),
+  [Fn, Number],
+  (fn, n) => fnCurryArity(fn, n),
+
   [Number, Function],
-  (n, fn) => functionCurryArity(fn, n),
+  (n, func) => fnCurryArity(definitionToFn(func), n),
   [Function, Number],
-  (fn, n) => functionCurryArity(fn, n)
+  (func, n) => fnCurryArity(definitionToFn(func), n)
 )
 
 export default curryN

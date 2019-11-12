@@ -1,11 +1,5 @@
 import Array from './js/Array'
-import functionArity from './fnArity'
-import functionCopyMeta from './functionCopyMeta'
-
-const functionCopyMetaAndSetArity = (func, source, number) =>
-  // TODO BRN: This can be improved by assigning the meta directly to the `func`
-  // instead of creating another wrapper function
-  functionArity(functionCopyMeta(func, source), number)
+import fnArity from './fnArity'
 
 // NOTE BRN: Originally had a dynamic method produced here but jsperf seems to
 // indicate that simply using an array slice is actually faster
@@ -47,7 +41,6 @@ const aryFunction = (func, number) => {
  * takesOneArg(1, 2)
  * //=> [1, undefined]
  */
-const functionAry = (func, number) =>
-  functionCopyMetaAndSetArity(aryFunction(func, number), func, number)
+const functionAry = (func, number) => fnArity(aryFunction(func, number), func, number)
 
 export default functionAry

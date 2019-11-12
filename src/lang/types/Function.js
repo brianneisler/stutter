@@ -15,7 +15,7 @@ import definitionToType from '../util/definitionToType'
  */
 const Function = defineAny(
   'lang.Function',
-  'A high-level, executable bit of code',
+  'A low-level, Javascript bit of code',
   definitionToType({
     class: _Function,
     is: anyIsFunction,

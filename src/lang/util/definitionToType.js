@@ -56,6 +56,8 @@ const definitionToType = (definition) => {
       }
       next = iter.next()
       if (anyIsObject(next.value)) {
+        // TODO BRN: Map over the object. For each Fn value, replace "Self" in
+        // the parameters of each Fn
         implementation = next.value
       } else {
         throw new Error(

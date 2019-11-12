@@ -1,4 +1,5 @@
-import argumentsMatchToFn from './argumentsMatchToFn'
+import argumentsMatchToFnParameters from './argumentsMatchToFnParameters'
+import fnGetMeta from './fnGetMeta'
 
 const errorNoMatch = () => {
   // TODO BRN: Enhance this error so that we know what we were working with.
@@ -16,13 +17,18 @@ const fnsToMultiFnDispatcher = (fns) => ({
       let matches = []
       for (let idx = 0; idx < length; idx++) {
         const fn = fns[idx]
-        if (fn.dispatcher) {
-          matches = matches.concat(fn.dispatcher.dispatch(args, options))
-        } else {
-          const match = argumentsMatchToFn(args, fn, options)
+        const meta = fnGetMeta(fn)
+        if (meta.dispatcher) {
+          matches = matches.concat(meta.dispatcher.dispatch(args, options))
+        } else if (meta.parameters) {
+          const match = argumentsMatchToFnParameters(args, fn, options)
           if (match) {
             matches.push(match)
           }
+        } else {
+          throw new Error(
+            `Fn must have either a dispatcher or parameters in order to be dispatched to. This fn has neither ${fn}`
+          )
         }
       }
       return matches
@@ -38,15 +44,19 @@ const fnsToMultiFnDispatcher = (fns) => ({
             throw error
           }
         }
-      } else {
+      } else if (fn.parameters) {
         // TODO BRN: Instead of having to loop over and potentially check the
         // same types multiple times, we should generate a decision tree of type checks
         // to perform. The leaves of the tree are the results of the match. This
         // way each type involved only needs to be tested once.
-        const match = argumentsMatchToFn(args, fn, options)
+        const match = argumentsMatchToFnParameters(args, fn, options)
         if (match) {
           return match
         }
+      } else {
+        throw new Error(
+          `Fn must have either a dispatcher or parameters in order to be dispatched to. This fn has neither ${fn}`
+        )
       }
     }
     throw errorNoMatch()

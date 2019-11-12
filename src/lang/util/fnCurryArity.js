@@ -1,5 +1,5 @@
-import functionArity from './fnArity'
-import functionCurry from './fnCurry'
+import fnArity from './fnArity'
+import fnGetMeta from './fnGetMeta'
 
 /**
  * Returns a curried equivalent of the provided function but limited to an arity
@@ -14,18 +14,24 @@ import functionCurry from './fnCurry'
  * @return {Function} A new, curried function.
  * @example
  *
- * const addNumbers = (...numbers) => arrayReduce(
+ * const addNumbers = buildFn((...numbers) => arrayReduce(
  *   (accum, number) => accum + number,
  *   0,
  *   numbers
- * )
+ * ))
  *
- * const addFourNumbers = functionCurryArity(addNumbers, 4)
+ * const addFourNumbers = fnCurryArity(addNumbers, 4)
  * const f = curriedAddFourNumbers(1, 2)
  * const g = f(3)
  * g(4)
  * //=> 10
  */
-const functionCurryArity = (func, number) => functionCurry(functionArity(func, number))
+const fnCurryArity = (fn, number) => {
+  fn = fnArity(fn, number)
+  if (!fnGetMeta(fn).curry) {
+    return fn.update({ curry: true })
+  }
+  return fn
+}
 
-export default functionCurryArity
+export default fnCurryArity

@@ -1,112 +1,113 @@
 import Exception from './js/Exception'
 import Number from '../types/Number'
 import buildException from './buildException'
-import buildFn from './buildFn'
+import definitionToFn from './definitionToFn'
 import fnCall from './fnCall'
+import fnGetMeta from './fnGetMeta'
 
 describe('buildException', () => {
   test('builds a new Expected:Argument:toMatchParameter Exception', () => {
-    const source = buildFn(function(arg1) {
+    const source = definitionToFn(function(arg1) {
       const exception = buildException(source)
         .expected.arg(arg1, 0)
-        .toMatchParameter(source.parameters[0])
+        .toMatchParameter(fnGetMeta(source).parameters[0])
       expect(exception).toBeInstanceOf(Exception)
       expect(exception).toMatchObject({
+        code: 'Expected:Argument:toMatchParameter',
+        expected: {
+          data: {
+            parameter: fnGetMeta(source).parameters[0]
+          },
+          expectation: 'toMatchParameter'
+        },
         source,
         target: {
-          type: 'Argument',
           index: 0,
+          type: 'Argument',
           value: 'foo'
-        },
-        expected: {
-          expectation: 'toMatchParameter',
-          data: {
-            parameter: source.parameters[0]
-          }
-        },
-        code: 'Expected:Argument:toMatchParameter'
+        }
       })
     })
 
-    fnCall(source, 'foo')
+    fnCall(source, null, 'foo')
   })
 
   test('builds a new Expected:Argument:toMatchRegex Exception', () => {
-    const source = buildFn(function(arg1) {
+    const source = definitionToFn(function(arg1) {
       const regex = /^bar$/
       const exception = buildException(source)
         .expected.arg(arg1, 0)
         .toMatchRegex(regex)
       expect(exception).toBeInstanceOf(Exception)
       expect(exception).toMatchObject({
-        source,
-        target: {
-          type: 'Argument',
-          index: 0,
-          value: 'foo'
-        },
+        code: 'Expected:Argument:toMatchRegex',
         expected: {
-          expectation: 'toMatchRegex',
           data: {
             regex
-          }
+          },
+          expectation: 'toMatchRegex'
         },
-        code: 'Expected:Argument:toMatchRegex'
+        source,
+        target: {
+          index: 0,
+          type: 'Argument',
+          value: 'foo'
+        }
       })
     })
 
-    fnCall(source, 'foo')
+    fnCall(source, null, 'foo')
   })
 
   test('builds a new Expected:Arguments:toBeEmpty Exception', () => {
-    const source = buildFn(function() {
+    const source = definitionToFn(function() {
       const exception = buildException(source)
         .expected.arguments(arguments)
         .toBeEmpty()
       expect(exception).toBeInstanceOf(Exception)
       expect(exception).toMatchObject({
+        code: 'Expected:Arguments:toBeEmpty',
+        expected: {
+          expectation: 'toBeEmpty'
+        },
         source,
         target: {
           type: 'Arguments',
           value: arguments
-        },
-        expected: {
-          expectation: 'toBeEmpty'
-        },
-        code: 'Expected:Arguments:toBeEmpty'
+        }
       })
     })
 
-    fnCall(source, 'foo')
+    fnCall(source, null, 'foo')
   })
 
   test('builds a new Expected:Arguments:toBeOfMinLength Exception', () => {
-    const source = buildFn(function() {
+    const source = definitionToFn(function() {
       const exception = buildException(source)
         .expected.arguments(arguments)
         .toBeOfMinLength(2)
       expect(exception).toBeInstanceOf(Exception)
       expect(exception).toMatchObject({
+        code: 'Expected:Arguments:toBeOfMinLength',
+        expected: {
+          data: {
+            length: 2
+          },
+          expectation: 'toBeOfMinLength'
+        },
         source,
         target: {
           type: 'Arguments',
           value: arguments
-        },
-        expected: {
-          expectation: 'toBeOfMinLength',
-          data: {
-            length: 2
-          }
-        },
-        code: 'Expected:Arguments:toBeOfMinLength'
+        }
       })
     })
 
-    fnCall(source, 'foo')
+    fnCall(source, null, 'foo')
   })
 
   test('builds a new Expected:Arguments:toBeOfMinLength Exception', () => {
-    const source = buildFn(
+    const source = definitionToFn(
       function() {
         const returned = 'foo'
         const exception = buildException(source)
@@ -114,23 +115,23 @@ describe('buildException', () => {
           .toMatchReturns(source.returns)
         expect(exception).toBeInstanceOf(Exception)
         expect(exception).toMatchObject({
+          code: 'Expected:Returned:toMatchReturns',
+          expected: {
+            data: {
+              returns: source.returns
+            },
+            expectation: 'toMatchReturns'
+          },
           source,
           target: {
             type: 'Returned',
             value: 'foo'
-          },
-          expected: {
-            expectation: 'toMatchReturns',
-            data: {
-              returns: source.returns
-            }
-          },
-          code: 'Expected:Returned:toMatchReturns'
+          }
         })
       },
       [() => Number]
     )
 
-    fnCall(source, 'foo')
+    fnCall(source, null, 'foo')
   })
 })

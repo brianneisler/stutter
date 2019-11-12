@@ -2,53 +2,53 @@ import FUNCTIONAL_PLACEHOLDER from '../constants/FUNCTIONAL_PLACEHOLDER'
 import Fn from './js/Fn'
 import Number from '../types/Number'
 import String from '../types/String'
-import buildFn from './buildFn'
-import fnCurry from './fnCurry'
+import definitionToFn from './definitionToFn'
 import fnsToMultiFn from './fnsToMultiFn'
+import functionCurry from './functionCurry'
 
-describe('fnCurry', () => {
+describe('functionCurry', () => {
   const __ = FUNCTIONAL_PLACEHOLDER
 
-  test('should return the same function if param length is 0', () => {
-    const fn = buildFn(() => {})
-    const curriedFn = fnCurry(fn)
-    expect(curriedFn).toBe(curriedFn)
+  test('should return the same Fn if param length is 0', () => {
+    const fn = definitionToFn(() => {})
+    const curriedFn = functionCurry(fn)
+    expect(curriedFn).toBe(fn)
   })
 
   test('should support placeholder on position 0', () => {
-    const fn = buildFn(
+    const fn = definitionToFn(
       (argA) => {
         expect(argA).toBe('a')
         return 0
       },
       [String]
     )
-    const curriedFn = fnCurry(fn)
+    const curriedFn = functionCurry(fn)
     const result = curriedFn(__)
     expect(result).toBeInstanceOf(Fn)
     expect(result('a')).toBe(0)
   })
 
   test('should support placeholder replacing placeholder', () => {
-    const func = buildFn(
+    const fn = definitionToFn(
       (argA) => {
         expect(argA).toBe('a')
         return 0
       },
       [String]
     )
-    const cFunc = functionCurry(func)
-    const resultFunc = cFunc(__)
-    expect(resultFunc).toBeInstanceOf(Function)
-    const result2Func = resultFunc(__)
-    expect(result2Func).toBeInstanceOf(Function)
-    const result3Func = result2Func(__)
-    expect(result3Func).toBeInstanceOf(Function)
-    expect(result3Func('a')).toBe(0)
+    const curriedFn = functionCurry(fn)
+    const resultFn = curriedFn(__)
+    expect(resultFn).toBeInstanceOf(Function)
+    const result2Fn = resultFn(__)
+    expect(result2Fn).toBeInstanceOf(Function)
+    const result3Fn = result2Fn(__)
+    expect(result3Fn).toBeInstanceOf(Function)
+    expect(result3Fn('a')).toBe(0)
   })
 
   test('should support more than one placeholder', () => {
-    const func = buildFn(
+    const func = definitionToFn(
       (argA, argB, argC) => {
         expect(argA).toBe('a')
         expect(argB).toBe('b')
@@ -57,8 +57,8 @@ describe('fnCurry', () => {
       },
       [String, String, String]
     )
-    const cFunc = functionCurry(func)
-    const result = cFunc(__, __, __)
+    const curriedFn = functionCurry(func)
+    const result = curriedFn(__, __, __)
     expect(result).toBeInstanceOf(Function)
     const aResult = result('a')
     expect(aResult).toBeInstanceOf(Function)
@@ -67,7 +67,7 @@ describe('fnCurry', () => {
   })
 
   test('should support placeholders mixed with args', () => {
-    const func = functionDefineTypes(
+    const fn = definitionToFn(
       (argA, argB, argC) => {
         expect(argA).toBe('a')
         expect(argB).toBe('b')
@@ -76,75 +76,75 @@ describe('fnCurry', () => {
       },
       [String, String, String]
     )
-    const cFunc = functionCurry(func)
-    const result = cFunc('a', __, 'c')
+    const curriedFn = functionCurry(fn)
+    const result = curriedFn('a', __, 'c')
     expect(result).toBeInstanceOf(Function)
     expect(result('b')).toBe(0)
   })
 
   test('should auto curry parameterized function of length 1', () => {
-    const func = functionDefineTypes((argA) => {
+    const func = definitionToFn((argA) => {
       expect(argA).toBe('a')
       return 0
     })
-    const cFunc = functionCurry(func)
-    expect(cFunc('a')).toBe(0)
+    const curriedFn = functionCurry(func)
+    expect(curriedFn('a')).toBe(0)
   })
 
   test('should auto curry parameterized function of length 2', () => {
-    const func = functionDefineTypes((argA, argB) => {
+    const fn = definitionToFn((argA, argB) => {
       expect(argA).toBe('a')
       expect(argB).toBe('b')
       return 0
     })
-    const cFunc = functionCurry(func)
-    expect(cFunc('a', 'b')).toBe(0)
-    expect(cFunc('a')('b')).toBe(0)
+    const curriedFn = functionCurry(fn)
+    expect(curriedFn('a', 'b')).toBe(0)
+    expect(curriedFn('a')('b')).toBe(0)
   })
 
   test('should auto curry parameterized function of length 3', () => {
-    const func = functionDefineTypes((argA, argB, argC) => {
+    const fn = definitionToFn((argA, argB, argC) => {
       expect(argA).toBe('a')
       expect(argB).toBe('b')
       expect(argC).toBe('c')
       return 0
     })
-    const cFunc = functionCurry(func)
-    expect(cFunc('a', 'b', 'c')).toBe(0)
-    expect(cFunc('a', 'b')('c')).toBe(0)
-    expect(cFunc('a')('b', 'c')).toBe(0)
-    expect(cFunc('a')('b')('c')).toBe(0)
+    const curriedFn = functionCurry(fn)
+    expect(curriedFn('a', 'b', 'c')).toBe(0)
+    expect(curriedFn('a', 'b')('c')).toBe(0)
+    expect(curriedFn('a')('b', 'c')).toBe(0)
+    expect(curriedFn('a')('b')('c')).toBe(0)
   })
 
   test('should auto curry parameterized function of length 4', () => {
-    const func = functionDefineTypes((argA, argB, argC, argD) => {
+    const fn = definitionToFn((argA, argB, argC, argD) => {
       expect(argA).toBe('a')
       expect(argB).toBe('b')
       expect(argC).toBe('c')
       expect(argD).toBe('d')
       return 0
     })
-    const cFunc = functionCurry(func)
-    expect(cFunc('a', 'b', 'c', 'd')).toBe(0)
-    expect(cFunc('a', 'b', 'c')('d')).toBe(0)
-    expect(cFunc('a', 'b')('c', 'd')).toBe(0)
-    expect(cFunc('a', 'b')('c')('d')).toBe(0)
-    expect(cFunc('a')('b', 'c', 'd')).toBe(0)
-    expect(cFunc('a')('b', 'c')('d')).toBe(0)
-    expect(cFunc('a')('b')('c', 'd')).toBe(0)
-    expect(cFunc('a')('b')('c')('d')).toBe(0)
+    const curriedFn = functionCurry(fn)
+    expect(curriedFn('a', 'b', 'c', 'd')).toBe(0)
+    expect(curriedFn('a', 'b', 'c')('d')).toBe(0)
+    expect(curriedFn('a', 'b')('c', 'd')).toBe(0)
+    expect(curriedFn('a', 'b')('c')('d')).toBe(0)
+    expect(curriedFn('a')('b', 'c', 'd')).toBe(0)
+    expect(curriedFn('a')('b', 'c')('d')).toBe(0)
+    expect(curriedFn('a')('b')('c', 'd')).toBe(0)
+    expect(curriedFn('a')('b')('c')('d')).toBe(0)
   })
 
   test('should support placeholder at position 0 in a curried multi function', () => {
-    const func = functionsToMultiFunction([
-      functionDefineTypes(
+    const fn = fnsToMultiFn([
+      definitionToFn(
         (argA) => {
           expect(argA).toBe('a')
           return 0
         },
         [String]
       ),
-      functionDefineTypes(
+      definitionToFn(
         (argA) => {
           expect(argA).toBe(1)
           return 1
@@ -152,23 +152,23 @@ describe('fnCurry', () => {
         [Number]
       )
     ])
-    const cFunc = functionCurry(func)
-    const result = cFunc(__)
+    const curriedFn = functionCurry(fn)
+    const result = curriedFn(__)
     expect(result).toBeInstanceOf(Function)
     expect(result('a')).toBe(0)
     expect(result(1)).toBe(1)
   })
 
   test('should support placeholder replacing placeholder in a curried multi function', () => {
-    const func = functionsToMultiFunction([
-      functionDefineTypes(
+    const fn = fnsToMultiFn([
+      definitionToFn(
         (argA) => {
           expect(argA).toBe('a')
           return 0
         },
         [String]
       ),
-      functionDefineTypes(
+      definitionToFn(
         (argA) => {
           expect(argA).toBe(1)
           return 1
@@ -176,20 +176,20 @@ describe('fnCurry', () => {
         [Number]
       )
     ])
-    const cFunc = functionCurry(func)
-    const resultFunc = cFunc(__)
-    expect(resultFunc).toBeInstanceOf(Function)
-    const result2Func = resultFunc(__)
-    expect(result2Func).toBeInstanceOf(Function)
-    const result3Func = result2Func(__)
-    expect(result3Func).toBeInstanceOf(Function)
-    expect(result3Func('a')).toBe(0)
-    expect(result3Func(1)).toBe(1)
+    const curriedFn = functionCurry(fn)
+    const resultFn = curriedFn(__)
+    expect(resultFn).toBeInstanceOf(Function)
+    const result2Fn = resultFn(__)
+    expect(result2Fn).toBeInstanceOf(Function)
+    const result3Fn = result2Fn(__)
+    expect(result3Fn).toBeInstanceOf(Function)
+    expect(result3Fn('a')).toBe(0)
+    expect(result3Fn(1)).toBe(1)
   })
 
   test('should support more than one placeholder in a curried multi function', () => {
-    const func = functionsToMultiFunction([
-      functionDefineTypes(
+    const fn = fnsToMultiFn([
+      definitionToFn(
         (argA, argB, argC) => {
           expect(argA).toBe('a')
           expect(argB).toBe('b')
@@ -198,7 +198,7 @@ describe('fnCurry', () => {
         },
         [String, String, String]
       ),
-      functionDefineTypes(
+      definitionToFn(
         (arg1, arg2, arg3) => {
           expect(arg1).toBe(1)
           expect(arg2).toBe(2)
@@ -208,8 +208,8 @@ describe('fnCurry', () => {
         [Number, Number, Number]
       )
     ])
-    const cFunc = functionCurry(func)
-    const result = cFunc(__, __, __)
+    const curriedFn = functionCurry(fn)
+    const result = curriedFn(__, __, __)
     expect(result).toBeInstanceOf(Function)
 
     const resultA = result('a')
@@ -224,8 +224,8 @@ describe('fnCurry', () => {
   })
 
   test('should support placeholders mixed with args in a curried multi function', () => {
-    const func = functionsToMultiFunction([
-      functionDefineTypes(
+    const fn = fnsToMultiFn([
+      definitionToFn(
         (argA, argB, argC) => {
           expect(argA).toBe('a')
           expect(argB).toBe('b')
@@ -234,7 +234,7 @@ describe('fnCurry', () => {
         },
         [String, String, String]
       ),
-      functionDefineTypes(
+      definitionToFn(
         (argA, arg2, argC) => {
           expect(argA).toBe('a')
           expect(arg2).toBe(2)
@@ -244,8 +244,8 @@ describe('fnCurry', () => {
         [String, Number, String]
       )
     ])
-    const cFunc = functionCurry(func)
-    const result = cFunc('a', __, 'c')
+    const curriedFn = functionCurry(fn)
+    const result = curriedFn('a', __, 'c')
     expect(result).toBeInstanceOf(Function)
 
     expect(result('b')).toBe(0)
@@ -253,8 +253,8 @@ describe('fnCurry', () => {
   })
 
   test('should execute exact matches in a curried multi function', () => {
-    const func = functionsToMultiFunction([
-      functionDefineTypes(
+    const fn = fnsToMultiFn([
+      definitionToFn(
         (argA, argB) => {
           expect(argA).toBe('a')
           expect(argB).toBe('b')
@@ -262,7 +262,7 @@ describe('fnCurry', () => {
         },
         [String, String]
       ),
-      functionDefineTypes(
+      definitionToFn(
         (argA) => {
           expect(argA).toBe('a')
           return 1
@@ -270,49 +270,49 @@ describe('fnCurry', () => {
         [String]
       )
     ])
-    const cFunc = functionCurry(func)
+    const curriedFn = functionCurry(fn)
 
-    expect(cFunc('a')).toBe(1)
-    expect(cFunc('a', 'b')).toBe(0)
+    expect(curriedFn('a')).toBe(1)
+    expect(curriedFn('a', 'b')).toBe(0)
   })
 
   // NOTE BRN: This test doesn't pass at the moment because extraneous args
   // result in an exact match.
 
-  // test('should execute exact matches with exact number of parameters in a curried multi function', () => {
-  //   const func = functionsToMultiFunction([
-  //     functionDefineTypes(
-  //       (argA) => {
-  //         expect(argA).toBe('a')
-  //         return 0
-  //       },
-  //       [String]
-  //     ),
-  //     functionDefineTypes(
-  //       (argA, argB) => {
-  //         expect(argA).toBe('a')
-  //         expect(argB).toBe('b')
-  //         return 1
-  //       },
-  //       [String, String]
-  //     )
-  //   ])
-  //   const cFunc = functionCurry(func)
-
-  //   expect(cFunc('a')).toBe(0)
-  //   expect(cFunc('a', 'b')).toBe(1)
-  // })
-
-  test('should auto curry multi function of length 1', () => {
-    const func = functionsToMultiFunction([
-      functionDefineTypes(
+  test('should execute exact matches with exact number of parameters in a curried multi function', () => {
+    const fn = fnsToMultiFn([
+      definitionToFn(
         (argA) => {
           expect(argA).toBe('a')
           return 0
         },
         [String]
       ),
-      functionDefineTypes(
+      definitionToFn(
+        (argA, argB) => {
+          expect(argA).toBe('a')
+          expect(argB).toBe('b')
+          return 1
+        },
+        [String, String]
+      )
+    ])
+    const curriedFn = functionCurry(fn)
+
+    expect(curriedFn('a')).toBe(0)
+    expect(curriedFn('a', 'b')).toBe(1)
+  })
+
+  test('should auto curry multi function of length 1', () => {
+    const fn = fnsToMultiFn([
+      definitionToFn(
+        (argA) => {
+          expect(argA).toBe('a')
+          return 0
+        },
+        [String]
+      ),
+      definitionToFn(
         (arg1) => {
           expect(arg1).toBe(1)
           return 1
@@ -320,16 +320,16 @@ describe('fnCurry', () => {
         [Number]
       )
     ])
-    const cFunc = functionCurry(func)
+    const curriedFn = functionCurry(fn)
 
-    expect(cFunc('a')).toBe(0)
+    expect(curriedFn('a')).toBe(0)
 
-    expect(cFunc(1)).toBe(1)
+    expect(curriedFn(1)).toBe(1)
   })
 
   test('should auto curry parameterized function of length 2', () => {
-    const func = functionsToMultiFunction([
-      functionDefineTypes(
+    const fn = fnsToMultiFn([
+      definitionToFn(
         (argA, argB) => {
           expect(argA).toBe('a')
           expect(argB).toBe('b')
@@ -337,7 +337,7 @@ describe('fnCurry', () => {
         },
         [String, String]
       ),
-      functionDefineTypes(
+      definitionToFn(
         (arg1, arg2) => {
           expect(arg1).toBe(1)
           expect(arg2).toBe(2)
@@ -346,18 +346,18 @@ describe('fnCurry', () => {
         [Number, Number]
       )
     ])
-    const cFunc = functionCurry(func)
+    const curriedFn = functionCurry(fn)
 
-    expect(cFunc('a', 'b')).toBe(0)
-    expect(cFunc('a')('b')).toBe(0)
+    expect(curriedFn('a', 'b')).toBe(0)
+    expect(curriedFn('a')('b')).toBe(0)
 
-    expect(cFunc(1, 2)).toBe(1)
-    expect(cFunc(1)(2)).toBe(1)
+    expect(curriedFn(1, 2)).toBe(1)
+    expect(curriedFn(1)(2)).toBe(1)
   })
 
   test('should auto curry parameterized function of length 3', () => {
-    const func = functionsToMultiFunction([
-      functionDefineTypes(
+    const fn = fnsToMultiFn([
+      definitionToFn(
         (argA, argB, argC) => {
           expect(argA).toBe('a')
           expect(argB).toBe('b')
@@ -366,7 +366,7 @@ describe('fnCurry', () => {
         },
         [String, String, String]
       ),
-      functionDefineTypes(
+      definitionToFn(
         (arg1, arg2, arg3) => {
           expect(arg1).toBe(1)
           expect(arg2).toBe(2)
@@ -376,22 +376,22 @@ describe('fnCurry', () => {
         [Number, Number, Number]
       )
     ])
-    const cFunc = functionCurry(func)
+    const curriedFn = functionCurry(fn)
 
-    expect(cFunc('a', 'b', 'c')).toBe(0)
-    expect(cFunc('a', 'b')('c')).toBe(0)
-    expect(cFunc('a')('b', 'c')).toBe(0)
-    expect(cFunc('a')('b')('c')).toBe(0)
+    expect(curriedFn('a', 'b', 'c')).toBe(0)
+    expect(curriedFn('a', 'b')('c')).toBe(0)
+    expect(curriedFn('a')('b', 'c')).toBe(0)
+    expect(curriedFn('a')('b')('c')).toBe(0)
 
-    expect(cFunc(1, 2, 3)).toBe(1)
-    expect(cFunc(1, 2)(3)).toBe(1)
-    expect(cFunc(1)(2, 3)).toBe(1)
-    expect(cFunc(1)(2)(3)).toBe(1)
+    expect(curriedFn(1, 2, 3)).toBe(1)
+    expect(curriedFn(1, 2)(3)).toBe(1)
+    expect(curriedFn(1)(2, 3)).toBe(1)
+    expect(curriedFn(1)(2)(3)).toBe(1)
   })
 
   test('should auto curry parameterized function of length 4', () => {
-    const func = functionsToMultiFunction([
-      functionDefineTypes(
+    const fn = fnsToMultiFn([
+      definitionToFn(
         (argA, argB, argC, argD) => {
           expect(argA).toBe('a')
           expect(argB).toBe('b')
@@ -401,7 +401,7 @@ describe('fnCurry', () => {
         },
         [String, String, String, String]
       ),
-      functionDefineTypes(
+      definitionToFn(
         (arg1, arg2, arg3, arg4) => {
           expect(arg1).toBe(1)
           expect(arg2).toBe(2)
@@ -413,24 +413,24 @@ describe('fnCurry', () => {
       )
     ])
 
-    const cFunc = functionCurry(func)
+    const curriedFn = functionCurry(fn)
 
-    expect(cFunc('a', 'b', 'c', 'd')).toBe(0)
-    expect(cFunc('a', 'b', 'c')('d')).toBe(0)
-    expect(cFunc('a', 'b')('c', 'd')).toBe(0)
-    expect(cFunc('a', 'b')('c')('d')).toBe(0)
-    expect(cFunc('a')('b', 'c', 'd')).toBe(0)
-    expect(cFunc('a')('b', 'c')('d')).toBe(0)
-    expect(cFunc('a')('b')('c', 'd')).toBe(0)
-    expect(cFunc('a')('b')('c')('d')).toBe(0)
+    expect(curriedFn('a', 'b', 'c', 'd')).toBe(0)
+    expect(curriedFn('a', 'b', 'c')('d')).toBe(0)
+    expect(curriedFn('a', 'b')('c', 'd')).toBe(0)
+    expect(curriedFn('a', 'b')('c')('d')).toBe(0)
+    expect(curriedFn('a')('b', 'c', 'd')).toBe(0)
+    expect(curriedFn('a')('b', 'c')('d')).toBe(0)
+    expect(curriedFn('a')('b')('c', 'd')).toBe(0)
+    expect(curriedFn('a')('b')('c')('d')).toBe(0)
 
-    expect(cFunc(1, 2, 3, 4)).toBe(1)
-    expect(cFunc(1, 2, 3)(4)).toBe(1)
-    expect(cFunc(1, 2)(3, 4)).toBe(1)
-    expect(cFunc(1, 2)(3)(4)).toBe(1)
-    expect(cFunc(1)(2, 3, 4)).toBe(1)
-    expect(cFunc(1)(2, 3)(4)).toBe(1)
-    expect(cFunc(1)(2)(3, 4)).toBe(1)
-    expect(cFunc(1)(2)(3)(4)).toBe(1)
+    expect(curriedFn(1, 2, 3, 4)).toBe(1)
+    expect(curriedFn(1, 2, 3)(4)).toBe(1)
+    expect(curriedFn(1, 2)(3, 4)).toBe(1)
+    expect(curriedFn(1, 2)(3)(4)).toBe(1)
+    expect(curriedFn(1)(2, 3, 4)).toBe(1)
+    expect(curriedFn(1)(2, 3)(4)).toBe(1)
+    expect(curriedFn(1)(2)(3, 4)).toBe(1)
+    expect(curriedFn(1)(2)(3)(4)).toBe(1)
   })
 })

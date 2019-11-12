@@ -1,8 +1,8 @@
-import functionCurryArity from './functionCurryArity'
+import fnCurryArity from './fnCurryArity'
 
-describe('functionCurryArity', () => {
+describe('fnCurryArity', () => {
   test('curry of arity 1 should curry method', () => {
-    const func = functionCurryArity((argA) => {
+    const func = fnCurryArity((argA) => {
       expect(argA).toBe('a')
       return 0
     }, 1)
@@ -10,7 +10,7 @@ describe('functionCurryArity', () => {
   })
 
   test('curry of arity 2 should curry method', () => {
-    const func = functionCurryArity((argA, argB) => {
+    const func = fnCurryArity((argA, argB) => {
       expect(argA).toBe('a')
       expect(argB).toBe('b')
       return 0
@@ -20,7 +20,7 @@ describe('functionCurryArity', () => {
   })
 
   test('curry of arity 3 should curry method', () => {
-    const func = functionCurryArity((argA, argB, argC) => {
+    const func = fnCurryArity((argA, argB, argC) => {
       expect(argA).toBe('a')
       expect(argB).toBe('b')
       expect(argC).toBe('c')
@@ -33,7 +33,7 @@ describe('functionCurryArity', () => {
   })
 
   test('curry of arity 4 should curry method', () => {
-    const func = functionCurryArity((argA, argB, argC, argD) => {
+    const func = fnCurryArity((argA, argB, argC, argD) => {
       expect(argA).toBe('a')
       expect(argB).toBe('b')
       expect(argC).toBe('c')
@@ -51,7 +51,7 @@ describe('functionCurryArity', () => {
   })
 
   test('currried function should preserve additional arguments', () => {
-    const func = functionCurryArity((argA, argB, argC) => {
+    const func = fnCurryArity((argA, argB, argC) => {
       expect(argA).toBe('a')
       expect(argB).toBe('b')
       expect(argC).toBe('c')
@@ -61,16 +61,16 @@ describe('functionCurryArity', () => {
   })
 
   test('curried function should have arity set to given number regardless of number of parameters', () => {
-    const func0 = functionCurryArity(() => {}, 1)
+    const func0 = fnCurryArity(() => {}, 1)
     expect(func0.length).toBe(1)
 
-    const func1 = functionCurryArity((arg1) => arg1, 1)
+    const func1 = fnCurryArity((arg1) => arg1, 1)
     expect(func1.length).toBe(1)
 
-    const func2 = functionCurryArity((arg1, arg2) => arg2, 1)
+    const func2 = fnCurryArity((arg1, arg2) => arg2, 1)
     expect(func2.length).toBe(1)
 
-    const func3 = functionCurryArity((arg1, arg2, arg3) => arg3, 2)
+    const func3 = fnCurryArity((arg1, arg2, arg3) => arg3, 2)
     expect(func3.length).toBe(2)
   })
 })

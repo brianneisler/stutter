@@ -9,6 +9,7 @@ describe('lang.types index', () => {
       Boolean: expect.any(Type),
       Buffer: expect.any(Type),
       Date: expect.any(Type),
+      Fn: expect.any(Type),
       Function: expect.any(Type),
       ImmutableList: expect.any(Type),
       ImmutableMap: expect.any(Type),

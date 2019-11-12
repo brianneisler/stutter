@@ -3,9 +3,9 @@ import anyIsFunction from './anyIsFunction'
 import buildExpected from './buildExpected'
 
 const buildException = (source) => {
-  if (!anyIsFunction(source)) {
-    throw new TypeError('Expected source to be a Function')
-  }
+  // if (!anyIsFunction(source)) {
+  //   throw new TypeError('Expected source to be a Function or an Fn')
+  // }
   return {
     expected: {
       arg: (arg, index) =>
@@ -17,8 +17,8 @@ const buildException = (source) => {
               {
                 // TODO BRN: Figure out how to get this type information without
                 // having to be explicit
-                type: 'Argument',
                 index,
+                type: 'Argument',
                 value: arg
               },
               expected

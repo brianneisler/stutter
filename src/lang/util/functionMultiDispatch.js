@@ -1,26 +1,15 @@
-import Fn from './js/Fn'
 import fnApply from './fnApply'
 
-/**
- * Define a multi function using a `Dispatcher`
- *
- * @private
- * @function
- * @since v0.1.0
- * @category lang.util
- * @param {Dispatcher} dispatcher The dispatcher that will dispatch to the function.
- * @return {Fn} The new multi Fn.
- * @example
- *
- */
-const dispatcherToMultiFn = (dispatcher, options = { multi: false, partial: false }) => {
-  //
-  const multiFunc = function() {
+const functionMultiDispatch = function(fn) {
+  const { meta } = fn
+  return function() {
     // TODO BRN: In the event that this results in a no match error, we should
     // try to identify the closest match that was likely intended and do a
     // parameter validation error
-    let match = dispatcher.dispatch(arguments, options)
-    if (options.multi) {
+    console.log('functionMultiDispatch - meta:', meta)
+    let match = fn.dispatcher.dispatch(arguments, meta)
+    console.log('match:', match)
+    if (meta.multi) {
       if (match.length === 0) {
         // TODO BRN: In the event that this results in a no matches, we should
         // try to identify the closest match that was likely intended and do a
@@ -30,11 +19,8 @@ const dispatcherToMultiFn = (dispatcher, options = { multi: false, partial: fals
       // NOTE BRN: In the event of multiple matches, we execute the first match
       match = match[0]
     }
-    return fnApply(match.fn, arguments)
+    return fnApply(match.fn, this, arguments)
   }
-  return new Fn(multiFunc, {
-    dispatcher
-  })
 }
 
-export default dispatcherToMultiFn
+export default functionMultiDispatch

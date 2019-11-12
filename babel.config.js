@@ -1,14 +1,16 @@
 module.exports = {
+  ignore: [/(node_modules)/],
+  plugins: [['@babel/plugin-proposal-object-rest-spread']],
   presets: [
     [
       '@babel/preset-env',
       {
-        useBuiltIns: 'usage',
+        corejs: 3,
         targets: {
-          node: '8'
-        }
+          node: '10'
+        },
+        useBuiltIns: 'usage'
       }
     ]
-  ],
-  plugins: [['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }]]
+  ]
 }

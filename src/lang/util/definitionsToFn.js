@@ -1,9 +1,5 @@
 import definitionsToFns from './definitionsToFns'
 import fnsToMultiFn from './fnsToMultiFn'
-import functionCurry from './fnCurry'
-import functionHandleExceptions from './functionHandleExceptions'
-import functionResolve from './functionResolve'
-import functionTypeCheck from './functionTypeCheck'
 
 /**
  * Converts a definitions Array into an `Fn` function.
@@ -37,10 +33,11 @@ const definitionsToFn = (definitions) => {
     fn = fns[0]
   }
 
-  // TODO BRN: inject these as defined wrappers instead of composing the function
-  return functionCurry(functionTypeCheck(fn), (targetFunc) =>
-    functionHandleExceptions(functionResolve(targetFunc))
-  )
+  return fn.update({
+    curry: true,
+    handleExceptions: true,
+    resolve: true
+  })
 }
 
 export default definitionsToFn

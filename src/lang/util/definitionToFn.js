@@ -1,36 +1,54 @@
 import Any from '../types/Any'
-import Fn from './js/Fn'
 import Parameter from './js/Parameter'
 import anyIsFunction from './anyIsFunction'
 import anyIsType from './anyIsType'
+import buildFn from './buildFn'
 import findTypeForClass from './findTypeForClass'
 import functionGetParameterNames from './functionGetParameterNames'
 
 /**
- * Set `parameters` and `returns` type definitions for the given `fn`
+ * Builds an `Fn` using the given function and `definition`
  *
  * @private
  * @function
  * @since v0.1.0
  * @category lang.util
- * @param {Function} fn The Fn to set the given type definitions on.
- * @param {Array} definition The Parameter and Return type definitions to set on the Fn.
- * @returns {Fn} The function passed in `func` with parameters attached.
+ * @param {Function} func The func to wrap in an `Fn`.
+ * @param {Array} definition The defintion of parameters for this `Fn`
+ * @returns {Function} A function with a Symbol('@@fn') pointing to the new `Fn` instance
  * @example
  *
- * const fn = buildFn((foo, bar) => 123)
- * fnSetDefinition(fn, [Any, String, () => Number])
- * //=> Fn {
- * //   paramters: [
- * //     { name: 'foo', type: Any },
- * //     { name: 'bar', type: String },
- * //   ],
- * //   returns: Number
- * //   func: (foo, bar) => 123
+ * const arrayWrap = definitionToFn(
+ *   (foo) => [ foo ],
+ *   [Any, () => Array]
+ * )
+ *
+ * arrayWrap('foo')
+ * // => [ 'foo' ]
+ *
+ * arrayWrap[SYMBOL_FN]
+ * // => Fn {
+ * //   func: (foo) => [ foo ],
+ * //   meta: {
+ * //     parameters: [
+ * //       Parameter {
+ * //         name: 'foo',
+ * //         type: Any
+ * //       }
+ * //     ],
+ * //     returns: Array
+ * //   }
  * // }
+ *
+ * arrayWrap.length
+ * // => 1
  */
-const fnSetDefinition = (fn, definition = []) => {
-  const parameterNames = functionGetParameterNames(fn.func)
+const definitionToFn = (func, definition = [], meta = {}) => {
+  if (!anyIsFunction(func)) {
+    throw new TypeError('Expected `func` to be a Function')
+  }
+
+  const parameterNames = functionGetParameterNames(func)
   const parameters = []
   let returns = Any
   const length =
@@ -43,7 +61,7 @@ const fnSetDefinition = (fn, definition = []) => {
       if (!anyIsType(type)) {
         if (!anyIsFunction(type)) {
           throw new Error(
-            `fnSetDefinition expected a Type for parameter '${name}' but instead was given ${type}`
+            `definitionToFn expected a Type for parameter '${name}' but instead was given ${type}`
           )
         }
 
@@ -84,11 +102,11 @@ const fnSetDefinition = (fn, definition = []) => {
     }
     index += 1
   }
-  return new Fn(fn.func, {
-    ...fn.meta,
+  return buildFn(func, {
+    ...meta,
     parameters,
     returns
   })
 }
 
-export default fnSetDefinition
+export default definitionToFn

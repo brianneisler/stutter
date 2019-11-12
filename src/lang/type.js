@@ -1,6 +1,6 @@
-import { definitionToType } from './util'
 import Object from './types/Object'
 import def from './def'
+import definitionToType from './util/definitionToType'
 import fn from './fn'
 
 /**

@@ -1,6 +1,9 @@
-import { Function, Number } from './types'
-import { functionAry } from './util'
+import Fn from './types/Fn'
+import Function from './types/Function'
+import Number from './types/Number'
+import definitionToFn from './util/definitionToFn'
 import defn from './defn'
+import fnAry from './util/fnAry'
 
 /**
  * Wraps a function of any arity (including nullary) in a function that accepts
@@ -33,11 +36,15 @@ import defn from './defn'
  * //=> [1, undefined]
  */
 const ary = defn(
-  [Function, Number],
-  (func, number) => functionAry(func, number),
+  [Fn, Number],
+  (fn, number) => fnAry(fn, number),
+  [Number, Fn],
+  (number, fn) => fnAry(fn, number),
 
+  [Function, Number],
+  (func, number) => fnAry(definitionToFn(func), number),
   [Number, Function],
-  (number, func) => functionAry(func, number)
+  (number, func) => fnAry(definitionToFn(func), number)
 )
 
 export default ary

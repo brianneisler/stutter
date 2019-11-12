@@ -1,3 +1,5 @@
+import SYMBOL_FN from '../constants/SYMBOL_FN'
+
 /**
  * Applies the function of a given `Fn`
  *
@@ -10,11 +12,16 @@
  * @returns {Any} The returned value from the execution of `fn`
  * @example
  *
- * const arrayWrap = new Fn((foo, bar) => foo + bar)
+ * const arrayWrap = buildFn((foo, bar) => foo + bar)
  *
- * applyFn(arrayWrap, [ 'bim', 'bop' ])
+ * applyFn(arrayWrap, null, [ 'bim', 'bop' ])
  * // => 'bimbop'
  */
-const fnApply = (fn, args) => fn.func.apply(null, args)
+const fnApply = (fn, context = null, args = []) => {
+  if (fn[SYMBOL_FN]) {
+    fn = fn[SYMBOL_FN]
+  }
+  return fn.apply(context, args)
+}
 
 export default fnApply

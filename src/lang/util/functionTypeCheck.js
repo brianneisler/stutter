@@ -1,6 +1,6 @@
 import anyResolveWith from './anyResolveWith'
 import buildException from './buildException'
-import functionCopyMeta from './functionCopyMeta'
+import fnGetMeta from './fnGetMeta'
 
 /**
  * Wrap the given function with another function that will check the types of
@@ -15,62 +15,58 @@ import functionCopyMeta from './functionCopyMeta'
  * @example
  *
  * const func = functionTypeCheck(
- *   functionDefineTypes((foo, bar) => {}, [Number, Number])
+ *   definitionToFn((foo, bar) => {}, [Number, Number])
  * )
  * func('foo', 123)
  * //=> throws TypeError
  *
  * const func = functionTypeCheck(
- *   functionDefineTypes(() => 'foo', [() => Number])
+ *   definitionToFn(() => 'foo', [() => Number])
  * )
  * func()
  * //=> throws TypeError
  */
-const functionTypeCheck = (func) => {
-  if (func.parameters || func.returns) {
-    const override = function() {
-      const { parameters } = func
-      if (parameters) {
-        const { length } = arguments
-        let idx = 0
-        let done = false
-        while (idx < length && !done) {
-          const arg = arguments[idx]
-          const parameter = parameters[idx]
-          if (parameter) {
-            if (!parameter.type.is(arg)) {
-              throw buildException(func)
-                .expected.arg(arguments, idx)
-                .toMatchParameter(parameter)
-            }
-          } else {
-            done = true
+const functionTypeCheck = (fn, func) => {
+  const meta = fnGetMeta(fn)
+  const { parameters, partial, returns } = meta
+  return function() {
+    if (parameters) {
+      const { length } = arguments
+      let idx = 0
+      let done = false
+      while (idx < length && !done) {
+        const arg = arguments[idx]
+        const parameter = parameters[idx]
+        if (parameter) {
+          if (!parameter.type.is(arg)) {
+            throw buildException(fn)
+              .expected.arg(arguments, idx)
+              .toMatchParameter(parameter)
           }
-          idx += 1
+        } else {
+          done = true
         }
-        if (arguments.length < parameters.length) {
-          throw buildException(func)
-            .expected.arguments(arguments)
-            .toBeOfMinLength(parameters.length)
-        }
+        idx += 1
       }
-      const returned = func.apply(this, arguments)
-      const { returns } = func
-      if (returns) {
-        return anyResolveWith(returned, (resolvedReturned) => {
-          if (!returns.is(resolvedReturned)) {
-            throw buildException(func)
-              .expected.returned(resolvedReturned)
-              .toMatchReturns(func.returns)
-          }
-          return resolvedReturned
-        })
+      if (arguments.length < parameters.length && !partial) {
+        throw buildException(fn)
+          .expected.arguments(arguments)
+          .toBeOfMinLength(parameters.length)
       }
-      return returned
     }
-    return functionCopyMeta(override, func)
+    const returned = func.apply(this, arguments)
+    if (returns) {
+      return anyResolveWith(returned, (resolvedReturned) => {
+        if (!returns.is(resolvedReturned)) {
+          throw buildException(fn)
+            .expected.returned(resolvedReturned)
+            .toMatchReturns(returns)
+        }
+        return resolvedReturned
+      })
+    }
+    return returned
   }
-  return func
 }
 
 export default functionTypeCheck

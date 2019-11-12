@@ -1,6 +1,6 @@
 import Number from '../types/Number'
 import String from '../types/String'
-import functionDefineTypes from './functionDefineTypes'
+import definitionToFn from './definitionToFn'
 import functionToParameterNames from './functionToParameterNames'
 
 describe('functionToParameterNames', () => {
@@ -17,7 +17,7 @@ describe('functionToParameterNames', () => {
   })
 
   it('returns an array of Parameters based on the param names for a function that is parameterized', () => {
-    const func = functionDefineTypes(
+    const func = definitionToFn(
       function test(foo, bar) {
         return bar
       },

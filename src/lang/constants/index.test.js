@@ -5,6 +5,7 @@ describe('constants index', () => {
       DEBURRED_LETTERS: expect.any(Object),
       DEFAULT_NAMESPACE_NAME: expect.any(String),
       FUNCTIONAL_PLACEHOLDER: expect.any(Object),
+      FUNCTION_IDENTITY: expect.any(Function),
       INFINITY: expect.any(Number),
       ITERATOR_END: expect.any(String),
       ITERATOR_START: expect.any(String),

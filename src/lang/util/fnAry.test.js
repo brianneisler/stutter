@@ -1,8 +1,8 @@
-import functionAry from './functionAry'
+import fnAry from './fnAry'
 
 describe('functionAry', () => {
   test('sets arity of 0', () => {
-    const func = functionAry((argA, argB, argC) => {
+    const func = fAry((argA, argB, argC) => {
       expect(argA).toBe(undefined)
       expect(argB).toBe(undefined)
       expect(argC).toBe(undefined)

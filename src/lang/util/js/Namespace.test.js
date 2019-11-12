@@ -8,8 +8,8 @@ describe('js:Namespace', () => {
       const instance = new Namespace('foo')
       expect(instance).toBeInstanceOf(Namespace)
       expect(instance).toEqual({
-        name: 'foo',
-        mappings: ImmutableMap()
+        mappings: ImmutableMap(),
+        name: 'foo'
       })
     })
   })
@@ -24,10 +24,10 @@ describe('js:Namespace', () => {
       )
       expect(instance).toBeInstanceOf(Namespace)
       expect(instance).toEqual({
-        name: 'foo',
         mappings: ImmutableMap({
           bar: 'value'
-        })
+        }),
+        name: 'foo'
       })
     })
   })
@@ -72,8 +72,8 @@ describe('js:Namespace', () => {
       const instance = new Namespace(
         'foo',
         ImmutableMap({
-          foo: 123,
-          bar: 'abc'
+          bar: 'abc',
+          foo: 123
         })
       )
       const result = instance.filter((value) => typeof value === 'number')
