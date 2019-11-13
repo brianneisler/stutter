@@ -8,6 +8,7 @@ describe('lang.util index', () => {
     mod = objectOmitProps(mod, ['freeGlobal', 'nodeTypes', 'root'])
 
     expect(mod).toEqualPrintDiff({
+      anyAlways: expect.any(Function),
       anyIsArguments: expect.any(Function),
       anyIsArray: expect.any(Function),
       anyIsArrayBuffer: expect.any(Function),
@@ -104,6 +105,7 @@ describe('lang.util index', () => {
       arrayLikeSlice: expect.any(Function),
       arrayLikeToIterator: expect.any(Function),
       arrayMap: expect.any(Function),
+      arrayReduce: expect.any(Function),
       arraySlice: expect.any(Function),
       asciiSize: expect.any(Function),
       asciiToArray: expect.any(Function),
@@ -123,6 +125,7 @@ describe('lang.util index', () => {
       filterTypesForProtocol: expect.any(Function),
       findTypeForClass: expect.any(Function),
       fnArity: expect.any(Function),
+      fnAry: expect.any(Function),
       fnCurryArity: expect.any(Function),
       fnGetMeta: expect.any(Function),
       fnsToMultiFn: expect.any(Function),
@@ -158,6 +161,7 @@ describe('lang.util index', () => {
       objectGetPrototypeOf: expect.any(Function),
       objectHasOwnProperty: expect.any(Function),
       objectKeys: expect.any(Function),
+      objectMap: expect.any(Function),
       objectOmitProps: expect.any(Function),
       objectPickProps: expect.any(Function),
       objectToIterator: expect.any(Function),
@@ -165,6 +169,7 @@ describe('lang.util index', () => {
       objectValues: expect.any(Function),
       propGetNamespace: expect.any(Function),
       propSetNamespace: expect.any(Function),
+      protocolNameToDispatcher: expect.any(Function),
       reflectOwnKeys: expect.any(Function),
       regExpClone: expect.any(Function),
       setForEach: expect.any(Function),

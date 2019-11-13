@@ -1,9 +1,11 @@
-import { Any, Function } from './types'
-import { anyResolveAllWith } from './util'
+import Any from './types/Any'
+import Fn from './types/Fn'
+import Function from './types/Function'
+import anyResolveAllWith from './util/anyResolveAllWith'
 import defn from './defn'
 
 /**
- * Resolves all async values in an array or object and executes the given with the result
+ * Resolves all async values in an Iterable data object and executes the given `fn` with the result
  *
  * Auto curried for placeholder support.
  *
@@ -45,6 +47,15 @@ import defn from './defn'
  * // => 'foo'
  */
 const allWith = defn(
+  'allWith',
+  'Resolves all async values in an Iterable data object and executes the given `fn` with the result',
+
+  [Any, Fn],
+  (any, fn) => anyResolveAllWith(any, fn),
+
+  [Fn, Any],
+  (fn, any) => anyResolveAllWith(any, fn),
+
   [Any, Function],
   (any, func) => anyResolveAllWith(any, func),
 

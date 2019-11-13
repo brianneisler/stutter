@@ -3,16 +3,16 @@ import { anyResolveAll } from './util'
 import defn from './defn'
 
 /**
- * Resolves all async values in an `Array` or `Object`
+ * Resolves all async values in an `Iterbale` data object.
  *
  * Auto curried for placeholder support.
  *
  * @function
  * @since v0.1.0
  * @category lang
- * @param {*} any The `Array` or `Object` whose values should be resolved. If
- * value is not an `Object` or `Array`, the value is simply resolved to itself.
- * @returns {*} The `Array` or `Object` with its values resolved.
+ * @param {*} any The data object whose values should be resolved. If
+ * value is not iterable, the value is simply resolved to itself.
+ * @returns {*} A clone of the data object with its values resolved.
  * @example
  *
  * const nums = [
@@ -37,7 +37,7 @@ import defn from './defn'
  * await all(123)
  * //=> 123
  */
-const all = defn('all', 'Resolves all async values in an `Array` or `Object`', [Any], (any) =>
+const all = defn('all', 'Resolves all resolvable values in a data object', [Any], (any) =>
   anyResolveAll(any)
 )
 

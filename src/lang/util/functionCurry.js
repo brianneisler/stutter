@@ -164,7 +164,6 @@ const curryMultiFn = (fn) => {
  * //=> 10
  */
 const functionCurry = (fn, handler) => {
-  // If we're already curried, don't curry again
   const { dispatcher, parameters } = fnGetMeta(fn)
   if (dispatcher) {
     return curryMultiFn(fn)

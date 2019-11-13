@@ -13,17 +13,17 @@ const Type = defineAny(
   definitionToType({
     class: _Type,
     is: (any) => anyIsType(any),
-    to: () => {
-      throw new Error('Cannot convert Type to any other type')
-    },
-
     protocols: [
       Typed,
       {
         is: fn([Self, Any], (self, any, ...rest) => self.is(any, ...rest)),
         to: fn([Self, Any], (self, any) => self.to(any))
       }
-    ]
+    ],
+
+    to: () => {
+      throw new Error('Cannot convert Type to any other type')
+    }
   })
 )
 

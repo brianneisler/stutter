@@ -1,31 +1,21 @@
-import Array from './js/Array'
 import fnArity from './fnArity'
 
-// NOTE BRN: Originally had a dynamic method produced here but jsperf seems to
-// indicate that simply using an array slice is actually faster
-// https://jsperf.com/direct-call-vs-slice
-const aryFunction = (func, number) => {
-  return function() {
-    return func.apply(this, Array.prototype.slice.call(arguments, 0, number))
-  }
-}
-
 /**
- * Wraps a function of any arity (including nullary) in a function that accepts
- * exactly `number` parameters. Any extraneous parameters will not be passed to
- * the supplied function.
+ * Returns a clone of Fn that sets the `ary` to the given `number`. The new Fn
+ * will accept exactly `number` parameters. Any extraneous parameters will not
+ * be passed to the supplied Fn and any extraneous Parameters will be removed
+ * from the Fn's meta data.
  *
  * @private
  * @function
  * @since v0.1.0
  * @category lang.util
- * @param {Function} func The function to wrap.
- * @param {Number} number The desired arity of the new function.
- * @returns {Function} A new function wrapping `func`. The new function is
- * guaranteed to be of arity `number`.
+ * @param {Fn} fn The Fn to set the ary of.
+ * @param {Number} number The desired arity of the new Fn.
+ * @returns {Fn} A new `Fn`. The new `Fn` is guaranteed to be of arity `number`.
  * @example
  *
- * const takesTwoArgs = (a, b) => [a, b]
+ * const takesTwoArgs = fn((a, b) => [a, b])
  *
  * takesTwoArgs.length
  * //=> 2
@@ -33,14 +23,17 @@ const aryFunction = (func, number) => {
  * takesTwoArgs(1, 2)
  * //=> [1, 2]
  *
- * const takesOneArg = nAry(1, takesTwoArgs)
+ * const takesOneArg = fnAry(1, takesTwoArgs)
  * takesOneArg.length
  * //=> 1
  *
- * // Only `n` arguments are passed to the wrapped function
+ * // Only `number` arguments are passed to the new `Fn`
  * takesOneArg(1, 2)
  * //=> [1, undefined]
  */
-const functionAry = (func, number) => fnArity(aryFunction(func, number), func, number)
+const fnAry = (fn, number) =>
+  fnArity(fn, number).update({
+    ary: number
+  })
 
-export default functionAry
+export default fnAry

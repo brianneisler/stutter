@@ -1,4 +1,6 @@
 import SYMBOL_FN from '../../constants/SYMBOL_FN'
+import anyIsNumber from '../anyIsNumber'
+import functionAry from '../functionAry'
 import functionCurry from '../functionCurry'
 import functionHandleExceptions from '../functionHandleExceptions'
 import functionMemoize from '../functionMemoize'
@@ -38,7 +40,13 @@ const buildFnHandler = function(fn) {
   }
 
   if (meta.parameters || meta.returns) {
-    handler = functionTypeCheck(fn, handler)
+    // HACK BRN: Need this so that the type check execptions know what name to
+    // call this function
+    objectDefineProperty(handler, SYMBOL_FN, {
+      configurable: true,
+      value: fn
+    })
+    handler = functionTypeCheck(handler, fn.meta)
   }
 
   if (meta.curry) {
@@ -51,6 +59,10 @@ const buildFnHandler = function(fn) {
 
   if (meta.resolve) {
     handler = functionResolve(handler)
+  }
+
+  if (anyIsNumber(meta.ary)) {
+    handler = functionAry(handler, meta.ary)
   }
 
   if (meta.handleExceptions) {

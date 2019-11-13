@@ -3,11 +3,14 @@
 Stutter is built with Javascript in mind but is heavily inspired by Clojure.
 Stutter aims to make functional programming easier by introducing support for functional
 concepts while still maintaining direct compatibility with native javascript.
-There are some conceptual differences that you should be aware of while working
-with `stutter`
+
+
 
 
 ## Concepts
+
+There are some conceptual differences that you should be aware of while working
+with `stutter`
 
 ### Falsy
 
@@ -30,6 +33,9 @@ null
 undefined
 NaN
 ```
+
+
+
 
 
 ## Methods by comparison
@@ -138,7 +144,7 @@ Evaluates multiple expressions and returns the last value. Returns `null` if no 
 
 **stutter**
 ```js
-(, $(print, "Success!")
+$.do($(print, "Success!")
   "By Zeus's hammer!")
 
 ```
@@ -155,12 +161,8 @@ Evaluates multiple expressions and returns the last value. Returns `null` if no 
 
 **stutter**
 ```js
-$(when, true,
+when(true,
   $(println, "Success!"),
-  "abra cadabra")
-
-$when(true,
-  $println("Success!"),
   "abra cadabra")
 ```
 
@@ -243,20 +245,20 @@ Evaluates expressions one at a time, from left to right. Returns the first value
 
 **stutter**
 ```js
-$or(null, null)    // => null
-$or(false, null)   // => null
-$or(true, nil)     // => true
+or(null, null)    // => null
+or(false, null)   // => null
+or(true, nil)     // => true
 
 // or doesn't evaluate if the first value is true
-$or(true, $println("foo"))   // => true
+or(true, println("foo"))   // => true
 
 // order matters
-$or($println("foo"), true)   // => > 'foo' true
+or(println("foo"), true)   // => > 'foo' true
 
 // does not coerce a given value to a boolean true, returns the value
-$or(false, 42)        // => 42
-$or(false, 42, 9999)  // => 42
-$or(42, 9999)         // => 42
+or(false, 42)        // => 42
+or(false, 42, 9999)  // => 42
+or(42, 9999)         // => 42
 ```
 
 
@@ -276,17 +278,11 @@ Evaluates expressions one at a time, from left to right. Returns the first value
 
 **stutter**
 ```js
-$(and, true, true)  // => true
-$.and(true, true)    // => true
 and(true, true)     // true
 
-$(and, true, false) // => false
-$and(true, false)   // => false
 and(true, false)    // false
 
-$(and, null, false) // => null
-$and(null, false)   // => null
-$and(null, false)   // null
+and(null, false)    // null
 ```
 
 
@@ -301,8 +297,6 @@ Creates a global var in the current namespace with the given name.
 
 **stutter**
 ```js
-$(def, 'myVal', 5)
-$def('myVal', 5)
 def('myVal', 5)
 ```
 
@@ -346,17 +340,9 @@ Thread last macro
 
 **stutter**
 ```js
-last._(range(10))
+_last(range(10)
   .filter(odd)
-  .map(pow(_, 2))
-
-_(person,
-  assoc('.hairColor', 'gray'),
-  update('.age', inc))
-
-$._(person,
-  assoc('.hairColor', 'gray'),
-  update('.age', inc))
+  map(pow(_, 2))
 ```
 
 NOTE: Thread gets run before every invocation of the next function

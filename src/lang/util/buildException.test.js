@@ -1,5 +1,5 @@
 import Exception from './js/Exception'
-import Number from '../types/Number'
+import String from '../types/String'
 import buildException from './buildException'
 import definitionToFn from './definitionToFn'
 import fnCall from './fnCall'
@@ -106,7 +106,7 @@ describe('buildException', () => {
     fnCall(source, null, 'foo')
   })
 
-  test('builds a new Expected:Arguments:toBeOfMinLength Exception', () => {
+  test('builds a new Expected:Returned:ToMatchReturns Exception', () => {
     const source = definitionToFn(
       function() {
         const returned = 'foo'
@@ -128,8 +128,9 @@ describe('buildException', () => {
             value: 'foo'
           }
         })
+        return returned
       },
-      [() => Number]
+      [() => String]
     )
 
     fnCall(source, null, 'foo')

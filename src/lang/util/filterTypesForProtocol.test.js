@@ -29,20 +29,39 @@ describe('filterTypesForProtocol', () => {
 
     const StringType = new Type({
       class: String,
-      protocols: ImmutableMap([
-        [
-          BarProtocol,
-          {
-            'foo.bar': fn([Self, NumberType], () => {})
-          }
-        ]
-      ])
+      protocols: [
+        BarProtocol,
+        {
+          'foo.bar': fn([Self, NumberType], () => {})
+        }
+      ]
     })
 
     const namespaces = ImmutableMap({
+      bar: new Namespace(
+        'bar',
+        ImmutableMap({
+          [456]: {
+            description: '',
+            value: 456
+          },
+          bar: {
+            description: '',
+            value: 'bar'
+          }
+        })
+      ),
       foo: new Namespace(
         'foo',
         ImmutableMap({
+          [123]: {
+            description: '',
+            value: 123
+          },
+          BarProtocol: {
+            description: '',
+            value: BarProtocol
+          },
           Number: {
             description: '',
             value: NumberType
@@ -50,27 +69,6 @@ describe('filterTypesForProtocol', () => {
           String: {
             description: '',
             value: StringType
-          },
-          BarProtocol: {
-            description: '',
-            value: BarProtocol
-          },
-          [123]: {
-            description: '',
-            value: 123
-          }
-        })
-      ),
-      bar: new Namespace(
-        'bar',
-        ImmutableMap({
-          bar: {
-            description: '',
-            value: 'bar'
-          },
-          [456]: {
-            description: '',
-            value: 456
           }
         })
       )

@@ -10,7 +10,7 @@ import Object from './js/Object'
  * @function
  * @since v0.1.0
  * @category lang.util
- * @param {Object} obj The object to extract properties from
+ * @param {Object} object The object to extract properties from
  * @returns {Array} An array of the object's own properties.
  * @example
  *

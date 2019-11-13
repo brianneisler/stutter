@@ -7,10 +7,11 @@ describe('buildMultiFn', () => {
   test('generates a simple multi function from the given disptacher', () => {
     const testFn = definitionToFn(jest.fn(() => {}))
     const dispatcher = {
-      dispatch: (args, options) => {
+      dispatch: (args, meta) => {
         expect(args[0]).toBe('foo')
         expect(args[1]).toBe('bar')
-        expect(options).toEqual({
+        expect(meta).toEqual({
+          dispatcher,
           multi: false,
           partial: false
         })
@@ -57,10 +58,11 @@ describe('buildMultiFn', () => {
   test('handles an array when the multi option is true', () => {
     const testFn = definitionToFn(jest.fn(() => {}))
     const dispatcher = {
-      dispatch: (args, options) => {
+      dispatch: (args, meta) => {
         expect(args[0]).toBe('foo')
         expect(args[1]).toBe('bar')
-        expect(options).toEqual({
+        expect(meta).toEqual({
+          dispatcher,
           multi: true,
           partial: false
         })

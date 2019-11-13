@@ -1,6 +1,5 @@
 import anyResolveWith from './anyResolveWith'
 import buildException from './buildException'
-import fnGetMeta from './fnGetMeta'
 
 /**
  * Wrap the given function with another function that will check the types of
@@ -10,25 +9,37 @@ import fnGetMeta from './fnGetMeta'
  * @function
  * @since v0.1.0
  * @category lang.util
- * @param {Function} func The function to wrap.
+ * @param {Function} func The function to type check.
+ * @param {{ parameters: Array<Parameter>, partial: boolean, returns: Type }} meta The meta values to use to type check
  * @return {Function} The new type checked function.
  * @example
  *
  * const func = functionTypeCheck(
- *   definitionToFn((foo, bar) => {}, [Number, Number])
+ *   (foo, bar) => {},
+ *   {
+ *     parameters: [
+ *       new Parameter('foo', Number),
+ *       new Parameter('bar', Number)
+ *     ]
+ *   }
  * )
  * func('foo', 123)
  * //=> throws TypeError
  *
  * const func = functionTypeCheck(
- *   definitionToFn(() => 'foo', [() => Number])
+ *   () => 'foo',
+ *   {
+ *     returns: Number
+ *   }
  * )
  * func()
  * //=> throws TypeError
  */
-const functionTypeCheck = (fn, func) => {
-  const meta = fnGetMeta(fn)
+const functionTypeCheck = (func, meta) => {
   const { parameters, partial, returns } = meta
+  if (!parameters && !returns) {
+    return func
+  }
   return function() {
     if (parameters) {
       const { length } = arguments
@@ -39,7 +50,7 @@ const functionTypeCheck = (fn, func) => {
         const parameter = parameters[idx]
         if (parameter) {
           if (!parameter.type.is(arg)) {
-            throw buildException(fn)
+            throw buildException(func)
               .expected.arg(arguments, idx)
               .toMatchParameter(parameter)
           }
@@ -49,7 +60,7 @@ const functionTypeCheck = (fn, func) => {
         idx += 1
       }
       if (arguments.length < parameters.length && !partial) {
-        throw buildException(fn)
+        throw buildException(func)
           .expected.arguments(arguments)
           .toBeOfMinLength(parameters.length)
       }
@@ -58,7 +69,7 @@ const functionTypeCheck = (fn, func) => {
     if (returns) {
       return anyResolveWith(returned, (resolvedReturned) => {
         if (!returns.is(resolvedReturned)) {
-          throw buildException(fn)
+          throw buildException(func)
             .expected.returned(resolvedReturned)
             .toMatchReturns(returns)
         }

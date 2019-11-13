@@ -1,5 +1,56 @@
 import ImmutableMap from './ImmutableMap'
+import SYMBOL_ITERATOR from '../../constants/SYMBOL_ITERATOR'
 import anyIsFunction from '../anyIsFunction'
+import anyIsObject from '../anyIsObject'
+import anyIsProtocol from '../anyIsProtocol'
+import objectMap from '../objectMap'
+
+const validateProtocols = (protocols) => {
+  // TODO BRN: validate that the protocols have been implemented correctly
+  // for each protocol implementation
+  //   - get the protocol
+  //   - ensure all required methods have been implemented
+  //   - ensure each method's types match the expected types
+  return !!protocols
+}
+
+const buildProtocols = (type, definitions) => {
+  let protocolsMap = new ImmutableMap()
+
+  if (definitions) {
+    const iter = definitions[SYMBOL_ITERATOR]()
+
+    let next = iter.next()
+    let protocol
+    let implementation
+    while (!next.done) {
+      protocol = null
+      implementation = null
+      if (anyIsProtocol(next.value)) {
+        protocol = next.value
+      } else {
+        throw new Error(
+          `buildProtocols method expected a Protocol in the Array. Instead found ${next.value}`
+        )
+      }
+      next = iter.next()
+      if (anyIsObject(next.value)) {
+        // Map over the object. For each Fn value, set the "self" meta value
+        implementation = objectMap(next.value, (fn) => fn.update({ self: type }))
+      } else {
+        throw new Error(
+          `buildProtocols method expected an Object in the Array. Instead found ${next.value}`
+        )
+      }
+      protocolsMap = protocolsMap.set(protocol, implementation)
+      next = iter.next()
+    }
+
+    validateProtocols(protocolsMap)
+  }
+
+  return protocolsMap
+}
 
 /**
  * Note: This class is **immutable**
@@ -10,7 +61,7 @@ class Type {
    */
   constructor(definition) {
     this.class = definition.class
-    this.protocols = definition.protocols || ImmutableMap({})
+    this.protocols = buildProtocols(this, definition.protocols)
 
     if (anyIsFunction(definition.is)) {
       this.is = definition.is

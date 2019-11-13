@@ -27,6 +27,7 @@ describe('definitionToFn', () => {
     expect(fn[SYMBOL_FN]).toBeInstanceOf(Fn)
     expect(fn[SYMBOL_FN]).toEqual({
       func,
+      handler: expect.any(Function),
       meta: {
         parameters: [new js.Parameter('n', Number)],
         returns: Number
@@ -60,6 +61,7 @@ describe('definitionToFn', () => {
 
     expect(fn[SYMBOL_FN]).toEqual({
       func,
+      handler: expect.any(Function),
       meta: {
         parameters: [new js.Parameter('n', Number)],
         returns: Number

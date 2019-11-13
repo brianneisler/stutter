@@ -1,18 +1,4 @@
-```
-            $$\                 $$\     $$\                         
-            $$ |                $$ |    $$ |                        
- $$$$$$$\ $$$$$$\   $$\   $$\ $$$$$$\ $$$$$$\    $$$$$$\   $$$$$$\  
-$$  _____|\_$$  _|  $$ |  $$ |\_$$  _|\_$$  _|  $$  __$$\ $$  __$$\ 
-\$$$$$$\    $$ |    $$ |  $$ |  $$ |    $$ |    $$$$$$$$ |$$ |  \__|
- \____$$\   $$ |$$\ $$ |  $$ |  $$ |$$\ $$ |$$\ $$   ____|$$ |      
-$$$$$$$  |  \$$$$  |\$$$$$$  |  \$$$$  |\$$$$  |\$$$$$$$\ $$ |      
-\_______/    \____/  \______/    \____/  \____/  \_______|\__|      
-```
-
-
-Functional programming framework built for Javascript
-
-
+![](docs/assets/stutter.png)
 
 [Website](https://stutter.io) • [Guide](docs/GUIDE.md) • [Full API documentation](docs/API.md)
 
@@ -135,7 +121,7 @@ add(9, 1)
 Stutter's methods are capable of accepting type defintitions so that it knows
 what kind of data a function is meant to handle. 
 This alerts you to problems when the wrong type of data is encountered or when a matching
-  type signature cannot be found.
+  function signature cannot be found.
 
 ```js
 const add = fn(
@@ -332,6 +318,10 @@ _(obj,
 
 **Reusable pipelines**
 ```js
+import { _, invert, set } from 'stutter'
+
+const obj = { a: 1, b: 2 }
+
 const pipeline = _
   .set('c', 3)
   .invert()
@@ -342,6 +332,10 @@ pipeline(obj)
 
 **Pre-filled pipeline**
 ```js
+import { _, invert, set } from 'stutter'
+
+const obj = { a: 1, b: 2 }
+
 const prefilled = _(obj)
 
 prefilled(

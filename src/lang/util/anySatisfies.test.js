@@ -24,20 +24,22 @@ describe('anySatisfies', () => {
     const StringType = new Type({
       class: String,
       is: (any) => typeof any === 'string',
-      protocols: ImmutableMap([
-        [
-          BarProtocol,
-          {
-            'foo.bar': fn([Self, NumberType], () => {})
-          }
-        ]
-      ])
+      protocols: [
+        BarProtocol,
+        {
+          'foo.bar': fn([Self, NumberType], () => {})
+        }
+      ]
     })
 
     const namespaces = ImmutableMap({
       foo: new Namespace(
         'foo',
         ImmutableMap({
+          BarProtocol: {
+            description: '',
+            value: BarProtocol
+          },
           Number: {
             description: '',
             value: NumberType
@@ -45,10 +47,6 @@ describe('anySatisfies', () => {
           String: {
             description: '',
             value: StringType
-          },
-          BarProtocol: {
-            description: '',
-            value: BarProtocol
           }
         })
       )
@@ -73,20 +71,22 @@ describe('anySatisfies', () => {
     const StringType = new Type({
       class: String,
       is: (any) => typeof any === 'string',
-      protocols: ImmutableMap([
-        [
-          BarProtocol,
-          {
-            'foo.bar': fn([Self, NumberType], () => {})
-          }
-        ]
-      ])
+      protocols: [
+        BarProtocol,
+        {
+          'foo.bar': fn([Self, NumberType], () => {})
+        }
+      ]
     })
 
     const namespaces = ImmutableMap({
       foo: new Namespace(
         'foo',
         ImmutableMap({
+          BarProtocol: {
+            description: '',
+            value: BarProtocol
+          },
           Number: {
             description: '',
             value: NumberType
@@ -94,10 +94,6 @@ describe('anySatisfies', () => {
           String: {
             description: '',
             value: StringType
-          },
-          BarProtocol: {
-            description: '',
-            value: BarProtocol
           }
         })
       )

@@ -1,14 +1,11 @@
-import curry from './curry'
+import Any from './types/Any'
+import Fn from './types/Fn'
+import anyAlways from './util/anyAlways'
 import defn from './defn'
-
-const baseAlways = (value) => {
-  return function() {
-    return value
-  }
-}
+import fn from './fn'
 
 /**
- * Returns a function that always returns the given value. Note that for non-primitives the value returned is a reference to the original value.
+ * Returns an `Fn` that always returns the given value. Note that for non-primitives the value returned is a reference to the original value.
  *
  * Aliases: [`constantly`](#constantly)
  *
@@ -20,10 +17,15 @@ const baseAlways = (value) => {
  * @example
  *
  * const foo = always('foo')
- * foo() //=> 'foo'
+ * foo()
+ * //=> 'foo'
  */
-const always = curry(defn('always', baseAlways))
+const always = defn(
+  'always',
+  'Returns an `Fn` that always returns the given value. Note that for non-primitives the value returned is a reference to the original value.',
+
+  [Any, () => Fn],
+  (value) => fn([() => Any], anyAlways(value))
+)
 
 export default always
-
-export { baseAlways }

@@ -6,9 +6,7 @@ const functionMultiDispatch = function(fn) {
     // TODO BRN: In the event that this results in a no match error, we should
     // try to identify the closest match that was likely intended and do a
     // parameter validation error
-    console.log('functionMultiDispatch - meta:', meta)
     let match = fn.dispatcher.dispatch(arguments, meta)
-    console.log('match:', match)
     if (meta.multi) {
       if (match.length === 0) {
         // TODO BRN: In the event that this results in a no matches, we should

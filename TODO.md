@@ -5,8 +5,10 @@ FOCUS
   exactly where the problems are and tell the developer why they are happening.
 
 TASKS
+- [ ] fix `functionCurry` tests (might need to change functionCurry signature)
 - [ ] Implement protocol support for `Fn`s
-- 
+  - [ ] update `Fn` code to support the new `self` property. It should use this
+    in type checking as well currying (anywhere that `Parameter`s are used) 
 
 
 - [ ] refactor all methods in lang folder to use `defn`

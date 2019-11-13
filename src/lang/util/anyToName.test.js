@@ -1,3 +1,4 @@
+import Fn from './js/Fn'
 import anyToName from './anyToName'
 
 describe('anyToName', () => {
@@ -39,5 +40,10 @@ describe('anyToName', () => {
       }
     }
     expect(anyToName(obj)).toBe('foo')
+  })
+
+  it('converts an Fn to name contained in meta', () => {
+    const fn = Fn.build(() => {}, { name: 'foo' })
+    expect(anyToName(fn)).toBe('foo')
   })
 })

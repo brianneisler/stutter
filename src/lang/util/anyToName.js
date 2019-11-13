@@ -1,3 +1,4 @@
+import SYMBOL_FN from '../constants/SYMBOL_FN'
 import SYMBOL_META from '../constants/SYMBOL_META'
 import anyIsFunction from './anyIsFunction'
 import anyIsString from './anyIsString'
@@ -29,6 +30,9 @@ const anyToName = (any) => {
   }
   if (any[SYMBOL_META]) {
     return any[SYMBOL_META].name
+  }
+  if (any[SYMBOL_FN]) {
+    return any[SYMBOL_FN].meta.name
   }
   // TODO BRN: Need to figure out how to reverse source maps here to get the
   // correct name if it's been obfuscated

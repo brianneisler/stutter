@@ -6,13 +6,13 @@ describe('js:Type', () => {
     test('correctly constructs the Type instance', () => {
       const testDef = {
         class: class {},
-        protocols: new ImmutableMap()
+        protocols: []
       }
       const instance = new Type(testDef)
       expect(instance).toBeInstanceOf(Type)
       expect(instance).toEqual({
         class: testDef.class,
-        protocols: testDef.protocols
+        protocols: new ImmutableMap()
       })
     })
 
@@ -31,8 +31,8 @@ describe('js:Type', () => {
     test('correctly sets the is method', () => {
       const testDef = {
         class: class {},
-        protocols: new ImmutableMap(),
-        is: () => {}
+        is: () => {},
+        protocols: []
       }
       const instance = new Type(testDef)
       expect(instance.is).toBe(testDef.is)
@@ -41,7 +41,7 @@ describe('js:Type', () => {
     test('correctly sets the to method', () => {
       const testDef = {
         class: class {},
-        protocols: new ImmutableMap(),
+        protocols: [],
         to: () => {}
       }
       const instance = new Type(testDef)
@@ -53,7 +53,7 @@ describe('js:Type', () => {
     it("throws if the `is` method is used when it hasn't been set", () => {
       const instance = new Type({
         class: class {},
-        protocols: new ImmutableMap()
+        protocols: []
       })
 
       expect(() => {
@@ -66,7 +66,7 @@ describe('js:Type', () => {
     it("throws if the `to` method is used when it hasn't been set", () => {
       const instance = new Type({
         class: class {},
-        protocols: new ImmutableMap()
+        protocols: []
       })
 
       expect(() => {
