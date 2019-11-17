@@ -1,3 +1,4 @@
+import SYMBOL_FN from '../constants/SYMBOL_FN'
 import objectDefineProperty from './objectDefineProperty'
 
 /**
@@ -18,12 +19,13 @@ import objectDefineProperty from './objectDefineProperty'
  * result.length
  * //=> 2
  */
-const functionDefineLength = (func, length) => {
-  objectDefineProperty(func, 'length', {
+const functionDefineSymbolFn = (func, fn) => {
+  objectDefineProperty(func, SYMBOL_FN, {
     configurable: true,
-    value: length
+    value: fn
   })
+
   return func
 }
 
-export default functionDefineLength
+export default functionDefineSymbolFn

@@ -1,17 +1,17 @@
 import fnArity from './fnArity'
-import fnGetMeta from './fnGetMeta'
+import fnCurry from './fnCurry'
 
 /**
- * Returns a curried equivalent of the provided function but limited to an arity
+ * Returns a curried equivalent of the provided `Fn` but limited to an arity
  * of `number`.
  *
  * @private
  * @function
  * @since v0.1.0
  * @category lang.util
- * @param {Function} func The function to curry.
+ * @param {Fn} fn The Fn to curry.
  * @param {Number} number The arity of the curried function.
- * @return {Function} A new, curried function.
+ * @return {Fn} A new, curried Fn.
  * @example
  *
  * const addNumbers = buildFn((...numbers) => arrayReduce(
@@ -26,12 +26,6 @@ import fnGetMeta from './fnGetMeta'
  * g(4)
  * //=> 10
  */
-const fnCurryArity = (fn, number) => {
-  fn = fnArity(fn, number)
-  if (!fnGetMeta(fn).curry) {
-    return fn.update({ curry: true })
-  }
-  return fn
-}
+const fnCurryArity = (fn, number) => fnArity(fnCurry(fn), number)
 
 export default fnCurryArity

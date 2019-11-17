@@ -1,7 +1,7 @@
 import FUNCTIONAL_PLACEHOLDER from '../constants/FUNCTIONAL_PLACEHOLDER'
-import Fn from './js/Fn'
 import Number from '../types/Number'
 import String from '../types/String'
+import anyIsFn from './anyIsFn'
 import definitionToFn from './definitionToFn'
 import fnsToMultiFn from './fnsToMultiFn'
 import functionCurry from './functionCurry'
@@ -24,8 +24,9 @@ describe('functionCurry', () => {
       [String]
     )
     const curriedFn = functionCurry(fn)
+    expect(anyIsFn(curriedFn)).toBe(true)
     const result = curriedFn(__)
-    expect(result).toBeInstanceOf(Fn)
+    expect(anyIsFn(result)).toBe(true)
     expect(result('a')).toBe(0)
   })
 
@@ -40,6 +41,7 @@ describe('functionCurry', () => {
     const curriedFn = functionCurry(fn)
     const resultFn = curriedFn(__)
     expect(resultFn).toBeInstanceOf(Function)
+    expect(anyIsFn(resultFn)).toBe(true)
     const result2Fn = resultFn(__)
     expect(result2Fn).toBeInstanceOf(Function)
     const result3Fn = result2Fn(__)
@@ -215,7 +217,9 @@ describe('functionCurry', () => {
     const resultA = result('a')
     expect(resultA).toBeInstanceOf(Function)
     const resultB = resultA('b')
-    expect(resultB('c')).toBe(0)
+    expect(resultB).toBeInstanceOf(Function)
+    const resultC = resultB('c')
+    expect(resultC).toBe(0)
 
     const result1 = result(1)
     expect(result1).toBeInstanceOf(Function)

@@ -1,4 +1,4 @@
-import { anyIsArray } from './util'
+import anyIsArray from './util/anyIsArray'
 import defn from './defn'
 
 /**

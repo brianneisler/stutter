@@ -2,7 +2,9 @@ import anyIsPlaceholder from './anyIsPlaceholder'
 import fnGetMeta from './fnGetMeta'
 
 const argumentsMatchToFnParameters = (args, fn, options) => {
-  const { parameters } = fnGetMeta(fn)
+  const meta = fnGetMeta(fn)
+  const { curried } = meta
+  const parameters = curried ? curried.parameters : meta.parameters
   if (!parameters) {
     throw new Error(`parameter 'fn' must be a parameterized Fn instance`)
   }
@@ -18,11 +20,7 @@ const argumentsMatchToFnParameters = (args, fn, options) => {
     }
   }
 
-  let exact = false
-  if (args.length === parameters.length) {
-    exact = true
-  }
-
+  let delta = args.length - parameters.length
   for (let idx = 0; idx < length; idx++) {
     const parameter = parameters[idx]
     const arg = args[idx]
@@ -30,13 +28,17 @@ const argumentsMatchToFnParameters = (args, fn, options) => {
       if (!options.partial) {
         return false
       }
+      delta -= 1
       partial = true
     } else if (!parameter.type.is(arg)) {
       return false
     }
   }
+
+  const exact = delta === 0 ? true : false
+
   return {
-    delta: args.length - parameters.length,
+    delta,
     exact,
     fn,
     partial

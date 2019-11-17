@@ -2,6 +2,7 @@ import SYMBOL_FN from '../../constants/SYMBOL_FN'
 import anyIsNumber from '../anyIsNumber'
 import functionAry from '../functionAry'
 import functionCurry from '../functionCurry'
+import functionDefineSymbolFn from '../functionDefineSymbolFn'
 import functionHandleExceptions from '../functionHandleExceptions'
 import functionMemoize from '../functionMemoize'
 import functionMultiDispatch from '../functionMultiDispatch'
@@ -16,9 +17,9 @@ const buildFnCaller = (fn) =>
 
 const buildFnHandler = function(fn) {
   const { meta } = fn
-  let handler = function() {
+  let handler = functionDefineSymbolFn(function() {
     return fn.func.apply(this, arguments)
-  }
+  }, fn)
 
   // NOTE BRN: the order of how we compose these functions matters.
   // 1) We want dispatching to be the last thing that happens. This will
@@ -36,37 +37,31 @@ const buildFnHandler = function(fn) {
 
   if (meta.dispatcher) {
     // NOTE BRN: This overrides the base handler
-    handler = functionMultiDispatch(fn)
+    handler = functionDefineSymbolFn(functionMultiDispatch(fn), fn)
   }
 
   if (meta.parameters || meta.returns) {
-    // HACK BRN: Need this so that the type check execptions know what name to
-    // call this function
-    objectDefineProperty(handler, SYMBOL_FN, {
-      configurable: true,
-      value: fn
-    })
-    handler = functionTypeCheck(handler, fn.meta)
+    handler = functionDefineSymbolFn(functionTypeCheck(handler, fn.meta), fn)
   }
 
   if (meta.curry) {
-    handler = functionCurry(fn, handler)
+    handler = functionCurry(handler)
   }
 
   if (meta.memoize) {
-    handler = functionMemoize(handler)
+    handler = functionDefineSymbolFn(functionMemoize(handler), fn)
   }
 
   if (meta.resolve) {
-    handler = functionResolve(handler)
+    handler = functionDefineSymbolFn(functionResolve(handler), fn)
   }
 
   if (anyIsNumber(meta.ary)) {
-    handler = functionAry(handler, meta.ary)
+    handler = functionDefineSymbolFn(functionAry(handler, meta.ary), fn)
   }
 
   if (meta.handleExceptions) {
-    handler = functionHandleExceptions(handler)
+    handler = functionDefineSymbolFn(functionHandleExceptions(handler), fn)
   }
 
   return handler
@@ -106,11 +101,7 @@ const fnCallerDefineProps = (caller, fn) => {
     configurable: true,
     value: functionUpdate
   })
-  objectDefineProperty(caller, SYMBOL_FN, {
-    configurable: true,
-    value: fn
-  })
-  return caller
+  return functionDefineSymbolFn(caller, fn)
 }
 
 /**

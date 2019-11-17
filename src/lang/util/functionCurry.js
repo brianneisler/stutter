@@ -1,3 +1,4 @@
+import SYMBOL_FN from '../constants/SYMBOL_FN'
 import anyIsPlaceholder from './anyIsPlaceholder'
 import arrayClone from './arrayClone'
 import arrayConcat from './arrayConcat'
@@ -7,6 +8,37 @@ import buildException from './buildException'
 import fnApply from './fnApply'
 import fnGetMeta from './fnGetMeta'
 import fnsToMultiFnDispatcher from './fnsToMultiFnDispatcher'
+import functionArity from './functionArity'
+import functionDefineSymbolFn from './functionDefineSymbolFn'
+
+const curryFunction = (length, received, func) => {
+  return function() {
+    const combined = []
+    let argsIdx = 0
+    let left = length
+    let combinedIdx = 0
+    while (combinedIdx < received.length || argsIdx < arguments.length) {
+      let result
+      if (
+        combinedIdx < received.length &&
+        (!anyIsPlaceholder(received[combinedIdx]) || argsIdx >= arguments.length)
+      ) {
+        result = received[combinedIdx]
+      } else {
+        result = arguments[argsIdx]
+        argsIdx += 1
+      }
+      combined[combinedIdx] = result
+      if (!anyIsPlaceholder(result)) {
+        left -= 1
+      }
+      combinedIdx += 1
+    }
+    return left <= 0
+      ? func.apply(this, combined)
+      : functionArity(left, curryFunction(length, combined, func))
+  }
+}
 
 const curryParameterizedFn = (fn, handler) => {
   return function() {
@@ -64,7 +96,8 @@ const curryParameterizedFn = (fn, handler) => {
           parameters: newParameters,
           placeholders: newPlaceholders,
           received: newReceived
-        }
+        },
+        curry: true
       })
     } else if (newPlaceholders.length > 0) {
       return fn.update({
@@ -72,7 +105,8 @@ const curryParameterizedFn = (fn, handler) => {
           parameters: newParameters,
           placeholders: newPlaceholders,
           received: newReceived
-        }
+        },
+        curry: true
       })
     }
     return handler.apply(this, newReceived)
@@ -101,6 +135,7 @@ const curryMultiFn = (fn) => {
   return function() {
     const matches = fnGetMeta(fn).dispatcher.dispatch(arguments, { multi: true, partial: true })
     const completedMatch = findExactOrClosestCompletedMatch(matches)
+
     if (completedMatch) {
       // TODO BRN: This breaks the current invocation chain causing any
       // remaining methods in the caller composition to be skipped. At the
@@ -109,16 +144,18 @@ const curryMultiFn = (fn) => {
       // chain changes, we'll need to find a better method for this...
       return fnApply(completedMatch.fn, this, arguments)
     }
+
+    const curriedFns = arrayMap(matches, (match) => {
+      let matchFn = match.fn
+      if (!fnGetMeta(matchFn).curry) {
+        matchFn = matchFn.update({ curry: true })
+      }
+      return fnApply(matchFn, this, arguments)
+    })
+
     return fn.update({
-      dispatcher: fnsToMultiFnDispatcher(
-        arrayMap(matches, (match) => {
-          let matchFn = match.fn
-          if (!fnGetMeta(matchFn).curry) {
-            matchFn = matchFn.update({ curry: true })
-          }
-          return fnApply(matchFn, this, arguments)
-        })
-      )
+      curry: true,
+      dispatcher: fnsToMultiFnDispatcher(curriedFns)
     })
   }
 }
@@ -163,17 +200,20 @@ const curryMultiFn = (fn) => {
  * g(4)
  * //=> 10
  */
-const functionCurry = (fn, handler) => {
-  const { dispatcher, parameters } = fnGetMeta(fn)
+const functionCurry = (func) => {
+  if (!func[SYMBOL_FN]) {
+    return curryFunction(func)
+  }
+  const { dispatcher, parameters } = fnGetMeta(func)
   if (dispatcher) {
-    return curryMultiFn(fn)
+    return functionDefineSymbolFn(curryMultiFn(func[SYMBOL_FN]), func[SYMBOL_FN])
   }
   if (parameters) {
     if (parameters.length === 0) {
       // Function accepts no parameters, do not apply currying
-      return handler
+      return func
     }
-    return curryParameterizedFn(fn, handler)
+    return functionDefineSymbolFn(curryParameterizedFn(func[SYMBOL_FN], func), func[SYMBOL_FN])
   }
   throw new Error('Fn must either have a dispatcher function or have parameters')
 }

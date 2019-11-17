@@ -1,6 +1,8 @@
-import { Function } from './types'
-import { functionCurry } from './util'
+import Fn from './types/Fn'
+import Function from './types/Function'
 import defn from './defn'
+import fnCurry from './util/fnCurry'
+import functionCurry from './util/functionCurry'
 
 /**
  * Returns a curried equivalent of the provided function. The curried function has two unusual capabilities. First, its arguments needn't be provided one at a time. If `f` is a ternary function and `g` is `curry(f)`, the following are equivalent:
@@ -35,6 +37,15 @@ import defn from './defn'
  * g(4)
  * //=> 10
  */
-const curry = defn('curry', [Function], (func) => functionCurry(func))
+const curry = defn(
+  'curry',
+  'Returns a curried equivalent of the provided function.',
+
+  [Function, () => Function],
+  (func) => functionCurry(func),
+
+  [Fn, () => Fn],
+  (fn) => fnCurry(fn)
+)
 
 export default curry
