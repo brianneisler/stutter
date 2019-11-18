@@ -1,5 +1,4 @@
-import curry from '../common/curry'
-import memoize from '../common/memoize'
+import functionMemoize from './functionMemoize'
 
 const charCodeOfDot = '.'.charCodeAt(0)
 const reEscapeChar = /\\(\\)?/g
@@ -21,23 +20,21 @@ const rePropName = RegExp(
   'g'
 )
 
-const stringToPath = curry(
-  memoize((string) => {
-    const result = []
-    if (string.charCodeAt(0) === charCodeOfDot) {
-      result.push('')
+const stringToPath = functionMemoize((string) => {
+  const result = []
+  if (string.charCodeAt(0) === charCodeOfDot) {
+    result.push('')
+  }
+  string.replace(rePropName, (match, expression, quote, subString) => {
+    let key = match
+    if (quote) {
+      key = subString.replace(reEscapeChar, '$1')
+    } else if (expression) {
+      key = expression.trim()
     }
-    string.replace(rePropName, (match, expression, quote, subString) => {
-      let key = match
-      if (quote) {
-        key = subString.replace(reEscapeChar, '$1')
-      } else if (expression) {
-        key = expression.trim()
-      }
-      result.push(key)
-    })
-    return result
+    result.push(key)
   })
-)
+  return result
+})
 
 export default stringToPath

@@ -1,5 +1,5 @@
-import { Any } from './types'
-import { anyResolveAll } from './util'
+import Any from './types/Any'
+import anyResolveAll from './util/anyResolveAll'
 import defn from './defn'
 
 /**
@@ -37,8 +37,12 @@ import defn from './defn'
  * await all(123)
  * //=> 123
  */
-const all = defn('all', 'Resolves all resolvable values in a data object', [Any], (any) =>
-  anyResolveAll(any)
+const all = defn(
+  'all',
+  'Resolves all resolvable values in a data object',
+
+  [Any],
+  (any) => anyResolveAll(any)
 )
 
 export default all

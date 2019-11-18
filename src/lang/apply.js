@@ -1,4 +1,6 @@
-import { Any, Array, Function } from './types'
+import Any from './types/Any'
+import Array from './types/Array'
+import Function from './types/Function'
 import defn from './defn'
 
 /**

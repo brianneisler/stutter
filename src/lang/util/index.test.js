@@ -9,6 +9,7 @@ describe('lang.util index', () => {
 
     expect(mod).toEqualPrintDiff({
       anyAlways: expect.any(Function),
+      anyHasKey: expect.any(Function),
       anyIsArguments: expect.any(Function),
       anyIsArray: expect.any(Function),
       anyIsArrayBuffer: expect.any(Function),
@@ -91,6 +92,7 @@ describe('lang.util index', () => {
       anyToName: expect.any(Function),
       anyToNumber: expect.any(Function),
       anyToObject: expect.any(Function),
+      anyToPath: expect.any(Function),
       anyToString: expect.any(Function),
       anyToStringTag: expect.any(Function),
       argumentsMatchToFnParameters: expect.any(Function),
@@ -191,6 +193,7 @@ describe('lang.util index', () => {
       stringSubstring: expect.any(Function),
       stringToArray: expect.any(Function),
       stringToLowerCase: expect.any(Function),
+      stringToPath: expect.any(Function),
       stringToUpperCase: expect.any(Function),
       symbolToString: expect.any(Function),
       unicodeSize: expect.any(Function),
