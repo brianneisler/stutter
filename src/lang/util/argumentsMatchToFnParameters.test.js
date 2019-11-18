@@ -2,6 +2,7 @@ import FUNCTIONAL_PLACEHOLDER from '../constants/FUNCTIONAL_PLACEHOLDER'
 import Number from '../types/Number'
 import Parameter from './js/Parameter'
 import SYMBOL_FN from '../constants/SYMBOL_FN'
+import Self from '../types/Self'
 import String from '../types/String'
 import argumentsMatchToFnParameters from './argumentsMatchToFnParameters'
 import buildFn from './buildFn'
@@ -112,6 +113,23 @@ describe('argumentsMatchToFnParameters', () => {
       exact: false,
       fn,
       partial: true
+    })
+  })
+
+  test('returns match when argument matches the Self type', () => {
+    let fn = definitionToFn(
+      (str) => {
+        return str
+      },
+      [Self]
+    )
+    fn = fn.update({ self: String })
+    const result = argumentsMatchToFnParameters(['foo'], fn, { partial: true })
+    expect(result).toEqual({
+      delta: 0,
+      exact: true,
+      fn,
+      partial: false
     })
   })
 

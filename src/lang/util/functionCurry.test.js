@@ -1,5 +1,6 @@
 import FUNCTIONAL_PLACEHOLDER from '../constants/FUNCTIONAL_PLACEHOLDER'
 import Number from '../types/Number'
+import Self from '../types/Self'
 import String from '../types/String'
 import anyIsFn from './anyIsFn'
 import definitionToFn from './definitionToFn'
@@ -82,6 +83,23 @@ describe('functionCurry', () => {
     const result = curriedFn('a', __, 'c')
     expect(result).toBeInstanceOf(Function)
     expect(result('b')).toBe(0)
+  })
+
+  test('should support Self type in currying', () => {
+    let fn = definitionToFn(
+      (argA, argB, argC) => {
+        expect(argA).toBe('a')
+        expect(argB).toBe('b')
+        expect(argC).toBe('c')
+        return 0
+      },
+      [Self, Self, Self]
+    )
+    fn = fn.update({ self: String })
+    const curriedFn = functionCurry(fn)
+    const result = curriedFn('a', 'b')
+    expect(result).toBeInstanceOf(Function)
+    expect(result('c')).toBe(0)
   })
 
   test('should auto curry parameterized function of length 1', () => {

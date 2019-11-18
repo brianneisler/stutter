@@ -1,5 +1,11 @@
 import ImmutableMap from './ImmutableMap'
+import Parameter from './Parameter'
+import Self from '../../types/Self'
 import Type from './Type'
+import anyIsFn from '../anyIsFn'
+import definitionToFn from '../definitionToFn'
+import definitionsToProtocol from '../definitionsToProtocol'
+import fnGetMeta from '../fnGetMeta'
 
 describe('js:Type', () => {
   describe('constructor', () => {
@@ -46,6 +52,26 @@ describe('js:Type', () => {
       }
       const instance = new Type(testDef)
       expect(instance.to).toBe(testDef.to)
+    })
+
+    test('sets the self property for Fns of Protocols', () => {
+      const protocol = definitionsToProtocol({
+        foo: [Self, () => Self]
+      })
+      const testDef = {
+        class: class {},
+        protocols: [protocol, { foo: definitionToFn((foo) => foo, [Self, () => Self]) }],
+        to: () => {}
+      }
+      const instance = new Type(testDef)
+      const protocolFn = instance.protocols.get(protocol).foo
+      expect(protocolFn).toBeInstanceOf(Function)
+      expect(anyIsFn(protocolFn)).toBe(true)
+      expect(fnGetMeta(protocolFn)).toEqual({
+        parameters: [new Parameter('foo', Self)],
+        returns: Self,
+        self: instance
+      })
     })
   })
 

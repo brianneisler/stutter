@@ -49,7 +49,7 @@ const functionTypeCheck = (func, meta) => {
         const arg = arguments[idx]
         const parameter = parameters[idx]
         if (parameter) {
-          if (!parameter.type.is(arg)) {
+          if (!parameter.type.is(arg, meta)) {
             throw buildException(func)
               .expected.arg(arguments, idx)
               .toMatchParameter(parameter)
@@ -68,7 +68,7 @@ const functionTypeCheck = (func, meta) => {
     const returned = func.apply(this, arguments)
     if (returns) {
       return anyResolveWith(returned, (resolvedReturned) => {
-        if (!returns.is(resolvedReturned)) {
+        if (!returns.is(resolvedReturned, meta)) {
           throw buildException(func)
             .expected.returned(resolvedReturned)
             .toMatchReturns(returns)

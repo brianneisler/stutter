@@ -30,7 +30,7 @@ const argumentsMatchToFnParameters = (args, fn, options) => {
       }
       delta -= 1
       partial = true
-    } else if (!parameter.type.is(arg)) {
+    } else if (!parameter.type.is(arg, meta)) {
       return false
     }
   }

@@ -1,7 +1,8 @@
 import { definitionsToFn } from './util'
 import Any from './types/Any'
-import Array from './types/Array'
-import Function from './types/Function'
+// import Array from './types/Array'
+import Fn from './types/Fn'
+// import Function from './types/Function'
 import def from './def'
 
 /**
@@ -71,13 +72,11 @@ import def from './def'
 const fn = def(
   'lang.fn',
   definitionsToFn([
-    [Function, () => Function],
-    (func) => definitionsToFn([func]),
+    // TODO BRN: Add support for unions and rest...
+    // [Function.or([Function, Array]).rest(), () => Fn],
+    // (func) => definitionsToFn([func]),
 
-    [Array, Function, () => Function],
-    (parameterTypes, func) => definitionsToFn([parameterTypes, func]),
-
-    [Any, () => Function], // TODO BRN: Add support for unions
+    [Any, () => Fn],
     (...definitions) => definitionsToFn(definitions)
   ])
 )

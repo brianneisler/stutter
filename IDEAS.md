@@ -243,3 +243,11 @@ pFunc
   .map()
 // function is still executable
 pFunc()
+```
+
+
+## Completely stateless functions
+All functions should be completely stateless. Any state should be supplied as a
+parameter to the function (absolutely NO hardcoded values within the code). Providing state to a function is essentially
+selecting a version of the function we'd like to use. 
+

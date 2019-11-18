@@ -48,8 +48,9 @@ const curryParameterizedFn = (fn, handler) => {
         .expected.arguments(arguments)
         .not.toBeEmpty()
     }
-    const curried = fn.curried || {}
-    const parameters = curried.parameters || fn.parameters
+    const meta = fnGetMeta(fn)
+    const curried = meta.curried || {}
+    const parameters = curried.parameters || meta.parameters
     const placeholders = curried.placeholders || []
     const received = curried.received || []
 
@@ -73,7 +74,7 @@ const curryParameterizedFn = (fn, handler) => {
         }
         newParameters.push(parameter)
       } else {
-        if (parameter && !parameter.type.is(arg)) {
+        if (parameter && !parameter.type.is(arg, meta)) {
           throw buildException(fn)
             .expected.arg(arguments, idx)
             .toMatchParameter(parameter)

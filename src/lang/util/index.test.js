@@ -59,6 +59,7 @@ describe('lang.util index', () => {
       anyIsPrototype: expect.any(Function),
       anyIsRegExp: expect.any(Function),
       anyIsResolved: expect.any(Function),
+      anyIsSelf: expect.any(Function),
       anyIsSeq: expect.any(Function),
       anyIsSet: expect.any(Function),
       anyIsString: expect.any(Function),

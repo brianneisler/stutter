@@ -1,5 +1,6 @@
 import Number from '../types/Number'
 import Parameter from './js/Parameter'
+import Self from '../types/Self'
 import functionTypeCheck from './functionTypeCheck'
 
 describe('functionTypeCheck', () => {
@@ -46,10 +47,27 @@ describe('functionTypeCheck', () => {
     }).toThrowMatchingObject({ code: 'Expected:Returned:toMatchReturns' })
   })
 
+  test('throws an Exception when arg does not match Self type', () => {
+    const func = functionTypeCheck((arg1) => arg1, {
+      parameters: [new Parameter('arg1', Self)],
+      self: Number
+    })
+    expect(() => func('foo')).toThrowMatchingObject({ code: 'Expected:Argument:toMatchParameter' })
+  })
+
   test('does not throw when types match correctly', () => {
     const func = functionTypeCheck((arg1) => arg1, {
       parameters: [new Parameter('arg1', Number)],
       returns: Number
+    })
+    expect(func(123)).toBe(123)
+  })
+
+  test('does not throw when types match Self type correctly', () => {
+    const func = functionTypeCheck((arg1) => arg1, {
+      parameters: [new Parameter('arg1', Self)],
+      returns: Self,
+      self: Number
     })
     expect(func(123)).toBe(123)
   })
