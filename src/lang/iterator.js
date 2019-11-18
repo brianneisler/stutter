@@ -1,35 +1,7 @@
-import { SYMBOL_ITERATOR } from '../constants'
-import arrayLikeToIterator from '../lang/arrayLikeToIterator'
-import curry from './curry'
-import isArrayLike from '../lang/isArrayLike'
-import isIndexedIterator from '../lang/isIndexedIterator'
-import isIterable from '../lang/isIterable'
-import isIterator from '../lang/isIterator'
-import isKeyedIterator from '../lang/isKeyedIterator'
-import isObjectLike from '../lang/isObjectLike'
-import iteratorResolver from './util/iteratorResolver'
-import objectToIterator from '../lang/objectToIterator'
-
-const baseIterator = (value, start = 'START') => {
-  if (isIterator(value)) {
-    if (isIndexedIterator(value) || isKeyedIterator(value)) {
-      return value
-    }
-    return iteratorResolver(value, start)
-  }
-  if (isArrayLike(value)) {
-    return arrayLikeToIterator(value, start)
-  }
-  if (isIterable(value)) {
-    return iteratorResolver(value[SYMBOL_ITERATOR](), start)
-  }
-  if (isObjectLike(value)) {
-    return objectToIterator(value, start)
-  }
-  throw new Error(
-    `iterator method expected to receive an iterable value. Instead the method was given ${value}.`
-  )
-}
+import { Any, Iterator } from './types'
+import { ITERATOR_END, ITERATOR_START } from './constants'
+import { anyToIterator } from './util'
+import defn from './defn'
 
 /**
  * This method generates an iterator for the given value
@@ -51,11 +23,15 @@ const baseIterator = (value, start = 'START') => {
  * iterator({ a: 1, b: 2, c: 3 })
  * //=> { next: () => { value: number, key: string, kdx: string, done: boolean }}
  */
-const iterator = curry(baseIterator)
+const iterator = defn(
+  'iterator',
+  'This method generates an iterator for the given value',
 
-iterator.END = 'END'
-iterator.START = 'START'
+  [Any, () => Iterator],
+  anyToIterator
+)
+
+iterator.END = ITERATOR_END
+iterator.START = ITERATOR_START
 
 export default iterator
-
-export { baseIterator }

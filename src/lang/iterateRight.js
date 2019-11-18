@@ -1,54 +1,9 @@
-import { baseIsResolved } from './isResolved'
-import { baseResolveWith } from './resolveWith'
-import curry from './curry'
-import isFunction from '../lang/isFunction'
-import iterator, { baseIterator } from './iterator'
-
-const resolveNext = (next, fn, iter, recur) =>
-  baseResolveWith((resolvedNext) => {
-    if (resolvedNext.done) {
-      return resolvedNext.value
-    }
-    return recur(fn, iter)
-  }, next)
-
-const doReverseSeriesIteration = (fn, iter) => {
-  while (true) {
-    let next = iter.previous()
-    if (!baseIsResolved(next)) {
-      return baseResolveWith((resolvedNext) => {
-        next = fn(resolvedNext)
-        if (!baseIsResolved(next)) {
-          return resolveNext(next, fn, iter, doReverseSeriesIteration)
-        }
-        if (next.done) {
-          return next.value
-        }
-        return doReverseSeriesIteration(fn, iter)
-      }, next)
-    }
-    next = fn(next)
-    if (!baseIsResolved(next)) {
-      return resolveNext(next, fn, iter, doReverseSeriesIteration)
-    }
-    if (next.done) {
-      return next.value
-    }
-  }
-}
-
-const baseIterateRight = (iteratee, collection) => {
-  const iter = baseIterator(collection, iterator.END)
-  if (!isFunction(iter.previous)) {
-    throw new Error(
-      `iterateRight expects an iterator that can be run in reverse order using a 'previous' method. Instead received ${iter}`
-    )
-  }
-  return doReverseSeriesIteration(iteratee, iter)
-}
+import { Any, Function } from './types'
+import { anyIterateRight } from './util'
+import defn from './defn'
 
 /**
- * This method iterates over the given collection or iterator in **series**. If the `iteratee` method returns `{ done: true }` then the iteration will complete.
+ * This method iterates right over the given collection or iterator in **series**. If the `iteratee` method returns `{ done: true }` then the iteration will complete.
  *
  * This method automatically upgrades to async. If the `iteratee` returns a Promise or a generator, this method will return a Promise or a generator. Values are iterated in order and if the iteratee returns a resolvable value the iteration will wait until that value resolves before continuing with the iteration.
  *
@@ -80,8 +35,15 @@ const baseIterateRight = (iteratee, collection) => {
  * }), ['a', 'b', 'c'])
  * //=> 1
  */
-const iterateRight = curry(baseIterateRight)
+const iterateRight = defn(
+  'iterateRight',
+  'This method iterates right over the given collection or iterator in **series**. If the `iteratee` method returns `{ done: true }` then the iteration will complete.',
+
+  [Any, Function],
+  (any, func) => anyIterateRight(any, func),
+
+  [Function, Any],
+  (func, any) => anyIterateRight(any, func)
+)
 
 export default iterateRight
-
-export { baseIterateRight }

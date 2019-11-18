@@ -18,6 +18,7 @@ describe('lang.types index', () => {
       ImmutableSet: expect.any(Type),
       ImmutableStack: expect.any(Type),
       Infinity: expect.any(Type),
+      Iterator: expect.any(Type),
       Key: expect.any(Type),
       Map: expect.any(Type),
       NaN: expect.any(Type),

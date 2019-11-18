@@ -71,6 +71,7 @@ describe('lang.util index', () => {
       anyIsWeakMap: expect.any(Function),
       anyIsWeakSet: expect.any(Function),
       anyIterate: expect.any(Function),
+      anyIterateRight: expect.any(Function),
       anyResolve: expect.any(Function),
       anyResolveAll: expect.any(Function),
       anyResolveAllWith: expect.any(Function),

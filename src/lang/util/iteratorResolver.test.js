@@ -1,4 +1,6 @@
-import { SYMBOL_ITERATOR } from '../constants'
+import ITERATOR_END from '../constants/ITERATOR_END'
+import ITERATOR_START from '../constants/ITERATOR_START'
+import SYMBOL_ITERATOR from '../constants/SYMBOL_ITERATOR'
 import iteratorResolver from './iteratorResolver'
 
 const testAsyncArrayIterator = (values) => {
@@ -14,8 +16,8 @@ const testAsyncArrayIterator = (values) => {
             })
           }
           return resolve({
-            value: values[idx],
-            done: false
+            done: false,
+            value: values[idx]
           })
         }, 0)
       })
@@ -64,8 +66,8 @@ describe('iteratorResolver', () => {
     const result = iterator.next()
     expect(result).toBeInstanceOf(Promise)
     expect(await result).toEqual({
-      prev: undefined,
-      done: true
+      done: true,
+      prev: undefined
     })
   })
 
@@ -75,8 +77,8 @@ describe('iteratorResolver', () => {
 
     const result = iterator.previous()
     expect(result).toEqual({
-      prev: undefined,
-      done: true
+      done: true,
+      prev: undefined
     })
   })
 
@@ -92,31 +94,31 @@ describe('iteratorResolver', () => {
     }
     expect(accum).toEqual([
       {
-        value: 'foo',
+        done: false,
         index: 0,
         kdx: 0,
         prev: undefined,
-        done: false
+        value: 'foo'
       },
       {
-        value: 'bar',
+        done: false,
         index: 1,
         kdx: 1,
         prev: {
-          value: 'foo',
+          done: false,
           index: 0,
           kdx: 0,
-          done: false
+          value: 'foo'
         },
-        done: false
+        value: 'bar'
       },
       {
         done: true,
         prev: {
-          value: 'bar',
+          done: false,
           index: 1,
           kdx: 1,
-          done: false
+          value: 'bar'
         }
       }
     ])
@@ -124,7 +126,7 @@ describe('iteratorResolver', () => {
 
   test('END starts the iterator at the last index', () => {
     const array = ['foo', 'bar']
-    const iterator = iteratorResolver(array[SYMBOL_ITERATOR](), 'END')
+    const iterator = iteratorResolver(array[SYMBOL_ITERATOR](), ITERATOR_END)
 
     let next = { done: false }
     const accum = []
@@ -134,39 +136,39 @@ describe('iteratorResolver', () => {
     }
     expect(accum).toEqual([
       {
-        value: 'bar',
+        done: false,
         index: 1,
         kdx: 1,
         prev: undefined,
-        done: false
+        value: 'bar'
       },
       {
-        value: 'foo',
+        done: false,
         index: 0,
         kdx: 0,
         prev: {
-          value: 'bar',
+          done: false,
           index: 1,
           kdx: 1,
-          done: false
+          value: 'bar'
         },
-        done: false
+        value: 'foo'
       },
       {
+        done: true,
         prev: {
-          value: 'foo',
+          done: false,
           index: 0,
           kdx: 0,
-          done: false
-        },
-        done: true
+          value: 'foo'
+        }
       }
     ])
   })
 
   test('START starts the iterator at the 0 index', () => {
     const array = ['foo', 'bar']
-    const iterator = iteratorResolver(array[SYMBOL_ITERATOR](), 'START')
+    const iterator = iteratorResolver(array[SYMBOL_ITERATOR](), ITERATOR_START)
 
     let next = { done: false }
     const accum = []
@@ -176,32 +178,32 @@ describe('iteratorResolver', () => {
     }
     expect(accum).toEqual([
       {
-        value: 'foo',
+        done: false,
         index: 0,
         kdx: 0,
         prev: undefined,
-        done: false
+        value: 'foo'
       },
       {
-        value: 'bar',
+        done: false,
         index: 1,
         kdx: 1,
         prev: {
-          value: 'foo',
+          done: false,
           index: 0,
           kdx: 0,
-          done: false
+          value: 'foo'
         },
-        done: false
+        value: 'bar'
       },
       {
+        done: true,
         prev: {
-          value: 'bar',
+          done: false,
           index: 1,
           kdx: 1,
-          done: false
-        },
-        done: true
+          value: 'bar'
+        }
       }
     ])
   })
@@ -213,108 +215,108 @@ describe('iteratorResolver', () => {
     let result = iterator.next()
     expect(result).toBeInstanceOf(Promise)
     expect(await result).toEqual({
-      value: 'a',
-      kdx: 0,
+      done: false,
       index: 0,
+      kdx: 0,
       prev: undefined,
-      done: false
+      value: 'a'
     })
 
     result = iterator.next()
     expect(result).toBeInstanceOf(Promise)
 
     expect(await result).toEqual({
-      value: 'b',
-      kdx: 1,
+      done: false,
       index: 1,
+      kdx: 1,
       prev: {
-        value: 'a',
-        kdx: 0,
+        done: false,
         index: 0,
-        done: false
+        kdx: 0,
+        value: 'a'
       },
-      done: false
+      value: 'b'
     })
 
     result = iterator.next()
     expect(result).toBeInstanceOf(Promise)
     expect(await result).toEqual({
-      value: 'c',
-      kdx: 2,
+      done: false,
       index: 2,
+      kdx: 2,
       prev: {
-        value: 'b',
-        kdx: 1,
+        done: false,
         index: 1,
-        done: false
+        kdx: 1,
+        value: 'b'
       },
-      done: false
+      value: 'c'
     })
 
     result = iterator.next()
     expect(result).toBeInstanceOf(Promise)
     expect(await result).toEqual({
+      done: true,
       prev: {
-        value: 'c',
-        kdx: 2,
+        done: false,
         index: 2,
-        done: false
-      },
-      done: true
+        kdx: 2,
+        value: 'c'
+      }
     })
   })
 
   test('iterates an async iterator in reverse until done is true', async () => {
     const asyncIterator = testAsyncArrayIterator(['a', 'b', 'c'])
-    const iterator = iteratorResolver(asyncIterator, 'END')
+    const iterator = iteratorResolver(asyncIterator, ITERATOR_END)
 
     let result = iterator.previous()
     expect(result).toBeInstanceOf(Promise)
     expect(await result).toEqual({
-      value: 'c',
-      kdx: 2,
+      done: false,
       index: 2,
+      kdx: 2,
       prev: undefined,
-      done: false
+      value: 'c'
     })
 
     result = iterator.previous()
     expect(result).toEqual({
-      value: 'b',
-      kdx: 1,
+      done: false,
       index: 1,
+      kdx: 1,
       prev: {
-        value: 'c',
-        kdx: 2,
+        done: false,
         index: 2,
-        done: false
+        kdx: 2,
+        value: 'c'
       },
-      done: false
+      value: 'b'
     })
 
     result = iterator.previous()
     expect(result).toEqual({
-      value: 'a',
-      kdx: 0,
+      done: false,
       index: 0,
+      kdx: 0,
       prev: {
-        value: 'b',
-        kdx: 1,
+        done: false,
         index: 1,
-        done: false
+        kdx: 1,
+        value: 'b'
       },
-      done: false
+      value: 'a'
     })
 
     result = iterator.previous()
     expect(result).toEqual({
+      done: true,
       prev: {
-        value: 'a',
-        kdx: 0,
+        done: false,
         index: 0,
-        done: false
-      },
-      done: true
+        kdx: 0,
+        value: 'a'
+      }
     })
   })
 })

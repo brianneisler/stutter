@@ -1,5 +1,6 @@
-import { Any, Function } from './types'
-import { anyIterate } from './util'
+import Any from './types/Any'
+import Function from './types/Function'
+import anyIterate from './util/anyIterate'
 import defn from './defn'
 
 /**
@@ -36,6 +37,9 @@ import defn from './defn'
  * //=> 1
  */
 const iterate = defn(
+  'iterate',
+  'This method iterates over the given collection or iterator in **series**. If the `iteratee` method returns `{ done: true }` then the iteration will complete.',
+
   [Any, Function],
   (any, func) => anyIterate(any, func),
 

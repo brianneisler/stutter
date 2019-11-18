@@ -1,4 +1,5 @@
-import { ITERATOR_START, SYMBOL_ITERATOR } from '../constants'
+import ITERATOR_START from '../constants/ITERATOR_START'
+import SYMBOL_ITERATOR from '../constants/SYMBOL_ITERATOR'
 import anyIsArrayLike from './anyIsArrayLike'
 import anyIsIndexedIterator from './anyIsIndexedIterator'
 import anyIsIterable from './anyIsIterable'

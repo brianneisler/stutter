@@ -1,6 +1,38 @@
 import iterate from './iterate'
 
 describe('iterate', () => {
+  test('accepts data first', () => {
+    const values = ['a', 'b']
+    const acc = []
+    const result = iterate(values, (next) => {
+      if (!next.done) {
+        acc.push(next.value)
+      }
+      return {
+        ...next,
+        done: !next.value,
+        value: acc
+      }
+    })
+    expect(result).toEqual(['a', 'b'])
+  })
+
+  test('accepts data last', () => {
+    const values = ['a', 'b']
+    const acc = []
+    const result = iterate((next) => {
+      if (!next.done) {
+        acc.push(next.value)
+      }
+      return {
+        ...next,
+        done: !next.value,
+        value: acc
+      }
+    }, values)
+    expect(result).toEqual(['a', 'b'])
+  })
+
   test('iterates array until done is true', () => {
     const values = ['a', 'b', 'c', 'd', null, 'f']
     const acc = []
@@ -14,59 +46,59 @@ describe('iterate', () => {
     }, values)
     expect(result).toEqual([
       {
-        value: 'a',
-        kdx: 0,
+        done: false,
         index: 0,
+        kdx: 0,
         prev: undefined,
-        done: false
+        value: 'a'
       },
       {
-        value: 'b',
-        kdx: 1,
+        done: false,
         index: 1,
+        kdx: 1,
         prev: {
-          value: 'a',
-          kdx: 0,
+          done: false,
           index: 0,
-          done: false
+          kdx: 0,
+          value: 'a'
         },
-        done: false
+        value: 'b'
       },
       {
-        value: 'c',
-        kdx: 2,
+        done: false,
         index: 2,
+        kdx: 2,
         prev: {
-          value: 'b',
-          kdx: 1,
+          done: false,
           index: 1,
-          done: false
+          kdx: 1,
+          value: 'b'
         },
-        done: false
+        value: 'c'
       },
       {
-        value: 'd',
-        kdx: 3,
+        done: false,
         index: 3,
+        kdx: 3,
         prev: {
-          value: 'c',
-          kdx: 2,
+          done: false,
           index: 2,
-          done: false
+          kdx: 2,
+          value: 'c'
         },
-        done: false
+        value: 'd'
       },
       {
-        value: null,
-        kdx: 4,
+        done: false,
         index: 4,
+        kdx: 4,
         prev: {
-          value: 'd',
-          kdx: 3,
+          done: false,
           index: 3,
-          done: false
+          kdx: 3,
+          value: 'd'
         },
-        done: false
+        value: null
       }
     ])
   })
@@ -92,59 +124,59 @@ describe('iterate', () => {
     result = await result
     expect(result).toEqual([
       {
-        value: 'a',
-        kdx: 0,
+        done: false,
         index: 0,
+        kdx: 0,
         prev: undefined,
-        done: false
+        value: 'a'
       },
       {
-        value: 'b',
-        kdx: 1,
+        done: false,
         index: 1,
+        kdx: 1,
         prev: {
-          value: 'a',
-          kdx: 0,
+          done: false,
           index: 0,
-          done: false
+          kdx: 0,
+          value: 'a'
         },
-        done: false
+        value: 'b'
       },
       {
-        value: 'c',
-        kdx: 2,
+        done: false,
         index: 2,
+        kdx: 2,
         prev: {
-          value: 'b',
-          kdx: 1,
+          done: false,
           index: 1,
-          done: false
+          kdx: 1,
+          value: 'b'
         },
-        done: false
+        value: 'c'
       },
       {
-        value: 'd',
-        kdx: 3,
+        done: false,
         index: 3,
+        kdx: 3,
         prev: {
-          value: 'c',
-          kdx: 2,
+          done: false,
           index: 2,
-          done: false
+          kdx: 2,
+          value: 'c'
         },
-        done: false
+        value: 'd'
       },
       {
-        value: null,
-        kdx: 4,
+        done: false,
         index: 4,
+        kdx: 4,
         prev: {
-          value: 'd',
-          kdx: 3,
+          done: false,
           index: 3,
-          done: false
+          kdx: 3,
+          value: 'd'
         },
-        done: false
+        value: null
       }
     ])
   }, 10000)
@@ -163,10 +195,10 @@ describe('iterate', () => {
               })
             }
             return resolve({
-              value: values[idx],
+              done: false,
               index: idx,
               kdx: idx,
-              done: false
+              value: values[idx]
             })
           }, 0)
         })
@@ -184,59 +216,59 @@ describe('iterate', () => {
 
     expect(await result).toEqual([
       {
-        value: 'a',
-        kdx: 0,
+        done: false,
         index: 0,
+        kdx: 0,
         prev: undefined,
-        done: false
+        value: 'a'
       },
       {
-        value: 'b',
-        kdx: 1,
+        done: false,
         index: 1,
+        kdx: 1,
         prev: {
-          value: 'a',
-          kdx: 0,
+          done: false,
           index: 0,
-          done: false
+          kdx: 0,
+          value: 'a'
         },
-        done: false
+        value: 'b'
       },
       {
-        value: 'c',
-        kdx: 2,
+        done: false,
         index: 2,
+        kdx: 2,
         prev: {
-          value: 'b',
-          kdx: 1,
+          done: false,
           index: 1,
-          done: false
+          kdx: 1,
+          value: 'b'
         },
-        done: false
+        value: 'c'
       },
       {
-        value: 'd',
-        kdx: 3,
+        done: false,
         index: 3,
+        kdx: 3,
         prev: {
-          value: 'c',
-          kdx: 2,
+          done: false,
           index: 2,
-          done: false
+          kdx: 2,
+          value: 'c'
         },
-        done: false
+        value: 'd'
       },
       {
-        value: null,
-        kdx: 4,
+        done: false,
         index: 4,
+        kdx: 4,
         prev: {
-          value: 'd',
-          kdx: 3,
+          done: false,
           index: 3,
-          done: false
+          kdx: 3,
+          value: 'd'
         },
-        done: false
+        value: null
       }
     ])
   })

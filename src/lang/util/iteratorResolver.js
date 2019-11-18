@@ -1,4 +1,5 @@
-import { ITERATOR_START } from '../constants'
+import ITERATOR_END from '../constants/ITERATOR_END'
+import ITERATOR_START from '../constants/ITERATOR_START'
 import anyIsResolved from './anyIsResolved'
 import anyResolveWith from './anyResolveWith'
 
@@ -62,7 +63,7 @@ const prevIterAt = (index, history) => {
   }
 }
 
-const historicIterator = (iterator, start = 'START') => {
+const historicIterator = (iterator, start = ITERATOR_START) => {
   const history = []
   const pending = []
   let index = 0
@@ -95,7 +96,7 @@ const historicIterator = (iterator, start = 'START') => {
     }
   }
 
-  if (start === 'END') {
+  if (start === ITERATOR_END) {
     return fastForward(histIterator)
   }
   return histIterator
