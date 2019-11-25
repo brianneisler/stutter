@@ -25,7 +25,7 @@ describe('definitionToFn', () => {
 
     expect(fn).toBeInstanceOf(Function)
     expect(fn[SYMBOL_FN]).toBeInstanceOf(Fn)
-    expect(fn[SYMBOL_FN]).toEqual({
+    expect(fn[SYMBOL_FN]).toMatchObject({
       func,
       handler: expect.any(Function),
       meta: {
@@ -59,7 +59,7 @@ describe('definitionToFn', () => {
     }
     const fn = definitionToFn(func, [Number, () => Number])
 
-    expect(fn[SYMBOL_FN]).toEqual({
+    expect(fn[SYMBOL_FN]).toMatchObject({
       func,
       handler: expect.any(Function),
       meta: {

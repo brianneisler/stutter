@@ -1,11 +1,7 @@
 import Exception from './js/Exception'
-import anyIsFunction from './anyIsFunction'
 import buildExpected from './buildExpected'
 
 const buildException = (source) => {
-  // if (!anyIsFunction(source)) {
-  //   throw new TypeError('Expected source to be a Function or an Fn')
-  // }
   return {
     expected: {
       arg: (arg, index) =>

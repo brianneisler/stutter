@@ -31,9 +31,7 @@ const anyToName = (any) => {
   if (any[SYMBOL_META]) {
     return any[SYMBOL_META].name
   }
-  if (any[SYMBOL_FN]) {
-    return any[SYMBOL_FN].meta.name
-  }
+
   // TODO BRN: Need to figure out how to reverse source maps here to get the
   // correct name if it's been obfuscated
   if (anyIsFunction(any)) {

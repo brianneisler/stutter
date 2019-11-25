@@ -134,7 +134,13 @@ const findExactOrClosestCompletedMatch = (matches) => {
 
 const curryMultiFn = (fn) => {
   return function() {
-    const matches = fnGetMeta(fn).dispatcher.dispatch(arguments, { multi: true, partial: true })
+    const { dispatcher } = fnGetMeta(fn)
+    const matches = dispatcher.dispatch(arguments, { multi: true, partial: true })
+    if (matches.length === 0) {
+      throw buildException(fn)
+        .expected.arguments(arguments)
+        .toMatchDispatcher(dispatcher)
+    }
     const completedMatch = findExactOrClosestCompletedMatch(matches)
 
     if (completedMatch) {

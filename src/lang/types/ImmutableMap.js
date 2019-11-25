@@ -9,7 +9,7 @@ import deftype from '../deftype'
  * @category lang
  * @example
  */
-const ImmutableMap = deftype('ImmutableMap', 'A type representing a ImmutableMap.', {
+const ImmutableMap = deftype('lang.ImmutableMap', 'A type representing a ImmutableMap.', {
   class: _ImmutableMap,
   is: anyIsImmutableMap
 })

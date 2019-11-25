@@ -5,7 +5,7 @@ import defineAny from '../util/defineAny'
 import definitionToType from '../util/definitionToType'
 
 const String = defineAny(
-  'String',
+  'lang.String',
   'A text value',
   definitionToType({
     class: _String,

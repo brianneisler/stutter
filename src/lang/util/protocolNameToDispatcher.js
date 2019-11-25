@@ -2,6 +2,7 @@ import Self from '../types/Self'
 import errorNoMatch from './errorNoMatch'
 import filterProtocolsForFunctionName from './filterProtocolsForFunctionName'
 import filterTypesForProtocol from './filterTypesForProtocol'
+import fnGetMeta from './fnGetMeta'
 import fnsToMultiFnDispatcher from './fnsToMultiFnDispatcher'
 import functionMemoizeWith from './functionMemoizeWith'
 import root from './root'
@@ -58,6 +59,22 @@ const protocolNameToDispatcher = (name, namespaces = root.namespaces) => {
       // not only does the Self arg need to be matched but so do the rest of the
       // parameters
       return dispatcher.dispatch(args, options)
+    },
+
+    getAllPossibleFns() {
+      const fns = namespacesReduceFnsByProtocolFnName(namespaces, name)
+      const { length } = fns
+      let possible = []
+      for (let idx = 0; idx < length; idx++) {
+        const fn = fns[idx]
+        const meta = fnGetMeta(fn)
+        if (meta.dispatcher) {
+          possible = possible.concat(meta.dispatcher.getAllPossibleFns())
+        } else {
+          possible.push(fn)
+        }
+      }
+      return possible
     }
   }
 }

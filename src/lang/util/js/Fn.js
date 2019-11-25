@@ -1,6 +1,9 @@
 import SYMBOL_FN from '../../constants/SYMBOL_FN'
+import SYMBOL_META from '../../constants/SYMBOL_META'
+import SYMBOL_TO_STRING_TAG from '../../constants/SYMBOL_TO_STRING_TAG'
 import anyIsNumber from '../anyIsNumber'
 import functionAry from '../functionAry'
+import functionComplement from '../functionComplement'
 import functionCurry from '../functionCurry'
 import functionDefineSymbolFn from '../functionDefineSymbolFn'
 import functionHandleExceptions from '../functionHandleExceptions'
@@ -38,6 +41,10 @@ const buildFnHandler = function(fn) {
   if (meta.dispatcher) {
     // NOTE BRN: This overrides the base handler
     handler = functionDefineSymbolFn(functionMultiDispatch(fn), fn)
+  }
+
+  if (meta.complement) {
+    handler = functionComplement(handler, meta.complement)
   }
 
   if (meta.parameters || meta.returns) {
@@ -79,6 +86,12 @@ const fnCallerDefineProps = (caller, fn) => {
       value: parameters.length
     })
   }
+  objectDefineProperty(caller, SYMBOL_META, {
+    configurable: true,
+    get() {
+      return this[SYMBOL_FN].meta
+    }
+  })
   objectDefineProperty(caller, 'dispatcher', {
     configurable: true,
     get() {
@@ -155,6 +168,14 @@ class Fn {
     this.func = func
     this.meta = meta
     this.handler = buildFnHandler(this)
+  }
+
+  get [SYMBOL_META]() {
+    return this.meta
+  }
+
+  get [SYMBOL_TO_STRING_TAG]() {
+    return 'Fn'
   }
 
   get curried() {

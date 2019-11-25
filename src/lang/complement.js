@@ -1,6 +1,8 @@
-import curry from './curry'
-import isFunction from '../lang/isFunction'
-import isPromise from '../lang/isPromise'
+import Fn from './types/Fn'
+import Function from './types/Function'
+import defn from './defn'
+import fnComplement from './util/fnComplement'
+import functionComplement from './util/functionComplement'
 
 /**
  * returns a new function that logically nots the returned value and returns that as the result.
@@ -18,17 +20,15 @@ import isPromise from '../lang/isPromise'
  * const isOdd = complement(isEven)
  * isOdd(1) //=> true
  */
-const complement = curry((fn) => {
-  if (!isFunction(fn)) {
-    throw new TypeError(`Expected 'fn' parameter to be a function. Instead received ${fn}.`)
-  }
-  return function() {
-    const result = fn.apply(this, arguments)
-    if (isPromise(result)) {
-      return result.then((resolvedResult) => !resolvedResult)
-    }
-    return !result
-  }
-})
+const complement = defn(
+  'lang.complement',
+  'returns a new function that logically nots the returned value and returns that as the result.',
+
+  [Fn, () => Fn],
+  (fn) => fnComplement(fn),
+
+  [Function, () => Function],
+  (func) => functionComplement(func)
+)
 
 export default complement

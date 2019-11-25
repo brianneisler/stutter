@@ -10,7 +10,7 @@ import deftype from '../deftype'
  * @example
  */
 const ImmutableOrderedSet = deftype(
-  'ImmutableOrderedSet',
+  'lang.ImmutableOrderedSet',
   'A type representing a ImmutableOrderedSet.',
   {
     class: _ImmutableOrderedSet,

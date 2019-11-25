@@ -2,7 +2,7 @@
 import anyIsGenerator from '../util/anyIsGenerator'
 import deftype from '../deftype'
 
-const Generator = deftype('Generator', 'A type representing a Generator.', {
+const Generator = deftype('lang.Generator', 'A type representing a Generator.', {
   // class: _Generator,
   is: anyIsGenerator
 })

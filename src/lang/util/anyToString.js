@@ -1,6 +1,9 @@
 import { INFINITY } from '../constants'
+import anyIsArguments from './anyIsArguments'
 import anyIsArray from './anyIsArray'
 import anyIsSymbol from './anyIsSymbol'
+import anyToArray from './anyToArray'
+import arrayMap from './arrayMap'
 import symbolToString from './symbolToString'
 
 /**
@@ -24,16 +27,22 @@ import symbolToString from './symbolToString'
  * // => '1,2,3'
  */
 const anyToString = (any) => {
-  if (any == null) {
-    return ''
+  if (any === null) {
+    return 'null'
+  }
+  if (any === undefined) {
+    return 'undefined'
   }
   // Exit early for strings to avoid a performance hit in some environments.
   if (typeof any == 'string') {
     return any
   }
+  if (anyIsArguments(any)) {
+    any = anyToArray(any)
+  }
   if (anyIsArray(any)) {
     // Recursively convert values (susceptible to call stack limits).
-    return `${any.map((other) => (other == null ? other : anyToString(other)))}`
+    return `[${arrayMap(any, anyToString).join(', ')}]`
   }
   if (anyIsSymbol(any)) {
     return symbolToString(any)

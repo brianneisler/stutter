@@ -2,7 +2,7 @@ import _Protocol from '../util/js/Protocol'
 import anyIsProtocol from '../util/anyIsProtocol'
 import deftype from '../deftype'
 
-const Protocol = deftype('Protocol', 'A type representing a Protocol of functions', {
+const Protocol = deftype('lang.Protocol', 'A type representing a Protocol of functions', {
   class: _Protocol,
   is: (any) => anyIsProtocol(any),
   to: () => {

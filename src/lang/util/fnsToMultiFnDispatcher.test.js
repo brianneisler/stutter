@@ -13,7 +13,8 @@ describe('fnsToMultiFnDispatcher', () => {
     )
     const multiFnDipatcher = fnsToMultiFnDispatcher([fn])
     expect(multiFnDipatcher).toEqual({
-      dispatch: expect.any(Function)
+      dispatch: expect.any(Function),
+      getAllPossibleFns: expect.any(Function)
     })
   })
 

@@ -8,7 +8,7 @@ import definitionToType from '../util/definitionToType'
 import fn from '../fn'
 
 const Type = defineAny(
-  'Type',
+  'lang.Type',
   'A generic type represeting a type itself',
   definitionToType({
     class: _Type,

@@ -5,7 +5,7 @@ import defineAny from '../util/defineAny'
 import definitionToType from '../util/definitionToType'
 
 const Number = defineAny(
-  'Number',
+  'lang.Number',
   'A numeric value',
   definitionToType({
     class: _Number,

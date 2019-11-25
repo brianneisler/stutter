@@ -1,4 +1,5 @@
 import Namespace from './js/Namespace'
+import SYMBOL_FN from '../constants/SYMBOL_FN'
 import SYMBOL_META from '../constants/SYMBOL_META'
 import anyIsObject from './anyIsObject'
 import objectDefineProperty from './objectDefineProperty'
@@ -28,6 +29,9 @@ const defineAny = (name, description, any) => {
   // better to have namespaces explicitly declared.
   if (!namespace) {
     namespace = new Namespace(namespaceName)
+  }
+  if (any[SYMBOL_FN]) {
+    any[SYMBOL_FN].meta.name = valueName
   }
   if (anyIsObject(any)) {
     objectDefineProperty(any, SYMBOL_META, {

@@ -52,6 +52,21 @@ const fnsToMultiFnDispatcher = (fns) => ({
       }
     }
     throw errorNoMatch()
+  },
+
+  getAllPossibleFns() {
+    const { length } = fns
+    let possible = []
+    for (let idx = 0; idx < length; idx++) {
+      const fn = fns[idx]
+      const meta = fnGetMeta(fn)
+      if (meta.dispatcher) {
+        possible = possible.concat(meta.dispatcher.getAllPossibleFns())
+      } else {
+        possible.push(fn)
+      }
+    }
+    return possible
   }
 })
 

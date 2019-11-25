@@ -41,6 +41,15 @@ describe('anyToArray', () => {
     expect(anyToArray(function*() {})).toEqual([])
   })
 
+  it('converts Arguments to an array of the args', () => {
+    const func = function() {
+      const array = anyToArray(arguments)
+      expect(array).toBeInstanceOf(Array)
+      expect(array).toEqual(['foo', 'bar', null])
+    }
+    func('foo', 'bar', null)
+  })
+
   it('converts RegExp to empty array', () => {
     expect(anyToArray(/abc/)).toEqual([])
   })

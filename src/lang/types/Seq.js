@@ -9,7 +9,7 @@ import deftype from '../deftype'
  * @category lang
  * @example
  */
-const Seq = deftype('Seq', 'A type representing a Seq.', {
+const Seq = deftype('lang.Seq', 'A type representing a Seq.', {
   class: _Seq,
   is: anyIsSeq
 })

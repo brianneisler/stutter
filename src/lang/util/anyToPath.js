@@ -1,7 +1,6 @@
 import anyHasKey from './anyHasKey'
+import anyHasProp from './anyHasProp'
 import anyIsArray from './anyIsArray'
-import anyIsKey from './anyIsKey'
-import anyIsProp from './anyIsProp'
 import anyIsString from './anyIsString'
 import stringToPath from './stringToPath'
 
@@ -33,9 +32,8 @@ const anyToPath = (any, object) => {
     return [any]
   }
 
-  // TODO BRN: Rework this part... should be using anyHasKey and anyHasProp
   // NOTE BRN: Keys take precendence over props
-  if (anyIsKey(any, object) || anyIsProp(any, object)) {
+  if (anyHasKey(object, any) || anyHasProp(object, any)) {
     return [any]
   }
   return stringToPath(any)

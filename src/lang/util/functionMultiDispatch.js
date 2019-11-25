@@ -1,3 +1,4 @@
+import buildException from './buildException'
 import fnApply from './fnApply'
 
 const functionMultiDispatch = function(fn) {
@@ -12,7 +13,9 @@ const functionMultiDispatch = function(fn) {
         // TODO BRN: In the event that this results in a no matches, we should
         // try to identify the closest match that was likely intended and do a
         // parameter validation error
-        throw new Error(`Could not find a matching function to execute`)
+        throw buildException(fn)
+          .expected.arguments(arguments)
+          .toMatchDispatcher(fn.dispatcher)
       }
       // NOTE BRN: In the event of multiple matches, we execute the first match
       match = match[0]

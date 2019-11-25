@@ -1,4 +1,5 @@
 import anyIsNumber from './anyIsNumber'
+import anyToInteger from './anyToInteger'
 
 /**
  * Determine if the given value is an integer.
@@ -32,6 +33,6 @@ import anyIsNumber from './anyIsNumber'
  * anyIsInteger('3')
  * // => false
  */
-const anyIsInteger = (value) => anyIsNumber(value) && value << 0 == value
+const anyIsInteger = (value) => anyIsNumber(value) && value == anyToInteger(value)
 
 export default anyIsInteger

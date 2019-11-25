@@ -5,12 +5,10 @@ import pipe from '../common/pipe'
 import reduce from './reduce'
 
 /**
- * Takes a function and a [functor](https://github.com/fantasyland/fantasy-land#functor), applies the function to each of the functor's values, and returns  a functor of the same shape.
+ * Takes a function and a [functor](https://github.com/fantasyland/fantasy-land#functor), applies the function to each of the functor's values, and returns a functor of the same shape.
  *
  * Provides suitable `map` implementations for `Array` and `Object`,
  * so this function may be applied to `[1, 2, 3]` or `{x: 1, y: 2, z: 3}`.
- *
- * Dispatches to the `map` method of the second argument, if present.
  *
  * This method automatically upgrades to async.
  * - If the `iteratee` or the `collection` arguments are Promises, this method will resolve those values before executing and this method will return a `Promise`.
@@ -32,9 +30,11 @@ import reduce from './reduce'
  *
  * map(double, {x: 1, y: 2, z: 3}) //=> {x: 2, y: 4, z: 6}
  */
-const map = defn('map',
+const map = defn(
+  'map',
 
-  [Function, Array], (iteratee, collection) =>
+  [Function, Array],
+  (iteratee, collection) =>
     reduce(
       (accum, value, kdx) =>
         pipe(
@@ -46,10 +46,10 @@ const map = defn('map',
         )(),
       isArrayLike(collection) ? [] : {},
       collection
-    )
-  ),
+    ),
 
-  [Array, Function], (collection, iteratee) => map(iteratee, collection)
+  [Array, Function],
+  (collection, iteratee) => map(iteratee, collection)
 )
 
 export default map

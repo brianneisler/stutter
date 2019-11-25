@@ -17,7 +17,8 @@ describe('fnsToMultiFn', () => {
     const multiFn = fnsToMultiFn([fn])
     expect(anyIsFn(multiFn)).toBe(true)
     expect(fnGetMeta(multiFn).dispatcher).toEqual({
-      dispatch: expect.any(Function)
+      dispatch: expect.any(Function),
+      getAllPossibleFns: expect.any(Function)
     })
   })
 

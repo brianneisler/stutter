@@ -9,7 +9,7 @@ import deftype from '../deftype'
  * @category lang
  * @example
  */
-const ImmutableList = deftype('ImmutableList', 'A type representing a ImmutableList.', {
+const ImmutableList = deftype('lang.ImmutableList', 'A type representing a ImmutableList.', {
   class: _ImmutableList,
   is: anyIsImmutableList
 })

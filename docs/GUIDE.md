@@ -12,7 +12,52 @@ concepts while still maintaining direct compatibility with native javascript.
 There are some conceptual differences that you should be aware of while working
 with `stutter`
 
-### Falsy
+
+### Props vs Keys vs Indexes
+
+Properties and keys are two different concepts within stutter. Often these are
+conflated in some other libraries. We have separated them out to help keep
+things consistent and to more easily reason about the two concepts.
+
+#### Props
+
+JavaScript is designed on a simple object-based paradigm. An object is a
+collection of properties, and a property is an association between a name and a
+value.
+
+These are easily accessed using the dot or bracket notation in Javascript
+
+```js
+const object = {
+  foo: 'bar'
+}
+
+// foo is the property
+object.foo 
+//=> 'bar'
+object['foo']
+```
+
+In Javascript, all properties are strings. Even when accessing a property using
+a non string value, the value is first cast as a string before accessing the
+property's value.
+
+```js
+const object = {
+  '1': 'a'
+}
+object[1]
+//=> 'a'
+```
+
+The above example works because the number is first typecast to a string before
+accessing the value.
+
+When using propertiy based methods in stutter (such as [`prop`](./API.md#prop)),
+we consider only 
+
+
+### Falsy and Truthy Values
 
 In javascript the following values are `false`
 ```js

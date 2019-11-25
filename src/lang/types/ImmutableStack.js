@@ -9,7 +9,7 @@ import deftype from '../deftype'
  * @category lang
  * @example
  */
-const ImmutableStack = deftype('ImmutableStack', 'A type representing a ImmutableStack.', {
+const ImmutableStack = deftype('lang.ImmutableStack', 'A type representing a ImmutableStack.', {
   class: _ImmutableStack,
   is: anyIsImmutableStack
 })

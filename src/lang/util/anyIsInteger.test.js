@@ -1,3 +1,6 @@
+import Infinity from './js/Infinity'
+import NaN from './js/NaN'
+import Number from './js/Number'
 import anyIsInteger from './anyIsInteger'
 
 describe('anyIsInteger', () => {
@@ -5,6 +8,7 @@ describe('anyIsInteger', () => {
     expect(anyIsInteger(0)).toBe(true)
     expect(anyIsInteger(-1)).toBe(true)
     expect(anyIsInteger(1)).toBe(true)
+    expect(anyIsInteger(Number.MAX_SAFE_INTEGER))
   })
 
   test('returns true for Number objects that are integers', () => {

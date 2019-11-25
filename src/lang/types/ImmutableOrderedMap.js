@@ -10,7 +10,7 @@ import deftype from '../deftype'
  * @example
  */
 const ImmutableOrderedMap = deftype(
-  'ImmutableOrderedMap',
+  'lang.ImmutableOrderedMap',
   'A type representing a ImmutableOrderedMap.',
   {
     class: _ImmutableOrderedMap,

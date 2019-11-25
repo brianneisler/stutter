@@ -9,7 +9,7 @@ import deftype from '../deftype'
  * @category lang
  * @example
  */
-const ImmutableSet = deftype('ImmutableSet', 'A type representing a ImmutableSet.', {
+const ImmutableSet = deftype('lang.ImmutableSet', 'A type representing a ImmutableSet.', {
   class: _ImmutableSet,
   is: anyIsImmutableSet
 })
