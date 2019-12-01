@@ -38,10 +38,10 @@ import defn from './defn'
  * //=> 123
  */
 const all = defn(
-  'all',
+  'lang.all',
   'Resolves all resolvable values in a data object',
 
-  [Any],
+  [Any, () => Any],
   (any) => anyResolveAll(any)
 )
 

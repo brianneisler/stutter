@@ -1,3 +1,4 @@
+// TODO BRN: Update this...
 const delay = (func, wait, ...args) => {
   if (typeof func !== 'function') {
     throw new TypeError('Expected a function')

@@ -38,7 +38,7 @@ import functionCurry from './util/functionCurry'
  * //=> 10
  */
 const curry = defn(
-  'curry',
+  'lang.curry',
   'Returns a curried equivalent of the provided function.',
 
   [Function, () => Function],

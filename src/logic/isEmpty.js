@@ -41,36 +41,42 @@ import toStringTag from '../lang/toStringTag'
  *
  * isEmpty({ 'a': 1 })  // => false
  */
-const isEmpty = defn('isEmpty', [Any], (value) => {
-  if (value == null) {
+const isEmpty = defn(
+  'isEmpty',
+  'Checks if `value` is an empty object, collection, map, or set.',
+
+  [Any],
+  (value) => {
+    if (value == null) {
+      return true
+    }
+    if (
+      isArrayLike(value) &&
+      (isArray(value) ||
+        typeof value == 'string' ||
+        typeof value.splice == 'function' ||
+        isBuffer(value) ||
+        isTypedArray(value) ||
+        isArguments(value))
+    ) {
+      return !value.length
+    }
+    // TODO BRN: It might make sense to move the Set and Map implementations to a
+    // protocol for "Emptiable" objects
+    const tag = toStringTag(value)
+    if (tag == 'Map' || tag == 'Set') {
+      return !value.size
+    }
+    if (isPrototype(value)) {
+      return !objectKeys(value).length
+    }
+    for (const key in value) {
+      if (objectHasOwnProperty(value, key)) {
+        return false
+      }
+    }
     return true
   }
-  if (
-    isArrayLike(value) &&
-    (isArray(value) ||
-      typeof value == 'string' ||
-      typeof value.splice == 'function' ||
-      isBuffer(value) ||
-      isTypedArray(value) ||
-      isArguments(value))
-  ) {
-    return !value.length
-  }
-  // TODO BRN: It might make sense to move the Set and Map implementations to a
-  // protocol for "Emptiable" objects
-  const tag = toStringTag(value)
-  if (tag == 'Map' || tag == 'Set') {
-    return !value.size
-  }
-  if (isPrototype(value)) {
-    return !objectKeys(value).length
-  }
-  for (const key in value) {
-    if (objectHasOwnProperty(value, key)) {
-      return false
-    }
-  }
-  return true
-})
+)
 
 export default isEmpty

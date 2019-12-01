@@ -31,20 +31,6 @@ describe('anyIsKey', () => {
     expect(anyIsKey(new Array())).toBe(true)
   })
 
-  test('returns false for paths', () => {
-    expect(anyIsKey('foo.bar')).toBe(false)
-    expect(anyIsKey('foo[1]')).toBe(false)
-    expect(anyIsKey("foo['abc']")).toBe(false)
-  })
-
-  test('returns true for paths that are actual keys', () => {
-    expect(anyIsKey('foo.bar', new Map([['foo.bar', 'value']]))).toBe(true)
-
-    expect(anyIsKey('foo[1]', new Map([['foo[1]', 'value']]))).toBe(true)
-
-    expect(anyIsKey("foo['abc']", new Map([["foo['abc']", 'value']]))).toBe(true)
-  })
-
   test('returns true for all other values', () => {
     expect(anyIsKey(undefined)).toBe(true)
     expect(anyIsKey(null)).toBe(true)

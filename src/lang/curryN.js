@@ -56,7 +56,7 @@ import fnCurryArity from './util/fnCurryArity'
  * //=> 10
  */
 const curryN = defn(
-  'curryN',
+  'lang.curryN',
 
   [Number, Fn],
   (n, fn) => fnCurryArity(fn, n),

@@ -1,6 +1,4 @@
-import { anyIsFunction, anyIsObject, objectAssign } from './util'
 import Object from './types/Object'
-import SYMBOL_PROTOCOLS from './constants/SYMBOL_PROTOCOLS'
 import String from './types/String'
 import Type from './types/Type'
 import def from './def'
@@ -92,32 +90,20 @@ import type from './type'
  */
 const deftype = def(
   'lang.deftype',
+  'Defines a new `Type` with the given `name`.',
+
   fn(
     [String, String, Object, () => Type],
-    (name, description, definition) => {
-      const definedType = def(name, description, type(definition))
-      if (anyIsFunction(definedType.class) && anyIsObject(definedType.protocols)) {
-        let protocols = definedType.class.prototype[SYMBOL_PROTOCOLS]
-        if (!protocols) {
-          protocols = {}
-        }
-        // TODO BRN: Might be good to check for previous protocols with the same name?
-        definedType.class.prototype[SYMBOL_PROTOCOLS] = objectAssign(
-          protocols,
-          definedType.protocols
-        )
-      }
-      return definedType
-    },
+    (name, description, definition) => def(name, description, type(definition)),
 
     [String, Object, () => Type],
-    (name, definition) => deftype(name, '', definition),
+    (name, definition) => def(name, '', type(definition)),
 
     [String, String, () => Type],
-    (name, description) => deftype(name, description, {}),
+    (name, description) => def(name, description, type({})),
 
     [String, () => Type],
-    (name) => deftype(name, '', {})
+    (name) => def(name, '', type({}))
   )
 )
 

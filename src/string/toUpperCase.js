@@ -1,6 +1,7 @@
-import curry from '../common/curry'
-import defn from '../common/defn'
-import stringToUpperCase from '../lang/stringToUpperCase'
+import Any from '../lang/types/Any'
+import String from '../lang/types/String'
+import defn from '../lang/defn'
+import stringToUpperCase from '../lang/util/stringToUpperCase'
 
 /**
  * Returns the given string value converted to upper case (the value will be converted to a string if it isn't one).
@@ -20,6 +21,12 @@ import stringToUpperCase from '../lang/stringToUpperCase'
  * await toUpperCase(Promise.resolve('foo'))
  * //=> 'FOO'
  */
-const toUpperCase = curry(defn('toUpperCase', stringToUpperCase))
+const toUpperCase = defn(
+  'toUpperCase',
+  "Returns the given string value converted to upper case (the value will be converted to a string if it isn't one)",
+
+  [Any, () => String],
+  stringToUpperCase
+)
 
 export default toUpperCase

@@ -57,7 +57,7 @@ const defprotocol = fn(
   (name, description, definitions) => def(name, description, protocol(definitions)),
 
   [String, Object, () => Protocol],
-  (name, definitions) => defprotocol(name, '', definitions)
+  (name, definitions) => def(name, '', protocol(definitions))
 )
 
 export default defprotocol

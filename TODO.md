@@ -20,6 +20,9 @@ TASKS
 - [ ] implement get
 - [ ] add support for use of Protocols as Type declarations of Fns 
 
+- [ ] add support for `extend` which should be able to extend an existing type
+  with a new protocol (allows for existing types to be implemented with new
+  protocols by third party libraries)
 
 
 - [ ] improve documentation

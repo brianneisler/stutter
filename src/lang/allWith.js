@@ -47,19 +47,19 @@ import defn from './defn'
  * // => 'foo'
  */
 const allWith = defn(
-  'allWith',
+  'lang.allWith',
   'Resolves all async values in an Iterable data object and executes the given `fn` with the result',
 
-  [Any, Fn],
+  [Any, Fn, () => Any],
   (any, fn) => anyResolveAllWith(any, fn),
 
-  [Fn, Any],
+  [Fn, Any, () => Any],
   (fn, any) => anyResolveAllWith(any, fn),
 
-  [Any, Function],
+  [Any, Function, () => Any],
   (any, func) => anyResolveAllWith(any, func),
 
-  [Function, Any],
+  [Function, Any, () => Any],
   (func, any) => anyResolveAllWith(any, func)
 )
 

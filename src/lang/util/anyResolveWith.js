@@ -22,14 +22,14 @@ import anyResolveToGeneratorWith from './anyResolveToGeneratorWith'
  * @example
  *
  * await anyResolveWith(
- *   (resolvedValue) => 'bar', // resolvedValue == 'foo'
- *   Promise.resolve('foo')
+ *   Promise.resolve('foo'),
+ *   (resolvedValue) => 'bar' // resolvedValue == 'foo'
  * )
  * //=> 'bar'
  *
  * anyResolveWith(
- *   (resolvedValue) => 'bar', // resolvedValue == 'foo'
- *   'foo'
+ *   'foo',
+ *   (resolvedValue) => 'bar' // resolvedValue == 'foo'
  * )
  * //=> 'bar'
  */

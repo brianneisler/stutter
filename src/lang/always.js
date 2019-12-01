@@ -21,7 +21,7 @@ import fn from './fn'
  * //=> 'foo'
  */
 const always = defn(
-  'always',
+  'lang.always',
   'Returns an `Fn` that always returns the given value. Note that for non-primitives the value returned is a reference to the original value.',
 
   [Any, () => Fn],

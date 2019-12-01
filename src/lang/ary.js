@@ -36,17 +36,17 @@ import fnAry from './util/fnAry'
  * //=> [1, undefined]
  */
 const ary = defn(
-  'ary',
+  'lang.ary',
   'Wraps a function of any arity (including nullary) in a function that accepts exactly `number` parameters. Any extraneous parameters will not be passed to the supplied function.',
 
-  [Fn, Number],
+  [Fn, Number, () => Fn],
   (fn, number) => fnAry(fn, number),
-  [Number, Fn],
+  [Number, Fn, () => Fn],
   (number, fn) => fnAry(fn, number),
 
-  [Function, Number],
+  [Function, Number, () => Fn],
   (func, number) => fnAry(definitionToFn(func), number),
-  [Number, Function],
+  [Number, Function, () => Fn],
   (number, func) => fnAry(definitionToFn(func), number)
 )
 

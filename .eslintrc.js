@@ -69,6 +69,7 @@ module.exports = {
     'no-var': 'error',
     'object-curly-newline': 'off',
     'object-shorthand': 'off',
+    'one-var': ['error', 'never'],
     'prefer-const': 'error',
     'prefer-destructuring': ['error', {'object': true, 'array': false}],
     'quotes': [

@@ -36,6 +36,7 @@ describe('lang.types index', () => {
       Object: expect.any(Type),
       ObjectLike: expect.any(Type),
       Op: expect.any(Type),
+      Path: expect.any(Type),
       Prop: expect.any(Type),
       Protocol: expect.any(Type),
       Range: expect.any(Type),

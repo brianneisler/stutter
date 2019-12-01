@@ -1,6 +1,3 @@
-import { REGEX_DEEP_PATH, REGEX_PLAIN_PROP } from '../constants'
-import Object from './js/Object'
-import anyIsObject from './anyIsObject'
 import anyIsString from './anyIsString'
 import anyIsSymbol from './anyIsSymbol'
 
@@ -12,7 +9,6 @@ import anyIsSymbol from './anyIsSymbol'
  * @since v0.1.0
  * @category lang.util
  * @param {*} any The value to check.
- * @param {Object} [object] The object to query props on.
  * @returns {boolean} Returns `true` if `any` is a property name, else `false`.
  * @example
  *
@@ -20,11 +16,6 @@ import anyIsSymbol from './anyIsSymbol'
  * //=> true
  *
  * anyIsProp('foo.bar')
- * //=> false
- *
- * anyIsProp('foo.bar', {
- *   'foo.bar': 'any'
- * })
  * //=> true
  *
  * anyIsProp(Symbol('abc'))
@@ -54,18 +45,6 @@ import anyIsSymbol from './anyIsSymbol'
  * anyIsProp({})
  * //=> false
  */
-const anyIsProp = (any, object) => {
-  if (anyIsSymbol(any)) {
-    return true
-  }
-  if (!anyIsString(any) || anyIsObject(any)) {
-    return false
-  }
-  return (
-    REGEX_PLAIN_PROP.test(any) ||
-    !REGEX_DEEP_PATH.test(any) ||
-    (object != null && any in Object(object))
-  )
-}
+const anyIsProp = (any) => anyIsSymbol(any) || anyIsString(any)
 
 export default anyIsProp

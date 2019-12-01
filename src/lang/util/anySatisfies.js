@@ -8,11 +8,11 @@ const anySatisfies = (any, protocol, namespaces = root.namespaces) => {
   const types = filterTypesForProtocol(protocol, namespaces)
   return anyFindType(any, types) !== null
 
-  // should we store known protocols on meta for value? This can only be done
+  // TODO BRN: should we store known protocols on meta for value? This can only be done
   // for objects. Perhaps in our wrapping layer for fn we could wrap all given
   // values in an object that allows us to store meta data onto any value that
   // is passed into an `fn`. This would require wrapping and unwrapping when we
-  // hand a value off to
+  // hand a value off on return
 
   // if (!anyIsObject(any)) {
   //   return false

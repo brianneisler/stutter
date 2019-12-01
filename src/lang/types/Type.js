@@ -10,6 +10,7 @@ import fn from '../fn'
 const Type = defineAny(
   'lang.Type',
   'A generic type represeting a type itself',
+
   definitionToType({
     class: _Type,
     is: (any) => anyIsType(any),

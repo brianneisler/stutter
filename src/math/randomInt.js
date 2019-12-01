@@ -1,5 +1,5 @@
 import { MAX_SAFE_INTEGER } from '../constants'
-import defn from '../common/defn'
+import defn from '../lang/defn'
 
 /**
  * Generates a random integer between 0 and the maximum given value

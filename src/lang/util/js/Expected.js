@@ -1,7 +1,7 @@
 import SYMBOL_TO_STRING_TAG from '../../constants/SYMBOL_TO_STRING_TAG'
 
 class Expected {
-  constructor({ data, expectation, exceptionToError }) {
+  constructor({ data, exceptionToError, expectation }) {
     this.data = data
     this.expectation = expectation
     if (!exceptionToError) {

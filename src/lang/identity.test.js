@@ -41,8 +41,4 @@ describe('identity', () => {
     ]
     forEach((value) => testValue(value), values)
   })
-
-  test('returns undefined when executed with no parameters', () => {
-    expect(identity()).toBe(undefined)
-  })
 })

@@ -19,40 +19,16 @@ describe('anyIsProp', () => {
     expect(anyIsProp(Symbol.for('foo'))).toBe(true)
   })
 
-  test('returns false for plain prop String objects', () => {
-    expect(anyIsProp(new String('foo'))).toBe(false)
-    expect(anyIsProp(new String('bar-'))).toBe(false)
-    expect(anyIsProp(new String('bar1'))).toBe(false)
-    expect(anyIsProp(new String('1bar'))).toBe(false)
+  test('returns true for plain prop String objects', () => {
+    expect(anyIsProp(new String('foo'))).toBe(true)
+    expect(anyIsProp(new String('bar-'))).toBe(true)
+    expect(anyIsProp(new String('bar1'))).toBe(true)
+    expect(anyIsProp(new String('1bar'))).toBe(true)
   })
 
   test('returns false for arrays', () => {
     expect(anyIsProp([])).toBe(false)
     expect(anyIsProp(new Array())).toBe(false)
-  })
-
-  test('returns false for prop paths', () => {
-    expect(anyIsProp('foo.bar')).toBe(false)
-    expect(anyIsProp('foo[1]')).toBe(false)
-    expect(anyIsProp("foo['abc']")).toBe(false)
-  })
-
-  test('returns true for prop paths that are actual props', () => {
-    expect(
-      anyIsProp('foo.bar', {
-        'foo.bar': 'value'
-      })
-    ).toBe(true)
-    expect(
-      anyIsProp('foo[1]', {
-        'foo[1]': 'value'
-      })
-    ).toBe(true)
-    expect(
-      anyIsProp("foo['abc']", {
-        "foo['abc']": 'value'
-      })
-    ).toBe(true)
   })
 
   test('returns false for all other values', () => {

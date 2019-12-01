@@ -27,10 +27,10 @@ import String from './types/String'
  * def('foo.bar', fn(() => {}))
  */
 const def = definitionsToFn([
-  [String, String, Any],
+  [String, String, Any, () => Any],
   (name, description, value) => defineAny(name, description, value),
 
-  [String, Any],
+  [String, Any, () => Any],
   (name, value) => def(name, '', value)
 ])
 

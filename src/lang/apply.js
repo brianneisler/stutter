@@ -32,7 +32,7 @@ import defn from './defn'
  * //=> -99
  */
 const apply = defn(
-  'apply',
+  'lang.apply',
   'Applies function `func` to the argument list `args`.',
 
   [Function, Array, () => Any],

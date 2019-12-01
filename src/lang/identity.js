@@ -1,6 +1,6 @@
-// import curry from './curry'
+import Any from './types/Any'
+import defn from './defn'
 
-// TODO BRN: Only add support for placeholders, do not curry
 /**
  * A function that does nothing but return the parameter supplied to it. Good as a default or placeholder function.
  *
@@ -21,8 +21,12 @@
  * identity()
  * //=> undefined
  */
-const identity = (value) => {
-  return value
-}
+const identity = defn(
+  'identity',
+  'A function that does nothing but return the parameter supplied to it. Good as a default or placeholder function.',
+
+  [Any, () => Any],
+  (value) => value
+)
 
 export default identity

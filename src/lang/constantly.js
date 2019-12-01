@@ -1,5 +1,9 @@
 import always from './always'
 
+// TODO BRN: Add proper support for aliases
+// * should support a the aliased functions protocols
+// * should allow for the name to be used in place of the underlying functions
+
 /**
  * Alias of [`always`](#always)
  *

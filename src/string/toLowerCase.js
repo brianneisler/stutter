@@ -1,6 +1,7 @@
-import curry from '../common/curry'
-import defn from '../common/defn'
-import stringToLowerCase from '../lang/stringToLowerCase'
+import Any from '../lang/types/Any'
+import String from '../lang/types/String'
+import defn from '../lang/defn'
+import stringToLowerCase from '../lang/util/stringToLowerCase'
 
 /**
  * Returns the given string value converted to lower case (the value will be converted to a string if it isn't one).
@@ -20,6 +21,12 @@ import stringToLowerCase from '../lang/stringToLowerCase'
  * await toLowerCase(Promise.resolve('FOO'))
  * //=> 'foo'
  */
-const toLowerCase = curry(defn('toLowerCase', stringToLowerCase))
+const toLowerCase = defn(
+  'toLowerCase',
+  "Returns the given string value converted to lower case (the value will be converted to a string if it isn't one)",
+
+  [Any, () => String],
+  stringToLowerCase
+)
 
 export default toLowerCase

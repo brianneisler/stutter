@@ -2,11 +2,15 @@ import { Any } from '../lang/types'
 import defn from '../lang/defn'
 
 /**
- * Returns `true` if both arguments are `true`; `false` otherwise.
+ * Evaluates expressions one at a time, from left to right. If an expression returns logical
+ * false, that that value is returned, otherwise it returns the value of the
+ * last expression (which is logically true).
  *
  * This method resolves both parameters before executing.
  *
  * This method will automatically upgrade to async if a Promise is received for either value.
+ *
+ * This method will automatically upgrade to a generator if a Generator is received for either value.
  *
  * @function
  * @since v0.1.0
@@ -28,9 +32,21 @@ import defn from '../lang/defn'
  * and(false, false)
  * //=> false
  *
+ * and(null, false)
+ * //=> null
+ *
+ * and([], {})
+ * //=> {}
+ *
  * await and(Promise.resolve(false), false)
  * //=> false
  */
-const and = defn('logic.and', [Any, Any], (valueA, valueB) => valueA && valueB)
+const and = defn(
+  'logic.and',
+  'Evaluates expressions one at a time, from left to right. If an expression returns logical false, that that value is returned, otherwise it returns the value of the last expression (which is logically true).',
+
+  [Any, Any, () => Any],
+  (valueA, valueB) => valueA && valueB
+)
 
 export default and

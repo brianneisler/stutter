@@ -1,9 +1,5 @@
-import { REGEX_DEEP_PATH, REGEX_PLAIN_PROP } from '../constants'
-import anyIsFunction from './anyIsFunction'
-import anyIsString from './anyIsString'
-
 /**
- * Checks if `any` is a key and not a path. The key does NOT need to exist in the optional Keyed value. The Keyed value is used to differentiate between a path and a key that is equivalent to a path.
+ * Checks if `any` is a key.
  *
  * @function
  * @since v0.1.0
@@ -14,14 +10,6 @@ import anyIsString from './anyIsString'
  * @example
  *
  * anyIsKey('foo')
- * //=> true
- *
- * anyIsKey('foo.bar')
- * //=> false
- *
- * anyIsKey('foo.bar', {
- *   'foo.bar': 'value'
- * })
  * //=> true
  *
  * anyIsKey(123)
@@ -48,15 +36,6 @@ import anyIsString from './anyIsString'
  * anyIsKey({})
  * //=> false
  */
-const anyIsKey = (any, keyed) => {
-  if (anyIsString(any)) {
-    return (
-      REGEX_PLAIN_PROP.test(any) ||
-      !REGEX_DEEP_PATH.test(any) ||
-      (keyed != null && anyIsFunction(keyed.has) && keyed.has(any))
-    )
-  }
-  return true
-}
+const anyIsKey = () => true
 
 export default anyIsKey

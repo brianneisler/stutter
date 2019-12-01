@@ -1,4 +1,4 @@
-import Promise from 'bluebird'
+import Promise from './util/js/Promise'
 
 /**
  * Creates a promise with the resolve and reject methods exposed as properties

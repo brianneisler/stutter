@@ -1,4 +1,4 @@
-import __ from '../common/__'
+import __ from '../lang/_'
 import toLowerCase from './toLowerCase'
 
 describe('toLowerCase', () => {

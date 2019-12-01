@@ -71,6 +71,8 @@ import def from './def'
  */
 const fn = def(
   'lang.fn',
+  'Defines an `Fn` function.',
+
   definitionsToFn([
     // TODO BRN: Add support for unions and rest...
     // [Function.or([Function, Array]).rest(), () => Fn],

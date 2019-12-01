@@ -29,7 +29,6 @@ describe('constants index', () => {
       SYMBOL_ITERATOR: expect.anything(),
       SYMBOL_META: expect.anything(),
       SYMBOL_OP: expect.anything(),
-      SYMBOL_PROTOCOLS: expect.anything(),
       SYMBOL_TO_STRING_TAG: expect.anything()
     })
   })
