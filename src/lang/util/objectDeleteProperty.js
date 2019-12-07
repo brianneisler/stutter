@@ -1,30 +1,41 @@
+import objectClone from './objectClone'
+import objectHasOwnProperty from './objectHasOwnProperty'
+
 /**
- * Removes a property from an object and returns the object.
+ * Removes a property from an Object. Returns a copy of the object with the
+ * Property removed.
  *
  * See [delete operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete) for more information
  *
  * @private
  * @function
+ * @immutable
+ * @pure
  * @since v0.1.0
  * @category lang.util
- * @param {object} object The object on which to remove the property.
- * @param {string} prop The name or Symbol of the property to be deleted.
- * @param {object} descriptor The descriptor for the property being defined.
- * @returns {object} The object that was passed to the function.
+ * @param {Object} object The Object on which to remove the property.
+ * @param {String} prop The name or Symbol of the property to be deleted.
+ * @returns {Object} A copy of the Object that was passed to the function.
  *
  * const object = {
  *   foo: 1,
  *   bar: 2
  * }
  *
- * objectDeleteProperty(object, 'foo')
+ * const result = objectDeleteProperty(object, 'foo')
  *
- * object.foo
+ * result.foo
  * //=> undefined
+ * object.foo
+ * //=> 1
  */
-const objectDefineProperty = (object, property) => {
-  delete object[property]
-  return object
+const objectDeleteProperty = (object, property) => {
+  if (!objectHasOwnProperty(object, property)) {
+    return object
+  }
+  const clone = objectClone(object)
+  delete clone[property]
+  return clone
 }
 
-export default objectDefineProperty
+export default objectDeleteProperty

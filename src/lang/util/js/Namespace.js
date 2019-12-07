@@ -1,12 +1,17 @@
 import ImmutableMap from './ImmutableMap'
+import SYMBOL_TO_STRING_TAG from '../../constants/SYMBOL_TO_STRING_TAG'
 
 /**
  * Note: This class is **immutable**
  */
 class Namespace {
   constructor(name, mappings = ImmutableMap()) {
-    this.name = name
     this.mappings = mappings
+    this.name = name
+  }
+
+  get [SYMBOL_TO_STRING_TAG]() {
+    return 'Namespace'
   }
 
   get(prop) {

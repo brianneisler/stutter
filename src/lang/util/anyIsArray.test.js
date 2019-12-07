@@ -1,3 +1,4 @@
+import ImmutableList from './js/ImmutableList'
 import anyIsArray from './anyIsArray'
 
 describe('anyIsArray', () => {
@@ -31,6 +32,7 @@ describe('anyIsArray', () => {
     expect(anyIsArray(new Boolean(true))).toBe(false)
     expect(anyIsArray(new Date())).toBe(false)
     expect(anyIsArray(new Error())).toBe(false)
+    expect(anyIsArray(new ImmutableList([]))).toBe(false)
     expect(anyIsArray(new Map())).toBe(false)
     expect(anyIsArray(new Number(1))).toBe(false)
     expect(anyIsArray(new Promise(() => {}))).toBe(false)

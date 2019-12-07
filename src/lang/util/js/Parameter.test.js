@@ -8,7 +8,7 @@ describe('js:Parameter', () => {
       const testType = new Type({ class: TestClass })
       const instance = new Parameter('foo', testType)
       expect(instance).toBeInstanceOf(Parameter)
-      expect(instance).toEqual({
+      expect(instance).toMatchObject({
         name: 'foo',
         type: testType
       })

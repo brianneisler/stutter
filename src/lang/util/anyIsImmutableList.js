@@ -26,6 +26,6 @@ import Immutable from 'immutable'
  * anyIsImmutableList(ImmutableStack())
  * //=> false
  */
-const anyIsImmutableList = Immutable.isList
+const anyIsImmutableList = (any) => Immutable.isList(any)
 
 export default anyIsImmutableList

@@ -1,5 +1,6 @@
+import Path from './js/Path'
 import anyHasKey from './anyHasKey'
-import anyHasProp from './anyHasProp'
+import anyHasProperty from './anyHasProperty'
 import anyIsArray from './anyIsArray'
 import anyIsString from './anyIsString'
 import stringToPath from './stringToPath'
@@ -12,30 +13,21 @@ import stringToPath from './stringToPath'
  * @since v0.1.0
  * @category common
  * @param {string} value The value to cast to an array path
- * @param {Object} object The object to check against for existing properties, keys or indexes that may be interpreted as a path
  * @returns {Array<string>} The path
  * @example
  *
  * anyToPath('a.b.c')
  * //=> ['a', 'b', 'c']
  *
- * anyToPath('a.b.c', {
- *   'a.b.c': 'foo'
- * })
- * //=> ['a.b.c']
  */
-const anyToPath = (any, object) => {
+const anyToPath = (any) => {
   if (!anyIsString(any)) {
-    if (anyIsArray(any) && !anyHasKey(object, any)) {
-      return any
+    if (anyIsArray(any)) {
+      return new Path(any)
     }
-    return [any]
+    return new Path([any])
   }
 
-  // NOTE BRN: Keys take precendence over props
-  if (anyHasKey(object, any) || anyHasProp(object, any)) {
-    return [any]
-  }
   return stringToPath(any)
 }
 

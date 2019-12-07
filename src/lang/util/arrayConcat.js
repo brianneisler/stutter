@@ -3,10 +3,12 @@ import Array from './js/Array'
 const { concat } = Array.prototype
 
 /**
- * Concat an array with two or more arrays. This method does not change the existing arrays, but instead returns a new array.
+ * Concat an `Array` with one or more `Array`s.
  *
  * @private
  * @function
+ * @immutable
+ * @pure
  * @since v0.1.0
  * @category lang.util
  * @param {Array} array The array concat with the given values

@@ -7,139 +7,139 @@ describe('anyToIterator', () => {
   test('returns iterator for string that iterates through the characters', () => {
     const iter = anyToIterator('abc')
     expect(iter.next()).toEqual({
-      value: 'a',
+      done: false,
       index: 0,
       kdx: 0,
       prev: undefined,
-      done: false
+      value: 'a'
     })
     expect(iter.next()).toEqual({
-      value: 'b',
+      done: false,
       index: 1,
       kdx: 1,
       prev: {
-        value: 'a',
+        done: false,
         index: 0,
         kdx: 0,
-        done: false
+        value: 'a'
       },
-      done: false
+      value: 'b'
     })
     expect(iter.next()).toEqual({
-      value: 'c',
+      done: false,
       index: 2,
       kdx: 2,
       prev: {
-        value: 'b',
+        done: false,
         index: 1,
         kdx: 1,
-        done: false
+        value: 'b'
       },
-      done: false
+      value: 'c'
     })
     expect(iter.next()).toEqual({
-      value: undefined,
+      done: true,
       prev: {
-        value: 'c',
+        done: false,
         index: 2,
         kdx: 2,
-        done: false
+        value: 'c'
       },
-      done: true
+      value: undefined
     })
   })
 
   test('returns iterator for array that iterates through the values', () => {
     const iter = anyToIterator(['abc', 'foo', 'bar'])
     expect(iter.next()).toEqual({
-      value: 'abc',
+      done: false,
       index: 0,
       kdx: 0,
       prev: undefined,
-      done: false
+      value: 'abc'
     })
     expect(iter.next()).toEqual({
-      value: 'foo',
+      done: false,
       index: 1,
       kdx: 1,
       prev: {
-        value: 'abc',
+        done: false,
         index: 0,
         kdx: 0,
-        done: false
+        value: 'abc'
       },
-      done: false
+      value: 'foo'
     })
     expect(iter.next()).toEqual({
-      value: 'bar',
+      done: false,
       index: 2,
       kdx: 2,
       prev: {
-        value: 'foo',
+        done: false,
         index: 1,
         kdx: 1,
-        done: false
+        value: 'foo'
       },
-      done: false
+      value: 'bar'
     })
     expect(iter.next()).toEqual({
-      value: undefined,
+      done: true,
       prev: {
-        value: 'bar',
+        done: false,
         index: 2,
         kdx: 2,
-        done: false
+        value: 'bar'
       },
-      done: true
+      value: undefined
     })
   })
 
   test('returns iterator for object that iterates through the values and keys', () => {
     const iter = anyToIterator({
       abc: 'def',
-      foo: 'bar',
-      bim: 'bop'
+      bim: 'bop',
+      foo: 'bar'
     })
     expect(iter.next()).toEqual({
-      value: 'def',
+      done: false,
       kdx: 'abc',
       key: 'abc',
       prev: undefined,
-      done: false
+      value: 'def'
     })
     expect(iter.next()).toEqual({
-      value: 'bar',
-      kdx: 'foo',
-      key: 'foo',
-      prev: {
-        value: 'def',
-        kdx: 'abc',
-        key: 'abc',
-        done: false
-      },
-      done: false
-    })
-    expect(iter.next()).toEqual({
-      value: 'bop',
+      done: false,
       kdx: 'bim',
       key: 'bim',
       prev: {
-        value: 'bar',
-        kdx: 'foo',
-        key: 'foo',
-        done: false
+        done: false,
+        kdx: 'abc',
+        key: 'abc',
+        value: 'def'
       },
-      done: false
+      value: 'bop'
     })
     expect(iter.next()).toEqual({
-      value: undefined,
+      done: false,
+      kdx: 'foo',
+      key: 'foo',
       prev: {
-        value: 'bop',
+        done: false,
         kdx: 'bim',
         key: 'bim',
-        done: false
+        value: 'bop'
       },
-      done: true
+      value: 'bar'
+    })
+    expect(iter.next()).toEqual({
+      done: true,
+      prev: {
+        done: false,
+        kdx: 'foo',
+        key: 'foo',
+        value: 'bar'
+      },
+      value: undefined
     })
   })
 

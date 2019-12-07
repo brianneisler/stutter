@@ -1,3 +1,5 @@
+import SYMBOL_TO_STRING_TAG from '../../constants/SYMBOL_TO_STRING_TAG'
+
 /**
  * Note: This class is **immutable**
  *
@@ -12,6 +14,10 @@ class Parameter {
   constructor(name, type) {
     this.name = name
     this.type = type
+  }
+
+  get [SYMBOL_TO_STRING_TAG]() {
+    return 'Parameter'
   }
 
   /**

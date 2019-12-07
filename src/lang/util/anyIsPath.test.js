@@ -1,34 +1,35 @@
+import Path from './js/Path'
 import anyIsPath from './anyIsPath'
 
 describe('anyIsPath', () => {
   test('returns true for empty Array', () => {
-    expect(anyIsPath([])).toBe(true)
-    expect(anyIsPath(new Array())).toBe(true)
+    expect(anyIsPath(new Path([]))).toBe(true)
+    expect(anyIsPath(new Path(new Array()))).toBe(true)
   })
 
   test('returns true for plain string in Array', () => {
-    expect(anyIsPath(['foo'])).toBe(true)
-    expect(anyIsPath(['bar-'])).toBe(true)
-    expect(anyIsPath(['bar1'])).toBe(true)
-    expect(anyIsPath(['1bar'])).toBe(true)
+    expect(anyIsPath(new Path(['foo']))).toBe(true)
+    expect(anyIsPath(new Path(['bar-']))).toBe(true)
+    expect(anyIsPath(new Path(['bar1']))).toBe(true)
+    expect(anyIsPath(new Path(['1bar']))).toBe(true)
   })
 
   test('returns true for numeric strings in Array', () => {
-    expect(anyIsPath(['123'])).toBe(true)
-    expect(anyIsPath(['-123'])).toBe(true)
-    expect(anyIsPath(['0'])).toBe(true)
+    expect(anyIsPath(new Path(['123']))).toBe(true)
+    expect(anyIsPath(new Path(['-123']))).toBe(true)
+    expect(anyIsPath(new Path(['0']))).toBe(true)
   })
 
   test('returns true for Symbols in Array', () => {
-    expect(anyIsPath([Symbol('abc')])).toBe(true)
-    expect(anyIsPath([Symbol.for('foo')])).toBe(true)
+    expect(anyIsPath(new Path([Symbol('abc')]))).toBe(true)
+    expect(anyIsPath(new Path([Symbol.for('foo')]))).toBe(true)
   })
 
   test('returns true for plain String objects in Array', () => {
-    expect(anyIsPath([new String('foo')])).toBe(true)
-    expect(anyIsPath([new String('bar-')])).toBe(true)
-    expect(anyIsPath([new String('bar1')])).toBe(true)
-    expect(anyIsPath([new String('1bar')])).toBe(true)
+    expect(anyIsPath(new Path([new String('foo')]))).toBe(true)
+    expect(anyIsPath(new Path([new String('bar-')]))).toBe(true)
+    expect(anyIsPath(new Path([new String('bar1')]))).toBe(true)
+    expect(anyIsPath(new Path([new String('1bar')]))).toBe(true)
   })
 
   test('returns false for all other values', () => {
@@ -47,10 +48,13 @@ describe('anyIsPath', () => {
     expect(anyIsPath(Symbol('abc'))).toBe(false)
     expect(anyIsPath(Symbol.for('foo'))).toBe(false)
     expect(anyIsPath(/abc/)).toBe(false)
+    expect(anyIsPath({})).toBe(false)
+    expect(anyIsPath([])).toBe(false)
     expect(anyIsPath(async () => {})).toBe(false)
     expect(anyIsPath(() => {})).toBe(false)
     expect(anyIsPath(function() {})).toBe(false)
     expect(anyIsPath(function*() {})).toBe(false)
+    expect(anyIsPath(new Array())).toBe(false)
     expect(anyIsPath(new ArrayBuffer(2))).toBe(false)
     expect(anyIsPath(new Boolean(false))).toBe(false)
     expect(anyIsPath(new Boolean(true))).toBe(false)

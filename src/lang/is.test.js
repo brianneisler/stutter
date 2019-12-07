@@ -1,4 +1,4 @@
-import __ from '../common/__'
+import __ from './_'
 import is from './is'
 
 describe('is', () => {
@@ -28,17 +28,6 @@ describe('is', () => {
     expect(
       is(Object, {
         resolve: () => 123
-      })
-    ).toBe(true)
-  })
-
-  test('dispatches to is method of object', () => {
-    expect(
-      is(String, {
-        is: (Constructor) => {
-          expect(Constructor).toBe(String)
-          return new String('foo') instanceof Constructor
-        }
       })
     ).toBe(true)
   })

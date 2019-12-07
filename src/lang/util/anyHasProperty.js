@@ -13,17 +13,17 @@ import objectHasOwnProperty from './objectHasOwnProperty'
  * @returns {boolean} Returns true if the given `any` has the property `prop`
  * @example
  *
- * anyHasProp('foo', {foo: 'bar'})
+ * anyHasProperty('foo', {foo: 'bar'})
  * //=> true
  *
- * anyHasProp('foo', new Map([['foo', 'bar']])) // Map keys are not props
+ * anyHasProperty('foo', new Map([['foo', 'bar']])) // Map keys are not props
  * //=> false
  */
-const anyHasProp = (any, prop) => {
+const anyHasProperty = (any, prop) => {
   if (anyIsNil(any)) {
     return false
   }
   return objectHasOwnProperty(any, prop)
 }
 
-export default anyHasProp
+export default anyHasProperty

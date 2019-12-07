@@ -11,7 +11,7 @@ describe('definitionsToProtocol', () => {
       foo: [Self, Any]
     })
     expect(instance).toBeInstanceOf(Protocol)
-    expect(instance).toEqual({
+    expect(instance).toMatchObject({
       definitions: ImmutableMap({
         foo: ImmutableList([Self, Any])
       })

@@ -1,3 +1,5 @@
+import SYMBOL_TO_STRING_TAG from '../../constants/SYMBOL_TO_STRING_TAG'
+
 /**
  * Note: This class is **immutable**
  */
@@ -7,6 +9,10 @@ class Protocol {
    */
   constructor(definitions) {
     this.definitions = definitions
+  }
+
+  get [SYMBOL_TO_STRING_TAG]() {
+    return 'Protocol'
   }
 
   /**

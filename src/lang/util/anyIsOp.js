@@ -1,4 +1,4 @@
-import { SYMBOL_OP } from '../constants'
+import Op from './js/Op'
 
 /**
  * Determines if `any` is an Op.
@@ -11,11 +11,14 @@ import { SYMBOL_OP } from '../constants'
  * @returns {boolean}
  * @example
  *
+ * anyIsOp(new Op(fn))
+ * //=> true
+ *
  * anyIsOp({
  *   ['@@redux-saga/IO']: 'op'
  * })
  * //=> true
  */
-const anyIsOp = (any) => !!(any && (any[SYMBOL_OP] || any['@@redux-saga/IO']))
+const anyIsOp = (any) => !!(any && (any instanceof Op || any['@@redux-saga/IO']))
 
 export default anyIsOp

@@ -86,15 +86,9 @@ module.exports = {
     'import/default': 'error',
     'import/first': 'error',
     'import/no-cycle': 'error',
+    'import/no-duplicates': 'error',
     'import/no-self-import': 'error',
-    'import/no-unresolved': [
-      'error',
-      {
-        "ignore": [
-          "react-native"
-        ]
-      }
-    ],
+    'import/no-unresolved': 'error',
     'import/no-useless-path-segments': 'error',
     'prettier/prettier': 'error',
     'sort-destructure-keys/sort-destructure-keys': 'error',

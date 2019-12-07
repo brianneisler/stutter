@@ -1,117 +1,182 @@
+import ImmutableList from './util/js/ImmutableList'
+import ImmutableMap from './util/js/ImmutableMap'
 import get from './get'
+import path from './path'
 
 describe('get', () => {
-  test('get using a single key', () => {
-    const value = {
-      foo: 'bar'
-    }
-    expect(get('foo', value)).toBe('bar')
-    expect(get(['foo'], value)).toBe('bar')
-    expect(get('foo.bar', value)).toBe(undefined)
-    expect(get('bim', value)).toBe(undefined)
-    expect(get(undefined, value)).toBe(value)
-  })
+  describe('Object', () => {
+    test('get a single existing Property from an Object using [Property, Object] argument order', () => {
+      const object = {
+        foo: 'bar'
+      }
+      const result = get('foo', object)
+      expect(result).toEqual('bar')
+    })
 
-  test('select from a nested Map', () => {
-    const value = {
-      foo: new Map([
-        [
-          'bar',
-          {
-            bim: 'bop'
-          }
-        ]
-      ])
-    }
-    expect(get('foo.bar.bim', value)).toBe('bop')
-  })
+    test('get a single existing Property from an Object using [Object, Property] argument order', () => {
+      const object = {
+        foo: 'bar'
+      }
+      const result = get(object, 'foo')
+      expect(result).toEqual('bar')
+    })
 
-  test('select from a nested object with get method uses prop only', () => {
-    const foo = {
-      data: {
-        bar: {
-          bim: 'bop'
+    test('get a single non-existing Property from an Object using [Property, Object] argument order', () => {
+      const value = {
+        foo: 'bar'
+      }
+      expect(get('bim', value)).toBe(undefined)
+    })
+
+    test('get from nil values throws error', () => {
+      expect(() => get('foo', undefined)).toThrow(/foo/)
+      expect(() => get('foo', null)).toThrow(/foo/)
+    })
+
+    test('`undefined` is NOT considered a Property', () => {
+      const value = {
+        [undefined]: 'foo'
+      }
+      expect(() => get(undefined, value)).toThrow()
+    })
+
+    test('`null` is NOT considered a Property for Object', () => {
+      const value = {
+        [null]: 'foo'
+      }
+      expect(() => get(null, value)).toThrow()
+    })
+
+    test('Booleans are not considered Properties for Object', () => {
+      const value = {
+        [false]: 'foo',
+        [true]: 'bar'
+      }
+      expect(() => get(false, value)).toThrow()
+      expect(() => get(true, value)).toThrow()
+    })
+
+    test('`Number` is NOT considered a Property for Object', () => {
+      const value = {
+        [0]: 'foo'
+      }
+      expect(() => get(0, value)).toThrow()
+    })
+
+    test('supports Symbol values as Property for Object', () => {
+      const sym = Symbol('foo')
+      const value = {
+        [sym]: 'foo'
+      }
+      expect(get(sym, value)).toBe('foo')
+    })
+
+    test('does not convert dot props to paths', () => {
+      const value = {
+        foo: {
+          bar: 'foobar'
         }
-      },
-      get(prop) {
-        return this.data[prop]
       }
-    }
-    const value = {
-      foo
-    }
-    expect(get('foo.bar.bim', value)).toBe('bop')
-  })
+      expect(get('foo.bar', value)).toBe(undefined)
+    })
 
-  test('undefined returns current value', () => {
-    const value = {}
-    expect(get(undefined, value)).toBe(value)
-    expect(get(undefined, null)).toBe(null)
-  })
-
-  test('null is not considered undefined', () => {
-    const value = {}
-    expect(get(null, value)).toBe(undefined)
-    expect(get(null, null)).toBe(undefined)
-  })
-
-  test('supports non string values as keys', () => {
-    const sym = Symbol('foo')
-    const value = {
-      [null]: 'foo',
-      [0]: 'foo',
-      [false]: 'foo',
-      [true]: 'foo',
-      [sym]: 'foo'
-    }
-    expect(get(null, value)).toBe('foo')
-    expect(get(0, value)).toBe('foo')
-    expect(get(false, value)).toBe('foo')
-    expect(get(true, value)).toBe('foo')
-    expect(get(sym, value)).toBe('foo')
-  })
-
-  test('converts dot props to paths', () => {
-    const value = {
-      foo: {
-        bar: 'foobar'
+    test('works with props that have dots', () => {
+      const value = {
+        'foo.bar': 'foobar'
       }
-    }
-    expect(get('foo.bar', value)).toBe('foobar')
+      expect(get('foo.bar', value)).toBe('foobar')
+    })
+
+    test('supports array syntax', () => {
+      const value = {
+        foo: ['foobar']
+      }
+      const result = get(path('foo[0]'), value)
+      expect(result).toBe('foobar')
+    })
   })
 
-  test('works with props that have dots', () => {
-    const value = {
-      'foo.bar': 'foobar'
-    }
-    expect(get(['foo.bar'], value)).toBe('foobar')
+  describe('Map', () => {
+    test('get from a nested Map', () => {
+      const value = {
+        foo: new Map([
+          [
+            'bar',
+            {
+              bim: 'bop'
+            }
+          ]
+        ])
+      }
+      expect(get(path('foo.bar.bim'), value)).toBe('bop')
+    })
   })
 
-  test('supports array syntax', () => {
-    const value = {
-      foo: ['foobar']
-    }
-    expect(get('foo[0]', value)).toBe('foobar')
+  describe('Array', () => {
+    test('supports accessing Arrays with Paths', () => {
+      const value = ['foobar']
+      expect(get(path('[0]'), value)).toBe('foobar')
+    })
+
+    test('supports accessing arrays directly with Number in Path', () => {
+      const value = ['foobar']
+      expect(get([0], value)).toBe('foobar')
+    })
   })
 
-  test('supports accessing arrays directly', () => {
-    const value = ['foobar']
-    expect(get('[0]', value)).toBe('foobar')
+  describe('ImmutableMap', () => {
+    test('get a single existing Key from an ImmutableMap using [Key, ImmutableMap] argument order', () => {
+      const map = new ImmutableMap([['foo', 'bar']])
+
+      const result = get('foo', map)
+      expect(result).toEqual('bar')
+      expect(map).toEqual(new ImmutableMap([['foo', 'bar']]))
+    })
+
+    test('get a single existing Key from an ImmutableMap using [ImmutableMap, Key] argument order', () => {
+      const map = new ImmutableMap([['foo', 'bar']])
+
+      const result = get(map, 'foo')
+      expect(result).toEqual('bar')
+      expect(map).toEqual(new ImmutableMap([['foo', 'bar']]))
+    })
+
+    test('get a nested existing Key from an ImmutableMap using [Path, ImmutableMap] argument order', () => {
+      const map = new ImmutableMap([['foo', { bar: 'baz' }]])
+
+      const result = get(map, path(['foo', 'bar']))
+      expect(result).toEqual('baz')
+      expect(map).toEqual(new ImmutableMap([['foo', { bar: 'baz' }]]))
+    })
   })
 
-  test('supports accessing arrays directly with number array path', () => {
-    const value = ['foobar']
-    expect(get([0], value)).toBe('foobar')
+  describe('ImmutableList', () => {
+    test('get a single existing Index from an ImmutableList using [Index, ImmutableList] argument order', () => {
+      const list = new ImmutableList(['foo'])
+
+      const result = get(0, list)
+      expect(result).toEqual('foo')
+      expect(list).toEqual(new ImmutableList(['foo']))
+    })
+
+    test('get a single existing Index from an ImmutableList using [ImmutableList, Index] argument order', () => {
+      const list = new ImmutableList(['foo'])
+
+      const result = get(list, 0)
+      expect(result).toEqual('foo')
+      expect(result).not.toBe(list)
+      expect(list).toEqual(new ImmutableList(['foo']))
+    })
   })
 
   test('empty array returns the value', () => {
-    expect(get([], { a: 'b' })).toEqual({ a: 'b' })
-    expect(get([], {})).toEqual({})
-    expect(get([], [])).toEqual([])
-    expect(get([], 'foo')).toBe('foo')
-    expect(get([], 123)).toBe(123)
-    expect(get([], null)).toBe(null)
-    expect(get([], undefined)).toBe(undefined)
+    expect(get(path([]), { a: 'b' })).toEqual({ a: 'b' })
+    expect(get(path([]), {})).toEqual({})
+    expect(get(path([]), [])).toEqual([])
+    expect(get(path([]), 'foo')).toBe('foo')
+    expect(get(path([]), 123)).toBe(123)
+    expect(get(path([]), null)).toBe(null)
+    expect(get(path([]), undefined)).toBe(undefined)
   })
 
   test('curries the get method', () => {
@@ -122,32 +187,11 @@ describe('get', () => {
     expect(getFoo(value)).toBe('bar')
   })
 
-  test('dispatches to the get method of the last argument', () => {
+  test('executes getter if prop is function', () => {
     const value = {
-      get(path) {
-        return this.props[path]
-      },
-      props: {
-        foo: 'bar'
-      }
+      foo: 'bar'
     }
-    expect(get('foo', value)).toBe('bar')
-  })
-
-  test('dispatches to the get method of the last argument when curried', () => {
-    const value = {
-      get: jest.fn(function(path) {
-        return get(path, this.props)
-      }),
-      props: {
-        foo: {
-          bar: 'baz'
-        }
-      }
-    }
-    const getFooBar = get('foo.bar')
-    expect(getFooBar(value)).toBe('baz')
-    expect(value.get).toHaveBeenCalledTimes(1)
-    expect(value.get).toHaveBeenCalledWith('foo.bar', value)
+    expect(get((val) => val.foo, value)).toBe('bar')
+    expect(get((val) => val.bar, value)).toBe(undefined)
   })
 })

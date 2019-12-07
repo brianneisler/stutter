@@ -28,7 +28,6 @@ describe('constants index', () => {
       SYMBOL_FN: expect.anything(),
       SYMBOL_ITERATOR: expect.anything(),
       SYMBOL_META: expect.anything(),
-      SYMBOL_OP: expect.anything(),
       SYMBOL_TO_STRING_TAG: expect.anything()
     })
   })

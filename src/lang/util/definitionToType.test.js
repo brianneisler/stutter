@@ -15,7 +15,7 @@ describe('definitionToType', () => {
     }
     const type = definitionToType(testDef)
     expect(type).toBeInstanceOf(Type)
-    expect(type).toEqual({
+    expect(type).toMatchObject({
       class: testDef.class,
       protocols: new ImmutableMap()
     })
@@ -24,7 +24,7 @@ describe('definitionToType', () => {
   it('accepts protocols and class optionally', () => {
     const type = definitionToType({})
     expect(type).toBeInstanceOf(Type)
-    expect(type).toEqual({
+    expect(type).toMatchObject({
       class: undefined,
       protocols: new ImmutableMap()
     })
@@ -42,7 +42,7 @@ describe('definitionToType', () => {
       ]
     }
     const type = definitionToType(testDef)
-    expect(type).toEqual({
+    expect(type).toMatchObject({
       class: testDef.class,
       protocols: expect.any(ImmutableMap)
     })

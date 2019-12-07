@@ -1,4 +1,4 @@
-import { SYMBOL_OP } from './constants'
+import Op from './util/js/Op'
 
 /**
  * Creates an op object that can be yielded by a generator and intercepted/executed by any generator middleware
@@ -9,6 +9,6 @@ import { SYMBOL_OP } from './constants'
  * @param {Function} fn The function to execute when the op is executed
  * @returns {Object} The op object
  */
-const op = (fn) => ({ [SYMBOL_OP]: fn })
+const op = (fn) => new Op(fn)
 
 export default op

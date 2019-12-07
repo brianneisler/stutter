@@ -13,7 +13,7 @@ describe('js:Protocol', () => {
         })
       )
       expect(instance).toBeInstanceOf(Protocol)
-      expect(instance).toEqual({
+      expect(instance).toMatchObject({
         definitions: ImmutableMap({
           foo: ImmutableList([Self, Number])
         })

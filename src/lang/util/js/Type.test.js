@@ -16,7 +16,7 @@ describe('js:Type', () => {
       }
       const instance = new Type(testDef)
       expect(instance).toBeInstanceOf(Type)
-      expect(instance).toEqual({
+      expect(instance).toMatchObject({
         class: testDef.class,
         protocols: new ImmutableMap()
       })
@@ -28,7 +28,7 @@ describe('js:Type', () => {
       }
       const instance = new Type(testDef)
       expect(instance).toBeInstanceOf(Type)
-      expect(instance).toEqual({
+      expect(instance).toMatchObject({
         class: testDef.class,
         protocols: new ImmutableMap()
       })
@@ -65,6 +65,28 @@ describe('js:Type', () => {
       }
       const instance = new Type(testDef)
       const protocolFn = instance.protocols.get(protocol).foo
+      expect(protocolFn).toBeInstanceOf(Function)
+      expect(anyIsFn(protocolFn)).toBe(true)
+      expect(fnGetMeta(protocolFn)).toEqual({
+        parameters: [new Parameter('foo', Self)],
+        returns: Self,
+        self: instance
+      })
+    })
+  })
+
+  describe('getProtocols', () => {
+    it('returns the Protocols of the Type', () => {
+      const protocol = definitionsToProtocol({
+        foo: [Self, () => Self]
+      })
+      const testDef = {
+        class: class {},
+        protocols: [protocol, { foo: definitionToFn((foo) => foo, [Self, () => Self]) }],
+        to: () => {}
+      }
+      const instance = new Type(testDef)
+      const protocolFn = instance.getProtocols().get(protocol).foo
       expect(protocolFn).toBeInstanceOf(Function)
       expect(anyIsFn(protocolFn)).toBe(true)
       expect(fnGetMeta(protocolFn)).toEqual({

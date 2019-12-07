@@ -1,4 +1,5 @@
 import Object from './types/Object'
+import Type from './types/Type'
 import def from './def'
 import definitionToType from './util/definitionToType'
 import fn from './fn'
@@ -20,6 +21,11 @@ import fn from './fn'
  *   to: anyToNumber
  * })
  */
-const type = def('lang.type', fn([Object], (definition) => definitionToType(definition)))
+const type = def(
+  'lang.type',
+  'Returns a new anonymous `Type` with the given `definition`.',
+
+  fn([Object, () => Type], (definition) => definitionToType(definition))
+)
 
 export default type

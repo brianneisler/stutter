@@ -32,7 +32,6 @@ const baseFilterAtIndex = (predicate, index, list) => {
   //   idx = 0
   // }
 
-  console.log('index:', index)
   let filtered = toSeq([])
   return iterate(
     (next) =>
@@ -41,7 +40,6 @@ const baseFilterAtIndex = (predicate, index, list) => {
           if (pNext.done) {
             return
           }
-          console.log('pNext:', pNext)
           return predicate(pNext.value, pNext.kdx)
         },
         (result) => {

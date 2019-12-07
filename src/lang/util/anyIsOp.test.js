@@ -1,13 +1,9 @@
-import { SYMBOL_OP } from '../constants'
+import Op from './js/Op'
 import anyIsOp from './anyIsOp'
 
 describe('anyIsOp', () => {
   test('returns true for Op', () => {
-    expect(
-      anyIsOp({
-        [SYMBOL_OP]: 'op'
-      })
-    ).toBe(true)
+    expect(anyIsOp(new Op(() => {}))).toBe(true)
   })
 
   test('returns true for redux saga op', () => {

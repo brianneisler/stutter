@@ -1,5 +1,6 @@
 import Any from '../types/Any'
 import Array from './js/Array'
+import Parameter from './js/Parameter'
 import arrayConcat from './arrayConcat'
 import arrayLikeSlice from './arrayLikeSlice'
 import fnGetMeta from './fnGetMeta'
@@ -8,10 +9,7 @@ const repeatDefaultParams = (number, startAt) => {
   let idx = 0
   const list = new Array(number)
   while (idx < number) {
-    list[idx] = {
-      name: `arg${idx + startAt}`,
-      type: Any
-    }
+    list[idx] = new Parameter(`arg${idx + startAt}`, Any)
     idx += 1
   }
   return list

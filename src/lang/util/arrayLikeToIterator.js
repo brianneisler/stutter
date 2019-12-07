@@ -4,10 +4,10 @@ import indexEndOffset from './indexEndOffset'
 const iterAt = (index, arrayLike) => {
   if (index < arrayLike.length && index >= 0) {
     return {
-      value: arrayLike[index],
+      done: false,
       index,
       kdx: index,
-      done: false
+      value: arrayLike[index]
     }
   }
   return {
@@ -18,10 +18,10 @@ const iterAt = (index, arrayLike) => {
 const prevIterAt = (index, arrayLike) => {
   if (index < arrayLike.length && index >= 0) {
     return {
-      value: arrayLike[index],
+      done: false,
       index,
       kdx: index,
-      done: false
+      value: arrayLike[index]
     }
   }
 }
@@ -79,6 +79,7 @@ const arrayLikeToIterator = (arrayLike, index = 0) => {
   let lastIndex
 
   return {
+    getIndex: () => lastIndex,
     next: () => {
       const iter = iterAt(index, arrayLike)
       const prev = prevIterAt(index - 1, arrayLike)
@@ -103,8 +104,7 @@ const arrayLikeToIterator = (arrayLike, index = 0) => {
         ...iter,
         prev
       }
-    },
-    getIndex: () => lastIndex
+    }
   }
 }
 

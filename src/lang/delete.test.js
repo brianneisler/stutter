@@ -1,9 +1,10 @@
 import ImmutableList from './util/js/ImmutableList'
 import ImmutableMap from './util/js/ImmutableMap'
 import _delete from './delete'
+import path from './path'
 
 describe('_delete', () => {
-  test('delete a single existing Prop from an Object using [Prop, Object] argument order', () => {
+  test('delete a single existing Property from an Object using [Property, Object] argument order', () => {
     const object = {
       foo: 'bar'
     }
@@ -12,7 +13,7 @@ describe('_delete', () => {
     expect(result).not.toBe(object)
   })
 
-  test('delete a single existing Prop from an Object using [Object, Prop] argument order', () => {
+  test('delete a single existing Prop from an Object using [Object, Property] argument order', () => {
     const object = {
       foo: 'bar'
     }
@@ -25,7 +26,7 @@ describe('_delete', () => {
     const object = {
       foo: 'bar'
     }
-    const result = _delete(['foo'], object)
+    const result = _delete(path(['foo']), object)
     expect(result).toEqual({})
     expect(result).not.toBe(object)
   })
@@ -53,6 +54,14 @@ describe('_delete', () => {
     expect(result).toEqual([])
     expect(result).not.toBe(array)
     expect(array).toEqual(['bar'])
+  })
+
+  test('delete a single existing Index using a Path from an Array using [Path, Array] argument order', () => {
+    const array = ['bar']
+
+    const result = _delete(path([0]), array)
+    expect(result).toEqual([])
+    expect(result).not.toBe(array)
   })
 
   test('delete a single existing Index from an Array using [Array, Index] argument order', () => {
@@ -98,6 +107,24 @@ describe('_delete', () => {
     expect(result).toEqual(new ImmutableMap())
     expect(result).not.toBe(map)
     expect(map).toEqual(new ImmutableMap([['foo', 'bar']]))
+  })
+
+  test('delete a single existing Index from an ImmutableList using [Index, ImmutableList] argument order', () => {
+    const list = new ImmutableList(['foo'])
+
+    const result = _delete(0, list)
+    expect(result).toEqual(new ImmutableList([]))
+    expect(result).not.toBe(list)
+    expect(list).toEqual(new ImmutableList(['foo']))
+  })
+
+  test('delete a single existing Index from an ImmutableMap using [ImmutableMap, Key] argument order', () => {
+    const list = new ImmutableList(['foo'])
+
+    const result = _delete(list, 0)
+    expect(result).toEqual(new ImmutableList())
+    expect(result).not.toBe(list)
+    expect(list).toEqual(new ImmutableList(['foo']))
   })
 
   test('delete an existing Symbol and a Prop from an Object', () => {
@@ -165,8 +192,7 @@ describe('_delete', () => {
   })
 
   test('automatically upgrades to async when a Key in a Path is a Promise', async () => {
-    const path = [Promise.resolve('foo')]
-    const result = _delete(path, {
+    const result = _delete(path([Promise.resolve('foo')]), {
       foo: 'bar'
     })
     expect(result).toBeInstanceOf(Promise)

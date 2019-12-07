@@ -2,6 +2,7 @@ import Any from './types/Any'
 import Path from './types/Path'
 import anyToPath from './util/anyToPath'
 import defn from './defn'
+import get from './get'
 
 /**
  * Casts a value to an array path.
@@ -18,16 +19,23 @@ import defn from './defn'
  * //=> ['a', 'b', 'c']
  *
  * path('a.b.c', {
- *   'a.b.c': 'foo'
+ *   a: {
+ *     b: {
+ *       c: 'foo'
+ *     }
+ *   }
  * })
- * //=> ['a.b.c']
+ * //=> 'foo'
  */
 const path = defn(
   'path',
   'Casts a value to an array path.',
 
   [Any, () => Path],
-  anyToPath
+  (any) => anyToPath(any),
+
+  [Any, Any, () => Any],
+  (any, target) => get(anyToPath(any), target)
 )
 
 export default path

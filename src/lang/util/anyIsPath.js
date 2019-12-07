@@ -1,4 +1,4 @@
-import anyIsArray from './anyIsArray'
+import Path from './js/Path'
 
 /**
  * Checks if `any` is a Path.
@@ -47,6 +47,6 @@ import anyIsArray from './anyIsArray'
  * anyIsPath({})
  * //=> false
  */
-const anyIsPath = (any) => anyIsArray(any)
+const anyIsPath = (any) => any instanceof Path
 
 export default anyIsPath

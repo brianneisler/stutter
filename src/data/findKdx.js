@@ -45,8 +45,8 @@ const findKdx = curry(
             if (result) {
               return {
                 ...next,
-                value: next.kdx,
-                done: true
+                done: true,
+                value: next.kdx
               }
             }
             return next

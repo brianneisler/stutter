@@ -7,7 +7,7 @@ describe('js:Namespace', () => {
     test('correctly constructs the Namespace instance', () => {
       const instance = new Namespace('foo')
       expect(instance).toBeInstanceOf(Namespace)
-      expect(instance).toEqual({
+      expect(instance).toMatchObject({
         mappings: ImmutableMap(),
         name: 'foo'
       })
@@ -23,7 +23,7 @@ describe('js:Namespace', () => {
         })
       )
       expect(instance).toBeInstanceOf(Namespace)
-      expect(instance).toEqual({
+      expect(instance).toMatchObject({
         mappings: ImmutableMap({
           bar: 'value'
         }),

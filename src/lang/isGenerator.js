@@ -1,4 +1,6 @@
-import { anyIsGenerator } from './util'
+import Any from './types/Any'
+import Boolean from './types/Boolean'
+import anyIsGenerator from './util/anyIsGenerator'
 import defn from './defn'
 
 /**
@@ -23,6 +25,12 @@ import defn from './defn'
  * })
  * //=> true
  */
-const isGenerator = defn('isGenerator', anyIsGenerator)
+const isGenerator = defn(
+  'isGenerator',
+  'Checks whether the given value is a Generator',
+
+  [Any, () => Boolean],
+  anyIsGenerator
+)
 
 export default isGenerator

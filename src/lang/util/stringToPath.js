@@ -1,3 +1,4 @@
+import Path from './js/Path'
 import functionMemoize from './functionMemoize'
 
 const charCodeOfDot = '.'.charCodeAt(0)
@@ -34,7 +35,7 @@ const stringToPath = functionMemoize((string) => {
     }
     result.push(key)
   })
-  return result
+  return new Path(result)
 })
 
 export default stringToPath

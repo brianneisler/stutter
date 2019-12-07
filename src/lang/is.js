@@ -1,4 +1,7 @@
-import { Any, Function } from './types'
+import Any from './types/Any'
+import Function from './types/Function'
+import Type from './types/Type'
+import anyIs from './util/anyIs'
 import defn from './defn'
 
 /**
@@ -37,8 +40,18 @@ import defn from './defn'
  * //=> false
  */
 const is = defn(
-  'is',
+  'lang.is',
+
+  [Type, Any],
+  (type, any) => anyIs(any, type),
+
+  [Any, Type],
+  (type, any) => anyIs(any, type),
+
   [Function, Any],
+  (fn, any) => (any != null && any.constructor === fn) || any instanceof fn,
+
+  [Any, Function],
   (fn, any) => (any != null && any.constructor === fn) || any instanceof fn
 )
 

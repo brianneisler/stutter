@@ -1,4 +1,6 @@
-import { Arguments } from './types'
+import Any from './types/Any'
+import Arguments from './types/Arguments'
+import Boolean from './types/Boolean'
 import defn from './defn'
 import is from './is'
 
@@ -18,6 +20,12 @@ import is from './is'
  * isArguments([1, 2, 3])
  * //=> false
  */
-const isArguments = defn('isArguments', is(Arguments))
+const isArguments = defn(
+  'isArguments',
+  'Checks if `any` is likely an `Arguments` object.',
+
+  [Any, () => Boolean],
+  is(Arguments)
+)
 
 export default isArguments

@@ -1,4 +1,5 @@
 import Any from '../types/Any'
+import Parameter from './js/Parameter'
 import definitionToFn from './definitionToFn'
 import fnArity from './fnArity'
 
@@ -29,11 +30,11 @@ describe('fnArity', () => {
       1
     )
     expect(fn.length).toBe(1)
-    expect(fn.parameters).toEqual([{ name: 'argA', type: Any }])
+    expect(fn.parameters).toEqual([new Parameter('argA', Any)])
     expect(fn('a', 'b', 'c')).toBe(1)
   })
 
-  test('sets arity greater than number of parameters in fntion', () => {
+  test('sets arity greater than number of Parameters in Fn', () => {
     const fn = fnArity(
       definitionToFn((argA) => {
         expect(argA).toBe('a')
@@ -43,9 +44,9 @@ describe('fnArity', () => {
     )
     expect(fn.length).toBe(3)
     expect(fn.parameters).toEqual([
-      { name: 'argA', type: Any },
-      { name: 'arg1', type: Any },
-      { name: 'arg2', type: Any }
+      new Parameter('argA', Any),
+      new Parameter('arg1', Any),
+      new Parameter('arg2', Any)
     ])
     expect(fn('a', 'b', 'c')).toBe(1)
   })
