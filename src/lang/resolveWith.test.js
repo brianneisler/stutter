@@ -1,4 +1,4 @@
-import isGenerator from '../lang/isGenerator'
+import isGenerator from "./isGenerator"
 import resolveWith from './resolveWith'
 
 describe('resolveWith', () => {
@@ -63,12 +63,12 @@ describe('resolveWith', () => {
 
     expect(isGenerator(generator)).toBe(true)
     expect(generator.next()).toEqual({
-      value: 'foo',
-      done: false
+      done: false,
+      value: 'foo'
     })
     expect(generator.next()).toEqual({
-      value: 'baz',
-      done: true
+      done: true,
+      value: 'baz'
     })
     expect(handler).toHaveBeenCalledWith('bar')
     expect(handler).toHaveBeenCalledTimes(1)
@@ -108,12 +108,12 @@ describe('resolveWith', () => {
 
     expect(isGenerator(generator)).toBe(true)
     expect(generator.next()).toEqual({
-      value: 'foo',
-      done: false
+      done: false,
+      value: 'foo'
     })
     expect(generator.next()).toEqual({
-      value: 'baz',
-      done: true
+      done: true,
+      value: 'baz'
     })
     expect(handler).toHaveBeenCalledWith('bar')
     expect(handler).toHaveBeenCalledTimes(1)
@@ -130,14 +130,14 @@ describe('resolveWith', () => {
 
     const firstNext = generator.next()
     expect(firstNext).toEqual({
-      value: expect.any(Promise),
-      done: false
+      done: false,
+      value: expect.any(Promise)
     })
     await firstNext.value
     const result = generator.next()
     expect(result).toEqual({
-      value: 'baz',
-      done: true
+      done: true,
+      value: 'baz'
     })
     expect(handler).toHaveBeenCalledWith('bar')
     expect(handler).toHaveBeenCalledTimes(1)

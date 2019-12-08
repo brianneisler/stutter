@@ -1,28 +1,28 @@
-import anyIsNil from './anyIsNil'
 import anyIterate from './anyIterate'
 
-const anyGetPathWith = (any, path, getFunc) => {
+const anyHasPathWith = (any, path, getFunc, hasFunc) => {
   if (path.size === 0) {
-    return any
+    return true
   }
   let value = any
   return anyIterate(path, (next) => {
     if (next.done) {
       return {
         ...next,
-        value
+        value: true
       }
     }
-    value = getFunc(next.value, value)
-    if (anyIsNil(value)) {
+    if (hasFunc(next.value, value)) {
+      value = getFunc(next.value, value)
+    } else {
       return {
         ...next,
         done: true,
-        value
+        value: false
       }
     }
     return next
   })
 }
 
-export default anyGetPathWith
+export default anyHasPathWith

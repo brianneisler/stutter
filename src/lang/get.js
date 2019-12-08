@@ -17,7 +17,6 @@ import defn from './defn'
  *
  * @function
  * @since v0.1.0
- * @category data
  * @param {Array|String|Number|Function} path The path to use.
  * @param {Object} value The value to retrieve the nested property from.
  * @returns {*} The data at `path`.

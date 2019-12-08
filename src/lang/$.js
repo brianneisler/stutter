@@ -1,10 +1,10 @@
-defn(
-  'sqrAll',
+// defn(
+//   'sqrAll',
 
-  [$.list],
-  map(sqr, $.list)
-)
+//   [$.list],
+//   map(sqr, $.list)
+// )
 
-map(fn([$.x], mul($.x, $.x)), range(1, 10))
+// map(fn([$.x], mul($.x, $.x)), range(1, 10))
 
-defn('add', [$.a, $.b], add($.a, $.b))
+// defn('add', [$.a, $.b], add($.a, $.b))
