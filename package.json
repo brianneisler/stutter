@@ -14,17 +14,16 @@
   },
   "main": "dist/index.js",
   "engines": {
-    "node": ">6.0"
+    "node": ">=8.0"
   },
   "scripts": {
     "build": "bash ./scripts/build.sh",
     "clean": "bash ./scripts/clean.sh",
     "cleanse": "bash ./scripts/cleanse.sh",
-    "docs:gen": "bash ./scripts/docs-gen.sh",
+    "docs:generate": "bash ./scripts/docs-generate.sh",
     "lint": "bash ./scripts/lint.sh",
     "lint:staged": "bash ./scripts/lint-staged.sh",
     "setup": "bash ./scripts/setup.sh",
-    "setup:ci": "bash ./scripts/setup-ci.sh",
     "test": "bash ./scripts/test.sh",
     "test:ci": "bash ./scripts/test-ci.sh",
     "watch": "bash ./scripts/watch.sh"
@@ -51,6 +50,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
+    "codecov": "^3.6.1",
     "dox": "^0.9.0",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",

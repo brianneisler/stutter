@@ -33,4 +33,4 @@ dist
 yarn.lock
 
 *.sample
-/coverage
+coverage

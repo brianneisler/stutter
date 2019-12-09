@@ -58,8 +58,8 @@ const parseSrcFiles = async (srcFiles) =>
       const fullPath = path.join(SRC_PATH, srcFile)
       const contents = await fs.readFile(fullPath, 'utf8')
       return {
-        srcFile,
-        meta: dox.parseComments(contents)
+        meta: dox.parseComments(contents),
+        srcFile
       }
     }, srcFiles)
   )
@@ -186,7 +186,7 @@ const renderFunctionMarkdown = ({
   return markdown
 }
 
-const renderValueMarkdown = ({ description, example, line, name, type, since, srcFile }) => {
+const renderValueMarkdown = ({ description, example, line, name, since, srcFile, type }) => {
   let markdown = `### ${name}\n\n`
   markdown += `[source](${GITHUB_TAG_URL}/src/${srcFile}#L${line})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; since ${since}\n`
   markdown += `${description}\n\n`
@@ -239,7 +239,7 @@ const generateReturns = (tags) => {
 }
 
 const generateFunctionDocs = (meta, srcFile) => {
-  const private = findPrivate(meta.tags)
+  const _private = findPrivate(meta.tags)
   const category = findCategory(meta.tags)
   if (!category) {
     throw new Error(`Source file ${srcFile} did not declare a @category tag`)
@@ -255,7 +255,7 @@ const generateFunctionDocs = (meta, srcFile) => {
     line: meta.line,
     name: meta.ctx.name,
     params: generateParams(meta.tags),
-    private,
+    private: _private,
     returns: generateReturns(meta.tags),
     since,
     srcFile
@@ -278,9 +278,9 @@ const generateValueDocs = (meta, srcFile) => {
     example: findExample(meta.tags),
     line: meta.line,
     name: meta.ctx.name,
-    type: typeTag.string,
     since,
-    srcFile
+    srcFile,
+    type: typeTag.string
   }
 }
 
@@ -300,8 +300,8 @@ const getCategory = (name, categories) => {
   let category = prop(name, categories)
   if (!category) {
     category = {
-      name,
       functions: [],
+      name,
       values: []
     }
   }

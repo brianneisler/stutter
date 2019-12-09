@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 set -e
-jest "$@"
+
+echo "testing..."
+
+jest $@ --expand
+
+echo "test complete!"
+

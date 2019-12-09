@@ -65,6 +65,9 @@ tests
 # lintstaged
 .lintstagedrc.json
 
+# nvm
+.nvmrc
+
 # prettier
 .prettierignore
 prettier.config.js
@@ -72,14 +75,19 @@ prettier.config.js
 # travis
 .travis.yml
 
+# vscode
+.vscode
 
 # development
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
 DEVELOPMENT.md
+IDEAS.md
+NOTES.md
 RELEASE.md
 TODO.md
 docs
 examples
+experiments
 scripts
 src
