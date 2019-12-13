@@ -1,12 +1,11 @@
-import { anyIsGeneratorFunction } from './util'
+import Any from './types/Any'
+import Boolean from './types/Boolean'
+import GeneratorFunction from './types/GeneratorFunction'
 import defn from './defn'
+import is from './is'
 
 /**
- * Checks whether `any1 is GeneratorFunction.
- *
- * @function
  * @since v0.1.0
- * @category lang
  * @param  {*} any The value to check.
  * @returns {boolean} Returns `true` if `any` is a GeneratorFunction, else `false`.
  * @example
@@ -17,6 +16,12 @@ import defn from './defn'
  * isGeneratorFunction(function() {})
  * //=> false
  */
-const isGeneratorFunction = defn('isGeneratorFunction', anyIsGeneratorFunction)
+const isGeneratorFunction = defn(
+  'lang.isGeneratorFunction',
+  'Checks if `Any` is classified as a `GeneratorFunction`.',
+
+  [Any, () => Boolean],
+  is(GeneratorFunction)
+)
 
 export default isGeneratorFunction

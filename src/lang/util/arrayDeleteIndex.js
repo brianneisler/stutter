@@ -2,7 +2,7 @@ import arrayClone from './arrayClone'
 import arraySplice from './arraySplice'
 
 /**
- * Deletes an index from an Array. Returns a new copy of the Array with the index
+ * Deletes an Index from an Array. Returns a new copy of the Array with the Index
  * removed.
  *
  * @private
@@ -10,7 +10,7 @@ import arraySplice from './arraySplice'
  * @immutable
  * @pure
  * @param {Array} array
- * @param {number} index
+ * @param {Index} index
  * @returns {Array}
  */
 const arrayDeleteIndex = (array, index) => {

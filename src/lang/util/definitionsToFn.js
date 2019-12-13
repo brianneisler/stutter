@@ -21,7 +21,14 @@ import fnsToMultiFn from './fnsToMultiFn'
  *
  *
  */
-const definitionsToFn = (definitions) => {
+const definitionsToFn = (
+  definitions,
+  options = {
+    curry: true,
+    handleExceptions: true,
+    resolve: true
+  }
+) => {
   const fns = definitionsToFns(definitions)
   if (fns.length === 0) {
     throw new Error('fn method expects at least one function')
@@ -33,11 +40,7 @@ const definitionsToFn = (definitions) => {
     fn = fns[0]
   }
 
-  return fn.update({
-    curry: true,
-    handleExceptions: true,
-    resolve: true
-  })
+  return fn.update(options)
 }
 
 export default definitionsToFn

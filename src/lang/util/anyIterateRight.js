@@ -1,10 +1,10 @@
 import ITERATOR_END from '../constants/ITERATOR_END'
 import anyIsResolved from './anyIsResolved'
-import anyResolveWith from './anyResolveWith'
 import anyToIterator from './anyToIterator'
+import unresolvedResolveWith from './unresolvedResolveWith'
 
 const resolveNext = (next, fn, iter, recur) =>
-  anyResolveWith(next, (resolvedNext) => {
+  unresolvedResolveWith(next, (resolvedNext) => {
     if (resolvedNext.done) {
       return resolvedNext.value
     }
@@ -15,7 +15,7 @@ const doReverseSeriesIteration = (fn, iter) => {
   while (true) {
     let next = iter.previous()
     if (!anyIsResolved(next)) {
-      return anyResolveWith(next, (resolvedNext) => {
+      return unresolvedResolveWith(next, (resolvedNext) => {
         next = fn(resolvedNext)
         if (!anyIsResolved(next)) {
           return resolveNext(next, fn, iter, doReverseSeriesIteration)

@@ -1,14 +1,13 @@
-import { anyIsError } from './util'
+import Any from './types/Any'
+import Boolean from './types/Boolean'
+import Error from './types/Error'
 import defn from './defn'
+import is from './is'
 
 /**
- * Checks if `value` is an `Error`, `EvalError`, `RangeError`, `ReferenceError`, `SyntaxError`, `TypeError`, or `URIError` object.
- *
- * @function
  * @since v0.1.0
- * @category lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an error object, else `false`.
+ * @param {Any} any The value to check.
+ * @returns {Boolean} Returns `true` if `Any` is an `Error` type, else `false`.
  * @example
  *
  * isError(new Error)
@@ -17,6 +16,12 @@ import defn from './defn'
  * isError(Error)
  * // => false
  */
-const isError = defn('isError', anyIsError)
+const isError = defn(
+  'lang.isError',
+  'Checks if `Any` is classified as an `Error` type.',
+
+  [Any, () => Boolean],
+  is(Error)
+)
 
 export default isError

@@ -70,7 +70,7 @@ import pipe from '../common/pipe'
  * //  0   1            0   1
  */
 const reduce = defn(
-  'reduce',
+  'data.reduce',
 
   [Function, Any, Iterable, () => Any],
   (iteratee, accumulator, iterable) => {

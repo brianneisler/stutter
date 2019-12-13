@@ -1,9 +1,5 @@
-import anyIsArguments from './anyIsArguments'
-import anyIsArray from './anyIsArray'
 import anyIsFunction from './anyIsFunction'
-import anyIsIterator from './anyIsIterator'
 import anyIsObject from './anyIsObject'
-import anyIterate from './anyIterate'
 import anyResolveWith from './anyResolveWith'
 
 /**
@@ -41,19 +37,17 @@ import anyResolveWith from './anyResolveWith'
  * await anyResolveAll(123)
  * //=> 123
  */
-const anyResolveAll = (any) =>
+
+// TODO BRN: Add support for all data types by having this receive a
+// iterateFunc, setFunc, and contagionFunc
+// NOTE BRN: setFunc should be a setting function that mutates the object
+const anyResolveAll = (any, contagionFunc, iterateFunc, setFunc) =>
   anyResolveWith(any, (resolvedAny) => {
-    // TODO BRN: Add support for immutable objects here
-    let result
-    if (anyIsArray(resolvedAny) || anyIsArguments(resolvedAny) || anyIsIterator(resolvedAny)) {
-      result = []
-    } else if (anyIsObject(resolvedAny) && !anyIsFunction(resolvedAny)) {
-      result = {}
-    } else {
+    if (!anyIsObject(resolvedAny) || anyIsFunction(resolvedAny)) {
       return resolvedAny
     }
-
-    return anyIterate(resolvedAny, (next) => {
+    let result = contagionFunc(any)
+    return iterateFunc(resolvedAny, (next) => {
       if (next.done) {
         return {
           ...next,
@@ -61,7 +55,7 @@ const anyResolveAll = (any) =>
         }
       }
       return anyResolveWith(next.value, (nextValue) => {
-        result[next.kdx] = nextValue
+        result = setFunc(result, next.kdx, nextValue)
         return next
       })
     })

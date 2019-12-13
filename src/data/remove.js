@@ -1,9 +1,8 @@
-import complement from '../common/complement'
-import curry from '../common/curry'
-import defn from '../common/defn'
+import Any from '../lang/types/Any'
+import Function from '../lang/types/Function'
+import complement from '../lang/complement'
+import defn from '../lang/defn'
 import filter from './filter'
-
-// TODO BRN: Improve this method to maintain the original array in memory when no changes are made
 
 /**
  * The complement of [`filter`](#filter).
@@ -18,12 +17,21 @@ import filter from './filter'
  *
  * isOdd = (n) => n % 2 === 1
  *
- * remove(isOdd, [1, 2, 3, 4]) //=> [2, 4]
+ * remove(isOdd, [1, 2, 3, 4])
+ * //=> [2, 4]
  *
- * remove(isOdd, {a: 1, b: 2, c: 3, d: 4}) //=> {b: 2, d: 4}
+ * remove(isOdd, {a: 1, b: 2, c: 3, d: 4})
+ * //=> {b: 2, d: 4}
  */
-const remove = curry(
-  defn('remove', (predicate, filterable) => filter(complement(predicate), filterable))
+const remove = defn(
+  'data.remove',
+  'The complement of [`filter`](#filter).',
+
+  [Function, Any, () => Any],
+  (predicate, filterable) => filter(complement(predicate), filterable),
+
+  [Any, Function, () => Any],
+  (filterable, predicate) => filter(complement(predicate), filterable)
 )
 
 export default remove

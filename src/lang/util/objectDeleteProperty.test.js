@@ -12,6 +12,7 @@ describe('objectDeleteProperty', () => {
       bar: 2,
       baz: 3
     })
+    expect(result.hasOwnProperty('foo')).toBe(false)
     expect(object).toEqual({
       bar: 2,
       baz: 3,

@@ -1,14 +1,8 @@
-import Any from './types/Any'
 import Arguments from './types/Arguments'
-import Boolean from './types/Boolean'
-import defn from './defn'
+import def from './def'
 import is from './is'
 
 /**
- * Checks if `any` is likely an `Arguments` object.
- *
- * @function
- * @category lang
  * @since v0.1.0
  * @param {*} any The value to check.
  * @returns {boolean} Returns `true` if `value` is an `Arguments` object, else `false`.
@@ -20,11 +14,10 @@ import is from './is'
  * isArguments([1, 2, 3])
  * //=> false
  */
-const isArguments = defn(
-  'isArguments',
-  'Checks if `any` is likely an `Arguments` object.',
+const isArguments = def(
+  'lang.isArguments',
+  'Checks if `Any` is classified as an `Arguments` type.',
 
-  [Any, () => Boolean],
   is(Arguments)
 )
 

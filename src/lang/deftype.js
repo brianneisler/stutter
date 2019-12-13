@@ -1,4 +1,4 @@
-import Object from './types/Object'
+import PlainObject from './types/PlainObject'
 import String from './types/String'
 import Type from './types/Type'
 import def from './def'
@@ -93,10 +93,10 @@ const deftype = def(
   'Defines a new `Type` with the given `name`.',
 
   fn(
-    [String, String, Object, () => Type],
+    [String, String, PlainObject, () => Type],
     (name, description, definition) => def(name, description, type(definition)),
 
-    [String, Object, () => Type],
+    [String, PlainObject, () => Type],
     (name, definition) => def(name, '', type(definition)),
 
     [String, String, () => Type],

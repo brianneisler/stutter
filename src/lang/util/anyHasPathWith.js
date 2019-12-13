@@ -1,28 +1,32 @@
-import anyIterate from './anyIterate'
+import anyResolveWith from './anyResolveWith'
+import pathIterate from './pathIterate'
 
 const anyHasPathWith = (any, path, getFunc, hasFunc) => {
   if (path.size === 0) {
     return true
   }
   let value = any
-  return anyIterate(path, (next) => {
-    if (next.done) {
-      return {
-        ...next,
-        value: true
+  return pathIterate(path, (next) =>
+    anyResolveWith(next.value, (pathValue) => {
+      if (next.done) {
+        return {
+          ...next,
+          value: true
+        }
       }
-    }
-    if (hasFunc(next.value, value)) {
-      value = getFunc(next.value, value)
-    } else {
+      if (hasFunc(value, pathValue)) {
+        return anyResolveWith(getFunc(value, pathValue), (resolvedValue) => {
+          value = resolvedValue
+          return next
+        })
+      }
       return {
         ...next,
         done: true,
         value: false
       }
-    }
-    return next
-  })
+    })
+  )
 }
 
 export default anyHasPathWith

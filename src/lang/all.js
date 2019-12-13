@@ -1,6 +1,9 @@
 import Any from './types/Any'
 import anyResolveAll from './util/anyResolveAll'
+import contagion from './contagion'
 import defn from './defn'
+import iterate from './iterate'
+import set from './set'
 
 /**
  * Resolves all async values in an `Iterbale` data object.
@@ -42,7 +45,7 @@ const all = defn(
   'Resolves all resolvable values in a data object',
 
   [Any, () => Any],
-  (any) => anyResolveAll(any)
+  (any) => anyResolveAll(any, contagion, iterate, set)
 )
 
 export default all

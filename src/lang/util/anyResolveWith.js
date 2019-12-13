@@ -43,11 +43,7 @@ const anyResolveWith = (any, func) => {
     }
     any = anyResolve(any)
   }
-  any = func(any)
-  if (!anyIsResolved(any)) {
-    return anyResolve(any)
-  }
-  return any
+  return anyResolve(func(any))
 }
 
 export default anyResolveWith

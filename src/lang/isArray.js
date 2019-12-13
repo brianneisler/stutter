@@ -1,12 +1,11 @@
-import anyIsArray from './util/anyIsArray'
+import Any from './types/Any'
+import Array from './types/Array'
+import Boolean from './types/Boolean'
 import defn from './defn'
+import is from './is'
 
 /**
- * Checks if `value` is classified as an `Array` object.
- *
- * @function
  * @since v0.1.0
- * @category lang
  * @param {*} value The value to check.
  * @returns {boolean} Returns `true` if `value` is an array, else `false`.
  * @example
@@ -23,6 +22,12 @@ import defn from './defn'
  * isArray(noop)
  * //=> false
  */
-const isArray = defn('isArray', anyIsArray)
+const isArray = defn(
+  'lang.isArray',
+  'Checks if `Any` is classified as an `Array` type.',
+
+  [Any, () => Boolean],
+  is(Array)
+)
 
 export default isArray

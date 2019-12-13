@@ -1,5 +1,5 @@
 import { definitionsToProtocol } from './util'
-import Object from './types/Object'
+import PlainObject from './types/PlainObject'
 import Protocol from './types/Protocol'
 import defn from './defn'
 
@@ -21,7 +21,7 @@ const protocol = defn(
   'lang.protocol',
   'Returns a new anonymous `Protocol` with the given `definitions`.',
 
-  [Object, () => Protocol],
+  [PlainObject, () => Protocol],
   (definitions) => definitionsToProtocol(definitions)
 )
 

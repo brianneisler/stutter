@@ -96,22 +96,6 @@ describe('get', () => {
     })
   })
 
-  describe('Map', () => {
-    test('get from a nested Map', () => {
-      const value = {
-        foo: new Map([
-          [
-            'bar',
-            {
-              bim: 'bop'
-            }
-          ]
-        ])
-      }
-      expect(get(path('foo.bar.bim'), value)).toBe('bop')
-    })
-  })
-
   describe('Array', () => {
     test('supports accessing Arrays with Paths', () => {
       const value = ['foobar']
@@ -121,6 +105,38 @@ describe('get', () => {
     test('supports accessing arrays directly with Number in Path', () => {
       const value = ['foobar']
       expect(get([0], value)).toBe('foobar')
+    })
+
+    test('get a single existing Index from an Array using [Index, Array] argument order', () => {
+      const array = ['foo', 'bar']
+      const result = get(1, array)
+      expect(result).toEqual('bar')
+      expect(array).toEqual(['foo', 'bar'])
+    })
+
+    test('get a single existing Index from an Array using [Array, Index] argument order', () => {
+      const array = ['foo', 'bar']
+      const result = get(array, 1)
+      expect(result).toEqual('bar')
+      expect(array).toEqual(['foo', 'bar'])
+    })
+  })
+
+  describe('Map', () => {
+    test('get a single existing Key from an Map using [Key, Map] argument order', () => {
+      const map = new Map([['foo', 'bar']])
+
+      const result = get('foo', map)
+      expect(result).toEqual('bar')
+      expect(map).toEqual(new Map([['foo', 'bar']]))
+    })
+
+    test('get a single existing Key from an Map using [Map, Key] argument order', () => {
+      const map = new Map([['foo', 'bar']])
+
+      const result = get(map, 'foo')
+      expect(result).toEqual('bar')
+      expect(map).toEqual(new Map([['foo', 'bar']]))
     })
   })
 
@@ -166,6 +182,43 @@ describe('get', () => {
       expect(result).toEqual('foo')
       expect(result).not.toBe(list)
       expect(list).toEqual(new ImmutableList(['foo']))
+    })
+  })
+
+  describe('String', () => {
+    test('get a single existing Index from a String using [Index, String] argument order', () => {
+      const string = 'foo'
+
+      const result = get(0, string)
+      expect(result).toEqual('f')
+      expect(string).toEqual('foo')
+    })
+
+    test('get a single existing Index from an String using [String, Index] argument order', () => {
+      const string = 'foo'
+
+      const result = get(string, 0)
+      expect(result).toEqual('f')
+      expect(result).not.toBe(string)
+      expect(string).toEqual('foo')
+    })
+  })
+
+  describe('Path', () => {
+    test('get a nest path of Immutable and mutable data structures', () => {})
+
+    test('get from a nested Map', () => {
+      const value = {
+        foo: new Map([
+          [
+            'bar',
+            {
+              bim: 'bop'
+            }
+          ]
+        ])
+      }
+      expect(get(path('foo.bar.bim'), value)).toBe('bop')
     })
   })
 

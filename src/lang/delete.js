@@ -1,3 +1,4 @@
+import Any from './types/Any'
 import Array from './types/Array'
 import ImmutableList from './types/ImmutableList'
 import ImmutableMap from './types/ImmutableMap'
@@ -6,14 +7,13 @@ import Key from './types/Key'
 import Map from './types/Map'
 import Object from './types/Object'
 import Path from './types/Path'
-import Prop from './types/Property'
-import anyIsNil from './util/anyIsNil'
-import anyResolveWith from './util/anyResolveWith'
+import Property from './types/Property'
+import anyDeletePathWith from './util/anyDeletePathWith'
 import arrayDeleteIndex from './util/arrayDeleteIndex'
 import defn from './defn'
 import get from './get'
+import has from './has'
 import mapDeleteKey from './util/mapDeleteKey'
-import objectClone from './util/objectClone'
 import objectDeleteProperty from './util/objectDeleteProperty'
 import set from './set'
 
@@ -37,6 +37,12 @@ import set from './set'
 const _delete = defn(
   'lang.delete',
   'Returns a new value that does not contain `target`',
+
+  [Path, Any, () => Any],
+  (path, any) => anyDeletePathWith(any, path, get, has, set, _delete),
+
+  [Any, Path, () => Any],
+  (any, path) => anyDeletePathWith(any, path, get, has, set, _delete),
 
   [Index, Array, () => Array],
   (index, array) => arrayDeleteIndex(array, index),
@@ -62,29 +68,11 @@ const _delete = defn(
   [ImmutableMap, Key, () => ImmutableMap],
   (immutableMap, key) => immutableMap.delete(key),
 
-  [Prop, Object, () => Object],
-  (property, object) => objectDeleteProperty(objectClone(object), property),
+  [Property, Object, () => Object],
+  (property, object) => objectDeleteProperty(object, property),
 
-  [Object, Prop, () => Object],
-  (object, property) => objectDeleteProperty(objectClone(object), property),
-
-  [Path, Object, () => Object],
-  (path, object) => {
-    switch (path.size) {
-      case 0:
-        return object
-      case 1:
-        return _delete(object, path.get(0))
-      default:
-        const head = path.get(0)
-        return anyResolveWith(get(head, object), (headValue) => {
-          if (anyIsNil(headValue)) {
-            return object
-          }
-          return set(object, head, _delete(path.tail(), headValue))
-        })
-    }
-  }
+  [Object, Property, () => Object],
+  (object, property) => objectDeleteProperty(object, property)
 )
 
 export default _delete

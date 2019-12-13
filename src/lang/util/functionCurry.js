@@ -41,6 +41,12 @@ const curryFunction = (length, received, func) => {
 }
 
 const curryParameterizedFn = (fn, handler) => {
+  const meta = fnGetMeta(fn)
+  const curried = meta.curried || {}
+  const parameters = curried.parameters || meta.parameters
+  const placeholders = curried.placeholders || []
+  const received = curried.received || []
+
   return function() {
     const { length } = arguments
     if (length === 0) {
@@ -48,11 +54,6 @@ const curryParameterizedFn = (fn, handler) => {
         .expected.arguments(arguments)
         .not.toBeEmpty()
     }
-    const meta = fnGetMeta(fn)
-    const curried = meta.curried || {}
-    const parameters = curried.parameters || meta.parameters
-    const placeholders = curried.placeholders || []
-    const received = curried.received || []
 
     let idx = -1
     let newPlaceholders = []
@@ -69,8 +70,8 @@ const curryParameterizedFn = (fn, handler) => {
           // this case.
           newPlaceholders.push(placeholder)
         } else {
-          newPlaceholders.push(idx)
           newReceived.push(arg)
+          newPlaceholders.push(newReceived.length - 1)
         }
         newParameters.push(parameter)
       } else {
@@ -142,7 +143,6 @@ const curryMultiFn = (fn) => {
         .toMatchDispatcher(dispatcher)
     }
     const completedMatch = findExactOrClosestCompletedMatch(matches)
-
     if (completedMatch) {
       // TODO BRN: This breaks the current invocation chain causing any
       // remaining methods in the caller composition to be skipped. At the

@@ -1,5 +1,5 @@
-import { Any } from './types'
-import { anyResolve } from './util'
+import Any from './types/Any'
+import anyResolve from './util/anyResolve'
 import defn from './defn'
 
 /**
@@ -33,6 +33,12 @@ import defn from './defn'
  * }) /
  * /=> bar
  */
-const resolve = defn([Any], (any) => anyResolve(any))
+const resolve = defn(
+  'resolve',
+  'Resolves a value.',
+
+  [Any, () => Any],
+  (any) => anyResolve(any)
+)
 
 export default resolve

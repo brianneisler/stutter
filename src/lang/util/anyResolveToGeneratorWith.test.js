@@ -20,8 +20,8 @@ describe('resolveToGeneratorWith', () => {
         resolve: () => 1
       })).next()
     ).toEqual({
-      value: 1,
-      done: true
+      done: true,
+      value: 1
     })
   })
 
@@ -45,8 +45,8 @@ describe('resolveToGeneratorWith', () => {
     const result = generator.next(promiseValue)
     expect(handler).toHaveBeenCalledWith('foo')
     expect(result).toEqual({
-      value: 'foo',
-      done: true
+      done: true,
+      value: 'foo'
     })
   })
 })

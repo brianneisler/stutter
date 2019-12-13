@@ -1,4 +1,5 @@
 import Any from './types/Any'
+import PlainObject from './types/PlainObject'
 import String from './types/String'
 import buildMultiFn from './util/buildMultiFn'
 import def from './def'
@@ -35,6 +36,22 @@ import protocolNameToDispatcher from './util/protocolNameToDispatcher'
  * //=> throws `Expected 'prop' parameter to be a String. Instead was given Object {}.`
  */
 const defn = fn(
+  [String, String, PlainObject],
+  (name, description, { definitions, options }) =>
+    def(
+      name,
+      description,
+      // NOTE BRN: The protocol multi function needs to come first in order for
+      // protocols to be checked before the base level functions are checked.
+      fn({
+        definitions: [buildMultiFn(protocolNameToDispatcher(name)), ...definitions],
+        options
+      })
+    ),
+
+  [String, PlainObject],
+  (name, definitionsObject) => defn(name, '', definitionsObject),
+
   [String, String, Any],
   (name, description, ...definitions) =>
     def(

@@ -1,4 +1,4 @@
-import __ from './__'
+import __ from './_'
 import isResolved from './isResolved'
 
 describe('isResolved', () => {

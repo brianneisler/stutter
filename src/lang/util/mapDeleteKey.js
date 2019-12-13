@@ -9,7 +9,7 @@ import mapClone from './mapClone'
  * @immutable
  * @pure
  * @param {Map} map
- * @param {Any} key
+ * @param {Key} key
  * @returns {Map}
  */
 const mapDeleteKey = (map, key) => {

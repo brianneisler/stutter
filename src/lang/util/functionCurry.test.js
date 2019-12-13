@@ -85,6 +85,23 @@ describe('functionCurry', () => {
     expect(result('b')).toBe(0)
   })
 
+  test('should support arg, then placeholder, then arg to fill placeholder', () => {
+    const fn = definitionToFn(
+      (argA, argB) => {
+        expect(argA).toBe('a')
+        expect(argB).toBe('b')
+        return 0
+      },
+      [String, String]
+    )
+    const curriedFn = functionCurry(fn)
+    const curriedFnA = curriedFn('a')
+    expect(curriedFnA).toBeInstanceOf(Function)
+    const curriedFnAPlacehodlerB = curriedFnA(__)
+    expect(curriedFnAPlacehodlerB).toBeInstanceOf(Function)
+    expect(curriedFnAPlacehodlerB('b')).toBe(0)
+  })
+
   test('should support Self type in currying', () => {
     let fn = definitionToFn(
       (argA, argB, argC) => {

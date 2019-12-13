@@ -5,14 +5,10 @@ import anyIs from './util/anyIs'
 import defn from './defn'
 
 /**
- * See if an object (`val`) is an instance of the supplied constructor. This function will check up the inheritance chain, if any.
- *
- * @function
  * @since v0.1.0
- * @category lang
  * @param {Type} type A type
- * @param {*} any The value to test
- * @returns {boolean}
+ * @param {Any} any The value to test
+ * @returns {Boolean}
  * @example
  *
  * is(Object, {})
@@ -41,18 +37,32 @@ import defn from './defn'
  */
 const is = defn(
   'lang.is',
+  'Checks whether `Any` is classified as an instance of the given `Type`',
 
-  [Type, Any],
-  (type, any) => anyIs(any, type),
+  {
+    definitions: [
+      [Type, Any],
+      (type, any) => anyIs(any, type),
 
-  [Any, Type],
-  (type, any) => anyIs(any, type),
+      [Any, Type],
+      (type, any) => anyIs(any, type),
 
-  [Function, Any],
-  (fn, any) => (any != null && any.constructor === fn) || any instanceof fn,
+      [Function, Any],
+      (fn, any) => (any != null && any.constructor === fn) || any instanceof fn,
 
-  [Any, Function],
-  (fn, any) => (any != null && any.constructor === fn) || any instanceof fn
+      [Any, Function],
+      (fn, any) => (any != null && any.constructor === fn) || any instanceof fn
+    ],
+    options: {
+      curry: true,
+      handleExceptions: true,
+
+      // NOTE BRN: We don't resolve values for the `is` method because we need
+      // to be able to determine types such as Op, Promise, Generator, etc
+      // without resolving them.
+      resolve: false
+    }
+  }
 )
 
 export default is

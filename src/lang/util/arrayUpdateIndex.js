@@ -1,4 +1,4 @@
-import arrayClone from './arrayClone'
+import arraySetIndex from './arraySetIndex'
 
 /**
  * Updates an index in an Array. Returns a new copy of the Array with the index
@@ -9,14 +9,13 @@ import arrayClone from './arrayClone'
  * @immutable
  * @pure
  * @param {Array} array
- * @param {number} index
+ * @param {Index} index
  * @param {Function} func
- * @returns {Array}
+ * @return {Array}
  */
 const arrayUpdateIndex = (array, index, func) => {
-  const clone = arrayClone(array)
-  clone[index] = func(array[index])
-  return clone
+  const result = func(array[index])
+  return arraySetIndex(array, index, result)
 }
 
 export default arrayUpdateIndex

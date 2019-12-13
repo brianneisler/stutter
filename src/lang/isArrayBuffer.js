@@ -1,12 +1,11 @@
-import { anyIsArrayBuffer } from './util'
+import Any from './types/Any'
+import ArrayBuffer from './types/ArrayBuffer'
+import Boolean from './types/Boolean'
 import defn from './defn'
+import is from './is'
 
 /**
- * Checks if `value` is classified as an `ArrayBuffer` object.
- *
- * @function
  * @since v0.1.0
- * @category lang
  * @param {*} value The value to check.
  * @returns {boolean} Returns `true` if `value` is an array buffer, else `false`.
  * @example
@@ -17,6 +16,12 @@ import defn from './defn'
  * isArrayBuffer(new Array(2))
  * // => false
  */
-const isArrayBuffer = defn('isArrayBuffer', anyIsArrayBuffer)
+const isArrayBuffer = defn(
+  'lang.isArrayBuffer',
+  'Checks if `Any` is classified as an `ArrayBuffer` type.',
+
+  [Any, () => Boolean],
+  is(ArrayBuffer)
+)
 
 export default isArrayBuffer

@@ -2,6 +2,7 @@ import ITERATOR_END from '../constants/ITERATOR_END'
 import ITERATOR_START from '../constants/ITERATOR_START'
 import anyIsResolved from './anyIsResolved'
 import anyResolveWith from './anyResolveWith'
+import unresolvedResolveWith from './unresolvedResolveWith'
 
 const iterateAt = (iterator, history, pending, index) => {
   if (history[index]) {
@@ -27,7 +28,7 @@ const fastForward = (histIterator) => {
   while (!next.done) {
     next = histIterator.next()
     if (!anyIsResolved(next)) {
-      return anyResolveWith(next, (resolvedNext) => {
+      return unresolvedResolveWith(next, (resolvedNext) => {
         if (!resolvedNext.done) {
           return fastForward(histIterator)
         }
@@ -140,6 +141,8 @@ const iteratorResolver = (iterator, start = ITERATOR_START) => {
     return histIterator
   })
 
+  // TODO BRN: Figure out a more efficient way of doing this rather than
+  // resolving the iterator every time
   return {
     next: () => anyResolveWith(histIterator, (resolvedIterator) => resolvedIterator.next()),
     previous: () => anyResolveWith(histIterator, (resolvedIterator) => resolvedIterator.previous())

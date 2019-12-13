@@ -3,6 +3,7 @@ import Any from './types/Any'
 // import Array from './types/Array'
 import Fn from './types/Fn'
 // import Function from './types/Function'
+import PlainObject from './types/PlainObject'
 import def from './def'
 
 /**
@@ -77,6 +78,9 @@ const fn = def(
     // TODO BRN: Add support for unions and rest...
     // [Function.or([Function, Array]).rest(), () => Fn],
     // (func) => definitionsToFn([func]),
+
+    [PlainObject, () => Fn],
+    ({ definitions, options }) => definitionsToFn(definitions, options),
 
     [Any, () => Fn],
     (...definitions) => definitionsToFn(definitions)

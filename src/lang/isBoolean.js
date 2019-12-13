@@ -1,14 +1,12 @@
-import { anyIsBoolean } from './util'
+import Any from './types/Any'
+import Boolean from './types/Boolean'
 import defn from './defn'
+import is from './is'
 
 /**
- * Checks if `any` is classified as a boolean primitive or object.
- *
- * @function
  * @since v0.1.0
- * @category lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a boolean, else `false`.
+ * @param {Any} any The value to check.
+ * @returns {Boolean} Returns `true` if `value` is a boolean, else `false`.
  * @example
  *
  * isBoolean(false)
@@ -17,6 +15,12 @@ import defn from './defn'
  * isBoolean(null)
  * // => false
  */
-const isBoolean = defn('isBoolean', anyIsBoolean)
+const isBoolean = defn(
+  'lang.isBoolean',
+  'Checks if `Any` is classified as a `Boolean`.',
+
+  [Any, () => Boolean],
+  is(Boolean)
+)
 
 export default isBoolean

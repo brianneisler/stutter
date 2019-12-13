@@ -1,14 +1,11 @@
 import Any from './types/Any'
 import Boolean from './types/Boolean'
-import anyIsGenerator from './util/anyIsGenerator'
+import Generator from './types/Generator'
 import defn from './defn'
+import is from './is'
 
 /**
- * Checks whether the given value is a generator.
- *
- * @function
  * @since v0.1.0
- * @category lang
  * @param  {*} any The value to check.
  * @returns {boolean} Returns `true` if `value` is a generator, else `false`.
  * @example
@@ -26,11 +23,11 @@ import defn from './defn'
  * //=> true
  */
 const isGenerator = defn(
-  'isGenerator',
-  'Checks whether the given value is a Generator',
+  'lang.isGenerator',
+  'Checks whether the given value is classified as a Generator',
 
   [Any, () => Boolean],
-  anyIsGenerator
+  is(Generator)
 )
 
 export default isGenerator

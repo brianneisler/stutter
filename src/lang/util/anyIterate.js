@@ -1,39 +1,5 @@
-import anyIsResolved from './anyIsResolved'
-import anyResolveWith from './anyResolveWith'
 import anyToIterator from './anyToIterator'
-
-const resolveNext = (next, fn, iter, recur) =>
-  anyResolveWith(next, (resolvedNext) => {
-    if (resolvedNext.done) {
-      return resolvedNext.value
-    }
-    return recur(fn, iter)
-  })
-
-const doSeriesIteration = (fn, iter) => {
-  while (true) {
-    let next = iter.next()
-    if (!anyIsResolved(next)) {
-      return anyResolveWith(next, (resolvedNext) => {
-        next = fn(resolvedNext)
-        if (!anyIsResolved(next)) {
-          return resolveNext(next, fn, iter, doSeriesIteration)
-        }
-        if (next.done) {
-          return next.value
-        }
-        return doSeriesIteration(fn, iter)
-      })
-    }
-    next = fn(next)
-    if (!anyIsResolved(next)) {
-      return resolveNext(next, fn, iter, doSeriesIteration)
-    }
-    if (next.done) {
-      return next.value
-    }
-  }
-}
+import iteratorIterate from './iteratorIterate'
 
 /**
  * This method iterates over the given collection or iterator in **series**. If the `iteratee` method returns `{ done: true }` then the iteration will complete.
@@ -69,6 +35,6 @@ const doSeriesIteration = (fn, iter) => {
  * }))
  * //=> 1
  */
-const anyIterate = (any, func) => doSeriesIteration(func, anyToIterator(any))
+const anyIterate = (any, func) => iteratorIterate(anyToIterator(any), func)
 
 export default anyIterate

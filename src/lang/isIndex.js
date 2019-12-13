@@ -1,15 +1,13 @@
-import { anyIsIndex } from './util'
+import Any from './types/Any'
+import Boolean from './types/Boolean'
+import Index from './types/IndexType'
 import defn from './defn'
+import is from './is'
 
 /**
- * Checks if `any` is a valid array-like index.
- *
- * @function
  * @since v0.1.0
- * @category lang
- * @param {*} any The value to check.
- * @param {number} length [=MAX_SAFE_INTEGER] The upper bounds of a valid index.
- * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+ * @param {Any} any The value to check.
+ * @returns {Boolean} Returns `true` if `Any` is a valid Index, else `false`.
  * @example
  *
  * isIndex(0)
@@ -21,6 +19,12 @@ import defn from './defn'
  * isIndex(-1)
  * //=> false
  */
-const isIndex = defn('isIndex', anyIsIndex)
+const isIndex = defn(
+  'lang.isIndex',
+  'Checks if `Any` is classified as an `Index` type.',
+
+  [Any, () => Boolean],
+  is(Index)
+)
 
 export default isIndex

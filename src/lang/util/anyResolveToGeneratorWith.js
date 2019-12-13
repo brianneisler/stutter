@@ -1,7 +1,7 @@
+import anyIsFunction from './anyIsFunction'
 import anyIsGenerator from './anyIsGenerator'
 import anyIsResolved from './anyIsResolved'
-import anyResolve from './anyResolve'
-import anyResolveToGenerator from './anyResolveToGenerator'
+import unresolvedResolveToGenerator from './unresolvedResolveToGenerator'
 
 /**
  * Resolves a value to a generator using the generator to yield values. When the
@@ -27,18 +27,20 @@ import anyResolveToGenerator from './anyResolveToGenerator'
  */
 const anyResolveToGeneratorWith = function*(any, func) {
   if (!anyIsResolved(any)) {
-    any = anyResolve(any)
     let result
     if (anyIsGenerator(any)) {
       result = yield* any
+    } else if (anyIsFunction(any.resolve)) {
+      result = any.resolve()
     } else {
+      // Must be either a Promise or an Op
       result = yield any
     }
     return yield* anyResolveToGeneratorWith(result, func)
   }
   any = func(any)
   if (!anyIsResolved(any)) {
-    return yield* anyResolveToGenerator(any)
+    return yield* unresolvedResolveToGenerator(any)
   }
   return any
 }

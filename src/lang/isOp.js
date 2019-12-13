@@ -1,13 +1,9 @@
-import { Any } from './types'
-import { anyIsOp } from './util'
-import defn from './defn'
+import Op from './types/Op'
+import def from './def'
+import is from './is'
 
 /**
- * Determines if the value is an op.
- *
- * @function
  * @since v0.1.0
- * @category common
  * @param {*} value
  * @returns {boolean}
  * @example
@@ -17,6 +13,11 @@ import defn from './defn'
  * })
  * //=> true
  */
-const isOp = defn('isOp', [Any], anyIsOp)
+const isOp = def(
+  'isOp',
+  'Checks if `Any` is classified as an `Op` type.',
+
+  is(Op)
+)
 
 export default isOp

@@ -55,12 +55,14 @@ const buildFnHandler = function(fn) {
     handler = functionCurry(handler)
   }
 
-  if (meta.memoize) {
-    handler = functionDefineSymbolFn(functionMemoize(handler), fn)
-  }
-
   if (meta.resolve) {
     handler = functionDefineSymbolFn(functionResolve(handler), fn)
+  }
+
+  // NOTE BRN: Memoization should come before parameter resolution to prevent
+  // resolving all arguments on every memoized call
+  if (meta.memoize) {
+    handler = functionDefineSymbolFn(functionMemoize(handler), fn)
   }
 
   if (anyIsNumber(meta.ary)) {

@@ -1,72 +1,84 @@
 import set from './set'
 
 describe('set', () => {
-  test('set to an object using a single existing string key', () => {
-    const collection = {
-      foo: 'bar'
-    }
-    const result = set('foo', 'baz', collection)
-    expect(result).toEqual({
-      foo: 'baz'
+  describe('Object', () => {
+    test('set to an object using a single existing string key', () => {
+      const collection = {
+        foo: 'bar'
+      }
+      const result = set('foo', 'baz', collection)
+      expect(result).toEqual({
+        foo: 'baz'
+      })
+      expect(result).not.toBe(collection)
     })
-    expect(result).not.toBe(collection)
+
+    test('set to an object using a single existing string key in array', () => {
+      const collection = {
+        foo: 'bar'
+      }
+      const result = set(['foo'], 'baz', collection)
+      expect(result).toEqual({
+        foo: 'baz'
+      })
+      expect(result).not.toBe(collection)
+    })
+
+    test('set to an object using a Symbol', () => {
+      const collection = {}
+      const symFoo = Symbol('foo')
+      expect(set(symFoo, 'baz', collection)).toEqual({
+        [symFoo]: 'baz'
+      })
+      expect(set([symFoo], 'baz', collection)).toEqual({
+        [symFoo]: 'baz'
+      })
+    })
+
+    test('set to an object using a Symbol then a prop', () => {
+      const collection = {}
+      const symFoo = Symbol('foo')
+      const result1 = set(symFoo, 'baz', collection)
+      expect(result1).toEqual({
+        [symFoo]: 'baz'
+      })
+      expect(collection).toEqual({})
+
+      const result2 = set('test', 'value', result1)
+      expect(result2).toEqual({
+        [symFoo]: 'baz',
+        test: 'value'
+      })
+      expect(result1).toEqual({
+        [symFoo]: 'baz'
+      })
+      expect(collection).toEqual({})
+    })
+
+    test('set to an object using a single existing key with dots', () => {
+      const collection = {
+        'foo.bar': 'baz'
+      }
+      expect(set('foo.bar', 'fum', collection)).toEqual({
+        'foo.bar': 'fum'
+      })
+    })
   })
 
-  test('set to an object using a single existing string key in array', () => {
-    const collection = {
-      foo: 'bar'
-    }
-    const result = set(['foo'], 'baz', collection)
-    expect(result).toEqual({
-      foo: 'baz'
+  describe('Array', () => {
+    test('set a single existing Index to an Array using [Index, Any, Array] argument order', () => {
+      const array = ['foo', 'bar']
+      const result = set(1, 'baz', array)
+      expect(result).toEqual(['foo', 'baz'])
+      expect(array).toEqual(['foo', 'bar'])
     })
-    expect(result).not.toBe(collection)
-  })
 
-  test('set to an object using a Symbol', () => {
-    const collection = {}
-    const symFoo = Symbol('foo')
-    expect(set(symFoo, 'baz', collection)).toEqual({
-      [symFoo]: 'baz'
+    test('set a single existing Index to an Array using [Array, Index, Any] argument order', () => {
+      const array = ['foo', 'bar']
+      const result = set(array, 1, 'baz')
+      expect(result).toEqual(['foo', 'baz'])
+      expect(array).toEqual(['foo', 'bar'])
     })
-    expect(set([symFoo], 'baz', collection)).toEqual({
-      [symFoo]: 'baz'
-    })
-  })
-
-  test('set to an object using a Symbol then a prop', () => {
-    const collection = {}
-    const symFoo = Symbol('foo')
-    const result1 = set(symFoo, 'baz', collection)
-    expect(result1).toEqual({
-      [symFoo]: 'baz'
-    })
-    expect(collection).toEqual({})
-
-    const result2 = set('test', 'value', result1)
-    expect(result2).toEqual({
-      [symFoo]: 'baz',
-      test: 'value'
-    })
-    expect(result1).toEqual({
-      [symFoo]: 'baz'
-    })
-    expect(collection).toEqual({})
-  })
-
-  test('set to an object using a single existing key with dots', () => {
-    const collection = {
-      'foo.bar': 'baz'
-    }
-    expect(set('foo.bar', 'fum', collection)).toEqual({
-      'foo.bar': 'fum'
-    })
-  })
-
-  test('set to an array using a single existing index', () => {
-    const collection = ['bar']
-    expect(set(0, 'baz', collection)).toEqual(['baz'])
-    expect(set([0], 'baz', collection)).toEqual(['baz'])
   })
 
   test('set to a Map using a single existing key', () => {
@@ -80,12 +92,12 @@ describe('set', () => {
       foo: 'bar'
     }
     expect(set('bim', 'bop', collection)).toEqual({
-      foo: 'bar',
-      bim: 'bop'
+      bim: 'bop',
+      foo: 'bar'
     })
     expect(set(['bim'], 'bop', collection)).toEqual({
-      foo: 'bar',
-      bim: 'bop'
+      bim: 'bop',
+      foo: 'bar'
     })
   })
 
@@ -112,8 +124,8 @@ describe('set', () => {
     }
 
     expect(set('bim', 'bop', collection)).toEqual({
-      foo: 'bar',
-      bim: 'bop'
+      bim: 'bop',
+      foo: 'bar'
     })
   })
 
@@ -162,8 +174,8 @@ describe('set', () => {
     const result = set('bim', 'bop', collection)
     expect(result).toBeInstanceOf(Promise)
     expect(await result).toEqual({
-      foo: 'bar',
-      bim: 'bop'
+      bim: 'bop',
+      foo: 'bar'
     })
   })
 })

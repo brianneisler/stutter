@@ -48,7 +48,6 @@ describe('anyToStringTag', () => {
   test('converts functions to the Function string tag', () => {
     expect(anyToStringTag(() => {})).toBe('Function')
     expect(anyToStringTag(function() {})).toBe('Function')
-    class Test {}
   })
 
   test('converts classes to the Object string tag', () => {

@@ -1,16 +1,7 @@
-import curry from './curry'
-
-const baseIdentical = (valueA, valueB) => {
-  // SameValue algorithm
-  if (valueA === valueB) {
-    // Steps 1-5, 7-10
-    // Steps 6.b-6.e: +0 != -0
-    // Added the nonzero y check to make Flow happy, but it is redundant
-    return valueA !== 0 || valueB !== 0 || 1 / valueA === 1 / valueB
-  }
-  // Step 6.a: NaN == NaN
-  return valueA !== valueA && valueB !== valueB
-}
+import Any from './types/Any'
+import Boolean from './types/Boolean'
+import anyIdenticalWithAny from './util/anyIdenticalWithAny'
+import defn from './defn'
 
 /**
  * Returns true if its arguments are identical, false otherwise. Values are identical if they reference the same memory. `NaN` is identical to `NaN`; `0` and `-0` are not identical.
@@ -33,8 +24,12 @@ const baseIdentical = (valueA, valueB) => {
  * identical(0, -0) //=> false
  * identical(NaN, NaN) //=> true
  */
-const identical = curry(baseIdentical)
+const identical = defn(
+  'identical',
+  'Returns true if its arguments are identical, false otherwise. Values are identical if they reference the same memory. `NaN` is identical to `NaN`; `0` and `-0` are not identical.',
+
+  [Any, Any, () => Boolean],
+  anyIdenticalWithAny
+)
 
 export default identical
-
-export { baseIdentical }

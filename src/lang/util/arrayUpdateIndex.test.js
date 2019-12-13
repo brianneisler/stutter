@@ -20,4 +20,13 @@ describe('arrayUpdateIndex', () => {
     expect(result).toEqual([1, 2, 3, 'foo'])
     expect(array).toEqual([1, 2, 3])
   })
+
+  test('updates a non existing Index in an Array with undefined', () => {
+    const array = [1, 2, 3]
+    const result = arrayUpdateIndex(array, 4, () => undefined)
+    expect(result).toEqual([1, 2, 3, undefined, undefined])
+    expect(result.length).toEqual(5)
+    expect(array).toEqual([1, 2, 3])
+    expect(array.length).toEqual(3)
+  })
 })

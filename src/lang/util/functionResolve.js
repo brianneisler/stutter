@@ -1,4 +1,4 @@
-import anyResolveAllWith from './anyResolveAllWith'
+import argumentsResolveAllWith from './argumentsResolveAllWith'
 
 /**
  * Wrap the given function with another function that will resolve the
@@ -20,7 +20,7 @@ import anyResolveAllWith from './anyResolveAllWith'
  */
 const functionResolve = (func) =>
   function() {
-    return anyResolveAllWith(arguments, (resolvedArgs) => func.apply(this, resolvedArgs))
+    return argumentsResolveAllWith(arguments, (resolvedArgs) => func.apply(this, resolvedArgs))
   }
 
 export default functionResolve

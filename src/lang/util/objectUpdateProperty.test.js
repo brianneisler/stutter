@@ -36,4 +36,35 @@ describe('objectUpdateProperty', () => {
       baz: 3
     })
   })
+
+  test('updating a Property that does not exist on an Object to undefined updates the Property on the Object', () => {
+    const object = {
+      bar: 2,
+      baz: 3
+    }
+    const result = objectUpdateProperty(object, 'foo', () => undefined)
+    expect(result).toEqual({
+      bar: 2,
+      baz: 3,
+      foo: undefined
+    })
+    expect(object).toEqual({
+      bar: 2,
+      baz: 3
+    })
+    expect(result).not.toBe(object)
+  })
+
+  test('updating a Property to the same value results in the same Object', () => {
+    const object = {
+      bar: 2,
+      baz: 3
+    }
+    const result = objectUpdateProperty(object, 'bar', () => 2)
+    expect(result).toBe(object)
+    expect(result).toEqual({
+      bar: 2,
+      baz: 3
+    })
+  })
 })

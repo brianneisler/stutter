@@ -1,5 +1,8 @@
-import { anyIsImmutableCollection } from './util'
+import Any from './types/Any'
+import Boolean from './types/Boolean'
+import ImmutableCollection from './types/ImmutableCollection'
 import defn from './defn'
+import is from './is'
 
 /**
  * Returns `true` if `any` is a `Collection`, or any of its subclasses.
@@ -25,6 +28,12 @@ import defn from './defn'
  * isImmutableCollection(Stack())
  * //=> true
  */
-const isImmutableCollection = defn('isImmutableCollection', anyIsImmutableCollection)
+const isImmutableCollection = defn(
+  'lang.isImmutableCollection',
+  'Checks if `Any` is classified as an `ImmutableCollection` type.',
+
+  [Any, () => Boolean],
+  is(ImmutableCollection)
+)
 
 export default isImmutableCollection
