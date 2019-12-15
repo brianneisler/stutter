@@ -6,22 +6,22 @@ describe('js:Exception', () => {
     test('correctly constructs the Type instance', () => {
       const source = function() {}
       const target = {
-        type: 'Argument',
         index: 0,
+        type: 'Argument',
         value: 'test'
       }
       const expected = new Expected({
-        expectation: 'foo',
         data: {},
-        exceptionToError: () => {}
+        exceptionToError: () => {},
+        expectation: 'foo'
       })
       const instance = new Exception(source, target, expected)
       expect(instance).toBeInstanceOf(Exception)
       expect(instance).toMatchObject({
-        source,
-        target,
+        code: 'Expected:Argument:foo',
         expected,
-        code: 'Expected:Argument:foo'
+        source,
+        target
       })
     })
   })
@@ -30,8 +30,8 @@ describe('js:Exception', () => {
     test('calls the toError method of the expected', () => {
       const source = function() {}
       const target = {
-        type: 'Argument',
         index: 0,
+        type: 'Argument',
         value: 'test'
       }
       const expected = {

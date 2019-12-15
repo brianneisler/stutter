@@ -8,8 +8,8 @@ describe('integration: setup config', () => {
         expect(context).toBe(testContext)
         return (config) => ({
           ...config,
-          foo: context.get('foo'),
-          bim: 'bop'
+          bim: 'bop',
+          foo: context.get('foo')
         })
       }
     }

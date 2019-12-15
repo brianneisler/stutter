@@ -1,6 +1,6 @@
 import ReadableBufferStream from './ReadableBufferStream'
 
-const bufferToStream = (buffer, options = { frequency: 10, chunkSize: 2048 }) => {
+const bufferToStream = (buffer, options = { chunkSize: 2048, frequency: 10 }) => {
   const stream = new ReadableBufferStream(options)
   stream.put(buffer)
   stream.stop()

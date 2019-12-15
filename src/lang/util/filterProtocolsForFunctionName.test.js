@@ -25,9 +25,26 @@ describe('filterProtocolsForFunctionName', () => {
       })
     )
     const namespaces = ImmutableMap({
+      bar: new Namespace(
+        'bar',
+        ImmutableMap({
+          [456]: {
+            description: '',
+            value: 456
+          },
+          Bar2Protocol: {
+            description: '',
+            value: Bar2Protocol
+          }
+        })
+      ),
       foo: new Namespace(
         'foo',
         ImmutableMap({
+          [123]: {
+            description: '',
+            value: 123
+          },
           BarProtocol: {
             description: '',
             value: BarProtocol
@@ -39,23 +56,6 @@ describe('filterProtocolsForFunctionName', () => {
                 'foo.foo': ImmutableList([Self, Number])
               })
             )
-          },
-          [123]: {
-            description: '',
-            value: 123
-          }
-        })
-      ),
-      bar: new Namespace(
-        'bar',
-        ImmutableMap({
-          Bar2Protocol: {
-            description: '',
-            value: Bar2Protocol
-          },
-          [456]: {
-            description: '',
-            value: 456
           }
         })
       )

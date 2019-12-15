@@ -83,7 +83,7 @@ describe('equals', () => {
   it('handles objects', () => {
     expect(equals({}, {})).toBe(true)
     expect(equals({ a: 1, b: 2 }, { a: 1, b: 2 })).toBe(true)
-    expect(equals({ a: 2, b: 3 }, { b: 3, a: 2 })).toBe(true)
+    expect(equals({ a: 2, b: 3 }, { a: 2, b: 3 })).toBe(true)
     expect(equals({ a: 2, b: 3 }, { a: 3, b: 3 })).toBe(false)
     expect(equals({ a: 2, b: 3, c: 1 }, { a: 2, b: 3 })).toBe(false)
   })

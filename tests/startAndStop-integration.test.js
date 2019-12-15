@@ -4,6 +4,7 @@ describe('integration: start and stop engine', () => {
   test('starts the engine and calls the setup and start methods', async () => {
     let wasCancelled = false
     const testModule = {
+      finally: jest.fn(),
       run: function*() {
         try {
           yield take('NEVER_GONNA_HAPPEN')
@@ -13,7 +14,6 @@ describe('integration: start and stop engine', () => {
           }
         }
       },
-      finally: jest.fn(),
       setup: jest.fn(),
       start: jest.fn(),
       stop: jest.fn()

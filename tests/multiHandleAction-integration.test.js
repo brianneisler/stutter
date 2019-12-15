@@ -21,11 +21,11 @@ describe('handle action integration tests', () => {
     const actionHandler = handleAction(function*(context, action) {
       expect(context).toEqual({})
       expect(action).toEqual({
-        type: 'TEST_ACTION',
         payload: {
           value: 'abc123'
         },
-        promise: expect.toBePromise()
+        promise: expect.toBePromise(),
+        type: 'TEST_ACTION'
       })
       return yield runAsync()
     })
@@ -40,11 +40,11 @@ describe('handle action integration tests', () => {
 
     const dispatched = engine.dispatch(testAction('abc123'))
     expect(dispatched).toEqual({
-      type: 'TEST_ACTION',
       payload: {
         value: 'abc123'
       },
-      promise: expect.toBePromise()
+      promise: expect.toBePromise(),
+      type: 'TEST_ACTION'
     })
     expect(dispatched.promise.isPending()).toBe(true)
 
@@ -64,11 +64,11 @@ describe('handle action integration tests', () => {
     const actionHandler = handleAction(function*(context, action) {
       expect(context).toEqual({})
       expect(action).toEqual({
-        type: 'TEST_ACTION',
         payload: {
           value: 'abc123'
         },
-        promise: expect.toBePromise()
+        promise: expect.toBePromise(),
+        type: 'TEST_ACTION'
       })
       return yield runAsync()
     })
@@ -83,11 +83,11 @@ describe('handle action integration tests', () => {
 
     const dispatched = engine.dispatch(testAction('abc123'))
     expect(dispatched).toEqual({
-      type: 'TEST_ACTION',
       payload: {
         value: 'abc123'
       },
-      promise: expect.toBePromise()
+      promise: expect.toBePromise(),
+      type: 'TEST_ACTION'
     })
     expect(dispatched.promise.isPending()).toBe(true)
 

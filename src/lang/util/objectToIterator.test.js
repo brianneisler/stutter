@@ -4,138 +4,138 @@ import objectToIterator from './objectToIterator'
 describe('objectToIterator', () => {
   test('creates an iterator for an object', () => {
     expect(objectToIterator({})).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
   })
 
   // TODO BRN: For the following special values we need to add tests that ensure the iterator iterates over the objects properties and not the array values only
   test('creates an object iterator for an array', () => {
     expect(objectToIterator([])).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
   })
 
   // TODO BRN: For the following special values we need to add tests that ensure the iterator iterates over the regexp's object properties
   test('creates an object iterator for a regexp', () => {
     expect(objectToIterator(/abc/)).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
   })
 
   // TODO BRN: For the following special values we need to add tests that ensure the iterator iterates over the functions's object properties
   test('creates an object iterator for functions', () => {
     expect(objectToIterator(async () => {})).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
     expect(objectToIterator(() => {})).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
     expect(objectToIterator(function() {})).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
     expect(objectToIterator(async function() {})).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
     expect(objectToIterator(function*() {})).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
   })
 
   // TODO BRN: For the following special values we need to add tests that ensure the iterator iterates over the generator's object properties
   test('creates an object iterator for generators', () => {
     expect(objectToIterator((function*() {})())).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
   })
 
   // TODO BRN: For the following special values we need to add tests that ensure the iterator iterates over the native object's properties
   test('creates an iterator for native objects', () => {
     expect(objectToIterator(new ArrayBuffer(2))).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
     expect(objectToIterator(new Boolean(false))).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
     expect(objectToIterator(new Boolean(true))).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
     expect(objectToIterator(new Date())).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
     expect(objectToIterator(new Error())).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
     expect(objectToIterator(new Map())).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
     expect(objectToIterator(new Number(1))).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
     expect(objectToIterator(new Promise(() => {}))).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
     expect(objectToIterator(new Set())).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
     expect(objectToIterator(new String('abc'))).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
     expect(objectToIterator(new WeakMap())).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
     expect(objectToIterator(new WeakSet())).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
   })
 
   // TODO BRN: For the following special values we need to add tests that ensure the iterator iterates over the length as a property
   test('creates an iterator for an object with length', () => {
     expect(objectToIterator({ length: 0 })).toEqual({
+      getKey: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getKey: expect.any(Function)
+      previous: expect.any(Function)
     })
   })
 
@@ -158,8 +158,8 @@ describe('objectToIterator', () => {
   test('getKey should match returned key', () => {
     const symBan = Symbol('ban')
     const iterator = objectToIterator({
-      foo: 'bar',
       bim: 'bop',
+      foo: 'bar',
       [symBan]: 'ana'
     })
     let next = { done: false }
@@ -180,8 +180,8 @@ describe('objectToIterator', () => {
   test('creates an iterator for the object', () => {
     const symBan = Symbol('ban')
     const iterator = objectToIterator({
-      foo: 'bar',
       bim: 'bop',
+      foo: 'bar',
       [symBan]: 'ana'
     })
     let next = { done: false }
@@ -192,44 +192,44 @@ describe('objectToIterator', () => {
     }
     expect(accum).toEqual([
       {
-        value: 'bar',
-        key: 'foo',
+        done: false,
         kdx: 'foo',
+        key: 'foo',
         prev: undefined,
-        done: false
+        value: 'bar'
       },
       {
-        value: 'bop',
-        key: 'bim',
+        done: false,
         kdx: 'bim',
+        key: 'bim',
         prev: {
-          value: 'bar',
-          key: 'foo',
+          done: false,
           kdx: 'foo',
-          done: false
+          key: 'foo',
+          value: 'bar'
         },
-        done: false
+        value: 'bop'
       },
       {
-        value: 'ana',
-        key: symBan,
+        done: false,
         kdx: symBan,
+        key: symBan,
         prev: {
-          value: 'bop',
-          key: 'bim',
+          done: false,
           kdx: 'bim',
-          done: false
+          key: 'bim',
+          value: 'bop'
         },
-        done: false
+        value: 'ana'
       },
       {
+        done: true,
         prev: {
-          value: 'ana',
-          key: symBan,
+          done: false,
           kdx: symBan,
-          done: false
-        },
-        done: true
+          key: symBan,
+          value: 'ana'
+        }
       }
     ])
   })
@@ -238,8 +238,8 @@ describe('objectToIterator', () => {
     const symBan = Symbol('ban')
     const iterator = objectToIterator(
       {
-        foo: 'bar',
         bim: 'bop',
+        foo: 'bar',
         [symBan]: 'ana'
       },
       ITERATOR_START
@@ -252,44 +252,44 @@ describe('objectToIterator', () => {
     }
     expect(accum).toEqual([
       {
-        value: 'bar',
-        key: 'foo',
+        done: false,
         kdx: 'foo',
+        key: 'foo',
         prev: undefined,
-        done: false
+        value: 'bar'
       },
       {
-        value: 'bop',
-        key: 'bim',
+        done: false,
         kdx: 'bim',
+        key: 'bim',
         prev: {
-          value: 'bar',
-          key: 'foo',
+          done: false,
           kdx: 'foo',
-          done: false
+          key: 'foo',
+          value: 'bar'
         },
-        done: false
+        value: 'bop'
       },
       {
-        value: 'ana',
-        key: symBan,
+        done: false,
         kdx: symBan,
+        key: symBan,
         prev: {
-          value: 'bop',
-          key: 'bim',
+          done: false,
           kdx: 'bim',
-          done: false
+          key: 'bim',
+          value: 'bop'
         },
-        done: false
+        value: 'ana'
       },
       {
+        done: true,
         prev: {
-          value: 'ana',
-          key: symBan,
+          done: false,
           kdx: symBan,
-          done: false
-        },
-        done: true
+          key: symBan,
+          value: 'ana'
+        }
       }
     ])
   })
@@ -298,8 +298,8 @@ describe('objectToIterator', () => {
     const symBan = Symbol('ban')
     const iterator = objectToIterator(
       {
-        foo: 'bar',
         bim: 'bop',
+        foo: 'bar',
         [symBan]: 'ana'
       },
       ITERATOR_END
@@ -312,71 +312,71 @@ describe('objectToIterator', () => {
     }
     expect(accum).toEqual([
       {
-        value: 'ana',
-        key: symBan,
+        done: false,
         kdx: symBan,
+        key: symBan,
         prev: undefined,
-        done: false
+        value: 'ana'
       },
       {
-        value: 'bop',
-        key: 'bim',
+        done: false,
         kdx: 'bim',
+        key: 'bim',
         prev: {
-          value: 'ana',
-          key: symBan,
+          done: false,
           kdx: symBan,
-          done: false
+          key: symBan,
+          value: 'ana'
         },
-        done: false
+        value: 'bop'
       },
       {
-        value: 'bar',
-        key: 'foo',
+        done: false,
         kdx: 'foo',
+        key: 'foo',
         prev: {
-          value: 'bop',
-          key: 'bim',
+          done: false,
           kdx: 'bim',
-          done: false
+          key: 'bim',
+          value: 'bop'
         },
-        done: false
+        value: 'bar'
       },
       {
+        done: true,
         prev: {
-          value: 'bar',
-          key: 'foo',
+          done: false,
           kdx: 'foo',
-          done: false
-        },
-        done: true
+          key: 'foo',
+          value: 'bar'
+        }
       }
     ])
   })
 
   test('calling next and then previous results in iterating the same value twice', () => {
     const iterator = objectToIterator({
-      foo: 'bar',
-      bim: 'bop'
+      bim: 'bop',
+      foo: 'bar'
     })
     expect(iterator.next()).toEqual({
-      value: 'bar',
-      key: 'foo',
+      done: false,
       kdx: 'foo',
+      key: 'foo',
       prev: undefined,
-      done: false
+      value: 'bar'
     })
     expect(iterator.previous()).toEqual({
-      value: 'bar',
-      key: 'foo',
+      done: false,
       kdx: 'foo',
+      key: 'foo',
       prev: {
-        value: 'bop',
-        key: 'bim',
+        done: false,
         kdx: 'bim',
-        done: false
+        key: 'bim',
+        value: 'bop'
       },
-      done: false
+      value: 'bar'
     })
   })
 })

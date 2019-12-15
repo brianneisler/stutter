@@ -10,10 +10,10 @@ describe('isKeyedIterator', () => {
   test('returns true for object with next and getKey method', () => {
     expect(
       isKeyedIterator({
+        getKey: () => {},
         next: () => ({
           done: true
-        }),
-        getKey: () => {}
+        })
       })
     ).toBe(true)
   })

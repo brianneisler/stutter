@@ -1,4 +1,4 @@
-import isGenerator from "./isGenerator"
+import isGenerator from './isGenerator'
 import resolveWith from './resolveWith'
 
 describe('resolveWith', () => {

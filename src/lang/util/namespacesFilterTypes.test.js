@@ -19,17 +19,6 @@ describe('namespacesFilterTypes', () => {
     })
 
     const namespaces = ImmutableMap({
-      foo: new Namespace(
-        'foo',
-        ImmutableMap({
-          foo: {
-            value: FooType
-          },
-          foo2: {
-            value: {}
-          }
-        })
-      ),
       bar: new Namespace(
         'bar',
         ImmutableMap({
@@ -46,6 +35,17 @@ describe('namespacesFilterTypes', () => {
         ImmutableMap({
           baz: {
             value: BazType
+          }
+        })
+      ),
+      foo: new Namespace(
+        'foo',
+        ImmutableMap({
+          foo: {
+            value: FooType
+          },
+          foo2: {
+            value: {}
           }
         })
       )

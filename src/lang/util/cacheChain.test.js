@@ -62,7 +62,7 @@ describe('cacheChain', () => {
   })
 
   test('returns different cache keys for different object instances that are equal in value', () => {
-    const imMap1 = ImmutableMap({ foo: 'bar', bar: 'baz' })
+    const imMap1 = ImmutableMap({ bar: 'baz', foo: 'bar' })
     const imMap2 = ImmutableMap({ foo: 'bar' })
 
     const key1 = cacheChain(imMap1)

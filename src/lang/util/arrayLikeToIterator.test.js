@@ -4,25 +4,25 @@ import arrayLikeToIterator from './arrayLikeToIterator'
 describe('arrayLikeToIterator', () => {
   test('creates an iterator for an array', () => {
     expect(arrayLikeToIterator([])).toEqual({
+      getIndex: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getIndex: expect.any(Function)
+      previous: expect.any(Function)
     })
   })
 
   test('creates an iterator for a string', () => {
     expect(arrayLikeToIterator('abc')).toEqual({
+      getIndex: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getIndex: expect.any(Function)
+      previous: expect.any(Function)
     })
   })
 
   test('creates an iterator for an object with length', () => {
     expect(arrayLikeToIterator({ length: 0 })).toEqual({
+      getIndex: expect.any(Function),
       next: expect.any(Function),
-      previous: expect.any(Function),
-      getIndex: expect.any(Function)
+      previous: expect.any(Function)
     })
   })
 
@@ -69,31 +69,31 @@ describe('arrayLikeToIterator', () => {
     }
     expect(accum).toEqual([
       {
-        value: 'foo',
+        done: false,
         index: 0,
         kdx: 0,
         prev: undefined,
-        done: false
+        value: 'foo'
       },
       {
-        value: 'bar',
+        done: false,
         index: 1,
         kdx: 1,
         prev: {
-          value: 'foo',
+          done: false,
           index: 0,
           kdx: 0,
-          done: false
+          value: 'foo'
         },
-        done: false
+        value: 'bar'
       },
       {
         done: true,
         prev: {
-          value: 'bar',
+          done: false,
           index: 1,
           kdx: 1,
-          done: false
+          value: 'bar'
         }
       }
     ])
@@ -109,25 +109,25 @@ describe('arrayLikeToIterator', () => {
     }
     expect(accum).toEqual([
       {
-        value: 'bar',
+        done: false,
         index: 1,
         kdx: 1,
         prev: {
-          value: 'foo',
+          done: false,
           index: 0,
           kdx: 0,
-          done: false
+          value: 'foo'
         },
-        done: false
+        value: 'bar'
       },
       {
+        done: true,
         prev: {
-          value: 'bar',
+          done: false,
           index: 1,
           kdx: 1,
-          done: false
-        },
-        done: true
+          value: 'bar'
+        }
       }
     ])
   })
@@ -142,8 +142,8 @@ describe('arrayLikeToIterator', () => {
     }
     expect(accum).toEqual([
       {
-        prev: { done: false, index: 1, kdx: 1, value: 'bar' },
-        done: true
+        done: true,
+        prev: { done: false, index: 1, kdx: 1, value: 'bar' }
       }
     ])
   })
@@ -158,8 +158,8 @@ describe('arrayLikeToIterator', () => {
     }
     expect(accum).toEqual([
       {
-        prev: { done: false, index: 1, kdx: 1, value: 'bar' },
-        done: true
+        done: true,
+        prev: { done: false, index: 1, kdx: 1, value: 'bar' }
       }
     ])
   })
@@ -174,25 +174,25 @@ describe('arrayLikeToIterator', () => {
     }
     expect(accum).toEqual([
       {
-        value: 'bar',
+        done: false,
         index: 1,
         kdx: 1,
         prev: {
-          value: 'foo',
+          done: false,
           index: 0,
           kdx: 0,
-          done: false
+          value: 'foo'
         },
-        done: false
+        value: 'bar'
       },
       {
+        done: true,
         prev: {
-          value: 'bar',
+          done: false,
           index: 1,
           kdx: 1,
-          done: false
-        },
-        done: true
+          value: 'bar'
+        }
       }
     ])
   })
@@ -207,32 +207,32 @@ describe('arrayLikeToIterator', () => {
     }
     expect(accum).toEqual([
       {
-        value: 'foo',
+        done: false,
         index: 0,
         kdx: 0,
         prev: undefined,
-        done: false
+        value: 'foo'
       },
       {
-        value: 'bar',
+        done: false,
         index: 1,
         kdx: 1,
         prev: {
-          value: 'foo',
+          done: false,
           index: 0,
           kdx: 0,
-          done: false
+          value: 'foo'
         },
-        done: false
+        value: 'bar'
       },
       {
+        done: true,
         prev: {
-          value: 'bar',
+          done: false,
           index: 1,
           kdx: 1,
-          done: false
-        },
-        done: true
+          value: 'bar'
+        }
       }
     ])
   })
@@ -240,23 +240,23 @@ describe('arrayLikeToIterator', () => {
   test('calling next and then previous results in iterating the same value twice', () => {
     const iterator = arrayLikeToIterator(['foo', 'bar'])
     expect(iterator.next()).toEqual({
-      value: 'foo',
+      done: false,
       index: 0,
       kdx: 0,
       prev: undefined,
-      done: false
+      value: 'foo'
     })
     expect(iterator.previous()).toEqual({
-      value: 'foo',
+      done: false,
       index: 0,
       kdx: 0,
       prev: {
-        value: 'bar',
+        done: false,
         index: 1,
         kdx: 1,
-        done: false
+        value: 'bar'
       },
-      done: false
+      value: 'foo'
     })
   })
 
@@ -270,32 +270,32 @@ describe('arrayLikeToIterator', () => {
     }
     expect(accum).toEqual([
       {
-        value: 'bar',
+        done: false,
         index: 1,
         kdx: 1,
         prev: undefined,
-        done: false
+        value: 'bar'
       },
       {
-        value: 'foo',
+        done: false,
         index: 0,
         kdx: 0,
         prev: {
-          value: 'bar',
+          done: false,
           index: 1,
           kdx: 1,
-          done: false
+          value: 'bar'
         },
-        done: false
+        value: 'foo'
       },
       {
+        done: true,
         prev: {
-          value: 'foo',
+          done: false,
           index: 0,
           kdx: 0,
-          done: false
-        },
-        done: true
+          value: 'foo'
+        }
       }
     ])
   })
@@ -303,22 +303,22 @@ describe('arrayLikeToIterator', () => {
   test('calling next multiple times when the iterator is at the end returns the same done result', () => {
     const iterator = arrayLikeToIterator(['foo', 'bar'], ITERATOR_END)
     expect(iterator.next()).toEqual({
+      done: true,
       prev: {
-        value: 'bar',
+        done: false,
         index: 1,
         kdx: 1,
-        done: false
-      },
-      done: true
+        value: 'bar'
+      }
     })
     expect(iterator.next()).toEqual({
+      done: true,
       prev: {
-        value: 'bar',
+        done: false,
         index: 1,
         kdx: 1,
-        done: false
-      },
-      done: true
+        value: 'bar'
+      }
     })
   })
 })

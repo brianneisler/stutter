@@ -34,11 +34,11 @@ const rate = (fn, max, duration) => {
 
     const invocation = {
       args,
-      promise: externalPromise(),
       invoke: () => {
         doInvoke(invocation)
         return invocation.promise
-      }
+      },
+      promise: externalPromise()
     }
 
     if (length(invocations) >= max) {

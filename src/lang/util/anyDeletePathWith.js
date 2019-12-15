@@ -17,9 +17,12 @@ const anyDeletePathWith = (any, path, getFunc, hasFunc, setFunc, deleteFunc) => 
         // NOTE BRN: We do this last set in case the head value needed to be resolved
         return setFunc(any, head, headValue)
       }
-      return anyResolveWith(deleteFunc(headValue, path.tail()), (deleteValue) => {
-        return setFunc(any, head, deleteValue)
-      })
+      return anyResolveWith(
+        anyDeletePathWith(headValue, path.tail(), getFunc, hasFunc, setFunc, deleteFunc),
+        (deleteValue) => {
+          return setFunc(any, head, deleteValue)
+        }
+      )
     })
   })
 }

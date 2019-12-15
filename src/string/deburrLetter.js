@@ -1,5 +1,5 @@
-import { DEBURRED_LETTERS } from '../constants'
-import getPropOf from '../data/getPropOf'
+import { DEBURRED_LETTERS } from '../lang/constants'
+import propOf from '../lang/propOf'
 
 /**
  * Used to convert Latin-1 Supplement and Latin Extended-A letters to basic Latin letters.
@@ -10,9 +10,10 @@ import getPropOf from '../data/getPropOf'
  * @param {string} letter The matched letter to deburr.
  * @returns {string} Returns the deburred letter.
  * @example
+ *
  * deburrLetter('é')
  * //=> 'e'
  */
-const deburrLetter = getPropOf(DEBURRED_LETTERS)
+const deburrLetter = propOf(DEBURRED_LETTERS)
 
 export default deburrLetter

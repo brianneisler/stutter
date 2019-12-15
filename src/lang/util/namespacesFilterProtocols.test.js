@@ -20,17 +20,6 @@ describe('namespacesFilterProtocols', () => {
     })
 
     const namespaces = ImmutableMap({
-      foo: new Namespace(
-        'foo',
-        ImmutableMap({
-          foo: {
-            value: FooProtocol
-          },
-          foo2: {
-            value: {}
-          }
-        })
-      ),
       bar: new Namespace(
         'bar',
         ImmutableMap({
@@ -47,6 +36,17 @@ describe('namespacesFilterProtocols', () => {
         ImmutableMap({
           baz: {
             value: BazProtocol
+          }
+        })
+      ),
+      foo: new Namespace(
+        'foo',
+        ImmutableMap({
+          foo: {
+            value: FooProtocol
+          },
+          foo2: {
+            value: {}
           }
         })
       )

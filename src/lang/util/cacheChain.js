@@ -10,8 +10,8 @@ const makeCacheChain = () => ({
 })
 
 const makeCacheLink = () => ({
-  ref: {},
-  cacheChain: makeCacheChain()
+  cacheChain: makeCacheChain(),
+  ref: {}
 })
 
 const isWeakKey = (value) => anyIsObject(value) && !anyIsImmutable(value)

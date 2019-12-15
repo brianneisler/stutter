@@ -13,6 +13,6 @@ import Immutable from 'immutable'
  * @returns {Seq.Indexed} A new Indexed Seq
  * @example
  */
-const Range = Immutable.Range
+const { Range } = Immutable
 
 export default Range

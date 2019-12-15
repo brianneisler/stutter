@@ -1,9 +1,9 @@
 import { baseIsOp } from './isOp'
 import curry from './curry'
-import isFunction from '../lang/isFunction'
-import isGenerator from '../lang/isGenerator'
-import isObject from '../lang/isObject'
-import isPromise from '../lang/isPromise'
+import isFunction from './isFunction'
+import isGenerator from './isGenerator'
+import isObject from './isObject'
+import isPromise from './isPromise'
 
 const baseIsResolved = (value) =>
   !isObject(value) ||

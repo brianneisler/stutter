@@ -2,6 +2,7 @@ import Any from '../lang/types/Any'
 import String from '../lang/types/String'
 import defn from '../lang/defn'
 import stringToUpperCase from '../lang/util/stringToUpperCase'
+import toString from '../lang/toString'
 
 /**
  * Returns the given string value converted to upper case (the value will be converted to a string if it isn't one).
@@ -25,8 +26,11 @@ const toUpperCase = defn(
   'toUpperCase',
   "Returns the given string value converted to upper case (the value will be converted to a string if it isn't one)",
 
+  [String, () => String],
+  stringToUpperCase,
+
   [Any, () => String],
-  stringToUpperCase
+  (any) => stringToUpperCase(toString(any))
 )
 
 export default toUpperCase

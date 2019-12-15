@@ -8,14 +8,14 @@ describe('anyIsException', () => {
   test('returns true for an Exception', () => {
     const source = function() {}
     const target = {
-      type: 'Argument',
       index: 0,
+      type: 'Argument',
       value: 'test'
     }
     const expected = new Expected({
-      expectation: 'foo',
       data: {},
-      exceptionToError: () => {}
+      exceptionToError: () => {},
+      expectation: 'foo'
     })
     expect(anyIsException(new Exception(source, target, expected))).toBe(true)
   })

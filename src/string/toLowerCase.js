@@ -2,6 +2,7 @@ import Any from '../lang/types/Any'
 import String from '../lang/types/String'
 import defn from '../lang/defn'
 import stringToLowerCase from '../lang/util/stringToLowerCase'
+import toString from '../lang/toString'
 
 /**
  * Returns the given string value converted to lower case (the value will be converted to a string if it isn't one).
@@ -25,8 +26,11 @@ const toLowerCase = defn(
   'toLowerCase',
   "Returns the given string value converted to lower case (the value will be converted to a string if it isn't one)",
 
+  [String, () => String],
+  stringToLowerCase,
+
   [Any, () => String],
-  stringToLowerCase
+  (any) => stringToLowerCase(toString(any))
 )
 
 export default toLowerCase

@@ -21,13 +21,6 @@ describe('namespacesFilter', () => {
 
   test('filters multiple namespaces', () => {
     const namespaces = ImmutableMap({
-      foo: new Namespace(
-        'foo',
-        ImmutableMap({
-          bar: 'abc',
-          baz: 123
-        })
-      ),
       bar: new Namespace(
         'foo',
         ImmutableMap({
@@ -40,6 +33,13 @@ describe('namespacesFilter', () => {
         ImmutableMap({
           bar: 'ghi',
           baz: 789
+        })
+      ),
+      foo: new Namespace(
+        'foo',
+        ImmutableMap({
+          bar: 'abc',
+          baz: 123
         })
       )
     })

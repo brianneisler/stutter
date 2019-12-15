@@ -5,7 +5,7 @@ import functionToFunctionName from './util/functionToFunctionName'
 import has from './has'
 import identical from '../common/identical'
 import iteratorToArray from '../lang/iteratorToArray'
-import keys from '../data/keys'
+import keys from './keys'
 import toType from '../lang/toType'
 
 /**

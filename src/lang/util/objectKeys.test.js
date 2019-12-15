@@ -4,8 +4,8 @@ describe('objectKeys', () => {
   test('returns an array of keys for an object', () => {
     expect(
       objectKeys({
-        foo: 'bar',
-        bim: 'bop'
+        bim: 'bop',
+        foo: 'bar'
       })
     ).toEqual(['foo', 'bim'])
   })
@@ -20,8 +20,8 @@ describe('objectKeys', () => {
   test('returns an array of keys for an object props that are part of the object enum bug', () => {
     expect(
       objectKeys({
-        toString: 'bar',
-        propertyIsEnumerable: 'bop'
+        propertyIsEnumerable: 'bop',
+        toString: 'bar'
       })
     ).toEqual(['toString', 'propertyIsEnumerable'])
   })

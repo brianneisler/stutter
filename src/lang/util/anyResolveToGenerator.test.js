@@ -52,8 +52,8 @@ describe('resolveToGenerator', () => {
 
     const result = generator.next(promiseValue)
     expect(result).toEqual({
-      value: 'foo',
-      done: true
+      done: true,
+      value: 'foo'
     })
   })
 
@@ -66,12 +66,12 @@ describe('resolveToGenerator', () => {
 
     expect(anyIsGenerator(generator)).toBe(true)
     expect(generator.next()).toEqual({
-      value: 'foo',
-      done: false
+      done: false,
+      value: 'foo'
     })
     expect(generator.next()).toEqual({
-      value: 'bar',
-      done: true
+      done: true,
+      value: 'bar'
     })
   })
 })

@@ -12,6 +12,6 @@ import Immutable from 'immutable'
  * @returns {Seq.Indexed} A new Indexed Seq
  * @example
  */
-const Repeat = Immutable.Repeat
+const { Repeat } = Immutable
 
 export default Repeat

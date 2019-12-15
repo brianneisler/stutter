@@ -1,7 +1,7 @@
 import arrayLikeReduce from '../lang/arrayLikeReduce'
 import curry from './curry'
-import isFunction from '../lang/isFunction'
-import isPromise from '../lang/isPromise'
+import isFunction from './isFunction'
+import isPromise from './isPromise'
 import reflectOwnKeys from '../lang/reflectOwnKeys'
 
 const mixClass = (Class, SuperClass) => {

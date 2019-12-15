@@ -5,10 +5,10 @@ const iterAt = (index, keys, object) => {
   if (index < keys.length && index >= 0) {
     const key = keys[index]
     return {
-      value: object[key],
-      key,
+      done: false,
       kdx: key,
-      done: false
+      key,
+      value: object[key]
     }
   }
   return {
@@ -20,10 +20,10 @@ const prevIterAt = (index, keys, object) => {
   if (index < keys.length && index >= 0) {
     const key = keys[index]
     return {
-      value: object[key],
-      key,
+      done: false,
       kdx: key,
-      done: false
+      key,
+      value: object[key]
     }
   }
 }
@@ -77,6 +77,7 @@ const objectToIterator = (object, start = ITERATOR_START) => {
   }
 
   return {
+    getKey: () => keys[lastIndex],
     next: () => {
       const iter = iterAt(index, keys, object)
       const prev = prevIterAt(index - 1, keys, object)
@@ -100,8 +101,7 @@ const objectToIterator = (object, start = ITERATOR_START) => {
         ...iter,
         prev
       }
-    },
-    getKey: () => keys[lastIndex]
+    }
   }
 }
 

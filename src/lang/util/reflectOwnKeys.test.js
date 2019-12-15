@@ -6,9 +6,9 @@ describe('reflectOwnKeys', () => {
     const symB = Symbol.for('b')
     expect(
       reflectOwnKeys({
+        c: 'c',
         [symA]: 'a',
-        [symB]: 'b',
-        c: 'c'
+        [symB]: 'b'
       })
     ).toEqual(['c', symA, symB])
   })

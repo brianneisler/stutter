@@ -29,8 +29,8 @@ const traversePostorder = curry((traverser, graph) => {
   }
   const context = newTraverseContext({
     graph,
-    visited: {},
-    results: {}
+    results: {},
+    visited: {}
   })
   return reduce((ctx, source) => traverseNode(ctx, source, traverser), context, graph.sources())
     .results

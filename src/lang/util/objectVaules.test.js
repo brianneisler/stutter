@@ -4,8 +4,8 @@ describe('objectValues', () => {
   test('returns an array of values for an object', () => {
     expect(
       objectValues({
-        foo: 'bar',
-        bim: 'bop'
+        bim: 'bop',
+        foo: 'bar'
       })
     ).toEqual(['bar', 'bop'])
   })
@@ -20,8 +20,8 @@ describe('objectValues', () => {
   test('returns an array of values for an object props that are part of the object enum bug', () => {
     expect(
       objectValues({
-        toString: 'bar',
-        propertyIsEnumerable: 'bop'
+        propertyIsEnumerable: 'bop',
+        toString: 'bar'
       })
     ).toEqual(['bar', 'bop'])
   })

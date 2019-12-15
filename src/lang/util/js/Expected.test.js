@@ -6,14 +6,14 @@ describe('js:Expected', () => {
   describe('constructor', () => {
     test('correctly constructs the Type instance', () => {
       const instance = new Expected({
-        expectation: 'foo',
         data: {},
-        exceptionToError: () => {}
+        exceptionToError: () => {},
+        expectation: 'foo'
       })
       expect(instance).toBeInstanceOf(Expected)
       expect(instance).toMatchObject({
-        expectation: 'foo',
-        data: {}
+        data: {},
+        expectation: 'foo'
       })
     })
   })
@@ -21,9 +21,9 @@ describe('js:Expected', () => {
   describe('Symbol.toStringTag', () => {
     test('Returns back a custom StringTag', () => {
       const instance = new Expected({
-        expectation: 'foo',
         data: {},
-        exceptionToError: () => {}
+        exceptionToError: () => {},
+        expectation: 'foo'
       })
       expect(anyToStringTag(instance)).toBe('Expected')
     })
@@ -34,14 +34,14 @@ describe('js:Expected', () => {
       const error = new Error('foo')
       const exceptionToError = jest.fn(() => error)
       const expected = new Expected({
-        expectation: 'foo',
         data: {},
-        exceptionToError
+        exceptionToError,
+        expectation: 'foo'
       })
       const source = function() {}
       const target = {
-        type: 'Argument',
         index: 0,
+        type: 'Argument',
         value: 'test'
       }
       const exception = new Exception(source, target, expected)

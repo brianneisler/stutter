@@ -11,10 +11,10 @@ describe('isIndexedIterator', () => {
   test('returns true for object with next and getIndex method', () => {
     expect(
       isIndexedIterator({
+        getIndex: () => {},
         next: () => ({
           done: true
-        }),
-        getIndex: () => {}
+        })
       })
     ).toBe(true)
   })
