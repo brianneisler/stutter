@@ -1,13 +1,14 @@
 import anyIsProperty from '../util/anyIsProperty'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-const Property = deftype(
+const Property = defineAny(
   'lang.Property',
   'A type representing a key for a Proped value.',
 
-  {
+  definitionToType({
     is: anyIsProperty
-  }
+  })
 )
 
 export default Property

@@ -1,5 +1,3 @@
-import objectHasOwnProperty from './objectHasOwnProperty'
-
-const arrayHasIndex = (array, index) => objectHasOwnProperty(array, index)
+const arrayHasIndex = (array, index) => index < array.length
 
 export default arrayHasIndex

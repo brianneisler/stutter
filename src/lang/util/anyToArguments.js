@@ -1,9 +1,6 @@
 import anyIsArguments from './anyIsArguments'
 import anyToArray from './anyToArray'
-
-const getArguments = function() {
-  return arguments
-}
+import arrayToArguments from './arrayToArguments'
 
 /**
  * Converts `any` to an `Arguments`.
@@ -33,7 +30,7 @@ const anyToArguments = (any) => {
     return any
   }
   const array = anyToArray(any)
-  return getArguments.apply(null, array)
+  return arrayToArguments(array)
 }
 
 export default anyToArguments

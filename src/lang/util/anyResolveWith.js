@@ -16,9 +16,9 @@ import anyResolveToGeneratorWith from './anyResolveToGeneratorWith'
  * @function
  * @since v0.1.0
  * @category lang.util
- * @param {*} any The value to resolve with the generator
+ * @param {Any} any The value to resolve with the generator
  * @param {Function} func The function to execute at the end of the resolution
- * @returns {Generator}
+ * @returns {Generator|Promise|Any}
  * @example
  *
  * await anyResolveWith(

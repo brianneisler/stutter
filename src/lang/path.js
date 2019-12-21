@@ -5,11 +5,7 @@ import defn from './defn'
 import get from './get'
 
 /**
- * Casts a value to an array path.
- *
- * @function
  * @since v0.1.0
- * @category common
  * @param {string} value The value to cast to an array path
  * @param {Object} object The object to check against for existing properties, keys or indexes that may be interpreted as a path
  * @returns {Array<string>} The path
@@ -28,9 +24,10 @@ import get from './get'
  * //=> 'foo'
  */
 const path = defn(
-  'path',
-  'Casts a value to an array path.',
+  'lang.path',
+  'Casts any value to a Path.',
 
+  // TOOD BRN: This will prevent curried usage of this method
   [Any, () => Path],
   (any) => anyToPath(any),
 

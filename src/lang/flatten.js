@@ -1,9 +1,9 @@
-import arrayFlatten from '../lang/arrayFlatten'
+import arrayFlatten from './util/arrayFlatten'
 import curry from '../common/curry'
 import defn from '../common/defn'
 
 /**
- * Returns a new list by pulling every item out of it (and all its sub-arrays) and putting them in a new array, depth-first.
+ *
  *
  * This method automatically upgrades to async. If a Promise is given as the list this method will resolve the promise as the list and return a Promise that resolves to the flattened list.
  *
@@ -17,6 +17,15 @@ import defn from '../common/defn'
  * flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]])
  * //=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
  */
-const flatten = curry(defn('flatten', arrayFlatten))
+const flatten = defn(
+  'lang.flatten',
+  {
+    description: 'Returns a new list by pulling every item out of it (and all its sub-arrays) and putting them in a new array, depth-first.',
+    since: 'v0.2.0'
+  },
+
+  [Array, () => Array]
+  arrayFlatten
+)
 
 export default flatten

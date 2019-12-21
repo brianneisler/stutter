@@ -16,6 +16,7 @@ import definitionToType from '../util/definitionToType'
 const Fn = defineAny(
   'lang.Fn',
   'A high-level, Stutter executable bit of code',
+
   definitionToType({
     class: _Fn,
     is: anyIsFn,

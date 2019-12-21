@@ -16,6 +16,7 @@ import definitionToType from '../util/definitionToType'
 const Boolean = defineAny(
   'lang.Boolean',
   'A Boolean represents one of two values: `true` or `false`',
+
   definitionToType({
     class: _Boolean,
     is: anyIsBoolean,

@@ -15,6 +15,9 @@ module.exports = {
     jest: true,
     node: true
   },
+  globals: {
+    example: "readonly"
+  },
   parser: 'babel-eslint',
   parserOptions: {
     'ecmaVersion': 2018,

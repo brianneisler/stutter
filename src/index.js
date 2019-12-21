@@ -1,5 +1,4 @@
 export * from './buffer'
-export * from './error'
 export * from './graph'
 export * from './lang'
 export * from './logging'

@@ -1,3 +1,4 @@
+import anyMatchesParameter from './anyMatchesParameter'
 import anyResolveWith from './anyResolveWith'
 import buildException from './buildException'
 
@@ -49,7 +50,7 @@ const functionTypeCheck = (func, meta) => {
         const arg = arguments[idx]
         const parameter = parameters[idx]
         if (parameter) {
-          if (!parameter.type.is(arg, meta)) {
+          if (!anyMatchesParameter(arg, parameter, meta)) {
             throw buildException(func)
               .expected.arg(arguments, idx)
               .toMatchParameter(parameter)

@@ -1,7 +1,9 @@
 // NOTE BRN: Methods in this folder SHOULD NOT depend upon any method from any other folder. This is so that we avoid circular dependencies on our own methods.
 
-export * from './protocols'
-export * from './types'
+import * as protocols from './protocols'
+import * as types from './types'
+
+export { protocols, types }
 
 export { default as __ } from './_'
 export { default as all } from './all'
@@ -23,7 +25,6 @@ export { default as constantly } from './constantly'
 export { default as contagion } from './contagion'
 export { default as contains } from './contains'
 export { default as curry } from './curry'
-export { default as curryN } from './curryN'
 export { default as def } from './def'
 export { default as defn } from './defn'
 export { default as defprotocol } from './defprotocol'

@@ -1,4 +1,5 @@
 import anyIsPlaceholder from './anyIsPlaceholder'
+import anyMatchesParameter from './anyMatchesParameter'
 import fnGetMeta from './fnGetMeta'
 
 const argumentsMatchToFnParameters = (args, fn, options) => {
@@ -30,7 +31,7 @@ const argumentsMatchToFnParameters = (args, fn, options) => {
       }
       delta -= 1
       partial = true
-    } else if (!parameter.type.is(arg, meta)) {
+    } else if (!anyMatchesParameter(arg, parameter, meta)) {
       return false
     }
   }

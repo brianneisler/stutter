@@ -17,8 +17,8 @@ const Type = defineAny(
     protocols: [
       Typed,
       {
-        is: fn([Self, Any], (self, any, ...rest) => self.is(any, ...rest)),
-        to: fn([Self, Any], (self, any) => self.to(any))
+        'lang.is': fn([Self, Any], (self, any, ...rest) => self.is(any, ...rest)),
+        'lang.to': fn([Self, Any], (self, any) => self.to(any))
       }
     ],
 

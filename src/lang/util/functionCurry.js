@@ -1,5 +1,6 @@
 import SYMBOL_FN from '../constants/SYMBOL_FN'
 import anyIsPlaceholder from './anyIsPlaceholder'
+import anyMatchesParameter from './anyMatchesParameter'
 import arrayClone from './arrayClone'
 import arrayConcat from './arrayConcat'
 import arrayMap from './arrayMap'
@@ -75,7 +76,7 @@ const curryParameterizedFn = (fn, handler) => {
         }
         newParameters.push(parameter)
       } else {
-        if (parameter && !parameter.type.is(arg, meta)) {
+        if (parameter && !anyMatchesParameter(arg, parameter, meta)) {
           throw buildException(fn)
             .expected.arg(arguments, idx)
             .toMatchParameter(parameter)

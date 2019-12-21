@@ -12,8 +12,8 @@ const { hasOwnProperty } = Object.prototype
  * @since v0.1.0
  * @category lang.util
  * @param {Object} object The object on which to check for the property.
- * @param {string} prop The String name or symbol of the property to test.
- * @returns {boolean} A boolean indicating whether or not the object has the specified property as own property.
+ * @param {Property} property The String name or symbol of the property to test.
+ * @returns {Boolean} A boolean indicating whether or not the object has the specified property as own property.
  *
  * const object = new Object()
  * object.property1 = 42
@@ -27,6 +27,6 @@ const { hasOwnProperty } = Object.prototype
  * objectHasOwnProperty(object, 'hasOwnProperty')
  * //=> false
  */
-const objectHasOwnProperty = (object, prop) => hasOwnProperty.call(object, prop)
+const objectHasOwnProperty = (object, property) => hasOwnProperty.call(object, property)
 
 export default objectHasOwnProperty

@@ -30,6 +30,7 @@ describe('lang.types index', () => {
       Index: expect.any(Type),
       Infinity: expect.any(Type),
       Integer: expect.any(Type),
+      Iterable: expect.any(Type),
       Iterator: expect.any(Type),
       Key: expect.any(Type),
       Map: expect.any(Type),

@@ -1,20 +1,18 @@
 import Any from './types/Any'
-import Array from './types/Array'
-import ImmutableList from './types/ImmutableList'
-import ImmutableMap from './types/ImmutableMap'
 import Index from './types/IndexType'
+import Indexed from './protocols/Indexed'
 import Key from './types/Key'
-import Map from './types/Map'
-import Object from './types/Object'
+import Keyed from './protocols/Keyed'
 import Path from './types/Path'
+import Propertied from './protocols/Propertied'
 import Property from './types/Property'
 import anyDeletePathWith from './util/anyDeletePathWith'
-import arrayDeleteIndex from './util/arrayDeleteIndex'
 import defn from './defn'
+import deleteIndex from './deleteIndex'
+import deleteKey from './deleteKey'
+import deleteProperty from './deleteProperty'
 import get from './get'
 import has from './has'
-import mapDeleteKey from './util/mapDeleteKey'
-import objectDeleteProperty from './util/objectDeleteProperty'
 import set from './set'
 
 /**
@@ -27,16 +25,14 @@ import set from './set'
  * @param {Object} obj The object to clone
  * @return {Object} A new object equivalent to the original but without the specified property
  * @example
- *
- * delete('b', { a: 1, b: 2, c: 3 })
- * //=> {a: 1, c: 3}
- *
- * delete(1, ['a', 'b', 'c'])
- * //=> ['a', 'c']
+
  */
 const _delete = defn(
   'lang.delete',
-  'Returns a new value that does not contain `target`',
+  {
+    description: 'Returns a new value that does not contain `target`',
+    since: 'v0.2.0'
+  },
 
   [Path, Any, () => Any],
   (path, any) => anyDeletePathWith(any, path, get, has, set, _delete),
@@ -44,35 +40,23 @@ const _delete = defn(
   [Any, Path, () => Any],
   (any, path) => anyDeletePathWith(any, path, get, has, set, _delete),
 
-  [Index, Array, () => Array],
-  (index, array) => arrayDeleteIndex(array, index),
+  [Index, Indexed, () => Indexed],
+  (index, indexed) => deleteIndex(indexed, index),
 
-  [Array, Index, () => Array],
-  (array, index) => arrayDeleteIndex(array, index),
+  [Indexed, Index, () => Indexed],
+  deleteIndex,
 
-  [Index, ImmutableList, () => ImmutableList],
-  (index, immutableList) => immutableList.delete(index),
+  [Key, Keyed, () => Keyed],
+  (key, keyed) => deleteKey(keyed, key),
 
-  [ImmutableList, Index, () => ImmutableList],
-  (immutableList, index) => immutableList.delete(index),
+  [Keyed, Key, () => Keyed],
+  deleteKey,
 
-  [Key, Map, () => Map],
-  (key, map) => mapDeleteKey(map, key),
+  [Property, Propertied, () => Propertied],
+  (property, propertied) => deleteProperty(propertied, property),
 
-  [Map, Key, () => Map],
-  (map, key) => mapDeleteKey(map, key),
-
-  [Key, ImmutableMap, () => ImmutableMap],
-  (key, immutableMap) => immutableMap.delete(key),
-
-  [ImmutableMap, Key, () => ImmutableMap],
-  (immutableMap, key) => immutableMap.delete(key),
-
-  [Property, Object, () => Object],
-  (property, object) => objectDeleteProperty(object, property),
-
-  [Object, Property, () => Object],
-  (object, property) => objectDeleteProperty(object, property)
+  [Propertied, Property, () => Propertied],
+  deleteProperty
 )
 
 export default _delete

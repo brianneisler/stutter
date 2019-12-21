@@ -1,4 +1,5 @@
-import anyIsPlainFunction from './anyIsPlainFunction'
+import anyIsFunction from './anyIsFunction'
+import anyIsIterator from './anyIsIterator'
 
 /**
  * Checks if `any` is a KeyedIterator. A KeyedIterator is classified as having a
@@ -26,7 +27,6 @@ import anyIsPlainFunction from './anyIsPlainFunction'
  * })
  * //=> true
  */
-const anyIsKeyedIterator = (any) =>
-  any != null && anyIsPlainFunction(any.next) && anyIsPlainFunction(any.getKey)
+const anyIsKeyedIterator = (any) => anyIsIterator(any) && anyIsFunction(any.getKey)
 
 export default anyIsKeyedIterator

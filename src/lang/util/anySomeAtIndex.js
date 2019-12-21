@@ -1,8 +1,8 @@
 import curry from '../common/curry'
 import defn from '../common/defn'
 import errorUnexpectedType from './errors/errorUnexpectedType'
-import isArrayLike from './isArrayLike'
-import isPromise from './isPromise'
+import isArrayLike from '../isArrayLike'
+import isPromise from '../isPromise'
 
 // TODO BRN: Merge this with `any`
 /**

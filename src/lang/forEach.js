@@ -1,12 +1,32 @@
-import curry from '../common/curry'
-import defn from '../common/defn'
-import iterate from '../common/iterate'
-import pipe from '../common/pipe'
+import Function from './types/Function'
+import Iterable from './protocols/Iterable'
+import defn from './defn'
+import iterate from './iterate'
+import pipe from './pipe'
+
+const iterableForEach = (iterable, func) =>
+  pipe(
+    () =>
+      iterate(
+        (next) =>
+          pipe(
+            (pNext) => {
+              if (pNext.done) {
+                return pNext
+              }
+              return func(pNext.value, pNext.kdx, iterable)
+            },
+            () => next
+          )(next),
+        iterable
+      ),
+    () => iterable
+  )()
 
 /**
  * Iterate over a collection calling a provided function `fn` for each element in the collection .
  *
- * `fn` receives two arguments: *(value, kdx)*
+ * `func` receives two arguments: *(value, kdx)*
  *
  * Note: `forEach` does not skip deleted or unassigned indices (sparse
  * arrays), unlike the native `Array.prototype.forEach` method. For more
@@ -28,8 +48,8 @@ import pipe from '../common/pipe'
  * @since v0.1.0
  * @category data
  * @param {Function} fn The function to invoke. Receives two arguments, `value` and either `index` for arrays or `key` for objects.
- * @param {*} collection The collection to iterate over.
- * @returns {*} The original collection.
+ * @param {Iterable} iterable The Iterable to iterate over.
+ * @returns {Iterable} The original Iterable.
  * @example
  *
  * const printXPlusFive = x => console.log(x + 5);
@@ -38,26 +58,14 @@ import pipe from '../common/pipe'
  * // logs 7
  * // logs 8
  */
-const forEach = curry(
-  defn('forEach', (fn, collection) =>
-    pipe(
-      () =>
-        iterate(
-          (next) =>
-            pipe(
-              (pNext) => {
-                if (pNext.done) {
-                  return pNext
-                }
-                return fn(pNext.value, pNext.kdx, collection)
-              },
-              () => next
-            )(next),
-          collection
-        ),
-      () => collection
-    )()
-  )
+const forEach = defn(
+  'forEach',
+
+  [Function, Iterable, () => Iterable],
+  (func, iterable) => iterableForEach(iterable, func),
+
+  [Iterable, Function, () => Iterable],
+  iterableForEach
 )
 
 export default forEach

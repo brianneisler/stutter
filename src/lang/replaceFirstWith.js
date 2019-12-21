@@ -1,0 +1,2 @@
+const replaceFirstWith = (func, string) =>
+    

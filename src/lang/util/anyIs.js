@@ -16,6 +16,6 @@
  * anyIs(123, String)
  * // => false
  */
-const anyIs = (any, type) => type.is(any)
+const anyIs = (any, type, meta) => type.is(any, meta)
 
 export default anyIs

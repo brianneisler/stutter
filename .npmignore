@@ -91,3 +91,4 @@ examples
 experiments
 scripts
 src
+*.example.js

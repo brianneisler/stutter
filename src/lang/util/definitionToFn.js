@@ -1,6 +1,7 @@
 import Any from '../types/Any'
 import Parameter from './js/Parameter'
 import anyIsFunction from './anyIsFunction'
+import anyIsProtocol from './anyIsProtocol'
 import anyIsType from './anyIsType'
 import buildFn from './buildFn'
 import findTypeForClass from './findTypeForClass'
@@ -58,10 +59,10 @@ const definitionToFn = (func, definition = [], meta = {}) => {
     const name = parameterNames[index] || `arg${index}`
     let type = definition[index]
     if (type) {
-      if (!anyIsType(type)) {
+      if (!anyIsType(type) && !anyIsProtocol(type)) {
         if (!anyIsFunction(type)) {
           throw new Error(
-            `definitionToFn expected a Type for parameter '${name}' but instead was given ${type}`
+            `definitionToFn expected a Type or Protocol for parameter '${name}' but instead was given ${type}`
           )
         }
 
@@ -81,9 +82,9 @@ const definitionToFn = (func, definition = [], meta = {}) => {
           } else {
             returns = returnedReturnType
           }
-          if (!anyIsType(returns)) {
+          if (!anyIsType(returns) && !anyIsProtocol(returns)) {
             throw new Error(
-              `parameterizeFunction expected return type to be a function that returns a Type. Instead this value was returned ${returnedReturnType}`
+              `parameterizeFunction expected return type to be a function that returns a Type or a Protocol. Instead this value was returned ${returnedReturnType}`
             )
           }
           // If there are no more parameter names then this is not a parameter

@@ -1,5 +1,6 @@
-import anyIterate from './anyIterate'
-import anyResolveWith from './anyResolveWith'
+import argumentsToArray from './argumentsToArray'
+import arrayResolveAllWith from './arrayResolveAllWith'
+import arrayToArguments from './arrayToArguments'
 
 /**
  * Resolves all async values in an Arguments object and executes the given with
@@ -9,7 +10,7 @@ import anyResolveWith from './anyResolveWith'
  * @function
  * @since v0.1.0
  * @category lang.util
- * @param {Arguments} arguments The Arguments whose values should be resolved.
+ * @param {Arguments} args The Arguments whose values should be resolved.
  * @param {Function} func The function to execute at the end of the resolution
  * @returns {Array} The Arguments with its values resolved
  * @example
@@ -24,22 +25,7 @@ import anyResolveWith from './anyResolveWith'
  * // => 'foo'
  */
 const argumentsResolveAllWith = (args, func) => {
-  const result = []
-  return anyResolveWith(
-    anyIterate(args, (next) => {
-      if (next.done) {
-        return {
-          ...next,
-          value: result
-        }
-      }
-      return anyResolveWith(next.value, (nextValue) => {
-        result[next.kdx] = nextValue
-        return next
-      })
-    }),
-    func
-  )
+  return arrayResolveAllWith(argumentsToArray(args), (resolved) => func(arrayToArguments(resolved)))
 }
 
-export default argumentsResolveAllWith
+export default argumentsResolveAllWith()

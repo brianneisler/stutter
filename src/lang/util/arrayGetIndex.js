@@ -9,7 +9,7 @@
  * @param {Index} index The Index to get.
  * @returns {Any} The value at the specified Index on the Array. Undefined if the Array does not have the Index.
  * @example
- * const index = ['foo']
+ * const array = ['foo']
  *
  * arrayGetIndex(array, 0)
  * //=> 'foo'

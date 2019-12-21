@@ -1,4 +1,5 @@
-import anyIsPlainFunction from './anyIsPlainFunction'
+import anyIsFunction from './anyIsFunction'
+import anyIsIterator from './anyIsIterator'
 
 /**
  * Checks if `any` is an IndexedIterator. An IndexedIterator is classified as having a property named `next` that is a plain function and a property named `getIndex` that is a plain function.
@@ -20,7 +21,6 @@ import anyIsPlainFunction from './anyIsPlainFunction'
  * anyIsIndexedIterator(array[Symbol.iterator])
  * //=> false
  */
-const anyIsIndexedIterator = (any) =>
-  any != null && anyIsPlainFunction(any.next) && anyIsPlainFunction(any.getIndex)
+const anyIsIndexedIterator = (any) => anyIsIterator(next) && anyIsFunction(any.getIndex)
 
 export default anyIsIndexedIterator

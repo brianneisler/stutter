@@ -125,16 +125,35 @@ const toMatchReturns = (next, not = false) => (returns) =>
     })
   )
 
+const toSatisfyProtocol = (next, not = false) => (protocol) =>
+  next(
+    new Expected({
+      data: {
+        protocol
+      },
+      exceptionToError: (exception, expected) =>
+        new TypeError(
+          `${sourceToString(exception.source)} expected ${targetToString(exception.target)} to ${
+            not ? 'NOT ' : ''
+          }satisfy the Protocol ${anyToName(
+            expected.data.protocol
+          )}. Instead was given ${targetToString(exception.target)}.`
+        )
+    })
+  )
+
 const buildExpected = (type, next) => {
   switch (type) {
     case 'Argument':
       return {
         not: {
           toMatchParameter: toMatchParameter(next, true),
-          toMatchRegex: toMatchRegex(next, true)
+          toMatchRegex: toMatchRegex(next, true),
+          toSatisfyProtocol: toSatisfyProtocol(next, true)
         },
         toMatchParameter: toMatchParameter(next),
-        toMatchRegex: toMatchRegex(next)
+        toMatchRegex: toMatchRegex(next),
+        toSatisfyProtocol: toSatisfyProtocol(next)
       }
 
     case 'Arguments':

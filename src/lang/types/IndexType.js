@@ -1,5 +1,6 @@
 import anyIsIndex from '../util/anyIsIndex'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
 /**
  * @type {Type}
@@ -7,8 +8,13 @@ import deftype from '../deftype'
  * @category lang
  * @example
  */
-const Index = deftype('lang.Index', 'A type representing an index for an Indexed value.', {
-  is: anyIsIndex
-})
+const Index = defineAny(
+  'lang.Index',
+  'A type representing an index for an Indexed value.',
+
+  definitionToType({
+    is: anyIsIndex
+  })
+)
 
 export default Index

@@ -1,6 +1,6 @@
 {
   "name": "stutter",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Functional programming framework for JavaScript",
   "author": "Brian Neisler <hello@brianneisler.com>",
   "license": "Apache-2.0",

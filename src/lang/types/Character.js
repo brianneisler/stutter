@@ -1,8 +1,14 @@
 import anyIsCharacter from '../util/anyIsCharacter'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-const Character = deftype('lang.Character', 'A single string character.', {
-  is: anyIsCharacter
-})
+const Character = defineAny(
+  'lang.Character',
+  'A single String character.',
+
+  definitionToType({
+    is: anyIsCharacter
+  })
+)
 
 export default Character

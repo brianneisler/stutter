@@ -44,109 +44,81 @@ describe('anySetPathWith', () => {
     })
   })
 
-  // test("when nil value is encountered on traversal and is not the last item in path, we escape and don't modify the value", () => {
-  //   const path = new Path(['a', 'b'])
-  //   const getFunc = (target, key) => objectGetProperty(target, key)
-  //   const hasFunc = (target, key) => objectHasProperty(target, key)
-  //   const setFunc = (target, key, value) => {
-  //     if (anyIsPath(key)) {
-  //       return anySetPathWith(target, key, value, getFunc, setFunc)
-  //     }
-  //     return objectSetProperty(target, key, value)
-  //   }
-  //   const setFunc = (target, key) => {
-  //     if (anyIsPath(key)) {
-  //       return anySetPathWith(target, key, getFunc, hasFunc, setFunc, setFunc)
-  //     }
-  //     return objectSetProperty(target, key)
-  //   }
-  //   const objectA = { a: undefined }
-  //   expect(anySetPathWith(objectA, path, getFunc, hasFunc, setFunc, setFunc)).toBe(objectA)
-  //   const objectB = { b: null }
-  //   expect(anySetPathWith(objectB, path, getFunc, hasFunc, setFunc, setFunc)).toBe(objectB)
-  // })
+  test("when nil value is encountered on traversal and is not the last item in path, we escape and don't modify the value", () => {
+    const path = new Path(['a', 'b'])
+    const getFunc = (target, key) => objectGetProperty(target, key)
+    const hasFunc = (target, key) => objectHasProperty(target, key)
+    const setFunc = (target, key, value) => {
+      if (anyIsPath(key)) {
+        return anySetPathWith(target, key, value, getFunc, setFunc)
+      }
+      return objectSetProperty(target, key, value)
+    }
+    const setFunc = (target, key) => {
+      if (anyIsPath(key)) {
+        return anySetPathWith(target, key, getFunc, hasFunc, setFunc, setFunc)
+      }
+      return objectSetProperty(target, key)
+    }
+    const objectA = { a: undefined }
+    expect(anySetPathWith(objectA, path, getFunc, hasFunc, setFunc, setFunc)).toBe(objectA)
+    const objectB = { b: null }
+    expect(anySetPathWith(objectB, path, getFunc, hasFunc, setFunc, setFunc)).toBe(objectB)
+  })
 
-  // test('upgrades to async when getFunc returns a promise', async () => {
-  //   const path = new Path(['a', 'b', 'c'])
-  //   const getFunc = async (target, key) => objectGetProperty(target, key)
-  //   const hasFunc = (target, key) => objectHasProperty(target, key)
-  //   const setFunc = (target, key, value) => {
-  //     if (anyIsPath(key)) {
-  //       return anySetPathWith(target, key, value, getFunc, setFunc)
-  //     }
-  //     return objectSetProperty(target, key, value)
-  //   }
-  //   const setFunc = (target, key) => {
-  //     if (anyIsPath(key)) {
-  //       return anySetPathWith(target, key, getFunc, hasFunc, setFunc, setFunc)
-  //     }
-  //     return objectSetProperty(target, key)
-  //   }
+  test('upgrades to async when getFunc returns a promise', async () => {
+    const path = new Path(['a', 'b', 'c'])
+    const getFunc = async (target, key) => objectGetProperty(target, key)
+    const hasFunc = (target, key) => objectHasProperty(target, key)
+    const setFunc = (target, key, value) => {
+      if (anyIsPath(key)) {
+        return anySetPathWith(target, key, value, getFunc, setFunc)
+      }
+      return objectSetProperty(target, key, value)
+    }
+    const setFunc = (target, key) => {
+      if (anyIsPath(key)) {
+        return anySetPathWith(target, key, getFunc, hasFunc, setFunc, setFunc)
+      }
+      return objectSetProperty(target, key)
+    }
 
-  //   const any = {
-  //     a: { b: { c: 3 } }
-  //   }
-  //   const promise = anySetPathWith(any, path, getFunc, hasFunc, setFunc, setFunc)
-  //   expect(promise).toBeInstanceOf(Promise)
-  //   const result = await promise
-  //   expect(result).toEqual({
-  //     a: { b: {} }
-  //   })
-  // })
+    const any = {
+      a: { b: { c: 3 } }
+    }
+    const promise = anySetPathWith(any, path, getFunc, hasFunc, setFunc, setFunc)
+    expect(promise).toBeInstanceOf(Promise)
+    const result = await promise
+    expect(result).toEqual({
+      a: { b: {} }
+    })
+  })
 
-  // test('handles async nil values', async () => {
-  //   const path = new Path(['a', 'b', 'c'])
-  //   const getFunc = (target, key) => objectGetProperty(target, key)
-  //   const hasFunc = (target, key) => objectHasProperty(target, key)
-  //   const setFunc = (target, key, value) => {
-  //     if (anyIsPath(key)) {
-  //       return anySetPathWith(target, key, value, getFunc, setFunc)
-  //     }
-  //     return objectSetProperty(target, key, value)
-  //   }
-  //   const setFunc = (target, key) => {
-  //     if (anyIsPath(key)) {
-  //       return anySetPathWith(target, key, getFunc, hasFunc, setFunc, setFunc)
-  //     }
-  //     return objectSetProperty(target, key)
-  //   }
+  test('handles async nil values', async () => {
+    const path = new Path(['a', 'b', 'c'])
+    const getFunc = (target, key) => objectGetProperty(target, key)
+    const hasFunc = (target, key) => objectHasProperty(target, key)
+    const setFunc = (target, key, value) => {
+      if (anyIsPath(key)) {
+        return anySetPathWith(target, key, value, getFunc, setFunc)
+      }
+      return objectSetProperty(target, key, value)
+    }
+    const setFunc = (target, key) => {
+      if (anyIsPath(key)) {
+        return anySetPathWith(target, key, getFunc, hasFunc, setFunc, setFunc)
+      }
+      return objectSetProperty(target, key)
+    }
 
-  //   const any = {
-  //     a: Promise.resolve({ b: Promise.resolve(null) })
-  //   }
-  //   const promise = anySetPathWith(any, path, getFunc, hasFunc, setFunc, setFunc)
-  //   expect(promise).toBeInstanceOf(Promise)
-  //   const result = await promise
-  //   expect(result).toEqual({
-  //     a: { b: null }
-  //   })
-  // })
-
-  // test('handles async Path values', async () => {
-  //   const path = new Path([Promise.resolve('a'), Promise.resolve('b'), Promise.resolve('c')])
-  //   const getFunc = (target, key) => objectGetProperty(target, key)
-  //   const hasFunc = (target, key) => objectHasProperty(target, key)
-  //   const setFunc = (target, key, value) => {
-  //     if (anyIsPath(key)) {
-  //       return anySetPathWith(target, key, value, getFunc, setFunc)
-  //     }
-  //     return objectSetProperty(target, key, value)
-  //   }
-  //   const setFunc = (target, key) => {
-  //     if (anyIsPath(key)) {
-  //       return anySetPathWith(target, key, getFunc, hasFunc, setFunc, setFunc)
-  //     }
-  //     return objectSetProperty(target, key)
-  //   }
-
-  //   const any = {
-  //     a: { b: { c: 3 } }
-  //   }
-  //   const promise = anySetPathWith(any, path, getFunc, hasFunc, setFunc, setFunc)
-  //   expect(promise).toBeInstanceOf(Promise)
-  //   const result = await promise
-  //   expect(result).toEqual({
-  //     a: { b: {} }
-  //   })
-  // })
+    const any = {
+      a: Promise.resolve({ b: Promise.resolve(null) })
+    }
+    const promise = anySetPathWith(any, path, getFunc, hasFunc, setFunc, setFunc)
+    expect(promise).toBeInstanceOf(Promise)
+    const result = await promise
+    expect(result).toEqual({
+      a: { b: null }
+    })
+  })
 })

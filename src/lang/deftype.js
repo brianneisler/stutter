@@ -93,6 +93,9 @@ const deftype = def(
   'Defines a new `Type` with the given `name`.',
 
   fn(
+    [String, PlainObject, PlainObject, () => Type],
+    (name, meta, definition) => def(name, meta, type(definition)),
+
     [String, String, PlainObject, () => Type],
     (name, description, definition) => def(name, description, type(definition)),
 

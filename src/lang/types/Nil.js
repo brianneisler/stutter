@@ -1,13 +1,14 @@
 import anyIsNil from '../util/anyIsNil'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-const Nil = deftype(
+const Nil = defineAny(
   'lang.Nil',
   'A type representing a null or undefined value.',
 
-  {
+  definitionToType({
     is: anyIsNil
-  }
+  })
 )
 
 export default Nil

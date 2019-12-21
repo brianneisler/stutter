@@ -17,7 +17,7 @@
  * anyIsObject([1, 2, 3])
  * // => true
  *
- * anyIsObject(Function)
+ * anyIsObject(function () {})
  * // => true
  *
  * anyIsObject(null)

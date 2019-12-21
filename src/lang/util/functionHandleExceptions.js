@@ -14,9 +14,12 @@ import functionCatchWith from './functionCatchWith'
  * @example
  *
  */
-const functionHandleExceptions = (func) =>
+const functionHandleExceptions = (func, source) =>
   functionCatchWith(func, (thrown) => {
     if (anyIsException(thrown)) {
+      if (!thrown.source) {
+        thrown.source = source
+      }
       throw thrown.toError()
     }
     throw thrown

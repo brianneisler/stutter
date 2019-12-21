@@ -70,7 +70,7 @@ const buildFnHandler = function(fn) {
   }
 
   if (meta.handleExceptions) {
-    handler = functionDefineSymbolFn(functionHandleExceptions(handler), fn)
+    handler = functionDefineSymbolFn(functionHandleExceptions(handler, fn), fn)
   }
 
   return handler

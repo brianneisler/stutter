@@ -1,13 +1,14 @@
 import anyIsUndefined from '../util/anyIsUndefined'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-const Undefined = deftype(
+const Undefined = defineAny(
   'lang.Undefined',
   'A type representing an `undefined` value.',
 
-  {
+  definitionToType({
     is: anyIsUndefined
-  }
+  })
 )
 
 export default Undefined

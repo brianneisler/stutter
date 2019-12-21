@@ -16,7 +16,11 @@ describe('defineAny', () => {
 
     const defaultNamespace = propGetNamespace(DEFAULT_NAMESPACE_NAME)
     expect(defaultNamespace.get('test')).toEqual({
-      description: 'test description',
+      meta: {
+        description: 'test description',
+        name: 'test',
+        namespace: 'default'
+      },
       value: 'test value'
     })
   })
@@ -31,7 +35,11 @@ describe('defineAny', () => {
 
     const testNamespace = propGetNamespace('my-namespace')
     expect(testNamespace.get('test')).toEqual({
-      description: 'test description',
+      meta: {
+        description: 'test description',
+        name: 'test',
+        namespace: 'my-namespace'
+      },
       value: 'test value'
     })
   })

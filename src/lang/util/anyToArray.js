@@ -1,4 +1,5 @@
 import { SYMBOL_ITERATOR } from '../constants'
+import anyIsArguments from './anyIsArguments'
 import anyIsArray from './anyIsArray'
 import anyIsArrayLike from './anyIsArrayLike'
 import anyIsFunction from './anyIsFunction'
@@ -7,6 +8,7 @@ import anyIsNil from './anyIsNil'
 import anyIsObject from './anyIsObject'
 import anyIsString from './anyIsString'
 import anyToStringTag from './anyToStringTag'
+import argumentsToArray from './argumentsToArray'
 import arrayClone from './arrayClone'
 import iteratorToArray from './iteratorToArray'
 import mapToArray from './mapToArray'
@@ -48,7 +50,12 @@ const anyToArray = (any) => {
     return any.toArray()
   }
   if (anyIsArrayLike(any)) {
-    return anyIsString(any) ? stringToArray(any) : arrayClone(any)
+    if (anyIsString(any)) {
+      return stringToArray(any)
+    } else if (anyIsArguments(any)) {
+      return argumentsToArray(any)
+    }
+    return arrayClone(any)
   }
   if (!anyIsObject(any)) {
     return [any]
