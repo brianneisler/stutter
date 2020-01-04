@@ -1,49 +1,15 @@
-import { baseIsOp } from './isOp'
-import curry from './curry'
-import isFunction from './isFunction'
-import isGenerator from './isGenerator'
-import isObject from './isObject'
-import isPromise from './isPromise'
+import Resolved from './types/Resolved'
+import defn from './defn'
+import is from './is'
 
-const baseIsResolved = (value) =>
-  !isObject(value) ||
-  !(isPromise(value) || isFunction(value.resolve) || isGenerator(value) || baseIsOp(value))
+const isResolved = defn(
+  'lang.isResolved',
+  {
+    description: 'Determines if the value is a resolved value.',
+    since: 'v0.2.0'
+  },
 
-/**
- * Determines if the value is a resolvable value.
- *
- * @function
- * @since v0.1.0
- * @category common
- * @param {*} value
- * @returns {boolean}
- * @example
- *
- * isResolved({
- *   ['@@redux-saga/IO']: 'op'
- * })
- * //=> false
- *
- * isResolved((function* () {})())
- * //=> false
- *
- * isResolved(new Promise(() => {})))
- * //=> false
- *
- * isResolved({ resolve: () => 'foo' })
- * //=> false
- *
- * isResolved(null)
- * //=> true
- *
- * isResolved(undefined)
- * //=> true
- *
- * isResolved('abc')
- * //=> true
- */
-const isResolved = curry(baseIsResolved)
+  is(Resolved)
+)
 
 export default isResolved
-
-export { baseIsResolved }

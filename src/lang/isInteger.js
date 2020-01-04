@@ -1,30 +1,16 @@
-import { anyIsInteger } from './util'
+// required
+import Integer from './types/Integer'
 import defn from './defn'
+import is from './is'
 
-/**
- * Determine if the passed argument is an integer.
- *
- * @function
- * @since v0.1.0
- * @category lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an integer, else `false`.
- * @example
- *
- * isInteger(3) // => true
- *
- * isInteger(new Number(3)) // => true
- *
- * isInteger(3.2) // => false
+const isInteger = defn(
+  'lang.isInteger',
+  {
+    description: 'Checks whether the given value is classified as an Integer',
+    since: 'v0.2.0'
+  },
 
- * isInteger(Number.MIN_VALUE) // => false
- *
- * isInteger(Infinity) // => false
- *
- * isInteger(NaN) // => false
- *
- * isInteger('3') // => false
- */
-const isInteger = defn('isInteger', anyIsInteger)
+  is(Integer)
+)
 
 export default isInteger

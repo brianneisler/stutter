@@ -1,26 +1,15 @@
-import Any from './types/Any'
-import Boolean from './types/Boolean'
+// required
 import Function from './types/Function'
 import defn from './defn'
 import is from './is'
 
-/**
- * @since v0.1.0
- * @param {*} any The value to check.
- * @returns {boolean} Returns `true` if `any` is a function, else `false`.
- * @example
- *
- * isFunction(function() {})
- * // => true
- *
- * isFunction(/abc/)
- * // => false
- */
 const isFunction = defn(
   'lang.isFunction',
-  'Checks if `value` is classified as a `Function`.',
+  {
+    description: 'Checks if `value` is classified as a `Function`.',
+    since: 'v0.2.0'
+  },
 
-  [Any, () => Boolean],
   is(Function)
 )
 

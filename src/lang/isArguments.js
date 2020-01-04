@@ -8,15 +8,14 @@ import is from './is'
  * @returns {boolean} Returns `true` if `value` is an `Arguments` object, else `false`.
  * @example
  *
- * isArguments((function() { return arguments })())
- * //=> true
- *
- * isArguments([1, 2, 3])
- * //=> false
+
  */
 const isArguments = def(
   'lang.isArguments',
-  'Checks if `Any` is classified as an `Arguments` type.',
+  {
+    description: 'Checks if `Any` is classified as an `Arguments` type.',
+    since: 'v0.2.0'
+  },
 
   is(Arguments)
 )

@@ -3,6 +3,7 @@ import anyIsArray from './anyIsArray'
 import anyIsFn from './anyIsFn'
 import anyIsFunction from './anyIsFunction'
 import definitionToFn from './definitionToFn'
+import fnCastWithDefinition from './fnCastWithDefinition'
 
 /**
  * Convert param type and function definitions into parameterized functions
@@ -58,10 +59,11 @@ const definitionsToFns = (definitions) => {
       }
     }
     if (anyIsFn(next.value)) {
+      let fn = next.value
       if (definition) {
-        throw new Error(`Cannot redefine an already defined Fn with new parameter types`)
+        fn = fnCastWithDefinition(fn, definition)
       }
-      fns.push(next.value)
+      fns.push(fn)
     } else if (anyIsFunction(next.value)) {
       func = next.value
       fns.push(definitionToFn(func, definition))

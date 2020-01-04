@@ -1,75 +1,50 @@
 import Any from './types/Any'
-import Array from './types/Array'
+import Boolean from './types/Boolean'
 import Function from './types/Function'
-import ImmutableList from './types/ImmutableList'
-import ImmutableMap from './types/ImmutableMap'
 import Index from './types/IndexType'
+import Indexed from './protocols/Indexed'
 import Key from './types/Key'
-import Map from './types/Map'
-import Object from './types/Object'
+import Keyed from './protocols/Keyed'
 import Path from './types/Path'
+import Propertied from './protocols/Propertied'
 import Property from './types/Property'
 import anyHasPathWith from './util/anyHasPathWith'
-import arrayHasIndex from './util/arrayHasIndex'
 import defn from './defn'
 import get from './get'
-import mapHasKey from './util/mapHasKey'
-import objectHasOwnProperty from './util/objectHasOwnProperty'
+import hasIndex from './hasIndex'
+import hasKey from './hasKey'
+import hasProperty from './hasProperty'
 
-/**
- * Returns whether or not the value contains the given selector.
- *
- * @function
- * @since v0.1.0
- * @param {Array|String} selector The selector to use.
- * @param {Object} value The value to check the path in.
- * @return {Boolean} Whether the selector exists.
- * @example
- *
- * has(['a', 'b'], {a: {b: 2}})          // => true
- * has(['a', 'b'], {a: {b: undefined}})  // => true
- * has(['a', 'b'], {a: {c: 2}})               // => false
- * has([], {})                           // => true
- */
 const has = defn(
   'lang.has',
-  'Returns whether or not the value contains the given selector.',
+  {
+    description: 'Returns whether or not the value contains the given selector.',
+    since: 'v0.2.0'
+  },
 
-  [Path, Any, () => Any],
+  [Path, Any, () => Boolean],
   (path, any) => anyHasPathWith(any, path, get, has),
 
-  [Any, Path, () => Any],
+  [Any, Path, () => Boolean],
   (any, path) => anyHasPathWith(any, path, get, has),
 
-  [Index, Array, () => Any],
-  (index, array) => arrayHasIndex(array, index),
+  [Index, Indexed, () => Boolean],
+  (index, indexed) => hasIndex(indexed, index),
 
-  [Array, Index, () => Any],
-  (array, index) => arrayHasIndex(array, index),
+  [Indexed, Index, () => Boolean],
+  hasIndex,
 
-  [Index, ImmutableList, () => Any],
-  (index, immutableList) => immutableList.has(index),
+  [Key, Keyed, () => Any],
+  (key, keyed) => hasKey(keyed, key),
 
-  [ImmutableList, Index, () => Any],
-  (immutableList, index) => immutableList.has(index),
+  [Keyed, Key, () => Any],
+  hasKey,
 
-  [Key, Map, () => Any],
-  (key, map) => mapHasKey(map, key),
+  [Property, Propertied, () => Any],
+  (property, propertied) => hasProperty(propertied, property),
 
-  [Map, Key, () => Any],
-  (map, key) => mapHasKey(map, key),
-
-  [Key, ImmutableMap, () => Any],
-  (key, immutableMap) => immutableMap.has(key),
-
-  [ImmutableMap, Key, () => Any],
-  (immutableMap, key) => immutableMap.has(key),
-
-  [Property, Object, () => Any],
-  (property, object) => objectHasOwnProperty(object, property),
-
-  [Object, Property, () => Any],
-  (object, property) => objectHasOwnProperty(object, property),
+  [Propertied, Property, () => Any],
+  hasProperty,
 
   [Function, Any, () => Any],
   (func, any) => func(any),

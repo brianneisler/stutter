@@ -37,7 +37,7 @@ import buildException from './buildException'
  * //=> throws TypeError
  */
 const functionTypeCheck = (func, meta) => {
-  const { parameters, partial, returns } = meta
+  const { parameters, partial, resolve, returns } = meta
   if (!parameters && !returns) {
     return func
   }
@@ -68,14 +68,22 @@ const functionTypeCheck = (func, meta) => {
     }
     const returned = func.apply(this, arguments)
     if (returns) {
-      return anyResolveWith(returned, (resolvedReturned) => {
-        if (!returns.is(resolvedReturned, meta)) {
-          throw buildException(func)
-            .expected.returned(resolvedReturned)
-            .toMatchReturns(returns)
-        }
-        return resolvedReturned
-      })
+      if (resolve) {
+        return anyResolveWith(returned, (resolvedReturned) => {
+          if (!returns.is(resolvedReturned, meta)) {
+            throw buildException(func)
+              .expected.returned(resolvedReturned)
+              .toMatchReturns(returns)
+          }
+          return resolvedReturned
+        })
+      }
+      if (!returns.is(returned, meta)) {
+        throw buildException(func)
+          .expected.returned(returned)
+          .toMatchReturns(returns)
+      }
+      return returned
     }
     return returned
   }

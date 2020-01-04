@@ -1,3 +1,4 @@
+// required
 import { Any, Iterator } from './types'
 import { ITERATOR_END, ITERATOR_START } from './constants'
 import { anyToIterator } from './util'
@@ -24,7 +25,7 @@ import defn from './defn'
  * //=> { next: () => { value: number, key: string, kdx: string, done: boolean }}
  */
 const iterator = defn(
-  'iterator',
+  'lang.iterator',
   'This method generates an iterator for the given value',
 
   [Any, () => Iterator],

@@ -1,21 +1,15 @@
-import anyIsPromise from './util/anyIsPromise'
+import Promise from './types/Promise'
+import defn from './defn'
+import is from './is'
 
-/**
- * Checks whether the given value is a Promise.
- *
- * @function
- * @since v0.1.0
- * @category lang
- * @param {*} any The value to check.
- * @returns {boolean} Returns `true` if `value` is a Promise, else `false`.
- * @example
- *
- * isPromise(new Promise(() => {})) //=> true
- *
- * isPromise({}) //=> false
- *
- * isPromise({ then: () => {} }) //=> true
- */
-const isPromise = anyIsPromise
+const isPromise = defn(
+  'lang.isPromise',
+  {
+    description: 'Checks whether the given value is a Promise.',
+    since: 'v0.2.0'
+  },
+
+  is(Promise)
+)
 
 export default isPromise

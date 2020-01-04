@@ -1,22 +1,16 @@
-import { anyIsNil } from './util'
+// required
+import Nil from './types/Nil'
 import defn from './defn'
+import is from './is'
 
-/**
- * Checks if `any` is `null` or `undefined`.
- *
- * @function
- * @since v0.1.0
- * @category lang
- * @param {*} any The value to check.
- * @returns {boolean} Returns `true` if `any` is nullish, else `false`.
- * @example
- *
- * isNil(null) // => true
- *
- * isNil(void 0) // => true
- *
- * isNil(NaN) // => false
- */
-const isNil = defn('isNil', anyIsNil)
+const isNil = defn(
+  'lang.isNil',
+  {
+    description: 'Checks if `any` is `null` or `undefined`',
+    since: 'v0.2.0'
+  },
+
+  is(Nil)
+)
 
 export default isNil

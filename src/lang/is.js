@@ -1,56 +1,30 @@
+// required
 import Any from './types/Any'
+import Boolean from './types/Boolean'
 import Function from './types/Function'
 import Type from './types/Type'
 import anyIs from './util/anyIs'
 import defn from './defn'
 
-/**
- * @since v0.1.0
- * @param {Type} type A type
- * @param {Any} any The value to test
- * @returns {Boolean}
- * @example
- *
- * is(Object, {})
- * //=> true
- *
- * is(Number, 1)
- * //=> true
- *
- * is(Object, 1)
- * //=> false
- *
- * is(String, 's')
- * //=> true
- *
- * is(String, new String(''))
- * //=> true
- *
- * is(Object, new String(''))
- * //=> true
- *
- * is(Object, 's')
- * //=> false
- *
- * is(Number, {})
- * //=> false
- */
 const is = defn(
   'lang.is',
-  'Checks whether `Any` is classified as an instance of the given `Type`',
+  {
+    description: 'Checks whether `Any` is classified as an instance of the given `Type`',
+    since: 'v0.2.0'
+  },
 
   {
     definitions: [
-      [Type, Any],
+      [Type, Any, () => Boolean],
       (type, any) => anyIs(any, type),
 
-      [Any, Type],
+      [Any, Type, () => Boolean],
       (type, any) => anyIs(any, type),
 
-      [Function, Any],
+      [Function, Any, () => Boolean],
       (fn, any) => (any != null && any.constructor === fn) || any instanceof fn,
 
-      [Any, Function],
+      [Any, Function, () => Boolean],
       (fn, any) => (any != null && any.constructor === fn) || any instanceof fn
     ],
     options: {

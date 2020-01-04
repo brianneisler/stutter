@@ -1,22 +1,16 @@
-import { anyIsUndefined } from './util'
+// required
+import Undefined from './types/Undefined'
 import defn from './defn'
+import is from './is'
 
-/**
- * Checks if `any` is `undefined`.
- *
- * @function
- * @since v0.1.0
- * @category lang
- * @param {*} any The value to check.
- * @returns {boolean} Returns `true` if `any` is `undefined`, else `false`.
- * @example
- *
- * isUndefined(void 0)
- * // => true
- *
- * isUndefined(null)
- * // => false
- */
-const isUndefined = defn('isUndefined', anyIsUndefined)
+const isUndefined = defn(
+  'lang.isUndefined',
+  {
+    description: 'Checks if `any` is `undefined`',
+    since: 'v0.2.0'
+  },
+
+  is(Undefined)
+)
 
 export default isUndefined

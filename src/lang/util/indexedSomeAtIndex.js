@@ -1,5 +1,5 @@
 import curry from '../common/curry'
-import defn from '../common/defn'
+import defunc from '../common/defunc'
 import errorUnexpectedType from './errors/errorUnexpectedType'
 import isArrayLike from '../isArrayLike'
 import isPromise from '../isPromise'
@@ -16,7 +16,7 @@ import isPromise from '../isPromise'
  * @since v0.1.0
  * @category data
  * @sig (a -> Boolean) -> [a] -> Boolean
- * @param {Function} fn The predicate function.
+ * @param {Function} func The predicate function.
  * @param {Integer} index The index to start at.
  * @param {Array} list The array to consider.
  * @returns {Boolean} `true` if the predicate is satisfied by at least one element, `false`
@@ -30,36 +30,31 @@ import isPromise from '../isPromise'
  *
  * await anyAtIndex(async (value) => lessThan2(value), 0, [1, 2]) //=> true
  */
-const anyAtIndex = curry(
-  defn('anyAtIndex', (fn, index, list) => {
-    if (!isArrayLike(list)) {
-      throw errorUnexpectedType('ArrayLike', list)
-    }
-    const { length } = list
-    let idx = index || 0
-    if (idx < 0) {
-      idx = length + idx
-    }
-    if (idx < 0) {
-      idx = 0
-    }
+const indexedSomeAtIndex = (func, index) => {
+  const { length } = list
+  let idx = index || 0
+  if (idx < 0) {
+    idx = length + idx
+  }
+  if (idx < 0) {
+    idx = 0
+  }
 
-    while (idx < length) {
-      const result = fn(list[idx], idx)
-      if (isPromise(result)) {
-        return result.then((resolvedResult) => {
-          if (resolvedResult) {
-            return true
-          }
-          return anyAtIndex(fn, idx + 1, list)
-        })
-      } else if (result) {
-        return true
-      }
-      idx += 1
+  while (idx < length) {
+    const result = func(list[idx], idx)
+    if (isPromise(result)) {
+      return result.then((resolvedResult) => {
+        if (resolvedResult) {
+          return true
+        }
+        return anySomeAtIndex(func, idx + 1, list)
+      })
+    } else if (result) {
+      return true
     }
-    return false
-  })
-)
+    idx += 1
+  }
+  return false
+}
 
-export default anyAtIndex
+export default indexedSomeAtIndex

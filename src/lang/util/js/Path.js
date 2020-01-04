@@ -25,8 +25,16 @@ class Path {
     return 'Path'
   }
 
+  first() {
+    return this.get(0)
+  }
+
   get(index) {
     return this.path.get(index)
+  }
+
+  rest() {
+    return this.tail()
   }
 
   tail() {

@@ -1,25 +1,14 @@
-import Any from './types/Any'
 import Boolean from './types/Boolean'
 import defn from './defn'
 import is from './is'
 
-/**
- * @since v0.1.0
- * @param {Any} any The value to check.
- * @returns {Boolean} Returns `true` if `value` is a boolean, else `false`.
- * @example
- *
- * isBoolean(false)
- * // => true
- *
- * isBoolean(null)
- * // => false
- */
 const isBoolean = defn(
   'lang.isBoolean',
-  'Checks if `Any` is classified as a `Boolean`.',
+  {
+    description: 'Checks if `Any` is classified as a `Boolean`.',
+    since: 'v0.2.0'
+  },
 
-  [Any, () => Boolean],
   is(Boolean)
 )
 

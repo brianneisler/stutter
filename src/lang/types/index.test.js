@@ -48,7 +48,7 @@ describe('lang.types index', () => {
       Property: expect.any(Type),
       Protocol: expect.any(Type),
       RegExp: expect.any(Type),
-      Repeat: expect.any(Type),
+      Resolved: expect.any(Type),
       Self: expect.any(Type),
       Seq: expect.any(Type),
       Set: expect.any(Type),

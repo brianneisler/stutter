@@ -1,10 +1,4 @@
 // NOTE BRN: Methods in this folder SHOULD NOT depend upon any method from any other folder. This is so that we avoid circular dependencies on our own methods.
-
-import * as protocols from './protocols'
-import * as types from './types'
-
-export { protocols, types }
-
 export { default as __ } from './_'
 export { default as all } from './all'
 export { default as allWith } from './allWith'

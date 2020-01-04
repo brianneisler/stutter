@@ -11,6 +11,7 @@ module.exports = {
     "sort-keys-fix"
   ],
   env: {
+    browser: true,
     es6: true,
     jest: true,
     node: true

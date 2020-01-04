@@ -1,18 +1,19 @@
 import Any from './types/Any'
-import Array from './types/Array'
-import ImmutableList from './types/ImmutableList'
-import ImmutableMap from './types/ImmutableMap'
 import Index from './types/IndexType'
+import Indexed from './protocols/Indexed'
 import Key from './types/Key'
-import Map from './types/Map'
-import Object from './types/Object'
+import Keyed from './protocols/Keyed'
 import Path from './types/Path'
+import Propertied from './protocols/Propertied'
 import Property from './types/Property'
 import anySetPathWith from './util/anySetPathWith'
-import arraySetIndex from './util/arraySetIndex'
+import contagion from './contagion'
 import defn from './defn'
 import get from './get'
-import mapSetKey from './util/mapSetKey'
+import setIndex from './setIndex'
+import setKey from './setKey'
+import setProp from './setProp'
+
 import objectSetProperty from './util/objectSetProperty'
 
 // const baseSet = (selector, value, collection) => {
@@ -57,22 +58,16 @@ const set = defn(
   {
     definitions: [
       [Path, Any, Any, () => Any],
-      (path, any) => anySetPathWith(any, path, get, set),
+      (path, any, value) => anySetPathWith(any, path, value, contagion, get, set),
 
-      [Any, Path, () => Any],
-      (any, path) => anySetPathWith(any, path, get, set),
+      [Any, Path, Any, () => Any],
+      (any, path, value) => anySetPathWith(any, path, value, contagion, get, set),
 
-      [Index, Any, Array, () => Array],
-      (index, value, array) => arraySetIndex(array, index, value),
+      [Index, Any, Indexed, () => Indexed],
+      (index, value, indexed) => setIndex(indexed, index, value),
 
-      [Array, Index, Any, () => Array],
-      (array, index, value) => arraySetIndex(array, index, value),
-
-      [Index, Any, ImmutableList, () => ImmutableList],
-      (index, value, immutableList) => immutableList.set(index, value),
-
-      [ImmutableList, Index, Any, () => ImmutableList],
-      (immutableList, index, value) => immutableList.set(index, value),
+      [Indexed, Index, Any, () => Indexed],
+      setIndex,
 
       [Key, Any, Map, () => Map],
       (key, value, map) => mapSetKey(map, key, value),
@@ -92,6 +87,15 @@ const set = defn(
       [Object, Property, Any, () => Object],
       (object, property, value) => objectSetProperty(object, property, value)
     ]
+    // // TODO BRN: We may not want to resolve the value that is being set. This
+    // would enable users to build lists of promises for use with Promise.all.
+    // To do this we would need to add custom resolvers for each implementation
+    // in the above Fn definitions.
+    // options: {
+    //   curry: true,
+    //   handleExceptions: true,
+    //   resolve: false
+    // }
   }
 )
 

@@ -1,4 +1,4 @@
-import { anyResolveToGenerator } from './util'
+import anyResolveToGenerator from './util/anyResolveToGenerator'
 import externalPromise from './externalPromise'
 
 const doResolve = function*(value, promise) {

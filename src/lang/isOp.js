@@ -1,21 +1,14 @@
+// required
 import Op from './types/Op'
 import def from './def'
 import is from './is'
 
-/**
- * @since v0.1.0
- * @param {*} value
- * @returns {boolean}
- * @example
- *
- * isOp({
- *   ['@@redux-saga/IO']: 'op'
- * })
- * //=> true
- */
 const isOp = def(
-  'isOp',
-  'Checks if `Any` is classified as an `Op` type.',
+  'lang.isOp',
+  {
+    description: 'Checks if `Any` is classified as an `Op` type.',
+    since: 'v0.2.0'
+  },
 
   is(Op)
 )

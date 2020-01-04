@@ -1,81 +1,74 @@
-import { Any } from './types'
+// required
+import Arguments from './types/Arguments'
+import Array from './types/Array'
+import Boolean from './types/Boolean'
+import Buffer from './types/Buffer'
+import ImmutableList from './types/ImmutableList'
+import ImmutableMap from './types/ImmutableMap'
+import Map from './types/Map'
+import Nil from './types/Nil'
+import Prototype from './types/Prototype'
+import Set from './types/Set'
+import String from './types/String'
+import TypedArray from './types/TypedArray'
 import defn from './defn'
-import isArguments from './isArguments'
-import isArray from './isArray'
-import isArrayLike from './isArrayLike'
-import isBuffer from './isBuffer'
-import isPrototype from './isPrototype'
-import isTypedArray from './isTypedArray'
 import objectHasOwnProperty from './util/objectHasOwnProperty'
 import objectKeys from './util/objectKeys'
-import toStringTag from './toStringTag'
 
-/**
- * Checks if `value` is an empty object, collection, map, or set.
- *
- * Objects are considered empty if they have no own enumerable string keyed
- * properties.
- *
- * Array-like values such as `arguments` objects, arrays, buffers, strings, or
- *
- * Similarly, maps and sets are considered empty if they have a `size` of `0`.
- *
- * Auto curried for placeholder support.
- *
- * @function
- * @since v0.1.0
- * @category logic
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is empty, else `false`.
- * @example
- *
- * isEmpty(null) // => true
- *
- * isEmpty(true) // => true
- *
- * isEmpty(1) // => true
- *
- * isEmpty([1, 2, 3]) // => false
- *
- * isEmpty('abc') // => false
- *
- * isEmpty({ 'a': 1 })  // => false
- */
 const isEmpty = defn(
-  'isEmpty',
-  'Checks if `value` is an empty object, collection, map, or set.',
+  'lang.isEmpty',
+  {
+    description: `Checks if \`value\` is an empty object, collection, map, or set.
 
-  [Any],
-  (value) => {
-    if (value == null) {
-      return true
-    }
-    if (
-      isArrayLike(value) &&
-      (isArray(value) ||
-        typeof value == 'string' ||
-        typeof value.splice == 'function' ||
-        isBuffer(value) ||
-        isTypedArray(value) ||
-        isArguments(value))
-    ) {
-      return !value.length
-    }
-    // TODO BRN: It might make sense to move the Set and Map implementations to a
-    // protocol for "Emptiable" objects
-    const tag = toStringTag(value)
-    if (tag == 'Map' || tag == 'Set') {
-      return !value.size
-    }
-    if (isPrototype(value)) {
-      return !objectKeys(value).length
-    }
-    for (const key in value) {
-      if (objectHasOwnProperty(value, key)) {
+      Objects are considered empty if they have no own enumerable string keyed properties.
+
+      Array-like values such as \`arguments\` objects, arrays, buffers, strings, or
+
+      Similarly, maps and sets are considered empty if they have a \`size\` of \`0\`.`,
+    since: 'v0.2.0'
+  },
+
+  [Nil, () => Boolean],
+  // eslint-disable-next-line no-unused-vars
+  (nil) => true,
+
+  [Arguments, () => Boolean],
+  (args) => args.length === 0,
+
+  [Array, () => Boolean],
+  (array) => array.length === 0,
+
+  [Buffer, () => Boolean],
+  (buffer) => buffer.length === 0,
+
+  [String, () => Boolean],
+  (string) => string.length === 0,
+
+  [TypedArray, () => Boolean],
+  (typedArray) => typedArray.length === 0,
+
+  [Map, () => Boolean],
+  (map) => map.size === 0,
+
+  [Set, () => Boolean],
+  (set) => set.size === 0,
+
+  [ImmutableMap, () => Boolean],
+  (immutableMap) => immutableMap.size === 0,
+
+  [ImmutableList, () => Boolean],
+  (immutableList) => immutableList.size === 0,
+
+  [Prototype, () => Boolean],
+  (proto) => objectKeys(proto).length === 0,
+
+  [Object, () => Boolean],
+  (object) => {
+    for (const key in object) {
+      if (objectHasOwnProperty(object, key)) {
         return false
       }
     }
-    return true
   }
 )
 

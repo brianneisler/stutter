@@ -1,3 +1,4 @@
+// required
 import { anyIsString } from './util'
 import defn from './defn'
 

@@ -15,18 +15,6 @@ import get from './get'
 import has from './has'
 import set from './set'
 
-/**
- * Returns a new value that does not contain `target`
- *
- * @function
- * @since v0.1.0
- * @category lang
- * @param {String} prop The name of the property to dissociate
- * @param {Object} obj The object to clone
- * @return {Object} A new object equivalent to the original but without the specified property
- * @example
-
- */
 const _delete = defn(
   'lang.delete',
   {
