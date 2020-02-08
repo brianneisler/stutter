@@ -1,5 +1,5 @@
-import anyIterate from './anyIterate'
 import anyResolveWith from './anyResolveWith'
+import arrayIterate from './arrayIterate'
 
 /**
  * Resolves all async values in an Array and executes the given with
@@ -11,21 +11,20 @@ import anyResolveWith from './anyResolveWith'
  * @category lang.util
  * @param {Array} array The Array whose values should be resolved.
  * @param {Function} func The function to execute at the end of the resolution
+ * @param {Object} context The context to execute the given Function
  * @returns {Array} The Array with its values resolved
  * @example
  *
- * await argumentsResolveAllWith(
- *   arguments,
+ * const array = [1, Promise.resolve(2), (async () => 3)()]
+ * await arrayResolveAllWith(
+ *   array,
  *   (resolvedNums) => 'foo', // [ 1, 2, 3 ]
- * )
- *
- * await func(1, Promise.resolve(2), (async () => 3)())
- * // => 'foo'
+ * ) // => 'foo'
  */
-const arrayResolveAllWith = (args, func) => {
+const arrayResolveAllWith = (array, func, context) => {
   const result = []
   return anyResolveWith(
-    anyIterate(args, (next) => {
+    arrayIterate(array, (next) => {
       if (next.done) {
         return {
           ...next,
@@ -37,7 +36,7 @@ const arrayResolveAllWith = (args, func) => {
         return next
       })
     }),
-    func
+    (resolved) => func.apply(context, resolved)
   )
 }
 

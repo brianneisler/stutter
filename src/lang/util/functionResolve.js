@@ -20,7 +20,7 @@ import argumentsResolveAllWith from './argumentsResolveAllWith'
  */
 const functionResolve = (func) =>
   function() {
-    return argumentsResolveAllWith(arguments, (resolvedArgs) => func.apply(this, resolvedArgs))
+    return argumentsResolveAllWith(arguments, func, this)
   }
 
 export default functionResolve

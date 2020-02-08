@@ -12,6 +12,7 @@ import arrayToArguments from './arrayToArguments'
  * @category lang.util
  * @param {Arguments} args The Arguments whose values should be resolved.
  * @param {Function} func The function to execute at the end of the resolution
+ * @param {Object} context The context to execute the given Function
  * @returns {Array} The Arguments with its values resolved
  * @example
  *
@@ -24,8 +25,8 @@ import arrayToArguments from './arrayToArguments'
  * await func(1, Promise.resolve(2), (async () => 3)())
  * // => 'foo'
  */
-const argumentsResolveAllWith = (args, func) => {
-  return arrayResolveAllWith(argumentsToArray(args), (resolved) => func(arrayToArguments(resolved)))
+const argumentsResolveAllWith = (args, func, context) => {
+  return arrayResolveAllWith(argumentsToArray(args), func, context)
 }
 
-export default argumentsResolveAllWith()
+export default argumentsResolveAllWith

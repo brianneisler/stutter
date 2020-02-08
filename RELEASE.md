@@ -60,5 +60,5 @@ git tag vX.X.X
 ```sh
 git push --tags
 ```
-- Travis will release new version from tag.
-- Relax and enjoy new version!
+- Travis will release the new version from tag.
+- Relax and enjoy the new version!
