@@ -26,7 +26,9 @@ const anyIsIndex = (any) => {
   const type = typeof any
   return (
     (type == 'number' || (type != 'symbol' && REGEX_UINT.test(any))) &&
-    (any > -1 && any % 1 == 0 && any < MAX_SAFE_INTEGER)
+    any > -1 &&
+    any % 1 == 0 &&
+    any < MAX_SAFE_INTEGER
   )
 }
 

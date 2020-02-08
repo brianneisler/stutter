@@ -15,7 +15,14 @@ describe('keys', () => {
   })
 
   test('returns an array of keys for a Map', () => {
-    expect(keys(new Map([['foo', 'bar'], ['bim', 'bop']]))).toEqual(['foo', 'bim'])
+    expect(
+      keys(
+        new Map([
+          ['foo', 'bar'],
+          ['bim', 'bop']
+        ])
+      )
+    ).toEqual(['foo', 'bim'])
   })
 
   test('returns an empty array of keys for an empty Map', () => {

@@ -109,8 +109,14 @@ describe('set', () => {
 
   test('set to a Map using a single non existing key', () => {
     const collection = new Map([['foo', 'bar']])
-    expect([...set('bim', 'bop', collection).entries()]).toEqual([['foo', 'bar'], ['bim', 'bop']])
-    expect([...set(['bim'], 'bop', collection).entries()]).toEqual([['foo', 'bar'], ['bim', 'bop']])
+    expect([...set('bim', 'bop', collection).entries()]).toEqual([
+      ['foo', 'bar'],
+      ['bim', 'bop']
+    ])
+    expect([...set(['bim'], 'bop', collection).entries()]).toEqual([
+      ['foo', 'bar'],
+      ['bim', 'bop']
+    ])
   })
 
   test('dispatches to the set method of collection', () => {

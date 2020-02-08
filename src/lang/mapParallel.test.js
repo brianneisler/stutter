@@ -66,7 +66,11 @@ describe('mapAll', () => {
 
     expect(result).toBeInstanceOf(Promise)
     result = await result
-    expect(result).toEqual([['a', 0], ['b', 1], ['c', 2]])
+    expect(result).toEqual([
+      ['a', 0],
+      ['b', 1],
+      ['c', 2]
+    ])
   })
 
   test('executes async in parallel', async () => {
@@ -84,6 +88,10 @@ describe('mapAll', () => {
     expect(iteratee).toHaveBeenCalledTimes(3)
     expect(result).toBeInstanceOf(Promise)
     result = await result
-    expect(result).toEqual([['a', 0], ['b', 1], ['c', 2]])
+    expect(result).toEqual([
+      ['a', 0],
+      ['b', 1],
+      ['c', 2]
+    ])
   })
 })

@@ -27,7 +27,10 @@ describe('fnCurr', () => {
   })
 
   test('changes the return type to Boolean', () => {
-    const fn = fnComplement(definitionToFn(() => 'foo'), [() => String])
+    const fn = fnComplement(
+      definitionToFn(() => 'foo'),
+      [() => String]
+    )
     expect(fnGetMeta(fn).returns).toBe(Boolean)
     expect(fn()).toBe(false)
   })

@@ -18,11 +18,20 @@ describe('functionMemoizeWith', () => {
   })
 
   test('preserves arity of function', () => {
-    const fn0 = functionMemoizeWith(() => null, () => ({}))
+    const fn0 = functionMemoizeWith(
+      () => null,
+      () => ({})
+    )
     expect(fn0.length).toBe(0)
-    const fn1 = functionMemoizeWith((n) => n, () => ({}))
+    const fn1 = functionMemoizeWith(
+      (n) => n,
+      () => ({})
+    )
     expect(fn1.length).toBe(1)
-    const fn2 = functionMemoizeWith((n1, n2) => n2, () => ({}))
+    const fn2 = functionMemoizeWith(
+      (n1, n2) => n2,
+      () => ({})
+    )
     expect(fn2.length).toBe(2)
   })
 })

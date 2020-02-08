@@ -17,11 +17,6 @@ import uniq from './uniq'
  *
  * union([1, 2, 3], [2, 3, 4]) //=> [1, 2, 3, 4]
  */
-const union = curry(
-  compose(
-    uniq,
-    concat
-  )
-)
+const union = curry(compose(uniq, concat))
 
 export default union

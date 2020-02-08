@@ -4,10 +4,22 @@ import WeakMap from './util/js/WeakMap'
 import getKey from './getKey'
 
 example('getKey', () => {
-  getKey('a', new Map([['a', 1], ['b', 2]]))
+  getKey(
+    'a',
+    new Map([
+      ['a', 1],
+      ['b', 2]
+    ])
+  )
   // => 1
 
-  getKey('b', new ImmutableMap([['a', 1], ['b', 2]]))
+  getKey(
+    'b',
+    new ImmutableMap([
+      ['a', 1],
+      ['b', 2]
+    ])
+  )
   // => 2
 
   const key = {}

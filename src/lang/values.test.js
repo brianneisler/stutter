@@ -10,7 +10,14 @@ describe('values', () => {
   })
 
   test('returns an array of values for a Map', () => {
-    expect(values(new Map([['foo', 'bar'], ['bim', 'bop']]))).toEqual(['bar', 'bop'])
+    expect(
+      values(
+        new Map([
+          ['foo', 'bar'],
+          ['bim', 'bop']
+        ])
+      )
+    ).toEqual(['bar', 'bop'])
   })
 
   test('returns an empty array of values for an empty Map', () => {

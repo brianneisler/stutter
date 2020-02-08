@@ -208,23 +208,76 @@ describe('equals', () => {
     expect(equals(new Map([]), new Map([[1, 'a']]))).toBe(false)
     expect(equals(new Map([[1, 'a']]), new Map([]))).toBe(false)
     expect(equals(new Map([[1, 'a']]), new Map([[1, 'a']]))).toBe(true)
-    expect(equals(new Map([[1, 'a'], [2, 'b']]), new Map([[2, 'b'], [1, 'a']]))).toBe(true)
+    expect(
+      equals(
+        new Map([
+          [1, 'a'],
+          [2, 'b']
+        ]),
+        new Map([
+          [2, 'b'],
+          [1, 'a']
+        ])
+      )
+    ).toBe(true)
     expect(equals(new Map([[1, 'a']]), new Map([[2, 'a']]))).toBe(false)
     expect(equals(new Map([[1, 'a']]), new Map([[1, 'b']]))).toBe(false)
     expect(
       equals(
-        new Map([[1, 'a'], [2, new Map([[3, 'c']])]]),
-        new Map([[1, 'a'], [2, new Map([[3, 'c']])]])
+        new Map([
+          [1, 'a'],
+          [2, new Map([[3, 'c']])]
+        ]),
+        new Map([
+          [1, 'a'],
+          [2, new Map([[3, 'c']])]
+        ])
       )
     ).toBe(true)
     expect(
       equals(
-        new Map([[1, 'a'], [2, new Map([[3, 'c']])]]),
-        new Map([[1, 'a'], [2, new Map([[3, 'd']])]])
+        new Map([
+          [1, 'a'],
+          [2, new Map([[3, 'c']])]
+        ]),
+        new Map([
+          [1, 'a'],
+          [2, new Map([[3, 'd']])]
+        ])
       )
     ).toBe(false)
-    expect(equals(new Map([[[1, 2, 3], [4, 5, 6]]]), new Map([[[1, 2, 3], [4, 5, 6]]]))).toBe(true)
-    expect(equals(new Map([[[1, 2, 3], [4, 5, 6]]]), new Map([[[1, 2, 3], [7, 8, 9]]]))).toBe(false)
+    expect(
+      equals(
+        new Map([
+          [
+            [1, 2, 3],
+            [4, 5, 6]
+          ]
+        ]),
+        new Map([
+          [
+            [1, 2, 3],
+            [4, 5, 6]
+          ]
+        ])
+      )
+    ).toBe(true)
+    expect(
+      equals(
+        new Map([
+          [
+            [1, 2, 3],
+            [4, 5, 6]
+          ]
+        ]),
+        new Map([
+          [
+            [1, 2, 3],
+            [7, 8, 9]
+          ]
+        ])
+      )
+    ).toBe(false)
   })
 
   it('dispatches to `equals` method recursively in Map', () => {
@@ -249,8 +302,30 @@ describe('equals', () => {
     expect(
       equals(new Set([1, new Set([2, new Set([3])])]), new Set([1, new Set([2, new Set([4])])]))
     ).toBe(false)
-    expect(equals(new Set([[1, 2, 3], [4, 5, 6]]), new Set([[1, 2, 3], [4, 5, 6]]))).toBe(true)
-    expect(equals(new Set([[1, 2, 3], [4, 5, 6]]), new Set([[1, 2, 3], [7, 8, 9]]))).toBe(false)
+    expect(
+      equals(
+        new Set([
+          [1, 2, 3],
+          [4, 5, 6]
+        ]),
+        new Set([
+          [1, 2, 3],
+          [4, 5, 6]
+        ])
+      )
+    ).toBe(true)
+    expect(
+      equals(
+        new Set([
+          [1, 2, 3],
+          [4, 5, 6]
+        ]),
+        new Set([
+          [1, 2, 3],
+          [7, 8, 9]
+        ])
+      )
+    ).toBe(false)
   })
 
   it('dispatches to `equals` method recursively in Set', () => {

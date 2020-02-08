@@ -5,7 +5,11 @@ describe('forEachAll', () => {
     const array = ['a', 'b', 'c']
     const acc = []
     const result = forEachAll((val, index) => acc.push([val, index]), array)
-    expect(acc).toEqual([['a', 0], ['b', 1], ['c', 2]])
+    expect(acc).toEqual([
+      ['a', 0],
+      ['b', 1],
+      ['c', 2]
+    ])
     expect(result).toBe(array)
   })
 
@@ -13,7 +17,11 @@ describe('forEachAll', () => {
     const object = { a: 'valueA', b: 'valueB', c: 'valueC' }
     const acc = []
     const result = forEachAll((val, key) => acc.push([val, key]), object)
-    expect(acc).toEqual([['valueA', 'a'], ['valueB', 'b'], ['valueC', 'c']])
+    expect(acc).toEqual([
+      ['valueA', 'a'],
+      ['valueB', 'b'],
+      ['valueC', 'c']
+    ])
     expect(result).toBe(object)
   })
 
@@ -23,7 +31,10 @@ describe('forEachAll', () => {
     const object = { [symA]: 'valueA', [symB]: 'valueB' }
     const acc = []
     const result = forEachAll((val, key) => acc.push([val, key]), object)
-    expect(acc).toEqual([['valueA', symA], ['valueB', symB]])
+    expect(acc).toEqual([
+      ['valueA', symA],
+      ['valueB', symB]
+    ])
     expect(result).toBe(object)
   })
 
@@ -43,7 +54,11 @@ describe('forEachAll', () => {
 
     expect(result).toBeInstanceOf(Promise)
     result = await result
-    expect(acc).toEqual([['a', 0], ['b', 1], ['c', 2]])
+    expect(acc).toEqual([
+      ['a', 0],
+      ['b', 1],
+      ['c', 2]
+    ])
     expect(result).toBe(array)
   })
 
@@ -64,7 +79,11 @@ describe('forEachAll', () => {
     expect(iteratee).toHaveBeenCalledTimes(3)
     expect(result).toBeInstanceOf(Promise)
     result = await result
-    expect(acc).toEqual([['a', 0], ['b', 1], ['c', 2]])
+    expect(acc).toEqual([
+      ['a', 0],
+      ['b', 1],
+      ['c', 2]
+    ])
     expect(result).toBe(array)
   })
 })

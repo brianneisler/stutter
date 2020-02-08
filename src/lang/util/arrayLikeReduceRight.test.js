@@ -33,6 +33,10 @@ describe('arrayLikeReduceRight', () => {
 
     expect(result).toBeInstanceOf(Promise)
     result = await result
-    expect(result).toEqual([['c', 2], ['b', 1], ['a', 0]])
+    expect(result).toEqual([
+      ['c', 2],
+      ['b', 1],
+      ['a', 0]
+    ])
   })
 })

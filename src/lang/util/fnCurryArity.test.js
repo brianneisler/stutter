@@ -77,16 +77,28 @@ describe('fnCurryArity', () => {
   })
 
   test('curried function should have arity set to given number regardless of number of parameters', () => {
-    const func0 = fnCurryArity(definitionToFn(() => {}), 1)
+    const func0 = fnCurryArity(
+      definitionToFn(() => {}),
+      1
+    )
     expect(func0.length).toBe(1)
 
-    const func1 = fnCurryArity(definitionToFn((arg1) => arg1), 1)
+    const func1 = fnCurryArity(
+      definitionToFn((arg1) => arg1),
+      1
+    )
     expect(func1.length).toBe(1)
 
-    const func2 = fnCurryArity(definitionToFn((arg1, arg2) => arg2), 1)
+    const func2 = fnCurryArity(
+      definitionToFn((arg1, arg2) => arg2),
+      1
+    )
     expect(func2.length).toBe(1)
 
-    const func3 = fnCurryArity(definitionToFn((arg1, arg2, arg3) => arg3), 2)
+    const func3 = fnCurryArity(
+      definitionToFn((arg1, arg2, arg3) => arg3),
+      2
+    )
     expect(func3.length).toBe(2)
   })
 })

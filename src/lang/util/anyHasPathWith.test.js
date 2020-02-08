@@ -5,10 +5,38 @@ import objectHasProperty from './objectHasProperty'
 
 describe('anyHasPathWith', () => {
   test('empty path returns true', () => {
-    expect(anyHasPathWith(undefined, new Path([]), () => {}, () => {})).toBe(true)
-    expect(anyHasPathWith(null, new Path([]), () => {}, () => {})).toBe(true)
-    expect(anyHasPathWith('foo', new Path([]), () => {}, () => {})).toBe(true)
-    expect(anyHasPathWith(1, new Path([]), () => {}, () => {})).toBe(true)
+    expect(
+      anyHasPathWith(
+        undefined,
+        new Path([]),
+        () => {},
+        () => {}
+      )
+    ).toBe(true)
+    expect(
+      anyHasPathWith(
+        null,
+        new Path([]),
+        () => {},
+        () => {}
+      )
+    ).toBe(true)
+    expect(
+      anyHasPathWith(
+        'foo',
+        new Path([]),
+        () => {},
+        () => {}
+      )
+    ).toBe(true)
+    expect(
+      anyHasPathWith(
+        1,
+        new Path([]),
+        () => {},
+        () => {}
+      )
+    ).toBe(true)
   })
 
   test('correctly calls getFunc and hasFunc on all path parts', () => {

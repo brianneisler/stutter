@@ -9,18 +9,46 @@ import objectSetProperty from './objectSetProperty'
 
 describe('anyDeletePathWith', () => {
   test('empty path returns undefined', () => {
-    expect(anyDeletePathWith(undefined, new Path([]), () => {}, () => {}, () => {}, () => {})).toBe(
-      undefined
-    )
-    expect(anyDeletePathWith(null, new Path([]), () => {}, () => {}, () => {}, () => {})).toBe(
-      undefined
-    )
-    expect(anyDeletePathWith('foo', new Path([]), () => {}, () => {}, () => {}, () => {})).toBe(
-      undefined
-    )
-    expect(anyDeletePathWith(1, new Path([]), () => {}, () => {}, () => {}, () => {})).toBe(
-      undefined
-    )
+    expect(
+      anyDeletePathWith(
+        undefined,
+        new Path([]),
+        () => {},
+        () => {},
+        () => {},
+        () => {}
+      )
+    ).toBe(undefined)
+    expect(
+      anyDeletePathWith(
+        null,
+        new Path([]),
+        () => {},
+        () => {},
+        () => {},
+        () => {}
+      )
+    ).toBe(undefined)
+    expect(
+      anyDeletePathWith(
+        'foo',
+        new Path([]),
+        () => {},
+        () => {},
+        () => {},
+        () => {}
+      )
+    ).toBe(undefined)
+    expect(
+      anyDeletePathWith(
+        1,
+        new Path([]),
+        () => {},
+        () => {},
+        () => {},
+        () => {}
+      )
+    ).toBe(undefined)
   })
 
   test('correctly calls deleteFunc on all path parts', () => {

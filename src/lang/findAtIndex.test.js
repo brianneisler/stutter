@@ -21,7 +21,10 @@ describe('findAtIndex', () => {
       1,
       array
     )
-    expect(calls).toEqual([{ index: 1, val: 'b' }, { index: 2, val: 'c' }])
+    expect(calls).toEqual([
+      { index: 1, val: 'b' },
+      { index: 2, val: 'c' }
+    ])
     expect(result).toBe(undefined)
   })
 
