@@ -53,6 +53,6 @@ describe('namespacesFilterProtocols', () => {
     })
     const results = namespacesFilterProtocols(namespaces)
     expect(results).toBeInstanceOf(Seq)
-    expect(results.toArray()).toEqual([FooProtocol, BarProtocol, BazProtocol])
+    expect(results.toArray()).toEqual([BarProtocol, BazProtocol, FooProtocol])
   })
 })

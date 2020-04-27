@@ -20,9 +20,9 @@ const contagion = defn(
     since: 'v0.2.0'
   },
 
-  [Array, Index, () => Array],
+  [Array, Index, Index, () => Array],
   // eslint-disable-next-line no-unused-vars
-  (array, index) => [],
+  (array, index, sample) => [],
 
   [Array, Property, () => PlainObject],
   // eslint-disable-next-line no-unused-vars

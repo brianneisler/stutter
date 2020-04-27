@@ -2,17 +2,50 @@ import Path from './js/Path'
 import anyIsPath from './anyIsPath'
 import anySetPathWith from './anySetPathWith'
 import objectGetProperty from './objectGetProperty'
-import objectHasProperty from './objectHasProperty'
 import objectSetProperty from './objectSetProperty'
 
 describe('anySetPathWith', () => {
   test('empty path returns given value', () => {
-    expect(anySetPathWith({}, new Path([]), undefined, () => {}, () => {}, () => {})).toBe(
-      undefined
-    )
-    expect(anySetPathWith({}, new Path([]), null, () => {}, () => {}, () => {})).toBe(null)
-    expect(anySetPathWith({}, new Path([]), 'foo', () => {}, () => {}, () => {})).toBe('foo')
-    expect(anySetPathWith({}, new Path([]), 1, () => {}, () => {}, () => {})).toBe(1)
+    expect(
+      anySetPathWith(
+        {},
+        new Path([]),
+        undefined,
+        () => {},
+        () => {},
+        () => {}
+      )
+    ).toBe(undefined)
+    expect(
+      anySetPathWith(
+        {},
+        new Path([]),
+        null,
+        () => {},
+        () => {},
+        () => {}
+      )
+    ).toBe(null)
+    expect(
+      anySetPathWith(
+        {},
+        new Path([]),
+        'foo',
+        () => {},
+        () => {},
+        () => {}
+      )
+    ).toBe('foo')
+    expect(
+      anySetPathWith(
+        {},
+        new Path([]),
+        1,
+        () => {},
+        () => {},
+        () => {}
+      )
+    ).toBe(1)
   })
 
   test('correctly calls setFunc on all path parts', () => {
@@ -44,81 +77,72 @@ describe('anySetPathWith', () => {
     })
   })
 
-  test("when nil value is encountered on traversal and is not the last item in path, we escape and don't modify the value", () => {
+  test('when nil value is encountered on traversal and is not the last item in path, we generate a new value based on contagion function', () => {
     const path = new Path(['a', 'b'])
+    const contagionFunc = jest.fn(() => ({}))
     const getFunc = (target, key) => objectGetProperty(target, key)
-    const hasFunc = (target, key) => objectHasProperty(target, key)
     const setFunc = (target, key, value) => {
       if (anyIsPath(key)) {
-        return anySetPathWith(target, key, value, getFunc, setFunc)
+        return anySetPathWith(target, key, value, contagionFunc, getFunc, setFunc)
       }
       return objectSetProperty(target, key, value)
     }
-    const setFunc = (target, key) => {
-      if (anyIsPath(key)) {
-        return anySetPathWith(target, key, getFunc, hasFunc, setFunc, setFunc)
-      }
-      return objectSetProperty(target, key)
-    }
+
     const objectA = { a: undefined }
-    expect(anySetPathWith(objectA, path, getFunc, hasFunc, setFunc, setFunc)).toBe(objectA)
-    const objectB = { b: null }
-    expect(anySetPathWith(objectB, path, getFunc, hasFunc, setFunc, setFunc)).toBe(objectB)
+    expect(anySetPathWith(objectA, path, 'foo', contagionFunc, getFunc, setFunc)).toEqual({
+      a: {
+        b: 'foo'
+      }
+    })
+    const objectB = { a: null }
+    expect(anySetPathWith(objectB, path, 'foo', contagionFunc, getFunc, setFunc)).toEqual({
+      a: {
+        b: 'foo'
+      }
+    })
   })
 
   test('upgrades to async when getFunc returns a promise', async () => {
     const path = new Path(['a', 'b', 'c'])
+    const contagionFunc = () => ({})
     const getFunc = async (target, key) => objectGetProperty(target, key)
-    const hasFunc = (target, key) => objectHasProperty(target, key)
     const setFunc = (target, key, value) => {
       if (anyIsPath(key)) {
         return anySetPathWith(target, key, value, getFunc, setFunc)
       }
       return objectSetProperty(target, key, value)
     }
-    const setFunc = (target, key) => {
-      if (anyIsPath(key)) {
-        return anySetPathWith(target, key, getFunc, hasFunc, setFunc, setFunc)
-      }
-      return objectSetProperty(target, key)
-    }
 
     const any = {
-      a: { b: { c: 3 } }
+      a: { b: null }
     }
-    const promise = anySetPathWith(any, path, getFunc, hasFunc, setFunc, setFunc)
+    const promise = anySetPathWith(any, path, 3, contagionFunc, getFunc, setFunc)
     expect(promise).toBeInstanceOf(Promise)
     const result = await promise
     expect(result).toEqual({
-      a: { b: {} }
+      a: { b: { c: 3 } }
     })
   })
 
   test('handles async nil values', async () => {
     const path = new Path(['a', 'b', 'c'])
+    const contagionFunc = () => ({})
     const getFunc = (target, key) => objectGetProperty(target, key)
-    const hasFunc = (target, key) => objectHasProperty(target, key)
     const setFunc = (target, key, value) => {
       if (anyIsPath(key)) {
-        return anySetPathWith(target, key, value, getFunc, setFunc)
+        return anySetPathWith(target, key, value, contagionFunc, getFunc, setFunc)
       }
       return objectSetProperty(target, key, value)
-    }
-    const setFunc = (target, key) => {
-      if (anyIsPath(key)) {
-        return anySetPathWith(target, key, getFunc, hasFunc, setFunc, setFunc)
-      }
-      return objectSetProperty(target, key)
     }
 
     const any = {
       a: Promise.resolve({ b: Promise.resolve(null) })
     }
-    const promise = anySetPathWith(any, path, getFunc, hasFunc, setFunc, setFunc)
+    const promise = anySetPathWith(any, path, 3, contagionFunc, getFunc, setFunc)
     expect(promise).toBeInstanceOf(Promise)
     const result = await promise
     expect(result).toEqual({
-      a: { b: null }
+      a: { b: { c: 3 } }
     })
   })
 })

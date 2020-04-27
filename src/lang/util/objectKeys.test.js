@@ -7,7 +7,7 @@ describe('objectKeys', () => {
         bim: 'bop',
         foo: 'bar'
       })
-    ).toEqual(['foo', 'bim'])
+    ).toEqual(['bim', 'foo'])
   })
 
   test('returns an array of keys for an args array with args enum bug', () => {
@@ -23,7 +23,7 @@ describe('objectKeys', () => {
         propertyIsEnumerable: 'bop',
         toString: 'bar'
       })
-    ).toEqual(['toString', 'propertyIsEnumerable'])
+    ).toEqual(['propertyIsEnumerable', 'toString'])
   })
 
   test('returns an empty array of keys for an empty object', () => {

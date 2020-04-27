@@ -7,7 +7,7 @@ describe('objectValues', () => {
         bim: 'bop',
         foo: 'bar'
       })
-    ).toEqual(['bar', 'bop'])
+    ).toEqual(['bop', 'bar'])
   })
 
   test('returns an array of values for an args array with args enum bug', () => {
@@ -23,7 +23,7 @@ describe('objectValues', () => {
         propertyIsEnumerable: 'bop',
         toString: 'bar'
       })
-    ).toEqual(['bar', 'bop'])
+    ).toEqual(['bop', 'bar'])
   })
 
   test('returns an empty array of values for an empty object', () => {

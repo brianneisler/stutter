@@ -1,7 +1,4 @@
-import arrayFlatten from './util/arrayFlatten'
-import arrayLikeReduce from './util/arrayLikeReduce'
-import arrayLikeSlice from './util/arrayLikeSlice'
-import identity from './identity'
+import { functionsPipe } from './util'
 
 // TODO BRN: This method is important at a fundamental level. Need to rewrite this to not depend upon data methods.
 /**
@@ -23,21 +20,6 @@ import identity from './identity'
  *
  * f(3, 4) // -(3^4) + 1
  */
-const pipe = (...functions) => {
-  functions = arrayFlatten(functions)
-  const { length } = functions
-  if (length === 0) {
-    return identity
-  }
-
-  if (length === 1) {
-    return functions[0]
-  }
-
-  const firstFunc = functions[0]
-  const rest = arrayLikeSlice(functions, 1)
-
-  return (...args) => arrayLikeReduce(rest, firstFunc(...args), (piped, func) => func(piped))
-}
+const pipe = (...functions) => functionsPipe(...functions)
 
 export default pipe

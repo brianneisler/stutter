@@ -6,7 +6,7 @@ import Index from './types/IndexType'
 import Key from './types/Key'
 import Map from './types/Map'
 import Object from './types/Object'
-import anyAtIndex from './util/indexedSomeAtIndex'
+import arrayLikeSomeAtIndex from './util/arrayLikeSomeAtIndex'
 import defn from './defn'
 import isArrayLike from './isArrayLike'
 import keys from './keys'
@@ -21,23 +21,31 @@ import keys from './keys'
  *
  * const lessThan0 = flip(lt)(0)
  * const lessThan2 = flip(lt)(2)
- * any(lessThan0)([1, 2]) //=> false
- * any(lessThan2)([1, 2]) //=> true
- * any(lessThan2)({ a: 1, b: 2 }) //=> true
+ * some(lessThan0)([1, 2]) //=> false
+ * some(lessThan2)([1, 2]) //=> true
+ * some(lessThan2)({ a: 1, b: 2 }) //=> true
  *
- * await any(async (value) => lessThan2(value), [1, 2]) //=> true
+ * await some(async (value) => lessThan2(value), [1, 2]) //=> true
  */
-const any = defn(
-  'any',
-  'Returns `true` if at least one of elements of the collection match the predicate, `false` otherwise.',
+const some = defn(
+  'lang.some',
+  {
+    description:
+      'Returns `true` if at least one of elements of the collection match the predicate, `false` otherwise.',
+    since: 'v0.2.0'
+  },
 
   [Function, Array, Index, () => Boolean],
+  (func, array, index) => arrayLikeSomeAtIndex(array, func, index),
 
   [Array, Index, Function, () => Boolean],
+  (array, index, func) => arrayLikeSomeAtIndex(array, func, index),
 
   [Function, Array, () => Boolean],
+  (func, array) => arrayLikeSomeAtIndex(array, func, 0),
 
   [Array, Function, () => Boolean],
+  (array, func) => arrayLikeSomeAtIndex(array, func, 0),
 
   [Function, ImmutableList, Index, () => Boolean],
   (func, immutableList, index) => immutableList.delete(index),
@@ -47,14 +55,7 @@ const any = defn(
 
   [Function, Object],
 
-  [Object, Function],
-
-  (fn, collection) => {
-    if (isArrayLike(collection)) {
-      return anyAtIndex(fn, 0, collection)
-    }
-    return anyAtIndex((key) => fn(collection[key], key), 0, keys(collection))
-  }
+  [Object, Function]
 )
 
-export default any
+export default some

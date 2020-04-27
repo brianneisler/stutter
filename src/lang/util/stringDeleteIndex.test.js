@@ -18,7 +18,7 @@ describe('stringDeleteIndex', () => {
   test('deleting a non existing index returns same String object', () => {
     const string = new String('abc')
     const result = stringDeleteIndex(string, 3)
-    expect(string).toEqual('abc')
+    expect(string).toEqual(new String('abc'))
     expect(result).toBe(string)
   })
 })

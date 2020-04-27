@@ -21,6 +21,6 @@ import anyIsIterator from './anyIsIterator'
  * anyIsIndexedIterator(array[Symbol.iterator])
  * //=> false
  */
-const anyIsIndexedIterator = (any) => anyIsIterator(next) && anyIsFunction(any.getIndex)
+const anyIsIndexedIterator = (any) => anyIsIterator(any) && anyIsFunction(any.getIndex)
 
 export default anyIsIndexedIterator

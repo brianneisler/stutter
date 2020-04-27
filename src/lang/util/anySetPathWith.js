@@ -1,4 +1,5 @@
 import anyIsNil from './anyIsNil'
+import anyIsObject from './anyIsObject'
 import anyResolveWith from './anyResolveWith'
 
 const anySetPathWith = (any, path, value, contagionFunc, getFunc, setFunc) => {
@@ -11,11 +12,11 @@ const anySetPathWith = (any, path, value, contagionFunc, getFunc, setFunc) => {
   }
   return anyResolveWith(getFunc(any, pathHead), (headValue) => {
     const pathTail = path.tail()
-    if (anyIsNil(headValue)) {
-      headValue = contagionFunc(any, pathTail.head())
+    if (anyIsNil(headValue) || !anyIsObject(headValue)) {
+      headValue = contagionFunc(any, pathHead, path.get(1))
     }
     return anyResolveWith(
-      anySetPathWith(headValue, pathTail, contagionFunc, getFunc, setFunc),
+      anySetPathWith(headValue, pathTail, value, contagionFunc, getFunc, setFunc),
       (setValue) => {
         return setFunc(any, pathHead, setValue)
       }
