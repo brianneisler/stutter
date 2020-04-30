@@ -45,6 +45,6 @@ describe('namespacesFilter', () => {
     })
     const results = namespacesFilter(namespaces, (value) => typeof value === 'string')
     expect(results).toBeInstanceOf(Seq)
-    expect(results.toArray()).toEqual(['abc', 'def', 'ghi'])
+    expect(results.toArray()).toEqual(['def', 'ghi', 'abc'])
   })
 })

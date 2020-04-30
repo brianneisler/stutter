@@ -80,10 +80,8 @@ describe('anyDeletePathWith', () => {
     expect(setFunc).toHaveBeenNthCalledWith(2, any, 'a', { b: {} })
     expect(setFunc).toHaveBeenCalledTimes(2)
 
-    expect(deleteFunc).toHaveBeenNthCalledWith(1, any.a, new Path(['b', 'c']))
-    expect(deleteFunc).toHaveBeenNthCalledWith(2, any.a.b, new Path(['c']))
-    expect(deleteFunc).toHaveBeenNthCalledWith(3, any.a.b, 'c')
-    expect(deleteFunc).toHaveBeenCalledTimes(3)
+    expect(deleteFunc).toHaveBeenNthCalledWith(1, any.a.b, 'c')
+    expect(deleteFunc).toHaveBeenCalledTimes(1)
 
     expect(result).toEqual({
       a: { b: {} }

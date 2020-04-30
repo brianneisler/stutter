@@ -193,22 +193,22 @@ describe('objectToIterator', () => {
     expect(accum).toEqual([
       {
         done: false,
-        kdx: 'foo',
-        key: 'foo',
+        kdx: 'bim',
+        key: 'bim',
         prev: undefined,
-        value: 'bar'
+        value: 'bop'
       },
       {
         done: false,
-        kdx: 'bim',
-        key: 'bim',
+        kdx: 'foo',
+        key: 'foo',
         prev: {
           done: false,
-          kdx: 'foo',
-          key: 'foo',
-          value: 'bar'
+          kdx: 'bim',
+          key: 'bim',
+          value: 'bop'
         },
-        value: 'bop'
+        value: 'bar'
       },
       {
         done: false,
@@ -216,9 +216,9 @@ describe('objectToIterator', () => {
         key: symBan,
         prev: {
           done: false,
-          kdx: 'bim',
-          key: 'bim',
-          value: 'bop'
+          kdx: 'foo',
+          key: 'foo',
+          value: 'bar'
         },
         value: 'ana'
       },
@@ -253,22 +253,22 @@ describe('objectToIterator', () => {
     expect(accum).toEqual([
       {
         done: false,
-        kdx: 'foo',
-        key: 'foo',
+        kdx: 'bim',
+        key: 'bim',
         prev: undefined,
-        value: 'bar'
+        value: 'bop'
       },
       {
         done: false,
-        kdx: 'bim',
-        key: 'bim',
+        kdx: 'foo',
+        key: 'foo',
         prev: {
           done: false,
-          kdx: 'foo',
-          key: 'foo',
-          value: 'bar'
+          kdx: 'bim',
+          key: 'bim',
+          value: 'bop'
         },
-        value: 'bop'
+        value: 'bar'
       },
       {
         done: false,
@@ -276,9 +276,9 @@ describe('objectToIterator', () => {
         key: symBan,
         prev: {
           done: false,
-          kdx: 'bim',
-          key: 'bim',
-          value: 'bop'
+          kdx: 'foo',
+          key: 'foo',
+          value: 'bar'
         },
         value: 'ana'
       },
@@ -320,35 +320,35 @@ describe('objectToIterator', () => {
       },
       {
         done: false,
-        kdx: 'bim',
-        key: 'bim',
+        kdx: 'foo',
+        key: 'foo',
         prev: {
           done: false,
           kdx: symBan,
           key: symBan,
           value: 'ana'
         },
-        value: 'bop'
-      },
-      {
-        done: false,
-        kdx: 'foo',
-        key: 'foo',
-        prev: {
-          done: false,
-          kdx: 'bim',
-          key: 'bim',
-          value: 'bop'
-        },
         value: 'bar'
       },
       {
-        done: true,
+        done: false,
+        kdx: 'bim',
+        key: 'bim',
         prev: {
           done: false,
           kdx: 'foo',
           key: 'foo',
           value: 'bar'
+        },
+        value: 'bop'
+      },
+      {
+        done: true,
+        prev: {
+          done: false,
+          kdx: 'bim',
+          key: 'bim',
+          value: 'bop'
         }
       }
     ])
@@ -361,22 +361,22 @@ describe('objectToIterator', () => {
     })
     expect(iterator.next()).toEqual({
       done: false,
-      kdx: 'foo',
-      key: 'foo',
+      kdx: 'bim',
+      key: 'bim',
       prev: undefined,
-      value: 'bar'
+      value: 'bop'
     })
     expect(iterator.previous()).toEqual({
       done: false,
-      kdx: 'foo',
-      key: 'foo',
+      kdx: 'bim',
+      key: 'bim',
       prev: {
         done: false,
-        kdx: 'bim',
-        key: 'bim',
-        value: 'bop'
+        kdx: 'foo',
+        key: 'foo',
+        value: 'bar'
       },
-      value: 'bar'
+      value: 'bop'
     })
   })
 })

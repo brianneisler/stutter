@@ -27,6 +27,7 @@ describe('functionTypeCheck', () => {
 
   test('throws an Exception when return type does not match in an async function', async () => {
     const func = functionTypeCheck(async () => 'foo', {
+      resolve: true,
       returns: Number
     })
     await expect(func()).rejects.toMatchObject({ code: 'Expected:Returned:toMatchReturns' })
@@ -38,6 +39,7 @@ describe('functionTypeCheck', () => {
         return 'foo'
       },
       {
+        resolve: true,
         returns: Number
       }
     )

@@ -1,7 +1,6 @@
 import Any from './types/Any'
 import Function from './types/Function'
 import anyResolveAllWith from './util/anyResolveAllWith'
-import contagion from './contagion'
 import defn from './defn'
 import iterate from './iterate'
 import set from './set'
@@ -15,10 +14,10 @@ const allWith = defn(
   },
 
   [Any, Function, () => Any],
-  (any, func) => anyResolveAllWith(any, func, contagion, iterate, set),
+  (any, func) => anyResolveAllWith(any, func, iterate, set),
 
   [Function, Any, () => Any],
-  (func, any) => anyResolveAllWith(any, func, contagion, iterate, set)
+  (func, any) => anyResolveAllWith(any, func, iterate, set)
 )
 
 export default allWith

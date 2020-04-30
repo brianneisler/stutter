@@ -40,13 +40,14 @@ import anyResolveWith from './anyResolveWith'
 
 // TODO BRN: Add support for all data types by having this receive a
 // iterateFunc, setFunc, and contagionFunc
-// NOTE BRN: setFunc should be a setting function that mutates the object
-const anyResolveAll = (any, contagionFunc, iterateFunc, setFunc) =>
+// TODO BRN: setFunc should be a setting function that mutates the object
+// instead of immutable modifications
+const anyResolveAll = (any, iterateFunc, setFunc) =>
   anyResolveWith(any, (resolvedAny) => {
     if (!anyIsObject(resolvedAny) || anyIsFunction(resolvedAny)) {
       return resolvedAny
     }
-    let result = contagionFunc(any)
+    let result = any
     return iterateFunc(resolvedAny, (next) => {
       if (next.done) {
         return {

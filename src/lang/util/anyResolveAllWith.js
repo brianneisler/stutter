@@ -44,7 +44,7 @@ import anyResolveWith from './anyResolveWith'
  * )
  * // => 'foo'
  */
-const anyResolveAllWith = (any, func, contagionFunc, iterateFunc, setFunc) =>
-  anyResolveWith(anyResolveAll(any, contagionFunc, iterateFunc, setFunc), func)
+const anyResolveAllWith = (any, func, iterateFunc, setFunc) =>
+  anyResolveWith(anyResolveAll(any, iterateFunc, setFunc), func)
 
 export default anyResolveAllWith

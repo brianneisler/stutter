@@ -52,6 +52,6 @@ describe('namespacesFilterTypes', () => {
     })
     const results = namespacesFilterTypes(namespaces)
     expect(results).toBeInstanceOf(Seq)
-    expect(results.toArray()).toEqual([FooType, BarType, BazType])
+    expect(results.toArray()).toEqual([BarType, BazType, FooType])
   })
 })

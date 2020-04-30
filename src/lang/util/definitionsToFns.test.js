@@ -37,9 +37,12 @@ describe('definitionsToFns', () => {
     expect(fns[0]).toBe(fn)
   })
 
-  test('Returns Fns without modification', () => {
-    const fn = definitionToFn(() => {})
-    expect(() => definitionsToFns([[Number], fn])).toThrowError(/^Cannot redefine/)
+  test('Allows for recasting of Fn with new definition', () => {
+    const fn = definitionToFn((foo) => foo, [String])
+    expect(fnGetMeta(fn).parameters).toEqual([new Parameter('foo', String)])
+    const fns = definitionsToFns([[Number], fn])
+    expect(fns[0]).not.toBe(fn)
+    expect(fnGetMeta(fns[0]).parameters).toEqual([new Parameter('foo', Number)])
   })
 
   test('parameterizes functions with defaults', () => {

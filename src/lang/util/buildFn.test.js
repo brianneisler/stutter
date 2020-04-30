@@ -87,6 +87,7 @@ describe('buildFn', () => {
   test('works with an async function', async () => {
     const fn = buildFn(async () => 'foo', {
       parameters: [],
+      resolve: true,
       returns: String
     })
     expect(await fn()).toEqual('foo')
@@ -95,6 +96,7 @@ describe('buildFn', () => {
   test('throws an Exception when return type does not match in an async function', async () => {
     const fn = buildFn(async () => 'foo', {
       parameters: [],
+      resolve: true,
       returns: Number
     })
     await expect(fn()).rejects.toMatchObject({ code: 'Expected:Returned:toMatchReturns' })
@@ -107,6 +109,7 @@ describe('buildFn', () => {
       },
       {
         parameters: [],
+        resolve: true,
         returns: Number
       }
     )
