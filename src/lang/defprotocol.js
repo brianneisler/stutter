@@ -54,7 +54,8 @@ import protocol from './protocol'
  */
 const defprotocol = fn(
   [String, String, Object, () => Protocol],
-  (name, description, definitions) => def(name, description, protocol(definitions)),
+  (name, description, definitions) =>
+    def(name, description, protocol(definitions)),
 
   [String, Object, () => Protocol],
   (name, definitions) => def(name, '', protocol(definitions))

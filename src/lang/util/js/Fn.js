@@ -1,7 +1,9 @@
+import ImmutableStack from './ImmutableStack'
 import SYMBOL_FN from '../../constants/SYMBOL_FN'
 import SYMBOL_META from '../../constants/SYMBOL_META'
 import SYMBOL_TO_STRING_TAG from '../../constants/SYMBOL_TO_STRING_TAG'
 import anyIsNumber from '../anyIsNumber'
+import anyToName from '../anyToName'
 import functionAry from '../functionAry'
 import functionComplement from '../functionComplement'
 import functionCurry from '../functionCurry'
@@ -14,13 +16,13 @@ import functionTypeCheck from '../functionTypeCheck'
 import objectDefineProperty from '../objectDefineProperty'
 
 const buildFnCaller = (fn) =>
-  function() {
+  function () {
     return fn.apply(this, arguments)
   }
 
-const buildFnHandler = function(fn) {
+const buildFnHandler = function (fn) {
   const { meta } = fn
-  let handler = functionDefineSymbolFn(function() {
+  let handler = functionDefineSymbolFn(function () {
     return fn.func.apply(this, arguments)
   }, fn)
 
@@ -76,7 +78,15 @@ const buildFnHandler = function(fn) {
   return handler
 }
 
-const functionUpdate = function(updates) {
+const functionDispatch = function (args, options, stack) {
+  return this[SYMBOL_FN].dispatch(args, options, stack)
+}
+
+const functionLog = function (logger) {
+  return this[SYMBOL_FN].log(logger)
+}
+
+const functionUpdate = function (updates) {
   return this[SYMBOL_FN].update(updates)
 }
 
@@ -111,6 +121,14 @@ const fnCallerDefineProps = (caller, fn) => {
     get() {
       return this[SYMBOL_FN].meta.returns
     }
+  })
+  objectDefineProperty(caller, 'dispatch', {
+    configurable: true,
+    value: functionDispatch
+  })
+  objectDefineProperty(caller, 'log', {
+    configurable: true,
+    value: functionLog
   })
   objectDefineProperty(caller, 'update', {
     configurable: true,
@@ -202,6 +220,19 @@ class Fn {
 
   call(context, ...args) {
     return this.apply(context, args)
+  }
+
+  dispatch(args, options, stack = new ImmutableStack()) {
+    return this.dispatcher.dispatch(args, options, stack.push(this))
+  }
+
+  log(logger) {
+    logger.log(`${this[SYMBOL_TO_STRING_TAG]}:${anyToName(this) ? anyToName(this) : 'anonymous'} {`)
+    logger.indent()
+    logger.write('meta:', false)
+    logger.log(this.meta)
+    logger.deindent()
+    logger.log('}')
   }
 
   update(updates) {

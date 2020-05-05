@@ -13,7 +13,7 @@ import functionArity from './functionArity'
 import functionDefineSymbolFn from './functionDefineSymbolFn'
 
 const curryFunction = (length, received, func) => {
-  return function() {
+  return function () {
     const combined = []
     let argsIdx = 0
     let left = length
@@ -22,7 +22,8 @@ const curryFunction = (length, received, func) => {
       let result
       if (
         combinedIdx < received.length &&
-        (!anyIsPlaceholder(received[combinedIdx]) || argsIdx >= arguments.length)
+        (!anyIsPlaceholder(received[combinedIdx]) ||
+          argsIdx >= arguments.length)
       ) {
         result = received[combinedIdx]
       } else {
@@ -48,12 +49,10 @@ const curryParameterizedFn = (fn, handler) => {
   const placeholders = curried.placeholders || []
   const received = curried.received || []
 
-  return function() {
+  return function () {
     const { length } = arguments
     if (length === 0) {
-      throw buildException(fn)
-        .expected.arguments(arguments)
-        .not.toBeEmpty()
+      throw buildException(fn).expected.arguments(arguments).not.toBeEmpty()
     }
 
     let idx = -1
@@ -90,7 +89,10 @@ const curryParameterizedFn = (fn, handler) => {
     }
 
     if (length < placeholders.length) {
-      newPlaceholders = arrayConcat(newPlaceholders, arraySlice(placeholders, length))
+      newPlaceholders = arrayConcat(
+        newPlaceholders,
+        arraySlice(placeholders, length)
+      )
     }
     if (length < parameters.length) {
       newParameters = arrayConcat(newParameters, arraySlice(parameters, length))
@@ -135,13 +137,12 @@ const findExactOrClosestCompletedMatch = (matches) => {
 }
 
 const curryMultiFn = (fn) => {
-  return function() {
-    const { dispatcher } = fnGetMeta(fn)
-    const matches = dispatcher.dispatch(arguments, { multi: true, partial: true })
+  return function () {
+    const matches = fn.dispatch(arguments, { multi: true, partial: true })
     if (matches.length === 0) {
       throw buildException(fn)
         .expected.arguments(arguments)
-        .toMatchDispatcher(dispatcher)
+        .toMatchDispatcher(fn.dispatcher)
     }
     const completedMatch = findExactOrClosestCompletedMatch(matches)
     if (completedMatch) {
@@ -214,16 +215,24 @@ const functionCurry = (func) => {
   }
   const { dispatcher, parameters } = fnGetMeta(func)
   if (dispatcher) {
-    return functionDefineSymbolFn(curryMultiFn(func[SYMBOL_FN]), func[SYMBOL_FN])
+    return functionDefineSymbolFn(
+      curryMultiFn(func[SYMBOL_FN]),
+      func[SYMBOL_FN]
+    )
   }
   if (parameters) {
     if (parameters.length === 0) {
       // Function accepts no parameters, do not apply currying
       return func
     }
-    return functionDefineSymbolFn(curryParameterizedFn(func[SYMBOL_FN], func), func[SYMBOL_FN])
+    return functionDefineSymbolFn(
+      curryParameterizedFn(func[SYMBOL_FN], func),
+      func[SYMBOL_FN]
+    )
   }
-  throw new Error('Fn must either have a dispatcher function or have parameters')
+  throw new Error(
+    'Fn must either have a dispatcher function or have parameters'
+  )
 }
 
 export default functionCurry

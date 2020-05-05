@@ -1,5 +1,6 @@
 import Any from '../types/Any'
 import Boolean from '../types/Boolean'
+import Integer from '../types/Integer'
 import Key from '../types/Key'
 import Self from '../types/Self'
 import defineAny from '../util/defineAny'
@@ -13,7 +14,8 @@ const Keyed = defineAny(
     'lang.deleteKey': [Self, Key, () => Self],
     'lang.getKey': [Self, Key, () => Any],
     'lang.hasKey': [Self, Key, () => Boolean],
-    'lang.setKey': [Self, Key, Any, () => Self]
+    'lang.setKey': [Self, Key, Any, () => Self],
+    'lang.size': [Self, () => Integer]
   })
 )
 

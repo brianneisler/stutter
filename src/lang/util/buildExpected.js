@@ -2,15 +2,12 @@ import Expected from './js/Expected'
 import TypeError from './js/TypeError'
 import anyToName from './anyToName'
 import anyToString from './anyToString'
-import anyToStringTag from './anyToStringTag'
 import fnGetMeta from './fnGetMeta'
 import functionToParameterNames from './functionToParameterNames'
+import parameterToString from './parameterToString'
+import sourceToString from './sourceToString'
 
 const prefixNot = (not, expectation) => `${not ? 'not.' : ''}${expectation}`
-
-const sourceToString = (source) => `${anyToName(source)}:${anyToStringTag(source)}`
-
-const parameterToString = (parameter) => `${anyToName(parameter)}:${anyToName(parameter.type)}`
 
 const fnToSignatureString = (fn) => {
   const { parameters } = fnGetMeta(fn)

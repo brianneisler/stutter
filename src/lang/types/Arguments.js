@@ -53,14 +53,14 @@ const Arguments = defineAny(
           [Index, Self, () => Self],
           (index, self) => argumentsHasIndex(self, index)
         ]),
-        'lang.length': definitionsToFn([[Self, () => Integer], argumentsLength]),
         'lang.setIndex': definitionsToFn([
           [Self, Index, Any, () => Self],
           argumentsSetIndex,
 
           [Index, Any, Self, () => Self],
           (index, any, self) => argumentsSetIndex(self, index, any)
-        ])
+        ]),
+        'lang.size': definitionsToFn([[Self, () => Integer], argumentsLength])
       }
     ],
     to: anyToArguments

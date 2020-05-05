@@ -15,13 +15,13 @@ describe('js:Exception', () => {
         exceptionToError: () => {},
         expectation: 'foo'
       })
-      const instance = new Exception(source, target, expected)
+      const instance = new Exception({ expected, source, target })
       expect(instance).toBeInstanceOf(Exception)
       expect(instance).toMatchObject({
-        code: 'Expected:Argument:foo',
         expected,
         source,
-        target
+        target,
+        type: 'Expected:Argument:foo'
       })
     })
   })
@@ -37,7 +37,7 @@ describe('js:Exception', () => {
       const expected = {
         toError: jest.fn(() => new Error('test'))
       }
-      const instance = new Exception(source, target, expected)
+      const instance = new Exception({ expected, source, target })
       const result = instance.toError()
       expect(result).toBeInstanceOf(Error)
       expect(result.message).toBe('test')

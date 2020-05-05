@@ -14,7 +14,7 @@
   },
   "main": "./index.module.js",
   "engines": {
-    "node": ">=8.0"
+    "node": ">=10.0"
   },
   "scripts": {
     "build": "bash ./scripts/build.sh",

@@ -3,7 +3,7 @@ import defn from './defn'
 describe('defn', () => {
   test('maintains context of function', () => {
     const test = {
-      func: defn('test', function() {
+      func: defn('test', function () {
         expect(this).toBe(test)
         return 'baz'
       })

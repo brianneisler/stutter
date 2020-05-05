@@ -47,14 +47,14 @@ const Array = defineAny(
           [Index, Self, () => Boolean],
           (index, self) => arrayHasIndex(self, index)
         ]),
-        'lang.length': definitionsToFn([[Self, () => Integer], arrayLength]),
         'lang.setIndex': definitionsToFn([
           [Self, Index, Any, () => Self],
           arraySetIndex,
 
           [Index, Any, Self, () => Self],
           (index, any, self) => arraySetIndex(self, index, any)
-        ])
+        ]),
+        'lang.size': definitionsToFn([[Self, () => Integer], arrayLength])
       }
     ],
     to: anyToArray

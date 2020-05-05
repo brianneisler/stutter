@@ -2,8 +2,12 @@ describe('constants index', () => {
   test('has expected methods', () => {
     const mod = require('./')
     expect(mod).toEqual({
+      // TODO BRN: Convert all of these constants into a form like ErrorCode
       DEBURRED_LETTERS: expect.any(Object),
       DEFAULT_NAMESPACE_NAME: expect.any(String),
+      ErrorCode: {
+        NO_MATCH: expect.any(String)
+      },
       FUNCTIONAL_PLACEHOLDER: expect.any(Object),
       FUNCTION_IDENTITY: expect.any(Function),
       INFINITY: expect.any(Number),

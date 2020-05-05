@@ -14,8 +14,8 @@ const Indexed = defineAny(
     'lang.deleteIndex': [Self, Index, () => Self],
     'lang.getIndex': [Self, Index, () => Any],
     'lang.hasIndex': [Self, Index, () => Boolean],
-    'lang.length': [Self, () => Integer],
-    'lang.setIndex': [Self, Index, Any, () => Self]
+    'lang.setIndex': [Self, Index, Any, () => Self],
+    'lang.size': [Self, () => Integer]
   })
 )
 

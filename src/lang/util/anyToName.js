@@ -35,7 +35,10 @@ const anyToName = (any) => {
   // TODO BRN: Need to figure out how to reverse source maps here to get the
   // correct name if it's been obfuscated
   if (anyIsFunction(any)) {
-    return any.prototype.name || any.name
+    if (any.prototype && any.prototype.name) {
+      return any.prototype.name
+    }
+    return any.name
   }
   if (anyIsString(any)) {
     return `'${any}'`

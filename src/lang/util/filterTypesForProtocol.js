@@ -2,10 +2,12 @@ import functionMemoizeWith from './functionMemoizeWith'
 import namespacesFilterTypes from './namespacesFilterTypes'
 import root from './root'
 
-const namespacesFilterTypesForProtocol = functionMemoizeWith((namespaces, protocol) => {
-  const types = namespacesFilterTypes(namespaces)
-  return types.filter((type) => type.getProtocols().has(protocol)).toList()
-})
+const namespacesFilterTypesForProtocol = functionMemoizeWith(
+  (namespaces, protocol) => {
+    const types = namespacesFilterTypes(namespaces)
+    return types.filter((type) => type.getProtocols().has(protocol)).toList()
+  }
+)
 
 /**
  * Filter through all of the existing `Types`s in all `Namespace`s to find the

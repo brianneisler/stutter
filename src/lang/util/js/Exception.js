@@ -3,12 +3,14 @@ import anyToStringTag from '../anyToStringTag'
 import buildStackTrace from '../buildStackTrace'
 
 class Exception {
-  constructor(source, target, expected) {
-    this.source = source
-    this.stack = buildStackTrace()
-    this.target = target
+  constructor({ code, expected, source, stack, target }) {
+    this.code = code
     this.expected = expected
-    this.code = `${anyToStringTag(expected)}:${target.type}:${expected.expectation}`
+    this.jscallstack = buildStackTrace()
+    this.source = source
+    this.stack = buildStackTrace(stack)
+    this.target = target
+    this.type = `${anyToStringTag(expected)}:${target.type}:${expected.expectation}`
   }
 
   get [SYMBOL_TO_STRING_TAG]() {

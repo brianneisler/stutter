@@ -48,14 +48,14 @@ const String = defineAny(
           [Index, Self, () => Boolean],
           (index, self) => stringHasIndex(self, index)
         ]),
-        'lang.length': definitionsToFn([[Self, () => Integer], stringLength]),
         'lang.setIndex': definitionsToFn([
           [Self, Index, Any, () => Self],
           stringSetIndex,
 
           [Index, Any, Self, () => Self],
           (index, any, self) => stringSetIndex(self, index, any)
-        ])
+        ]),
+        'lang.size': definitionsToFn([[Self, () => Integer], stringLength])
       }
     ],
     to: anyToString

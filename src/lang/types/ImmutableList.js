@@ -21,44 +21,48 @@ import immutableListSetIndex from '../util/immutableListSetIndex'
  * @category lang
  * @example
  */
-const ImmutableList = deftype('lang.ImmutableList', 'A type representing a ImmutableList.', {
-  class: _ImmutableList,
-  is: anyIsImmutableList,
+const ImmutableList = deftype(
+  'lang.ImmutableList',
+  'A type representing a ImmutableList.',
+  {
+    class: _ImmutableList,
+    is: anyIsImmutableList,
 
-  protocols: [
-    Indexed,
-    {
-      'lang.deleteIndex': fn([
-        [Self, Index, () => Self],
-        immutableListDeleteIndex,
+    protocols: [
+      Indexed,
+      {
+        'lang.deleteIndex': fn(
+          [Self, Index, () => Self],
+          immutableListDeleteIndex,
 
-        [Index, Self, () => Self],
-        (index, self) => immutableListDeleteIndex(self, index)
-      ]),
-      'lang.getIndex': fn([
-        [Self, Index, () => Any],
-        immutableListGetIndex,
+          [Index, Self, () => Self],
+          (index, self) => immutableListDeleteIndex(self, index)
+        ),
+        'lang.getIndex': fn(
+          [Self, Index, () => Any],
+          immutableListGetIndex,
 
-        [Index, Self, () => Any],
-        (index, self) => immutableListGetIndex(self, index)
-      ]),
-      'lang.hasIndex': fn([
-        [Self, Index, () => Boolean],
-        immutableListHasIndex,
+          [Index, Self, () => Any],
+          (index, self) => immutableListGetIndex(self, index)
+        ),
+        'lang.hasIndex': fn(
+          [Self, Index, () => Boolean],
+          immutableListHasIndex,
 
-        [Index, Self, () => Boolean],
-        (index, self) => immutableListHasIndex(self, index)
-      ]),
-      'lang.length': fn([Self, () => Integer], immutableListLength),
-      'lang.setIndex': fn([
-        [Self, Index, Any, () => Self],
-        immutableListSetIndex,
+          [Index, Self, () => Boolean],
+          (index, self) => immutableListHasIndex(self, index)
+        ),
+        'lang.setIndex': fn(
+          [Self, Index, Any, () => Self],
+          immutableListSetIndex,
 
-        [Index, Any, Self, () => Self],
-        (index, any, self) => immutableListSetIndex(self, index, any)
-      ])
-    }
-  ]
-})
+          [Index, Any, Self, () => Self],
+          (index, any, self) => immutableListSetIndex(self, index, any)
+        ),
+        'lang.size': fn([Self, () => Integer], immutableListLength)
+      }
+    ]
+  }
+)
 
 export default ImmutableList

@@ -1,3 +1,5 @@
+import { ErrorCode } from '../constants'
+import ImmutableStack from './js/ImmutableStack'
 import Number from '../types/Number'
 import String from '../types/String'
 import definitionToFn from './definitionToFn'
@@ -27,8 +29,8 @@ describe('fnsToMultiFnDispatcher', () => {
     )
     const multiFnDipatcher = fnsToMultiFnDispatcher([fn])
     expect(() => {
-      multiFnDipatcher.dispatch([], { multi: false, partial: false })
-    }).toThrow(/^Could not find matching function/)
+      multiFnDipatcher.dispatch([], { multi: false, partial: false }, new ImmutableStack())
+    }).toThrowMatchingObject({ code: ErrorCode.NO_MATCH })
   })
 
   test('returns the matched Fns in a multi true and partial true dispatch', () => {
@@ -51,7 +53,11 @@ describe('fnsToMultiFnDispatcher', () => {
       [String, String]
     )
     const multiFnDipatcher = fnsToMultiFnDispatcher([fn1, fn2, fn3])
-    const result = multiFnDipatcher.dispatch(['foo'], { multi: true, partial: true })
+    const result = multiFnDipatcher.dispatch(
+      ['foo'],
+      { multi: true, partial: true },
+      new ImmutableStack()
+    )
     expect(result).toEqual([
       { delta: -1, exact: false, fn: fn2, partial: true },
       { delta: -1, exact: false, fn: fn3, partial: true }
@@ -78,7 +84,11 @@ describe('fnsToMultiFnDispatcher', () => {
       [String, String, String]
     )
     const multiFnDipatcher = fnsToMultiFnDispatcher([fn1, fn2, fn3])
-    const result = multiFnDipatcher.dispatch(['foo', 'bar'], { multi: true, partial: true })
+    const result = multiFnDipatcher.dispatch(
+      ['foo', 'bar'],
+      { multi: true, partial: true },
+      new ImmutableStack()
+    )
     expect(result).toEqual([
       { delta: 1, exact: false, fn: fn1, partial: false },
       { delta: 0, exact: true, fn: fn2, partial: false },
@@ -112,7 +122,11 @@ describe('fnsToMultiFnDispatcher', () => {
       [String, String, String, String]
     )
     const multiFnDipatcher = fnsToMultiFnDispatcher([fn1, fn2, fn3, fn4])
-    const result = multiFnDipatcher.dispatch(['foo', 'bar', 'baz'], { multi: true, partial: false })
+    const result = multiFnDipatcher.dispatch(
+      ['foo', 'bar', 'baz'],
+      { multi: true, partial: false },
+      new ImmutableStack()
+    )
     expect(result).toEqual([
       { delta: 2, exact: false, fn: fn1, partial: false },
       { delta: 1, exact: false, fn: fn2, partial: false },

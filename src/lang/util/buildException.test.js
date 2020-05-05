@@ -7,13 +7,12 @@ import fnGetMeta from './fnGetMeta'
 
 describe('buildException', () => {
   test('builds a new Expected:Argument:toMatchParameter Exception', () => {
-    const source = definitionToFn(function(arg1) {
+    const source = definitionToFn(function (arg1) {
       const exception = buildException(source)
         .expected.arg(arg1, 0)
         .toMatchParameter(fnGetMeta(source).parameters[0])
       expect(exception).toBeInstanceOf(Exception)
       expect(exception).toMatchObject({
-        code: 'Expected:Argument:toMatchParameter',
         expected: {
           data: {
             parameter: fnGetMeta(source).parameters[0]
@@ -25,7 +24,8 @@ describe('buildException', () => {
           index: 0,
           type: 'Argument',
           value: 'foo'
-        }
+        },
+        type: 'Expected:Argument:toMatchParameter'
       })
     })
 
@@ -33,14 +33,11 @@ describe('buildException', () => {
   })
 
   test('builds a new Expected:Argument:toMatchRegex Exception', () => {
-    const source = definitionToFn(function(arg1) {
+    const source = definitionToFn(function (arg1) {
       const regex = /^bar$/
-      const exception = buildException(source)
-        .expected.arg(arg1, 0)
-        .toMatchRegex(regex)
+      const exception = buildException(source).expected.arg(arg1, 0).toMatchRegex(regex)
       expect(exception).toBeInstanceOf(Exception)
       expect(exception).toMatchObject({
-        code: 'Expected:Argument:toMatchRegex',
         expected: {
           data: {
             regex
@@ -52,7 +49,8 @@ describe('buildException', () => {
           index: 0,
           type: 'Argument',
           value: 'foo'
-        }
+        },
+        type: 'Expected:Argument:toMatchRegex'
       })
     })
 
@@ -60,13 +58,10 @@ describe('buildException', () => {
   })
 
   test('builds a new Expected:Arguments:toBeEmpty Exception', () => {
-    const source = definitionToFn(function() {
-      const exception = buildException(source)
-        .expected.arguments(arguments)
-        .toBeEmpty()
+    const source = definitionToFn(function () {
+      const exception = buildException(source).expected.arguments(arguments).toBeEmpty()
       expect(exception).toBeInstanceOf(Exception)
       expect(exception).toMatchObject({
-        code: 'Expected:Arguments:toBeEmpty',
         expected: {
           expectation: 'toBeEmpty'
         },
@@ -74,7 +69,8 @@ describe('buildException', () => {
         target: {
           type: 'Arguments',
           value: arguments
-        }
+        },
+        type: 'Expected:Arguments:toBeEmpty'
       })
     })
 
@@ -82,13 +78,10 @@ describe('buildException', () => {
   })
 
   test('builds a new Expected:Arguments:toBeOfMinLength Exception', () => {
-    const source = definitionToFn(function() {
-      const exception = buildException(source)
-        .expected.arguments(arguments)
-        .toBeOfMinLength(2)
+    const source = definitionToFn(function () {
+      const exception = buildException(source).expected.arguments(arguments).toBeOfMinLength(2)
       expect(exception).toBeInstanceOf(Exception)
       expect(exception).toMatchObject({
-        code: 'Expected:Arguments:toBeOfMinLength',
         expected: {
           data: {
             length: 2
@@ -99,7 +92,8 @@ describe('buildException', () => {
         target: {
           type: 'Arguments',
           value: arguments
-        }
+        },
+        type: 'Expected:Arguments:toBeOfMinLength'
       })
     })
 
@@ -108,14 +102,13 @@ describe('buildException', () => {
 
   test('builds a new Expected:Returned:ToMatchReturns Exception', () => {
     const source = definitionToFn(
-      function() {
+      function () {
         const returned = 'foo'
         const exception = buildException(source)
           .expected.returned(returned)
           .toMatchReturns(source.returns)
         expect(exception).toBeInstanceOf(Exception)
         expect(exception).toMatchObject({
-          code: 'Expected:Returned:toMatchReturns',
           expected: {
             data: {
               returns: source.returns
@@ -126,7 +119,8 @@ describe('buildException', () => {
           target: {
             type: 'Returned',
             value: 'foo'
-          }
+          },
+          type: 'Expected:Returned:toMatchReturns'
         })
         return returned
       },

@@ -1,6 +1,5 @@
+import { SYMBOL_ITERATOR, SYMBOL_TO_STRING_TAG } from '../../constants'
 import ImmutableMap from './ImmutableMap'
-import SYMBOL_ITERATOR from '../../constants/SYMBOL_ITERATOR'
-import SYMBOL_TO_STRING_TAG from '../../constants/SYMBOL_TO_STRING_TAG'
 import anyIsFunction from '../anyIsFunction'
 import anyIsObject from '../anyIsObject'
 import anyIsProtocol from '../anyIsProtocol'

@@ -13,7 +13,7 @@ const anySetPathWith = (any, path, value, contagionFunc, getFunc, setFunc) => {
   return anyResolveWith(getFunc(any, pathHead), (headValue) => {
     const pathTail = path.tail()
     if (anyIsNil(headValue) || !anyIsObject(headValue)) {
-      headValue = contagionFunc(any, pathHead, path.get(1))
+      headValue = contagionFunc(any, path.get(1))
     }
     return anyResolveWith(
       anySetPathWith(headValue, pathTail, value, contagionFunc, getFunc, setFunc),

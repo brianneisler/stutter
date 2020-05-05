@@ -1,3 +1,5 @@
+import * as ErrorCode from './ErrorCode'
+
 export { default as DEBURRED_LETTERS } from './DEBURRED_LETTERS'
 export { default as DEFAULT_NAMESPACE_NAME } from './DEFAULT_NAMESPACE_NAME'
 export { default as FUNCTIONAL_PLACEHOLDER } from './FUNCTIONAL_PLACEHOLDER'
@@ -25,3 +27,5 @@ export { default as SYMBOL_FN } from './SYMBOL_FN'
 export { default as SYMBOL_ITERATOR } from './SYMBOL_ITERATOR'
 export { default as SYMBOL_META } from './SYMBOL_META'
 export { default as SYMBOL_TO_STRING_TAG } from './SYMBOL_TO_STRING_TAG'
+
+export { ErrorCode }

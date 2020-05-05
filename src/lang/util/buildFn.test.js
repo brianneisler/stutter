@@ -65,7 +65,7 @@ describe('buildFn', () => {
       parameters: [new Parameter('arg1', Number)],
       returns: String
     })
-    expect(() => fn('foo')).toThrowMatchingObject({ code: 'Expected:Argument:toMatchParameter' })
+    expect(() => fn('foo')).toThrowMatchingObject({ type: 'Expected:Argument:toMatchParameter' })
   })
 
   test('throws an Exception when there are not enough args', () => {
@@ -73,7 +73,7 @@ describe('buildFn', () => {
       parameters: [new Parameter('arg1', Number)],
       returns: String
     })
-    expect(() => fn()).toThrowMatchingObject({ code: 'Expected:Arguments:toBeOfMinLength' })
+    expect(() => fn()).toThrowMatchingObject({ type: 'Expected:Arguments:toBeOfMinLength' })
   })
 
   test('throws an Exception when return type does not match returned value', () => {
@@ -81,7 +81,7 @@ describe('buildFn', () => {
       parameters: [],
       returns: Number
     })
-    expect(() => fn()).toThrowMatchingObject({ code: 'Expected:Returned:toMatchReturns' })
+    expect(() => fn()).toThrowMatchingObject({ type: 'Expected:Returned:toMatchReturns' })
   })
 
   test('works with an async function', async () => {
@@ -99,7 +99,7 @@ describe('buildFn', () => {
       resolve: true,
       returns: Number
     })
-    await expect(fn()).rejects.toMatchObject({ code: 'Expected:Returned:toMatchReturns' })
+    await expect(fn()).rejects.toMatchObject({ type: 'Expected:Returned:toMatchReturns' })
   })
 
   test('throws an Exception when return type does not match in a generator function', () => {
@@ -116,7 +116,7 @@ describe('buildFn', () => {
     expect(() => {
       const generator = fn()
       generator.next()
-    }).toThrowMatchingObject({ code: 'Expected:Returned:toMatchReturns' })
+    }).toThrowMatchingObject({ type: 'Expected:Returned:toMatchReturns' })
   })
 
   test('preserves context of function', () => {

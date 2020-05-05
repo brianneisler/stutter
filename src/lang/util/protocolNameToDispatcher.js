@@ -1,5 +1,7 @@
+import { ErrorCode, SYMBOL_META } from '../constants'
 import Self from '../types/Self'
-import errorNoMatch from './errorNoMatch'
+import anyLog from './anyLog'
+import buildException from './buildException'
 import filterProtocolsForFunctionName from './filterProtocolsForFunctionName'
 import filterTypesForProtocol from './filterTypesForProtocol'
 import fnGetMeta from './fnGetMeta'
@@ -40,7 +42,7 @@ const namespacesReduceFnsByProtocolFnName = functionMemoizeWith((namespaces, nam
 
 const protocolNameToDispatcher = (name, namespaces = root.namespaces) => {
   return {
-    dispatch: (args, options) => {
+    dispatch: (args, options, stack) => {
       // NOTE BRN: We always make this call to get the protocols since the
       // namespace is immutable. This way in case the namespace has changed, we
       // will get the latest Protocols.
@@ -50,15 +52,22 @@ const protocolNameToDispatcher = (name, namespaces = root.namespaces) => {
         if (options.multi) {
           return []
         }
-        throw errorNoMatch()
+        throw buildException(stack.peek(), {
+          code: ErrorCode.NO_MATCH,
+          stack
+        })
+          .expected.arguments(args)
+          .toMatchDispatcher(this)
       }
 
+      // console.log(`dispatching protocol: ${name}`)
+      // anyLog(fns[0][SYMBOL_META].self).push()
       const dispatcher = fnsToMultiFnDispatcher(fns)
 
       // NOTE BRN: Remember that in order for a Protocol method to be matched,
       // not only does the Self arg need to be matched but so do the rest of the
       // parameters
-      return dispatcher.dispatch(args, options)
+      return dispatcher.dispatch(args, options, stack)
     },
 
     getAllPossibleFns() {

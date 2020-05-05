@@ -24,34 +24,34 @@ const ImmutableMap = deftype(
     protocols: [
       Keyed,
       {
-        'lang.deleteKey': fn([
+        'lang.deleteKey': fn(
           [Self, Key, () => Self],
           immutableMapDeleteKey,
 
           [Key, Self, () => Self],
           (key, self) => immutableMapDeleteKey(self, key)
-        ]),
-        'lang.getKey': fn([
+        ),
+        'lang.getKey': fn(
           [Self, Key, () => Any],
           immutableMapGetKey,
 
           [Key, Self, () => Any],
           (key, self) => immutableMapGetKey(self, key)
-        ]),
-        'lang.hasKey': fn([
+        ),
+        'lang.hasKey': fn(
           [Self, Key, () => Boolean],
           immutableMapHasKey,
 
           [Key, Self, () => Boolean],
           (key, self) => immutableMapHasKey(self, key)
-        ]),
-        'lang.setKey': fn([
+        ),
+        'lang.setKey': fn(
           [Self, Key, Any, () => Self],
           immutableMapSetKey,
 
           [Key, Any, Self, () => Self],
           (key, any, self) => immutableMapSetKey(self, key, any)
-        ])
+        )
       }
     ]
   }

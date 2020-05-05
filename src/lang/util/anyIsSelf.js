@@ -19,7 +19,11 @@
 const anyIsSelf = (any, meta) => {
   if (!meta || !meta.self) {
     throw new TypeError(
-      `anyIsSelf expects a 'meta' object with a 'self' property, instead received ${meta}`
+      `anyIsSelf expects a 'meta' object with a 'self' property, instead received ${JSON.stringify(
+        meta,
+        null,
+        2
+      )}`
     )
   }
   return meta.self.is(any)

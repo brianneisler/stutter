@@ -46,7 +46,10 @@ const definitionToFn = (func, definition = [], meta = {}) => {
   }
 
   const parameterNames = functionGetParameterNames(func)
-  const { parameters, returns } = definitionToParametersAndReturns(definition, parameterNames)
+  const { parameters, returns } = definitionToParametersAndReturns(
+    definition,
+    parameterNames
+  )
   return buildFn(func, {
     ...meta,
     parameters,

@@ -44,7 +44,7 @@ describe('js:Expected', () => {
         type: 'Argument',
         value: 'test'
       }
-      const exception = new Exception(source, target, expected)
+      const exception = new Exception({ expected, source, target })
       const result = expected.toError(exception)
       expect(result).toBe(error)
       expect(exceptionToError).toHaveBeenCalledWith(exception, expected)

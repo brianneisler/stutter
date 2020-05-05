@@ -4,7 +4,7 @@ import fn from './fn'
 describe('fn', () => {
   it('maintains context of function', () => {
     const test = {
-      func: fn(function() {
+      func: fn(function () {
         expect(this).toBe(test)
         return 'baz'
       })
@@ -68,28 +68,28 @@ describe('fn', () => {
     expect(foo(Promise.resolve('foo'))).rejects.toBeInstanceOf(TypeError)
   })
 
-  // it('throws an Exception when argument does not match expected Type', async () => {
-  //   const foo = fn([Number], (num) => num)
-  //   try {
-  //     foo('foo')
-  //   } catch (error) {
-  //     expect(error).toMatchObject({
-  //       code: 'Expected:Argument:toMatchParameter'
-  //     })
-  //     return
-  //   }
-  //   throw new Error('Did not throw')
-  // })
+  it('throws an Exception when argument does not match expected Type', async () => {
+    const foo = fn([Number], (num) => num)
+    try {
+      foo('foo')
+    } catch (error) {
+      expect(error).toMatchObject({
+        type: 'Expected:Argument:toMatchParameter'
+      })
+      return
+    }
+    throw new Error('Did not throw')
+  })
 
-  // it('throws an Exception when argument does not match expected Type after async value is resolved', async () => {
-  //   const foo = fn([Number], (num) => {
-  //     expect(num).toBe(123)
-  //     return num
-  //   })
-  //   expect(foo(Promise.resolve('foo'))).rejects.toMatchObject({
-  //     code: 'Expected:Argument:toMatchParameter'
-  //   })
-  // })
+  it('throws an Exception when argument does not match expected Type after async value is resolved', async () => {
+    const foo = fn([Number], (num) => {
+      expect(num).toBe(123)
+      return num
+    })
+    expect(foo(Promise.resolve('foo'))).rejects.toMatchObject({
+      type: 'Expected:Argument:toMatchParameter'
+    })
+  })
 
   it('Curries the given method', () => {
     const method = fn((foo, bar) => {
@@ -138,18 +138,18 @@ describe('fn', () => {
     ])
   })
 
-  // it('throws an Exception when executed with no arguments', async () => {
-  //   const foo = fn((num) => num)
-  //   try {
-  //     foo()
-  //   } catch (error) {
-  //     expect(error).toMatchObject({
-  //       code: 'Expected:Arguments:not.toBeEmpty'
-  //     })
-  //     return
-  //   }
-  //   throw new Error('Did not throw')
-  // })
+  it('throws an Exception when executed with no arguments', async () => {
+    const foo = fn((num) => num)
+    try {
+      foo()
+    } catch (error) {
+      expect(error).toMatchObject({
+        type: 'Expected:Arguments:not.toBeEmpty'
+      })
+      return
+    }
+    throw new Error('Did not throw')
+  })
 
   it('throws an Exception when executed with no arguments and function is last in stack', async () => {
     const foo = fn((num) => num)

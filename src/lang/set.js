@@ -12,80 +12,42 @@ import defn from './defn'
 import get from './get'
 import setIndex from './setIndex'
 import setKey from './setKey'
-import setProp from './setProp'
+import setProperty from './setProperty'
 
-import objectSetProperty from './util/objectSetProperty'
-
-// const baseSet = (selector, value, collection) => {
-//   if (
-//     collection != null &&
-//     isFunction(collection.set) &&
-//     !isMap(collection) &&
-//     !isWeakMap(collection)
-//   ) {
-//     return collection.set(selector, value)
-//   }
-//   return baseAssoc(selector, value, collection)
-// }
-
-// const set = curry((selector, value, collection) =>
-//   allWith(
-//     ([resolvedSelector, resolvedCollection]) =>
-//       baseSet(resolvedSelector, value, resolvedCollection),
-//     [selector, collection]
-//   )
-// )
-
-/**
- * Makes a shallow clone of an object, setting or overriding the specified property with the given value. Note that this copies and flattens prototype properties onto the new object as well. All non-primitive properties are copied by reference.
- * @function
- * @since v0.1.0
- * @category data
- * @sig String -> a -> {k: v} -> {k: v}
- * @param {Array | String | Function} selector The property path to set or functional selector
- * @param {*} value The new value
- * @param {*} collection The collection to clone and assign the new value
- * @returns {*} A new collection equivalent to the original except for the changed selector path.
- * @example
- *
- * set('c', 3, {a: 1, b: 2})          //=> {a: 1, b: 2, c: 3}
- * set('c.d', 3, {a: 1, b: 2})        //=> {a: 1, b: 2, c: { d: 3 }}
- * set([ 'c', 'd' ], 3, {a: 1, b: 2}) //=> {a: 1, b: 2, c: { d: 3 }}
- */
 const set = defn(
   'lang.set',
-  'Makes a shallow clone of an object, setting or overriding the specified property with the given value. Note that this copies and flattens prototype properties onto the new object as well. All non-primitive properties are copied by reference.',
+  {
+    description:
+      'Makes a shallow clone of an object, setting or overriding the specified property with the given value. Note that this copies and flattens prototype properties onto the new object as well. All non-primitive properties are copied by reference.',
+    since: 'v0.2.0'
+  },
   {
     definitions: [
       [Path, Any, Any, () => Any],
-      (path, any, value) => anySetPathWith(any, path, value, contagion, get, set),
+      (path, any, value) =>
+        anySetPathWith(any, path, value, contagion, get, set),
 
       [Any, Path, Any, () => Any],
-      (any, path, value) => anySetPathWith(any, path, value, contagion, get, set),
+      (any, path, value) =>
+        anySetPathWith(any, path, value, contagion, get, set),
 
       [Index, Any, Indexed, () => Indexed],
       (index, value, indexed) => setIndex(indexed, index, value),
 
       [Indexed, Index, Any, () => Indexed],
-      setIndex,
+      (indexed, index, value) => setIndex(indexed, index, value),
 
-      [Key, Any, Map, () => Map],
-      (key, value, map) => mapSetKey(map, key, value),
+      [Key, Any, Keyed, () => Keyed],
+      (key, value, keyed) => setKey(keyed, key, value),
 
-      [Map, Key, Any, () => Map],
-      (map, key, value) => mapSetKey(map, key, value),
+      [Keyed, Key, Any, () => Keyed],
+      setKey,
 
-      [Key, Any, ImmutableMap, () => ImmutableMap],
-      (key, value, immutableMap) => immutableMap.set(key, value),
+      [Property, Any, Propertied, () => Propertied],
+      (property, value, propertied) => setProperty(propertied, property, value),
 
-      [ImmutableMap, Key, Any, () => ImmutableMap],
-      (immutableMap, key, value) => immutableMap.set(key, value),
-
-      [Property, Any, Object, () => Object],
-      (property, value, object) => objectSetProperty(object, property, value),
-
-      [Object, Property, Any, () => Object],
-      (object, property, value) => objectSetProperty(object, property, value)
+      [Propertied, Property, Any, () => Propertied],
+      setProperty
     ]
     // // TODO BRN: We may not want to resolve the value that is being set. This
     // would enable users to build lists of promises for use with Promise.all.

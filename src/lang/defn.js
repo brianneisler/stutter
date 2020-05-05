@@ -27,7 +27,10 @@ const defn = def(
         // NOTE BRN: The protocol multi function needs to come first in order for
         // protocols to be checked before the base level functions are checked.
         fn({
-          definitions: [buildMultiFn(protocolNameToDispatcher(name)), ...definitions],
+          definitions: [
+            buildMultiFn(protocolNameToDispatcher(name)),
+            ...definitions
+          ],
           options
         })
       ),
@@ -40,13 +43,25 @@ const defn = def(
         // NOTE BRN: The protocol multi function needs to come first in order for
         // protocols to be checked before the base level functions are checked.
         fn({
-          definitions: [buildMultiFn(protocolNameToDispatcher(name)), ...definitions],
+          definitions: [
+            buildMultiFn(protocolNameToDispatcher(name)),
+            ...definitions
+          ],
           options
         })
       ),
 
+    [String, MetaObject, Any],
+    (name, metaObject, ...definitions) =>
+      def(
+        name,
+        metaObject,
+        fn(buildMultiFn(protocolNameToDispatcher(name)), ...definitions)
+      ),
+
     [String, MetaObject],
-    (name, metaObject) => def(name, metaObject, buildMultiFn(protocolNameToDispatcher(name))),
+    (name, metaObject) =>
+      def(name, metaObject, buildMultiFn(protocolNameToDispatcher(name))),
 
     [String, DefinitionsObject],
     (name, definitionsObject) => defn(name, '', definitionsObject),

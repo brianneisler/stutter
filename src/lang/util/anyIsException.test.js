@@ -6,7 +6,7 @@ import arrayDifference from './arrayDifference'
 
 describe('anyIsException', () => {
   test('returns true for an Exception', () => {
-    const source = function() {}
+    const source = function () {}
     const target = {
       index: 0,
       type: 'Argument',
@@ -17,7 +17,7 @@ describe('anyIsException', () => {
       exceptionToError: () => {},
       expectation: 'foo'
     })
-    expect(anyIsException(new Exception(source, target, expected))).toBe(true)
+    expect(anyIsException(new Exception({ expected, source, target }))).toBe(true)
   })
 
   test('returns false for all other values', () => {

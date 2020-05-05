@@ -8,21 +8,21 @@ describe('functionTypeCheck', () => {
     const func = functionTypeCheck((arg1) => arg1, {
       parameters: [new Parameter('arg1', Number)]
     })
-    expect(() => func('foo')).toThrowMatchingObject({ code: 'Expected:Argument:toMatchParameter' })
+    expect(() => func('foo')).toThrowMatchingObject({ type: 'Expected:Argument:toMatchParameter' })
   })
 
   test('throws an Exception when there are not enough args', () => {
     const func = functionTypeCheck((arg1) => arg1, {
       parameters: [new Parameter('arg1', Number)]
     })
-    expect(() => func()).toThrowMatchingObject({ code: 'Expected:Arguments:toBeOfMinLength' })
+    expect(() => func()).toThrowMatchingObject({ type: 'Expected:Arguments:toBeOfMinLength' })
   })
 
   test('throws an Exception when return type does not match returned value', () => {
     const func = functionTypeCheck(() => 'foo', {
       returns: Number
     })
-    expect(() => func()).toThrowMatchingObject({ code: 'Expected:Returned:toMatchReturns' })
+    expect(() => func()).toThrowMatchingObject({ type: 'Expected:Returned:toMatchReturns' })
   })
 
   test('throws an Exception when return type does not match in an async function', async () => {
@@ -30,7 +30,7 @@ describe('functionTypeCheck', () => {
       resolve: true,
       returns: Number
     })
-    await expect(func()).rejects.toMatchObject({ code: 'Expected:Returned:toMatchReturns' })
+    await expect(func()).rejects.toMatchObject({ type: 'Expected:Returned:toMatchReturns' })
   })
 
   test('throws an Exception when return type does not match in a generator function', () => {
@@ -46,7 +46,7 @@ describe('functionTypeCheck', () => {
     expect(() => {
       const generator = func()
       generator.next()
-    }).toThrowMatchingObject({ code: 'Expected:Returned:toMatchReturns' })
+    }).toThrowMatchingObject({ type: 'Expected:Returned:toMatchReturns' })
   })
 
   test('throws an Exception when arg does not match Self type', () => {
@@ -54,7 +54,7 @@ describe('functionTypeCheck', () => {
       parameters: [new Parameter('arg1', Self)],
       self: Number
     })
-    expect(() => func('foo')).toThrowMatchingObject({ code: 'Expected:Argument:toMatchParameter' })
+    expect(() => func('foo')).toThrowMatchingObject({ type: 'Expected:Argument:toMatchParameter' })
   })
 
   test('does not throw when types match correctly', () => {

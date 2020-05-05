@@ -2,6 +2,7 @@ import SYMBOL_ITERATOR from '../constants/SYMBOL_ITERATOR'
 import anyIsArray from './anyIsArray'
 import anyIsFn from './anyIsFn'
 import anyIsFunction from './anyIsFunction'
+import anyLog from './anyLog'
 import definitionToFn from './definitionToFn'
 import fnCastWithDefinition from './fnCastWithDefinition'
 
@@ -39,7 +40,9 @@ import fnCastWithDefinition from './fnCastWithDefinition'
  */
 const definitionsToFns = (definitions) => {
   if (!anyIsArray(definitions) || definitions.length === 0) {
-    throw new TypeError('definitionsToFns method expects an Array containing at least one function')
+    throw new TypeError(
+      'definitionsToFns method expects an Array containing at least one function'
+    )
   }
   const iter = definitions[SYMBOL_ITERATOR]()
   const fns = []
@@ -60,8 +63,15 @@ const definitionsToFns = (definitions) => {
     }
     if (anyIsFn(next.value)) {
       let fn = next.value
+
       if (definition) {
+        // anyLog(definitions).push()
+        // throw new Error('break')
+        // console.log('fn precast')
+        // anyLog(fn).push()
         fn = fnCastWithDefinition(fn, definition)
+        // console.log('fn postcast')
+        // anyLog(fn).push()
       }
       fns.push(fn)
     } else if (anyIsFunction(next.value)) {

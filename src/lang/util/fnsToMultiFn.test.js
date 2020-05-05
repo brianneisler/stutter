@@ -103,7 +103,7 @@ describe('fnsToMultiFn', () => {
       [String, String]
     )
     const multiFn = fnsToMultiFn([fn1, fn2, fn3])
-    const result = multiFn.dispatcher.dispatch(['foo', 'bar'], { multi: true })
+    const result = multiFn.dispatch(['foo', 'bar'], { multi: true })
     expect(result).toEqual([
       {
         delta: 0,

@@ -11,7 +11,11 @@ import Seq from './js/Seq'
  * @param {Function} func The filter function
  * @returns {Seq<Any>}
  */
-const namespacesFilter = (namespaces, func) =>
-  namespaces.reduce((results, namespace) => results.concat(namespace.filter(func)), Seq([]))
+const namespacesFilter = (namespaces, func) => {
+  return namespaces.reduce(
+    (results, namespace) => results.concat(namespace.filter(func)),
+    Seq([])
+  )
+}
 
 export default namespacesFilter

@@ -13,24 +13,27 @@ import _ImmutableMap from './util/js/ImmutableMap'
 import _Map from './util/js/Map'
 import defn from './defn'
 
+// TODO BRN: Figure out how to turn this into a protocol (implementation will be
+// similar to type conversion)
 const contagion = defn(
   'lang.contagion',
   {
-    description: '',
+    description:
+      'Generates a new instance based on the given instance type and a "sample" type. The combination of the instance type and sample type will determine the new type of instance to return. This is primarily used by deep operations such as set and update where the new type ',
     since: 'v0.2.0'
   },
 
-  [Array, Index, Index, () => Array],
+  [Array, Index, () => Array],
   // eslint-disable-next-line no-unused-vars
-  (array, index, sample) => [],
+  (array, sample) => [],
 
   [Array, Property, () => PlainObject],
   // eslint-disable-next-line no-unused-vars
-  (array, property) => ({}),
+  (array, sample) => ({}),
 
   [Array, Key, () => Map],
   // eslint-disable-next-line no-unused-vars
-  (array, key) => new Map(),
+  (array, sample) => new Map(),
 
   [Array, () => Array],
   // eslint-disable-next-line no-unused-vars
@@ -38,19 +41,31 @@ const contagion = defn(
 
   [ImmutableList, Index, () => ImmutableList],
   // eslint-disable-next-line no-unused-vars
-  (immutableList, index) => new _ImmutableList([]),
+  (immutableList, sample) => new _ImmutableList(),
 
   [ImmutableList, Key, () => ImmutableMap],
   // eslint-disable-next-line no-unused-vars
-  (immutableList, key) => new _ImmutableMap(),
+  (immutableList, sample) => new _ImmutableMap(),
+
+  [ImmutableList, Property, () => PlainObject],
+  // eslint-disable-next-line no-unused-vars
+  (immutableList, sample) => ({}),
 
   [ImmutableList, () => ImmutableList],
   // eslint-disable-next-line no-unused-vars
-  (immutableList) => new _ImmutableList([]),
+  (immutableList) => new _ImmutableList(),
 
   [ImmutableMap, Index, () => ImmutableList],
   // eslint-disable-next-line no-unused-vars
-  (immutableMap, index) => new _ImmutableList([]),
+  (immutableMap, sample) => new _ImmutableList(),
+
+  [ImmutableMap, Key, () => ImmutableMap],
+  // eslint-disable-next-line no-unused-vars
+  (immutableMap, sample) => new _ImmutableMap(),
+
+  [ImmutableMap, Property, () => PlainObject],
+  // eslint-disable-next-line no-unused-vars
+  (immutableMap, sample) => ({}),
 
   [ImmutableMap, () => ImmutableMap],
   // eslint-disable-next-line no-unused-vars
@@ -58,11 +73,15 @@ const contagion = defn(
 
   [Map, Index, () => Array],
   // eslint-disable-next-line no-unused-vars
-  (map, index) => [],
+  (map, sample) => [],
+
+  [Map, Property, () => PlainObject],
+  // eslint-disable-next-line no-unused-vars
+  (map, sample) => ({}),
 
   [Map, Key, () => Map],
   // eslint-disable-next-line no-unused-vars
-  (map, key) => new _Map(),
+  (map, sample) => new _Map(),
 
   [Map, () => Map],
   // eslint-disable-next-line no-unused-vars
@@ -70,11 +89,15 @@ const contagion = defn(
 
   [(Object, Index, () => Array)],
   // eslint-disable-next-line no-unused-vars
-  (object, index) => [],
+  (object, sample) => [],
 
   [(Object, Property, () => PlainObject)],
   // eslint-disable-next-line no-unused-vars
-  (object, property) => ({}),
+  (object, sample) => ({}),
+
+  [(Object, Key, () => Map)],
+  // eslint-disable-next-line no-unused-vars
+  (object, sample) => new _Map(),
 
   [(Object, () => PlainObject)],
   // eslint-disable-next-line no-unused-vars

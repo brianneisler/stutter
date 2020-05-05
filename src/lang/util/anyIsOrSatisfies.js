@@ -25,7 +25,7 @@ const anyIsOrSatisfies = (any, typeOrProtocol, meta) => {
   if (anyIsType(typeOrProtocol)) {
     return anyIs(any, typeOrProtocol, meta)
   } else if (anyIsProtocol(typeOrProtocol)) {
-    return anySatisfies(any, typeOrProtocol, meta)
+    return anySatisfies(any, typeOrProtocol)
   }
   throw new Error(
     `typeOrProtocol must be either a Type or a Protocol. Instead was given ${typeOrProtocol}`

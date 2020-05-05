@@ -39,7 +39,7 @@ import functionDefineLength from './functionDefineLength'
  */
 const functionMemoizeWith = (func, cacheFunc = cacheChain) => {
   const cache = new WeakMap()
-  return functionDefineLength(function() {
+  return functionDefineLength(function () {
     const key = cacheFunc.apply(this, arguments)
     if (!cache.has(key)) {
       cache.set(key, func.apply(this, arguments))
