@@ -1,5 +1,5 @@
+import { FN } from '../constants/Symbol'
 import Any from '../types/Any'
-import SYMBOL_FN from '../constants/SYMBOL_FN'
 import definitionToFn from './definitionToFn'
 import fnGetMeta from './fnGetMeta'
 
@@ -14,7 +14,7 @@ describe('fnGetMeta', () => {
 
   test('returns true for an Fn instance', () => {
     const fn = definitionToFn(() => {})
-    expect(fnGetMeta(fn[SYMBOL_FN])).toEqual({
+    expect(fnGetMeta(fn[FN])).toEqual({
       parameters: [],
       returns: Any
     })

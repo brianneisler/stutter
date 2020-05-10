@@ -1,4 +1,4 @@
-import { SYMBOL_ITERATOR } from './constants'
+import { ITERATOR } from './constants/Symbol'
 import arrayLikeToIterator from './util/arrayLikeToIterator'
 import isIndexedIterator from './isIndexedIterator'
 import objectToIterator from './util/objectToIterator'
@@ -21,21 +21,21 @@ describe('isIndexedIterator', () => {
 
   test('returns false for native array iterator', () => {
     const array = []
-    expect(isIndexedIterator(array[SYMBOL_ITERATOR]())).toBe(false)
+    expect(isIndexedIterator(array[ITERATOR]())).toBe(false)
   })
 
   test('returns false for native string iterator', () => {
     const string = 'abc'
-    expect(isIndexedIterator(string[SYMBOL_ITERATOR]())).toBe(false)
+    expect(isIndexedIterator(string[ITERATOR]())).toBe(false)
   })
 
   test('returns false for generators', () => {
-    expect(isIndexedIterator((function*() {})())).toBe(false)
+    expect(isIndexedIterator((function* () {})())).toBe(false)
   })
 
   test('returns false for native Set iterator', () => {
     const set = new Set()
-    expect(isIndexedIterator(set[SYMBOL_ITERATOR]())).toBe(false)
+    expect(isIndexedIterator(set[ITERATOR]())).toBe(false)
   })
 
   test('returns true false for objectToIterator', () => {
@@ -56,8 +56,8 @@ describe('isIndexedIterator', () => {
     expect(isIndexedIterator(/abc/)).toBe(false)
     expect(isIndexedIterator(async () => {})).toBe(false)
     expect(isIndexedIterator(() => {})).toBe(false)
-    expect(isIndexedIterator(function() {})).toBe(false)
-    expect(isIndexedIterator(function*() {})).toBe(false)
+    expect(isIndexedIterator(function () {})).toBe(false)
+    expect(isIndexedIterator(function* () {})).toBe(false)
     expect(isIndexedIterator(new ArrayBuffer(2))).toBe(false)
     expect(isIndexedIterator(new Boolean(false))).toBe(false)
     expect(isIndexedIterator(new Boolean(true))).toBe(false)

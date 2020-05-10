@@ -1,9 +1,9 @@
-import { SYMBOL_TO_STRING_TAG } from '../constants'
+import { TO_STRING_TAG } from '../constants/Symbol'
 import objectForEach from './objectForEach'
 
 const loggerLogObject = (logger, object) => {
-  if (object[SYMBOL_TO_STRING_TAG]) {
-    logger.write(`${object[SYMBOL_TO_STRING_TAG]} {`)
+  if (object[TO_STRING_TAG]) {
+    logger.write(`${object[TO_STRING_TAG]} {`)
   } else {
     logger.write('Object {')
   }

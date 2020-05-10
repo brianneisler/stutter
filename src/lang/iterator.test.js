@@ -1,11 +1,22 @@
-import SYMBOL_ITERATOR from './constants/SYMBOL_ITERATOR'
+import { ITERATOR } from './constants/Symbol'
 import arrayLikeToIterator from './util/arrayLikeToIterator'
 import iterator from './iterator'
 import objectToIterator from './util/objectToIterator'
 
 describe('iterator', () => {
   test('throws error for non objects', () => {
-    const valuesToTest = [null, undefined, false, true, 0, -1, 1, NaN, Infinity, -Infinity]
+    const valuesToTest = [
+      null,
+      undefined,
+      false,
+      true,
+      0,
+      -1,
+      1,
+      NaN,
+      Infinity,
+      -Infinity
+    ]
     valuesToTest.forEach((value) => {
       expect(() => {
         iterator(value)
@@ -157,7 +168,7 @@ describe('iterator', () => {
       next: () => {}
     }
     const iterable = {
-      [SYMBOL_ITERATOR]: () => iter
+      [ITERATOR]: () => iter
     }
     const result = iterator(iterable)
     expect(result).toEqual({

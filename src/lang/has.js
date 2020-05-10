@@ -18,7 +18,8 @@ import hasProperty from './hasProperty'
 const has = defn(
   'lang.has',
   {
-    description: 'Returns whether or not the value contains the given selector.',
+    description:
+      'Returns whether or not the value contains the given selector.',
     since: 'v0.2.0'
   },
 
@@ -32,19 +33,19 @@ const has = defn(
   (index, indexed) => hasIndex(indexed, index),
 
   [Indexed, Index, () => Boolean],
-  hasIndex,
+  (indexed, index) => hasIndex(indexed, index),
 
   [Key, Keyed, () => Any],
   (key, keyed) => hasKey(keyed, key),
 
   [Keyed, Key, () => Any],
-  hasKey,
+  (keyed, key) => hasKey(keyed, key),
 
   [Property, Propertied, () => Any],
   (property, propertied) => hasProperty(propertied, property),
 
   [Propertied, Property, () => Any],
-  hasProperty,
+  (propertied, property) => hasProperty(propertied, property),
 
   [Function, Any, () => Any],
   (func, any) => func(any),

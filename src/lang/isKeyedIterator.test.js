@@ -1,6 +1,6 @@
-import { SYMBOL_ITERATOR } from '../constants'
+import { ITERATOR } from './constants/Symbol'
 import isKeyedIterator from './isKeyedIterator'
-import objectToIterator from './objectToIterator'
+import objectToIterator from './util/objectToIterator'
 
 describe('isKeyedIterator', () => {
   test('returns true for objectToIterator', () => {
@@ -20,21 +20,21 @@ describe('isKeyedIterator', () => {
 
   test('returns false for native array iterator', () => {
     const array = []
-    expect(isKeyedIterator(array[SYMBOL_ITERATOR]())).toBe(false)
+    expect(isKeyedIterator(array[ITERATOR]())).toBe(false)
   })
 
   test('returns false for native string iterator', () => {
     const string = 'abc'
-    expect(isKeyedIterator(string[SYMBOL_ITERATOR]())).toBe(false)
+    expect(isKeyedIterator(string[ITERATOR]())).toBe(false)
   })
 
   test('returns false for generators', () => {
-    expect(isKeyedIterator((function*() {})())).toBe(false)
+    expect(isKeyedIterator((function* () {})())).toBe(false)
   })
 
   test('returns false for native Set iterator', () => {
     const set = new Set()
-    expect(isKeyedIterator(set[SYMBOL_ITERATOR]())).toBe(false)
+    expect(isKeyedIterator(set[ITERATOR]())).toBe(false)
   })
 
   test('returns false for all other values', () => {
@@ -51,8 +51,8 @@ describe('isKeyedIterator', () => {
     expect(isKeyedIterator(/abc/)).toBe(false)
     expect(isKeyedIterator(async () => {})).toBe(false)
     expect(isKeyedIterator(() => {})).toBe(false)
-    expect(isKeyedIterator(function() {})).toBe(false)
-    expect(isKeyedIterator(function*() {})).toBe(false)
+    expect(isKeyedIterator(function () {})).toBe(false)
+    expect(isKeyedIterator(function* () {})).toBe(false)
     expect(isKeyedIterator(new ArrayBuffer(2))).toBe(false)
     expect(isKeyedIterator(new Boolean(false))).toBe(false)
     expect(isKeyedIterator(new Boolean(true))).toBe(false)

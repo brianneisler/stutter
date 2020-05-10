@@ -1,7 +1,7 @@
+import { FN } from '../constants/Symbol'
 import FUNCTIONAL_PLACEHOLDER from '../constants/FUNCTIONAL_PLACEHOLDER'
 import Number from '../types/Number'
 import Parameter from './js/Parameter'
-import SYMBOL_FN from '../constants/SYMBOL_FN'
 import Self from '../types/Self'
 import String from '../types/String'
 import argumentsMatchToFnParameters from './argumentsMatchToFnParameters'
@@ -16,7 +16,9 @@ describe('argumentsMatchToFnParameters', () => {
       },
       [Number, String]
     )
-    const result = argumentsMatchToFnParameters([123, 'foo'], fn, { partial: false })
+    const result = argumentsMatchToFnParameters([123, 'foo'], fn, {
+      partial: false
+    })
     expect(result).toEqual({
       delta: 0,
       exact: true,
@@ -32,7 +34,9 @@ describe('argumentsMatchToFnParameters', () => {
       },
       [Number, String]
     )
-    const result = argumentsMatchToFnParameters(['abc', 'foo'], fn, { partial: false })
+    const result = argumentsMatchToFnParameters(['abc', 'foo'], fn, {
+      partial: false
+    })
     expect(result).toBe(false)
   })
 
@@ -81,7 +85,9 @@ describe('argumentsMatchToFnParameters', () => {
       },
       [Number, Number]
     )
-    const result = argumentsMatchToFnParameters([123, 456], fn, { partial: true })
+    const result = argumentsMatchToFnParameters([123, 456], fn, {
+      partial: true
+    })
     expect(result.delta).toBe(0)
   })
 
@@ -92,7 +98,9 @@ describe('argumentsMatchToFnParameters', () => {
       },
       [Number, Number]
     )
-    const result = argumentsMatchToFnParameters([123, 456, 789], fn, { partial: true })
+    const result = argumentsMatchToFnParameters([123, 456, 789], fn, {
+      partial: true
+    })
     expect(result.delta).toBe(1)
   })
 
@@ -142,14 +150,17 @@ describe('argumentsMatchToFnParameters', () => {
     )
     fn = fn.update({ curry: true })
     fn = fn(123)
-    expect(fn[SYMBOL_FN].meta).toEqual({
+    expect(fn[FN].meta).toEqual({
       curried: {
         parameters: [new Parameter('num2', Number)],
         placeholders: [],
         received: [123]
       },
       curry: true,
-      parameters: [new Parameter('num1', Number), new Parameter('num2', Number)],
+      parameters: [
+        new Parameter('num1', Number),
+        new Parameter('num2', Number)
+      ],
       returns: Number
     })
 

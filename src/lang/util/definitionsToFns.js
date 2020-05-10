@@ -1,4 +1,4 @@
-import SYMBOL_ITERATOR from '../constants/SYMBOL_ITERATOR'
+import { ITERATOR } from '../constants/Symbol'
 import anyIsArray from './anyIsArray'
 import anyIsFn from './anyIsFn'
 import anyIsFunction from './anyIsFunction'
@@ -44,7 +44,7 @@ const definitionsToFns = (definitions) => {
       'definitionsToFns method expects an Array containing at least one function'
     )
   }
-  const iter = definitions[SYMBOL_ITERATOR]()
+  const iter = definitions[ITERATOR]()
   const fns = []
   let next = iter.next()
   let func

@@ -1,8 +1,8 @@
-import SYMBOL_FN from '../constants/SYMBOL_FN'
+import { FN } from '../constants/Symbol'
 
 const fnGetMeta = (fn) => {
-  if (fn[SYMBOL_FN]) {
-    fn = fn[SYMBOL_FN]
+  if (fn[FN]) {
+    fn = fn[FN]
   }
   return fn.meta
 }

@@ -11,12 +11,16 @@ describe('shallowEquals', () => {
   })
 
   test('shallowEquals returns true if arguments fields are equal', () => {
-    expect(shallowEquals({ a: 1, b: 2, c: undefined }, { a: 1, b: 2, c: undefined })).toBe(true)
+    expect(
+      shallowEquals({ a: 1, b: 2, c: undefined }, { a: 1, b: 2, c: undefined })
+    ).toBe(true)
 
     expect(shallowEquals({ a: 1, b: 2, c: 3 }, { a: 1, b: 2, c: 3 })).toBe(true)
 
     const object = {}
-    expect(shallowEquals({ a: 1, b: 2, c: object }, { a: 1, b: 2, c: object })).toBe(true)
+    expect(
+      shallowEquals({ a: 1, b: 2, c: object }, { a: 1, b: 2, c: object })
+    ).toBe(true)
   })
 
   test('shallowEquals returns false if either argument is null or undefined', () => {
@@ -33,6 +37,8 @@ describe('shallowEquals', () => {
   })
 
   test('shallowEquals returns false if arguments have different keys', () => {
-    expect(shallowEquals({ a: 1, b: 2, c: undefined }, { a: 1, bb: 2, c: undefined })).toBe(false)
+    expect(
+      shallowEquals({ a: 1, b: 2, c: undefined }, { a: 1, bb: 2, c: undefined })
+    ).toBe(false)
   })
 })

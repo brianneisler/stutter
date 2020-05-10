@@ -1,5 +1,5 @@
+import { FN } from '../constants/Symbol'
 import Fn from './js/Fn'
-import SYMBOL_FN from '../constants/SYMBOL_FN'
 import anyIsObject from './anyIsObject'
 
 /**
@@ -26,8 +26,8 @@ const anyIsFn = (any) => {
   if (!anyIsObject(any)) {
     return false
   }
-  if (any[SYMBOL_FN]) {
-    return any[SYMBOL_FN] instanceof Fn
+  if (any[FN]) {
+    return any[FN] instanceof Fn
   }
   return any instanceof Fn
 }

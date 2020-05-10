@@ -32,19 +32,19 @@ const _delete = defn(
   (index, indexed) => deleteIndex(indexed, index),
 
   [Indexed, Index, () => Indexed],
-  deleteIndex,
+  (indexed, index) => deleteIndex(indexed, index),
 
   [Key, Keyed, () => Keyed],
   (key, keyed) => deleteKey(keyed, key),
 
   [Keyed, Key, () => Keyed],
-  deleteKey,
+  (keyed, key) => deleteKey(keyed, key),
 
   [Property, Propertied, () => Propertied],
   (property, propertied) => deleteProperty(propertied, property),
 
   [Propertied, Property, () => Propertied],
-  deleteProperty
+  (propertied, property) => deleteProperty(propertied, property)
 )
 
 export default _delete

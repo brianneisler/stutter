@@ -1,4 +1,4 @@
-import { SYMBOL_ITERATOR } from '../constants'
+import { ITERATOR } from '../constants/Symbol'
 import anyIsArguments from './anyIsArguments'
 import anyIsArray from './anyIsArray'
 import anyIsArrayLike from './anyIsArrayLike'
@@ -61,10 +61,11 @@ const anyToArray = (any) => {
     return [any]
   }
   if (anyIsIterable(any)) {
-    return iteratorToArray(any[SYMBOL_ITERATOR]())
+    return iteratorToArray(any[ITERATOR]())
   }
   const tag = anyToStringTag(any)
-  const func = tag == 'Map' ? mapToArray : tag == 'Set' ? setToArray : objectValues
+  const func =
+    tag == 'Map' ? mapToArray : tag == 'Set' ? setToArray : objectValues
 
   return func(any)
 }

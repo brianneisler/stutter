@@ -1,4 +1,4 @@
-import SYMBOL_FN from '../constants/SYMBOL_FN'
+import { FN } from '../constants/Symbol'
 import objectDefineProperty from './objectDefineProperty'
 
 /**
@@ -20,7 +20,7 @@ import objectDefineProperty from './objectDefineProperty'
  * //=> 2
  */
 const functionDefineSymbolFn = (func, fn) => {
-  objectDefineProperty(func, SYMBOL_FN, {
+  objectDefineProperty(func, FN, {
     configurable: true,
     value: fn
   })

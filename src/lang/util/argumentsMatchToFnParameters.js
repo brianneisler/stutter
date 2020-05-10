@@ -1,5 +1,6 @@
 import anyIsPlaceholder from './anyIsPlaceholder'
 import anyMatchesParameter from './anyMatchesParameter'
+import buildException from './buildException'
 import fnGetMeta from './fnGetMeta'
 
 const argumentsMatchToFnParameters = (args, fn, options) => {
@@ -7,7 +8,7 @@ const argumentsMatchToFnParameters = (args, fn, options) => {
   const { curried } = meta
   const parameters = curried ? curried.parameters : meta.parameters
   if (!parameters) {
-    throw new Error(`parameter 'fn' must be a parameterized Fn instance`)
+    throw buildException(fn).expected.fn().toHaveParameters()
   }
   let { length } = parameters
   let partial = false

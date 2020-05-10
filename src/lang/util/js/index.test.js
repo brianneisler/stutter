@@ -6,6 +6,7 @@ describe('lang.util.js index', () => {
       ArrayBuffer: expect.any(Function),
       Boolean: expect.any(Function),
       Buffer: expect.any(Function),
+      Context: expect.any(Function),
       Date: expect.any(Function),
       Error: expect.any(Function),
       Exception: expect.any(Function),

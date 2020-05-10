@@ -31,19 +31,19 @@ const get = defn(
   (index, indexed) => getIndex(indexed, index),
 
   [Indexed, Index, () => Any],
-  getIndex,
+  (indexed, index) => getIndex(indexed, index),
 
   [Key, Keyed, () => Any],
   (key, keyed) => getKey(keyed, key),
 
   [Keyed, Key, () => Any],
-  getKey,
+  (keyed, key) => getKey(keyed, key),
 
   [Property, Propertied, () => Any],
   (property, propertied) => getProperty(propertied, property),
 
   [Propertied, Property, () => Any],
-  getProperty,
+  (propertied, property) => getProperty(propertied, property),
 
   [Function, Any, () => Any],
   (func, any) => func(any),

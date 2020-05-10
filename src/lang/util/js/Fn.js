@@ -1,9 +1,11 @@
-import ImmutableStack from './ImmutableStack'
-import SYMBOL_FN from '../../constants/SYMBOL_FN'
-import SYMBOL_META from '../../constants/SYMBOL_META'
-import SYMBOL_TO_STRING_TAG from '../../constants/SYMBOL_TO_STRING_TAG'
+import { FN, META, TO_STRING_TAG } from '../../constants/Symbol'
+import { v4 as uuid } from 'uuid'
 import anyIsNumber from '../anyIsNumber'
 import anyToName from '../anyToName'
+import buildCallstack from '../buildCallstack'
+import createContext from '../createContext'
+import createJSCallee from '../createJSCallee'
+import fnToSignatureString from '../fnToSignatureString'
 import functionAry from '../functionAry'
 import functionComplement from '../functionComplement'
 import functionCurry from '../functionCurry'
@@ -14,10 +16,11 @@ import functionMultiDispatch from '../functionMultiDispatch'
 import functionResolve from '../functionResolve'
 import functionTypeCheck from '../functionTypeCheck'
 import objectDefineProperty from '../objectDefineProperty'
+import sourceToString from '../sourceToString'
 
 const buildFnCaller = (fn) =>
   function () {
-    return fn.apply(this, arguments)
+    return fn.apply(createContext({}), this, arguments)
   }
 
 const buildFnHandler = function (fn) {
@@ -78,16 +81,16 @@ const buildFnHandler = function (fn) {
   return handler
 }
 
-const functionDispatch = function (args, options, stack) {
-  return this[SYMBOL_FN].dispatch(args, options, stack)
+const functionDispatch = function (context, args, options) {
+  return this[FN].dispatch(context, args, options)
 }
 
 const functionLog = function (logger) {
-  return this[SYMBOL_FN].log(logger)
+  return this[FN].log(logger)
 }
 
 const functionUpdate = function (updates) {
-  return this[SYMBOL_FN].update(updates)
+  return this[FN].update(updates)
 }
 
 const fnCallerDefineProps = (caller, fn) => {
@@ -98,28 +101,28 @@ const fnCallerDefineProps = (caller, fn) => {
       value: parameters.length
     })
   }
-  objectDefineProperty(caller, SYMBOL_META, {
+  objectDefineProperty(caller, META, {
     configurable: true,
     get() {
-      return this[SYMBOL_FN].meta
+      return this[FN].meta
     }
   })
   objectDefineProperty(caller, 'dispatcher', {
     configurable: true,
     get() {
-      return this[SYMBOL_FN].meta.dispatcher
+      return this[FN].meta.dispatcher
     }
   })
   objectDefineProperty(caller, 'parameters', {
     configurable: true,
     get() {
-      return this[SYMBOL_FN].meta.parameters
+      return this[FN].meta.parameters
     }
   })
   objectDefineProperty(caller, 'returns', {
     configurable: true,
     get() {
-      return this[SYMBOL_FN].meta.returns
+      return this[FN].meta.returns
     }
   })
   objectDefineProperty(caller, 'dispatch', {
@@ -185,16 +188,22 @@ class Fn {
   }
 
   constructor(func, meta) {
+    this.id = uuid()
+    objectDefineProperty(func, 'name', {
+      configurable: true,
+      value: `Fn:${this.id}`
+    })
+    // console.log('func.name:', func)
     this.func = func
     this.meta = meta
     this.handler = buildFnHandler(this)
   }
 
-  get [SYMBOL_META]() {
+  get [META]() {
     return this.meta
   }
 
-  get [SYMBOL_TO_STRING_TAG]() {
+  get [TO_STRING_TAG]() {
     return 'Fn'
   }
 
@@ -214,20 +223,59 @@ class Fn {
     return this.meta.returns
   }
 
-  apply(context, args) {
-    return this.handler.apply(context, args)
+  apply(context, self, args) {
+    let { callee } = context
+    try {
+      return this.handler.apply(self, args)
+    } catch (error) {
+      const jsCallee = createJSCallee()
+      if (!callee) {
+        callee = jsCallee
+      }
+      console.log(
+        `Error occurred while ${sourceToString(
+          callee
+        )} was invoking ${fnToSignatureString(this)} at (${jsCallee.file}:${
+          jsCallee.lineNumber
+        }:${jsCallee.columnNumber})`
+      )
+      throw error
+    }
   }
 
-  call(context, ...args) {
-    return this.apply(context, args)
+  call(context, self, ...args) {
+    return this.apply(context, self, args)
   }
 
-  dispatch(args, options, stack = new ImmutableStack()) {
-    return this.dispatcher.dispatch(args, options, stack.push(this))
+  dispatch(context, args, options) {
+    const { callee } = context
+    try {
+      return this.dispatcher.dispatch(
+        context
+          .pushCallstack({
+            method: 'dispatch',
+            target: this
+          })
+          .setCallee(this),
+        args,
+        options
+      )
+    } catch (error) {
+      console.log(
+        `Error occurred while ${fnToSignatureString(
+          callee
+        )} was dispatching to ${fnToSignatureString(this)}`
+      )
+      throw error
+    }
   }
 
   log(logger) {
-    logger.log(`${this[SYMBOL_TO_STRING_TAG]}:${anyToName(this) ? anyToName(this) : 'anonymous'} {`)
+    logger.log(
+      `${this[TO_STRING_TAG]}:${
+        anyToName(this) ? anyToName(this) : 'anonymous'
+      } {`
+    )
     logger.indent()
     logger.write('meta:', false)
     logger.log(this.meta)

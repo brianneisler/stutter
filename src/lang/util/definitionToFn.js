@@ -23,7 +23,7 @@ import functionGetParameterNames from './functionGetParameterNames'
  * arrayWrap('foo')
  * // => [ 'foo' ]
  *
- * arrayWrap[SYMBOL_FN]
+ * arrayWrap[Symbol.FN]
  * // => Fn {
  * //   func: (foo) => [ foo ],
  * //   meta: {

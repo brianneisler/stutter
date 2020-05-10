@@ -1,6 +1,5 @@
+import { FN, META } from '../constants/Symbol'
 import Namespace from './js/Namespace'
-import SYMBOL_FN from '../constants/SYMBOL_FN'
-import SYMBOL_META from '../constants/SYMBOL_META'
 import anyIsObject from './anyIsObject'
 import anyIsString from './anyIsString'
 import objectDefineProperty from './objectDefineProperty'
@@ -25,8 +24,8 @@ import stringParseNames from './stringParseNames'
  */
 const defineAny = (name, meta, any) => {
   const { namespaceName, valueName } = stringParseNames(name)
-  if (any[SYMBOL_FN]) {
-    any[SYMBOL_FN].meta.name = valueName
+  if (any[FN]) {
+    any[FN].meta.name = valueName
   }
 
   if (anyIsString(meta)) {
@@ -43,7 +42,7 @@ const defineAny = (name, meta, any) => {
     }
   }
   if (anyIsObject(any)) {
-    objectDefineProperty(any, SYMBOL_META, {
+    objectDefineProperty(any, META, {
       value: meta
     })
   }

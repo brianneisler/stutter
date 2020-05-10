@@ -1,24 +1,24 @@
-import { SYMBOL_ITERATOR } from '../constants'
+import { ITERATOR } from './constants/Symbol'
 import isIterator from './isIterator'
 
 describe('isIterator', () => {
   test('returns true for array iterator', () => {
     const array = []
-    expect(isIterator(array[SYMBOL_ITERATOR]())).toBe(true)
+    expect(isIterator(array[ITERATOR]())).toBe(true)
   })
 
   test('returns true for string iterator', () => {
     const string = 'abc'
-    expect(isIterator(string[SYMBOL_ITERATOR]())).toBe(true)
+    expect(isIterator(string[ITERATOR]())).toBe(true)
   })
 
   test('returns true for generators', () => {
-    expect(isIterator((function*() {})())).toBe(true)
+    expect(isIterator((function* () {})())).toBe(true)
   })
 
   test('returns true for Set', () => {
     const set = new Set()
-    expect(isIterator(set[SYMBOL_ITERATOR]())).toBe(true)
+    expect(isIterator(set[ITERATOR]())).toBe(true)
   })
 
   test('returns true for object with next method', () => {
@@ -45,8 +45,8 @@ describe('isIterator', () => {
     expect(isIterator(/abc/)).toBe(false)
     expect(isIterator(async () => {})).toBe(false)
     expect(isIterator(() => {})).toBe(false)
-    expect(isIterator(function() {})).toBe(false)
-    expect(isIterator(function*() {})).toBe(false)
+    expect(isIterator(function () {})).toBe(false)
+    expect(isIterator(function* () {})).toBe(false)
     expect(isIterator(new ArrayBuffer(2))).toBe(false)
     expect(isIterator(new Boolean(false))).toBe(false)
     expect(isIterator(new Boolean(true))).toBe(false)

@@ -1,5 +1,5 @@
+import { TO_STRING_TAG } from '../../constants/Symbol'
 import ImmutableMap from './ImmutableMap'
-import SYMBOL_TO_STRING_TAG from '../../constants/SYMBOL_TO_STRING_TAG'
 
 /**
  * Note: This class is **immutable**
@@ -10,7 +10,7 @@ class Namespace {
     this.name = name
   }
 
-  get [SYMBOL_TO_STRING_TAG]() {
+  get [TO_STRING_TAG]() {
     return 'Namespace'
   }
 

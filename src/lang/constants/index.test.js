@@ -29,10 +29,12 @@ describe('constants index', () => {
       REGEX_STRING_VARIATION_SELECTORS_RANGE: expect.any(String),
       REGEX_UINT: expect.any(RegExp),
       REGEX_UNICODE: expect.any(RegExp),
-      SYMBOL_FN: expect.anything(),
-      SYMBOL_ITERATOR: expect.anything(),
-      SYMBOL_META: expect.anything(),
-      SYMBOL_TO_STRING_TAG: expect.anything()
+      Symbol: {
+        FN: expect.anything(),
+        ITERATOR: expect.anything(),
+        META: expect.anything(),
+        TO_STRING_TAG: expect.anything()
+      }
     })
   })
 })

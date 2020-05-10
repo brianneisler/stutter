@@ -1,4 +1,4 @@
-import { SYMBOL_ITERATOR, SYMBOL_TO_STRING_TAG } from '../../constants'
+import { ITERATOR, TO_STRING_TAG } from '../../constants/Symbol'
 import ImmutableMap from './ImmutableMap'
 import anyIsFunction from '../anyIsFunction'
 import anyIsObject from '../anyIsObject'
@@ -18,7 +18,7 @@ const buildProtocols = (type, definitions) => {
   let protocolsMap = new ImmutableMap()
 
   if (definitions) {
-    const iter = definitions[SYMBOL_ITERATOR]()
+    const iter = definitions[ITERATOR]()
 
     let next = iter.next()
     let protocol
@@ -36,7 +36,9 @@ const buildProtocols = (type, definitions) => {
       next = iter.next()
       if (anyIsObject(next.value)) {
         // Map over the object. For each Fn value, set the "self" meta value
-        implementation = objectMap(next.value, (fn) => fn.update({ self: type }))
+        implementation = objectMap(next.value, (fn) =>
+          fn.update({ self: type })
+        )
       } else {
         throw new Error(
           `buildProtocols method expected an Object in the Array. Instead found ${next.value}`
@@ -72,7 +74,7 @@ class Type {
     }
   }
 
-  get [SYMBOL_TO_STRING_TAG]() {
+  get [TO_STRING_TAG]() {
     return 'Type'
   }
 
@@ -84,11 +86,15 @@ class Type {
   }
 
   is() {
-    throw new Error(`The 'is' method as not been implemented for the Type ${this.class}`)
+    throw new Error(
+      `The 'is' method as not been implemented for the Type ${this.class}`
+    )
   }
 
   to() {
-    throw new Error(`The 'to' method as not been implemented for the Type ${this.class}`)
+    throw new Error(
+      `The 'to' method as not been implemented for the Type ${this.class}`
+    )
   }
 }
 

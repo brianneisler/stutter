@@ -1,8 +1,8 @@
+import { FN } from '../constants/Symbol'
 import Any from '../types/Any'
 import Fn from './js/Fn'
 import Number from '../types/Number'
 import Parameter from './js/Parameter'
-import SYMBOL_FN from '../constants/SYMBOL_FN'
 import String from '../types/String'
 import buildFn from './buildFn'
 import fnGetMeta from './fnGetMeta'
@@ -17,9 +17,9 @@ describe('buildFn', () => {
     const fn = buildFn(func, meta)
 
     expect(fn).toBeInstanceOf(Function)
-    expect(fn[SYMBOL_FN]).toBeInstanceOf(Fn)
-    expect(fn[SYMBOL_FN].func).toBe(func)
-    expect(fn[SYMBOL_FN].meta).toBe(meta)
+    expect(fn[FN]).toBeInstanceOf(Fn)
+    expect(fn[FN].func).toBe(func)
+    expect(fn[FN].meta).toBe(meta)
     expect(fn.length).toBe(2)
   })
 
@@ -65,7 +65,9 @@ describe('buildFn', () => {
       parameters: [new Parameter('arg1', Number)],
       returns: String
     })
-    expect(() => fn('foo')).toThrowMatchingObject({ type: 'Expected:Argument:toMatchParameter' })
+    expect(() => fn('foo')).toThrowMatchingObject({
+      type: 'Expected:Argument:toMatchParameter'
+    })
   })
 
   test('throws an Exception when there are not enough args', () => {
@@ -73,7 +75,9 @@ describe('buildFn', () => {
       parameters: [new Parameter('arg1', Number)],
       returns: String
     })
-    expect(() => fn()).toThrowMatchingObject({ type: 'Expected:Arguments:toBeOfMinLength' })
+    expect(() => fn()).toThrowMatchingObject({
+      type: 'Expected:Arguments:toBeOfMinLength'
+    })
   })
 
   test('throws an Exception when return type does not match returned value', () => {
@@ -81,7 +85,9 @@ describe('buildFn', () => {
       parameters: [],
       returns: Number
     })
-    expect(() => fn()).toThrowMatchingObject({ type: 'Expected:Returned:toMatchReturns' })
+    expect(() => fn()).toThrowMatchingObject({
+      type: 'Expected:Returned:toMatchReturns'
+    })
   })
 
   test('works with an async function', async () => {
@@ -99,12 +105,14 @@ describe('buildFn', () => {
       resolve: true,
       returns: Number
     })
-    await expect(fn()).rejects.toMatchObject({ type: 'Expected:Returned:toMatchReturns' })
+    await expect(fn()).rejects.toMatchObject({
+      type: 'Expected:Returned:toMatchReturns'
+    })
   })
 
   test('throws an Exception when return type does not match in a generator function', () => {
     const fn = buildFn(
-      function*() {
+      function* () {
         return 'foo'
       },
       {
@@ -122,7 +130,7 @@ describe('buildFn', () => {
   test('preserves context of function', () => {
     const context = {}
     const fn = buildFn(
-      function(arg1) {
+      function (arg1) {
         expect(this).toBe(context)
         return arg1
       },

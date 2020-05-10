@@ -1,4 +1,4 @@
-import SYMBOL_FN from '../constants/SYMBOL_FN'
+import { FN } from '../constants/Symbol'
 
 /**
  * Applies the function of a given `Fn`
@@ -17,11 +17,11 @@ import SYMBOL_FN from '../constants/SYMBOL_FN'
  * applyFn(arrayWrap, null, [ 'bim', 'bop' ])
  * // => 'bimbop'
  */
-const fnApply = (fn, context = null, args = []) => {
-  if (fn[SYMBOL_FN]) {
-    fn = fn[SYMBOL_FN]
+const fnApply = (fn, context, self = null, args = []) => {
+  if (fn[FN]) {
+    fn = fn[FN]
   }
-  return fn.apply(context, args)
+  return fn.apply(context, self, args)
 }
 
 export default fnApply

@@ -1,7 +1,7 @@
+import { FN } from '../../constants/Symbol'
 import Any from '../../types/Any'
 import Fn from './Fn'
 import Parameter from './Parameter'
-import SYMBOL_FN from '../../constants/SYMBOL_FN'
 
 describe('js:Fn', () => {
   describe('constructor', () => {
@@ -22,13 +22,16 @@ describe('js:Fn', () => {
     })
     expect(fn.parameters).toBe(undefined)
     expect(result).not.toBe(fn)
-    expect(result.parameters).toEqual([new Parameter('argA', Any), new Parameter('argB', Any)])
+    expect(result.parameters).toEqual([
+      new Parameter('argA', Any),
+      new Parameter('argB', Any)
+    ])
   })
 
   test('defines the @@fn symbol', () => {
     const fn = Fn.build((argA, argB) => {
       return argB
     })
-    expect(fn[SYMBOL_FN]).toBeInstanceOf(Fn)
+    expect(fn[FN]).toBeInstanceOf(Fn)
   })
 })

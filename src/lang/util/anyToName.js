@@ -1,5 +1,4 @@
-import SYMBOL_FN from '../constants/SYMBOL_FN'
-import SYMBOL_META from '../constants/SYMBOL_META'
+import { META } from '../constants/Symbol'
 import anyIsFunction from './anyIsFunction'
 import anyIsString from './anyIsString'
 import anyToString from './anyToString'
@@ -28,8 +27,8 @@ const anyToName = (any) => {
   if (anyIsFunction(any.toName)) {
     return any.toName()
   }
-  if (any[SYMBOL_META]) {
-    return any[SYMBOL_META].name
+  if (any[META]) {
+    return any[META].name
   }
 
   // TODO BRN: Need to figure out how to reverse source maps here to get the

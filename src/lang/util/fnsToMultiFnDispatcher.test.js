@@ -1,7 +1,7 @@
 import { ErrorCode } from '../constants'
-import ImmutableStack from './js/ImmutableStack'
 import Number from '../types/Number'
 import String from '../types/String'
+import createContext from './createContext'
 import definitionToFn from './definitionToFn'
 import fnsToMultiFnDispatcher from './fnsToMultiFnDispatcher'
 
@@ -29,7 +29,13 @@ describe('fnsToMultiFnDispatcher', () => {
     )
     const multiFnDipatcher = fnsToMultiFnDispatcher([fn])
     expect(() => {
-      multiFnDipatcher.dispatch([], { multi: false, partial: false }, new ImmutableStack())
+      multiFnDipatcher.dispatch(
+        createContext({
+          callee: this
+        }),
+        [],
+        { multi: false, partial: false }
+      )
     }).toThrowMatchingObject({ code: ErrorCode.NO_MATCH })
   })
 
@@ -54,9 +60,11 @@ describe('fnsToMultiFnDispatcher', () => {
     )
     const multiFnDipatcher = fnsToMultiFnDispatcher([fn1, fn2, fn3])
     const result = multiFnDipatcher.dispatch(
+      createContext({
+        callee: this
+      }),
       ['foo'],
-      { multi: true, partial: true },
-      new ImmutableStack()
+      { multi: true, partial: true }
     )
     expect(result).toEqual([
       { delta: -1, exact: false, fn: fn2, partial: true },
@@ -85,9 +93,11 @@ describe('fnsToMultiFnDispatcher', () => {
     )
     const multiFnDipatcher = fnsToMultiFnDispatcher([fn1, fn2, fn3])
     const result = multiFnDipatcher.dispatch(
+      createContext({
+        callee: this
+      }),
       ['foo', 'bar'],
-      { multi: true, partial: true },
-      new ImmutableStack()
+      { multi: true, partial: true }
     )
     expect(result).toEqual([
       { delta: 1, exact: false, fn: fn1, partial: false },
@@ -123,9 +133,11 @@ describe('fnsToMultiFnDispatcher', () => {
     )
     const multiFnDipatcher = fnsToMultiFnDispatcher([fn1, fn2, fn3, fn4])
     const result = multiFnDipatcher.dispatch(
+      createContext({
+        callee: this
+      }),
       ['foo', 'bar', 'baz'],
-      { multi: true, partial: false },
-      new ImmutableStack()
+      { multi: true, partial: false }
     )
     expect(result).toEqual([
       { delta: 2, exact: false, fn: fn1, partial: false },

@@ -1,4 +1,10 @@
-import { createAction, createEngine, handleAction, isPromise, takeEvery } from '../src'
+import {
+  createAction,
+  createEngine,
+  handleAction,
+  isPromise,
+  takeEvery
+} from '../src'
 
 describe('handle action integration tests', () => {
   expect.extend({
@@ -18,7 +24,7 @@ describe('handle action integration tests', () => {
           resolve('foo')
         }, 500)
       })
-    const actionHandler = handleAction(function*(context, action) {
+    const actionHandler = handleAction(function* (context, action) {
       expect(context).toEqual({})
       expect(action).toEqual({
         payload: {
@@ -32,7 +38,7 @@ describe('handle action integration tests', () => {
 
     const engine = createEngine({
       test: {
-        run: function*() {
+        run: function* () {
           yield takeEvery(testAction, actionHandler)
         }
       }
@@ -61,7 +67,7 @@ describe('handle action integration tests', () => {
           reject('error')
         }, 500)
       })
-    const actionHandler = handleAction(function*(context, action) {
+    const actionHandler = handleAction(function* (context, action) {
       expect(context).toEqual({})
       expect(action).toEqual({
         payload: {
@@ -75,7 +81,7 @@ describe('handle action integration tests', () => {
 
     const engine = createEngine({
       test: {
-        run: function*() {
+        run: function* () {
           yield takeEvery(testAction, actionHandler)
         }
       }

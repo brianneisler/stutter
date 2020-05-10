@@ -1,12 +1,16 @@
 import Exception from './js/Exception'
 import String from '../types/String'
 import buildException from './buildException'
+import createContext from './createContext'
 import definitionToFn from './definitionToFn'
 import fnCall from './fnCall'
 import fnGetMeta from './fnGetMeta'
 
 describe('buildException', () => {
   test('builds a new Expected:Argument:toMatchParameter Exception', () => {
+    const testContext = createContext({
+      callee: this
+    })
     const source = definitionToFn(function (arg1) {
       const exception = buildException(source)
         .expected.arg(arg1, 0)
@@ -29,13 +33,18 @@ describe('buildException', () => {
       })
     })
 
-    fnCall(source, null, 'foo')
+    fnCall(source, testContext, null, 'foo')
   })
 
   test('builds a new Expected:Argument:toMatchRegex Exception', () => {
+    const testContext = createContext({
+      callee: this
+    })
     const source = definitionToFn(function (arg1) {
       const regex = /^bar$/
-      const exception = buildException(source).expected.arg(arg1, 0).toMatchRegex(regex)
+      const exception = buildException(source)
+        .expected.arg(arg1, 0)
+        .toMatchRegex(regex)
       expect(exception).toBeInstanceOf(Exception)
       expect(exception).toMatchObject({
         expected: {
@@ -54,12 +63,17 @@ describe('buildException', () => {
       })
     })
 
-    fnCall(source, null, 'foo')
+    fnCall(source, testContext, null, 'foo')
   })
 
   test('builds a new Expected:Arguments:toBeEmpty Exception', () => {
+    const testContext = createContext({
+      callee: this
+    })
     const source = definitionToFn(function () {
-      const exception = buildException(source).expected.arguments(arguments).toBeEmpty()
+      const exception = buildException(source)
+        .expected.arguments(arguments)
+        .toBeEmpty()
       expect(exception).toBeInstanceOf(Exception)
       expect(exception).toMatchObject({
         expected: {
@@ -74,12 +88,17 @@ describe('buildException', () => {
       })
     })
 
-    fnCall(source, null, 'foo')
+    fnCall(source, testContext, null, 'foo')
   })
 
   test('builds a new Expected:Arguments:toBeOfMinLength Exception', () => {
+    const testContext = createContext({
+      callee: this
+    })
     const source = definitionToFn(function () {
-      const exception = buildException(source).expected.arguments(arguments).toBeOfMinLength(2)
+      const exception = buildException(source)
+        .expected.arguments(arguments)
+        .toBeOfMinLength(2)
       expect(exception).toBeInstanceOf(Exception)
       expect(exception).toMatchObject({
         expected: {
@@ -97,10 +116,13 @@ describe('buildException', () => {
       })
     })
 
-    fnCall(source, null, 'foo')
+    fnCall(source, testContext, null, 'foo')
   })
 
   test('builds a new Expected:Returned:ToMatchReturns Exception', () => {
+    const testContext = createContext({
+      callee: this
+    })
     const source = definitionToFn(
       function () {
         const returned = 'foo'
@@ -127,6 +149,6 @@ describe('buildException', () => {
       [() => String]
     )
 
-    fnCall(source, null, 'foo')
+    fnCall(source, testContext, null, 'foo')
   })
 })

@@ -1,18 +1,25 @@
 import * as js from './js'
+import { FN } from '../constants/Symbol'
 import Any from '../types/Any'
 import Boolean from '../types/Boolean'
 import Fn from './js/Fn'
 import Number from '../types/Number'
-import SYMBOL_FN from '../constants/SYMBOL_FN'
 import String from '../types/String'
 import definitionToFn from './definitionToFn'
 
 describe('definitionToFn', () => {
   it('builds a function using the given function and defintion', async () => {
-    const foo = definitionToFn((argA, argB) => argB, [Any, Number, () => String])
+    const foo = definitionToFn((argA, argB) => argB, [
+      Any,
+      Number,
+      () => String
+    ])
 
-    expect(foo[SYMBOL_FN].meta).toEqual({
-      parameters: [new js.Parameter('argA', Any), new js.Parameter('argB', Number)],
+    expect(foo[FN].meta).toEqual({
+      parameters: [
+        new js.Parameter('argA', Any),
+        new js.Parameter('argB', Number)
+      ],
       returns: String
     })
   })
@@ -24,8 +31,8 @@ describe('definitionToFn', () => {
     const fn = definitionToFn(func, [Number, () => Number])
 
     expect(fn).toBeInstanceOf(Function)
-    expect(fn[SYMBOL_FN]).toBeInstanceOf(Fn)
-    expect(fn[SYMBOL_FN]).toMatchObject({
+    expect(fn[FN]).toBeInstanceOf(Fn)
+    expect(fn[FN]).toMatchObject({
       func,
       handler: expect.any(Function),
       meta: {
@@ -59,7 +66,7 @@ describe('definitionToFn', () => {
     }
     const fn = definitionToFn(func, [Number, () => Number])
 
-    expect(fn[SYMBOL_FN]).toMatchObject({
+    expect(fn[FN]).toMatchObject({
       func,
       handler: expect.any(Function),
       meta: {
@@ -73,7 +80,7 @@ describe('definitionToFn', () => {
     const fn = definitionToFn((foo, bar) => {
       return bar
     })
-    expect(fn[SYMBOL_FN].meta).toEqual({
+    expect(fn[FN].meta).toEqual({
       parameters: [new js.Parameter('foo', Any), new js.Parameter('bar', Any)],
       returns: Any
     })
@@ -86,14 +93,17 @@ describe('definitionToFn', () => {
       },
       [String, String]
     )
-    expect(fn[SYMBOL_FN].meta).toEqual({
-      parameters: [new js.Parameter('foo', String), new js.Parameter('bar', String)],
+    expect(fn[FN].meta).toEqual({
+      parameters: [
+        new js.Parameter('foo', String),
+        new js.Parameter('bar', String)
+      ],
       returns: Any
     })
   })
 
   test('Throws error if given a non Type in the paramTypes', () => {
-    const Foo = function() {}
+    const Foo = function () {}
     expect(() => {
       definitionToFn(
         (num, str) => {
@@ -111,8 +121,11 @@ describe('definitionToFn', () => {
       },
       [Number]
     )
-    expect(fn[SYMBOL_FN].meta).toEqual({
-      parameters: [new js.Parameter('foo', Number), new js.Parameter('bar', Any)],
+    expect(fn[FN].meta).toEqual({
+      parameters: [
+        new js.Parameter('foo', Number),
+        new js.Parameter('bar', Any)
+      ],
       returns: Any
     })
   })
@@ -124,8 +137,11 @@ describe('definitionToFn', () => {
       },
       [js.Number, js.String, () => js.Boolean]
     )
-    expect(fn[SYMBOL_FN].meta).toEqual({
-      parameters: [new js.Parameter('foo', Number), new js.Parameter('bar', String)],
+    expect(fn[FN].meta).toEqual({
+      parameters: [
+        new js.Parameter('foo', Number),
+        new js.Parameter('bar', String)
+      ],
       returns: Boolean
     })
   })
@@ -137,8 +153,11 @@ describe('definitionToFn', () => {
       },
       [Number, Number]
     )
-    expect(fn[SYMBOL_FN].meta).toEqual({
-      parameters: [new js.Parameter('foo', Number), new js.Parameter('arg1', Number)],
+    expect(fn[FN].meta).toEqual({
+      parameters: [
+        new js.Parameter('foo', Number),
+        new js.Parameter('arg1', Number)
+      ],
       returns: Any
     })
   })

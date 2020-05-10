@@ -1,4 +1,5 @@
-import { ErrorCode, SYMBOL_META } from '../constants'
+import { NO_MATCH } from '../constants/ErrorCode'
+import { META } from '../constants/Symbol'
 import Self from '../types/Self'
 import anyLog from './anyLog'
 import buildException from './buildException'
@@ -19,30 +20,32 @@ const groupProtocols = functionMemoizeWith((protocols, functionName) =>
   })
 )
 
-const namespacesReduceFnsByProtocolFnName = functionMemoizeWith((namespaces, name) => {
-  const functionProtocols = filterProtocolsForFunctionName(name)
+const namespacesReduceFnsByProtocolFnName = functionMemoizeWith(
+  (namespaces, name) => {
+    const functionProtocols = filterProtocolsForFunctionName(name)
 
-  // Protocols should dispatch the same way that functions do. The only
-  // difference is that the self type can be matched to any type that
-  // implements the protocol
+    // Protocols should dispatch the same way that functions do. The only
+    // difference is that the self type can be matched to any type that
+    // implements the protocol
 
-  const groupedProtocols = groupProtocols(functionProtocols, name)
-  return groupedProtocols.reduce(
-    (accum, protocols) =>
-      protocols.reduce((accum2, protocol) => {
-        const types = filterTypesForProtocol(protocol, namespaces)
-        return types.reduce((fns, type) => {
-          fns.push(type.getProtocols().get(protocol)[name])
-          return fns
-        }, accum2)
-      }, accum),
-    []
-  )
-})
+    const groupedProtocols = groupProtocols(functionProtocols, name)
+    return groupedProtocols.reduce(
+      (accum, protocols) =>
+        protocols.reduce((accum2, protocol) => {
+          const types = filterTypesForProtocol(protocol, namespaces)
+          return types.reduce((fns, type) => {
+            fns.push(type.getProtocols().get(protocol)[name])
+            return fns
+          }, accum2)
+        }, accum),
+      []
+    )
+  }
+)
 
 const protocolNameToDispatcher = (name, namespaces = root.namespaces) => {
   return {
-    dispatch: (args, options, stack) => {
+    dispatch: (context, args, options) => {
       // NOTE BRN: We always make this call to get the protocols since the
       // namespace is immutable. This way in case the namespace has changed, we
       // will get the latest Protocols.
@@ -52,22 +55,22 @@ const protocolNameToDispatcher = (name, namespaces = root.namespaces) => {
         if (options.multi) {
           return []
         }
-        throw buildException(stack.peek(), {
-          code: ErrorCode.NO_MATCH,
-          stack
+        throw buildException(context.callstack.peek(), {
+          callstack: context.callstack,
+          code: ErrorCode.NO_MATCH
         })
           .expected.arguments(args)
           .toMatchDispatcher(this)
       }
 
       // console.log(`dispatching protocol: ${name}`)
-      // anyLog(fns[0][SYMBOL_META].self).push()
+      // anyLog(fns[0][META].self).push()
       const dispatcher = fnsToMultiFnDispatcher(fns)
 
       // NOTE BRN: Remember that in order for a Protocol method to be matched,
       // not only does the Self arg need to be matched but so do the rest of the
       // parameters
-      return dispatcher.dispatch(args, options, stack)
+      return dispatcher.dispatch(context, args, options)
     },
 
     getAllPossibleFns() {

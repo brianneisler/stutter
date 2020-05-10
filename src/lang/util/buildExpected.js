@@ -2,17 +2,11 @@ import Expected from './js/Expected'
 import TypeError from './js/TypeError'
 import anyToName from './anyToName'
 import anyToString from './anyToString'
-import fnGetMeta from './fnGetMeta'
+import fnToSignatureString from './fnToSignatureString'
 import functionToParameterNames from './functionToParameterNames'
-import parameterToString from './parameterToString'
 import sourceToString from './sourceToString'
 
 const prefixNot = (not, expectation) => `${not ? 'not.' : ''}${expectation}`
-
-const fnToSignatureString = (fn) => {
-  const { parameters } = fnGetMeta(fn)
-  return `[${parameters.map(parameterToString).join(', ')}]`
-}
 
 const targetToString = (target) => `${target.type}:${anyToString(target.value)}`
 
@@ -38,11 +32,53 @@ const toBeOfMinLength = (next, not = false) => (length) =>
       },
       exceptionToError: (exception, expected) =>
         new TypeError(
-          `${sourceToString(exception.source)} expected ${targetToString(exception.target)} ${
-            not ? 'NOT ' : ''
-          }to be of minimum length ${expected.data.length}.`
+          `${sourceToString(exception.source)} expected ${targetToString(
+            exception.target
+          )} ${not ? 'NOT ' : ''}to be of minimum length ${
+            expected.data.length
+          }.`
         ),
       expectation: prefixNot(not, 'toBeOfMinLength')
+    })
+  )
+
+const toHaveParameters = (next, not = false) => () =>
+  next(
+    new Expected({
+      exceptionToError: (exception) => {
+        let sentence
+        if (exception.source === exception.target.value) {
+          sentence = `${sourceToString(exception.source)} was`
+        } else {
+          sentence = `${sourceToString(
+            exception.source
+          )} expected ${targetToString(exception.target)}`
+        }
+        return new TypeError(
+          `${sentence} ${not ? 'NOT ' : ''}to have Parameters.`
+        )
+      },
+      expectation: prefixNot(not, 'toHaveParameters')
+    })
+  )
+
+const toHaveParametersOrDispatcher = (next, not = false) => () =>
+  next(
+    new Expected({
+      exceptionToError: (exception) => {
+        let sentence
+        if (exception.source === exception.target.value) {
+          sentence = `${sourceToString(exception.source)} was`
+        } else {
+          sentence = `${sourceToString(
+            exception.source
+          )} expected ${targetToString(exception.target)}`
+        }
+        return new TypeError(
+          `${sentence} ${not ? 'NOT ' : ''}to have Parameters or a Dispatcher.`
+        )
+      },
+      expectation: prefixNot(not, 'toHaveParametersOrDispatcher')
     })
   )
 
@@ -55,7 +91,9 @@ const toMatchDispatcher = (next, not = false) => (dispatcher) =>
       exceptionToError: (exception, expected) => {
         const allFns = expected.data.dispatcher.getAllPossibleFns()
         return new TypeError(
-          `${sourceToString(exception.source)} expected ${targetToString(exception.target)} ${
+          `${sourceToString(exception.source)} expected ${targetToString(
+            exception.target
+          )} ${
             not ? 'NOT ' : ''
           }to match one of the following method signatures.\n${allFns
             .map((fn) => `* ${fnToSignatureString(fn)}`)
@@ -76,9 +114,11 @@ const toMatchParameter = (next, not = false) => (parameter) =>
         new TypeError(
           `${sourceToString(exception.source)} expected ${targetToString(
             exception.target
-          )} for Parameter ${anyToName(expected.data.parameter)} to ${not ? 'NOT ' : ''}be a ${
-            expected.data.parameter.type
-          }. Instead was given ${exception.target.value}.`
+          )} for Parameter ${anyToName(expected.data.parameter)} to ${
+            not ? 'NOT ' : ''
+          }be a ${expected.data.parameter.type}. Instead was given ${
+            exception.target.value
+          }.`
         ),
       expectation: prefixNot(not, 'toMatchParameter')
     })
@@ -91,13 +131,15 @@ const toMatchRegex = (next, not = false) => (regex) =>
         regex
       },
       exceptionToError: (exception, expected) => {
-        const parameterName = functionToParameterNames(exception.source)[exception.target.index]
+        const parameterName = functionToParameterNames(exception.source)[
+          exception.target.index
+        ]
         return new TypeError(
           `${sourceToString(exception.source)} expected ${targetToString(
             exception.target
-          )} for Parameter '${parameterName}' ${not ? 'NOT ' : ''}to match regex ${
-            expected.data.regex
-          }.`
+          )} for Parameter '${parameterName}' ${
+            not ? 'NOT ' : ''
+          }to match regex ${expected.data.regex}.`
         )
       },
       expectation: prefixNot(not, 'toMatchRegex')
@@ -130,9 +172,9 @@ const toSatisfyProtocol = (next, not = false) => (protocol) =>
       },
       exceptionToError: (exception, expected) =>
         new TypeError(
-          `${sourceToString(exception.source)} expected ${targetToString(exception.target)} to ${
-            not ? 'NOT ' : ''
-          }satisfy the Protocol ${anyToName(
+          `${sourceToString(exception.source)} expected ${targetToString(
+            exception.target
+          )} to ${not ? 'NOT ' : ''}satisfy the Protocol ${anyToName(
             expected.data.protocol
           )}. Instead was given ${targetToString(exception.target)}.`
         )
@@ -163,6 +205,15 @@ const buildExpected = (type, next) => {
         toBeEmpty: toBeEmpty(next),
         toBeOfMinLength: toBeOfMinLength(next),
         toMatchDispatcher: toMatchDispatcher(next)
+      }
+    case 'Fn':
+      return {
+        not: {
+          toHaveParameters: toHaveParameters(next, true),
+          toHaveParametersOrDispatcher: toHaveParametersOrDispatcher(next, true)
+        },
+        toHaveParameters: toHaveParameters(next),
+        toHaveParametersOrDispatcher: toHaveParametersOrDispatcher(next)
       }
     case 'Returned':
       return {

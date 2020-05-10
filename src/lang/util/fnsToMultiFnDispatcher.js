@@ -6,7 +6,7 @@ import fnGetMeta from './fnGetMeta'
 
 const fnsToMultiFnDispatcher = (fns) => {
   return {
-    dispatch: (args, options, stack) => {
+    dispatch: (context, args, options) => {
       // console.log('fnsToMultiFnDispatcher - dispatching args:', args)
       // anyLog(fns).push()
       const { length } = fns
@@ -16,7 +16,7 @@ const fnsToMultiFnDispatcher = (fns) => {
           const fn = fns[idx]
           const meta = fnGetMeta(fn)
           if (fn.dispatcher) {
-            matches = matches.concat(fn.dispatch(args, options, stack))
+            matches = matches.concat(fn.dispatch(context, args, options))
           } else if (meta.parameters) {
             // anyLog(fn).push()
             const match = argumentsMatchToFnParameters(args, fn, options)
@@ -24,9 +24,9 @@ const fnsToMultiFnDispatcher = (fns) => {
               matches.push(match)
             }
           } else {
-            throw new Error(
-              `Fn must have either a dispatcher or parameters in order to be dispatched to. This fn has neither ${fn}`
-            )
+            throw buildException(context.callstack.peek().callee)
+              .expected.fn(fn)
+              .toHaveParametersOrDispatcher()
           }
         }
         return matches
@@ -36,7 +36,7 @@ const fnsToMultiFnDispatcher = (fns) => {
         const fn = fns[idx]
         if (fn.dispatcher) {
           try {
-            return fn.dispatch(args, options, stack)
+            return fn.dispatch(context, args, options)
           } catch (error) {
             if (error.code !== ErrorCode.NO_MATCH) {
               throw error
@@ -52,14 +52,14 @@ const fnsToMultiFnDispatcher = (fns) => {
             return match
           }
         } else {
-          throw new Error(
-            `Fn must have either a dispatcher or parameters in order to be dispatched to. This fn has neither ${fn}`
-          )
+          throw buildException(context.callstack.peek().callee)
+            .expected.fn(fn)
+            .toHaveParametersOrDispatcher()
         }
       }
-      throw buildException(stack.peek(), {
+      throw buildException(context.callstack.peek().callee, {
         code: ErrorCode.NO_MATCH,
-        stack
+        stack: context.stack
       })
         .expected.arguments(args)
         .toMatchDispatcher(this)

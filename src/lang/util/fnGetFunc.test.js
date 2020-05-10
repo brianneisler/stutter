@@ -1,4 +1,4 @@
-import SYMBOL_FN from '../constants/SYMBOL_FN'
+import { FN } from '../constants/Symbol'
 import definitionToFn from './definitionToFn'
 import fnGetFunc from './fnGetFunc'
 
@@ -12,6 +12,6 @@ describe('fnGetFunc', () => {
   test('returns true for an Fn instance', () => {
     const func = () => {}
     const fn = definitionToFn(func)
-    expect(fnGetFunc(fn[SYMBOL_FN])).toBe(func)
+    expect(fnGetFunc(fn[FN])).toBe(func)
   })
 })

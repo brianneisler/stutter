@@ -1,4 +1,4 @@
-import SYMBOL_FN from '../constants/SYMBOL_FN'
+import { FN } from '../constants/Symbol'
 import anyIsPlaceholder from './anyIsPlaceholder'
 import anyMatchesParameter from './anyMatchesParameter'
 import arrayClone from './arrayClone'
@@ -6,6 +6,7 @@ import arrayConcat from './arrayConcat'
 import arrayMap from './arrayMap'
 import arraySlice from './arraySlice'
 import buildException from './buildException'
+import createContext from './createContext'
 import fnApply from './fnApply'
 import fnGetMeta from './fnGetMeta'
 import fnsToMultiFnDispatcher from './fnsToMultiFnDispatcher'
@@ -137,8 +138,18 @@ const findExactOrClosestCompletedMatch = (matches) => {
 }
 
 const curryMultiFn = (fn) => {
-  return function () {
-    const matches = fn.dispatch(arguments, { multi: true, partial: true })
+  // TODO BRN: Figure out how to pass down the context
+  const func = function () {
+    const context = createContext({
+      callee: func
+    })
+    const matches = fn.dispatch(
+      context,
+      arguments,
+      { multi: true, partial: true }
+      // TODO BRN: Figure out how to connect this to the invoking function
+      // ("callee") context
+    )
     if (matches.length === 0) {
       throw buildException(fn)
         .expected.arguments(arguments)
@@ -151,7 +162,7 @@ const curryMultiFn = (fn) => {
       // moment that is only type checking (which does not happen on multi
       // methods) so there is nothing being skipped. But, if the composition
       // chain changes, we'll need to find a better method for this...
-      return fnApply(completedMatch.fn, this, arguments)
+      return fnApply(completedMatch.fn, context, this, arguments)
     }
 
     const curriedFns = arrayMap(matches, (match) => {
@@ -159,7 +170,7 @@ const curryMultiFn = (fn) => {
       if (!fnGetMeta(matchFn).curry) {
         matchFn = matchFn.update({ curry: true })
       }
-      return fnApply(matchFn, this, arguments)
+      return fnApply(matchFn, context, this, arguments)
     })
 
     return fn.update({
@@ -167,6 +178,7 @@ const curryMultiFn = (fn) => {
       dispatcher: fnsToMultiFnDispatcher(curriedFns)
     })
   }
+  return func
 }
 
 /**
@@ -210,15 +222,12 @@ const curryMultiFn = (fn) => {
  * //=> 10
  */
 const functionCurry = (func) => {
-  if (!func[SYMBOL_FN]) {
+  if (!func[FN]) {
     return curryFunction(func)
   }
   const { dispatcher, parameters } = fnGetMeta(func)
   if (dispatcher) {
-    return functionDefineSymbolFn(
-      curryMultiFn(func[SYMBOL_FN]),
-      func[SYMBOL_FN]
-    )
+    return functionDefineSymbolFn(curryMultiFn(func[FN]), func[FN])
   }
   if (parameters) {
     if (parameters.length === 0) {
@@ -226,8 +235,8 @@ const functionCurry = (func) => {
       return func
     }
     return functionDefineSymbolFn(
-      curryParameterizedFn(func[SYMBOL_FN], func),
-      func[SYMBOL_FN]
+      curryParameterizedFn(func[FN], func),
+      func[FN]
     )
   }
   throw new Error(

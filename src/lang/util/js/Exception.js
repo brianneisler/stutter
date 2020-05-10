@@ -1,4 +1,4 @@
-import SYMBOL_TO_STRING_TAG from '../../constants/SYMBOL_TO_STRING_TAG'
+import { TO_STRING_TAG } from '../../constants/Symbol'
 import anyToStringTag from '../anyToStringTag'
 import buildStackTrace from '../buildStackTrace'
 
@@ -10,10 +10,12 @@ class Exception {
     this.source = source
     this.stack = buildStackTrace(stack)
     this.target = target
-    this.type = `${anyToStringTag(expected)}:${target.type}:${expected.expectation}`
+    this.type = `${anyToStringTag(expected)}:${target.type}:${
+      expected.expectation
+    }`
   }
 
-  get [SYMBOL_TO_STRING_TAG]() {
+  get [TO_STRING_TAG]() {
     return 'Exception'
   }
 

@@ -10,6 +10,9 @@ TASKS
   - [x] update `Fn` code to support the new `self` property. It should use this
     in type checking as well currying (anywhere that `Parameter`s are used) 
 - [x] add support for multi-function type definitions in Protocols
+- [ ] add support for immutable generators which can be cloned. Will need to
+  figure out how to add "clone" to the [regenerator-runtime](https://github.com/facebook/regenerator/blob/master/packages/regenerator-runtime)
+
 
 - [ ] refactor all methods to use `defn`
   - [ ] use namespaces names

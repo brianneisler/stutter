@@ -41,13 +41,13 @@ const set = defn(
       (key, value, keyed) => setKey(keyed, key, value),
 
       [Keyed, Key, Any, () => Keyed],
-      setKey,
+      (keyed, key, value) => setKey(keyed, key, value),
 
       [Property, Any, Propertied, () => Propertied],
       (property, value, propertied) => setProperty(propertied, property, value),
 
       [Propertied, Property, Any, () => Propertied],
-      setProperty
+      (propertied, property, value) => setProperty(propertied, property, value)
     ]
     // // TODO BRN: We may not want to resolve the value that is being set. This
     // would enable users to build lists of promises for use with Promise.all.

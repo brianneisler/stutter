@@ -1,4 +1,5 @@
 import * as ErrorCode from './ErrorCode'
+import * as Symbol from './Symbol'
 
 export { default as DEBURRED_LETTERS } from './DEBURRED_LETTERS'
 export { default as DEFAULT_NAMESPACE_NAME } from './DEFAULT_NAMESPACE_NAME'
@@ -23,9 +24,5 @@ export { default as REGEX_STRING_UTF_ZERO_WIDTH_JOINER } from './REGEX_STRING_UT
 export { default as REGEX_STRING_VARIATION_SELECTORS_RANGE } from './REGEX_STRING_VARIATION_SELECTORS_RANGE'
 export { default as REGEX_UINT } from './REGEX_UINT'
 export { default as REGEX_UNICODE } from './REGEX_UNICODE'
-export { default as SYMBOL_FN } from './SYMBOL_FN'
-export { default as SYMBOL_ITERATOR } from './SYMBOL_ITERATOR'
-export { default as SYMBOL_META } from './SYMBOL_META'
-export { default as SYMBOL_TO_STRING_TAG } from './SYMBOL_TO_STRING_TAG'
 
-export { ErrorCode }
+export { ErrorCode, Symbol }

@@ -37,6 +37,21 @@ const buildException = (source, { code, stack } = {}) => {
               }
             })
         ),
+      fn: (fn) =>
+        buildExpected(
+          'Fn',
+          (expected) =>
+            new Exception({
+              code,
+              expected,
+              source,
+              stack,
+              target: {
+                type: 'Fn',
+                value: fn || source
+              }
+            })
+        ),
       returned: (returned) =>
         buildExpected(
           'Returned',

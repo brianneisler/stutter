@@ -1,5 +1,4 @@
-import SYMBOL_ITERATOR from '../../constants/SYMBOL_ITERATOR'
-import SYMBOL_TO_STRING_TAG from '../../constants/SYMBOL_TO_STRING_TAG'
+import { ITERATOR, TO_STRING_TAG } from '../../constants/Symbol'
 import anyToImmutableList from '../anyToImmutableList'
 
 /**
@@ -17,11 +16,11 @@ class Path {
     this.size = this.path.size
   }
 
-  [SYMBOL_ITERATOR]() {
+  [ITERATOR]() {
     return this.path.values()
   }
 
-  get [SYMBOL_TO_STRING_TAG]() {
+  get [TO_STRING_TAG]() {
     return 'Path'
   }
 
