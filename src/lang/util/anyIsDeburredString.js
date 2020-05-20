@@ -1,7 +1,7 @@
-import { REGEX_COMBO_MARK, REGEX_LATIN } from '../constants'
+import { COMBO_MARK, LATIN } from '../constants/Regex'
 import anyIsString from './anyIsString'
 
 const anyIsDeburredString = (any) =>
-  anyIsString(any) && (REGEX_LATIN.test(any) || REGEX_COMBO_MARK.test(any))
+  anyIsString(any) && (LATIN.test(any) || COMBO_MARK.test(any))
 
 export default anyIsDeburredString

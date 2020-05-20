@@ -1,7 +1,7 @@
 import anyIsGenerator from './anyIsGenerator'
 import anyIsPromise from './anyIsPromise'
 
-const generatorCatchWith = function*(generator, handler) {
+const generatorCatchWith = function* (generator, handler) {
   try {
     return yield* generator
   } catch (thrown) {
@@ -45,7 +45,7 @@ const promiseCatchWith = (promise, handler) => promise.catch(handler)
  * const wrappedGeneratorFunc = functionCatchWith(throwsError, (error) => {})
  */
 const functionCatchWith = (func, handler) => {
-  return function() {
+  return function () {
     try {
       const result = func.apply(this, arguments)
       if (anyIsPromise(result)) {

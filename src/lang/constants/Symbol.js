@@ -6,7 +6,7 @@ import Symbol from '../util/js/Symbol'
  * @private
  * @type {Symbol}
  * @since v0.1.0
- * @category lang.constants
+ * @category lang.constants.Symbol
  */
 export const FN = Symbol.for('@@fn')
 
@@ -18,7 +18,7 @@ export const FN = Symbol.for('@@fn')
  * @private
  * @type {Symbol}
  * @since v0.1.0
- * @category lang.constants
+ * @category lang.constants.Symbol
  */
 export const ITERATOR =
   typeof Symbol !== 'undefined' ? Symbol.iterator : '@@iterator'
@@ -29,9 +29,19 @@ export const ITERATOR =
  * @private
  * @type {Symbol}
  * @since v0.1.0
- * @category lang.constants
+ * @category lang.constants.Symbol
  */
 export const META = Symbol.for('@@meta')
+
+/**
+ * The `Symbol.for('@@toSignature')` defines a string signature for the object
+ *
+ * @private
+ * @type {Symbol}
+ * @since v0.2.0
+ * @category lang.constants.Symbol
+ */
+export const TO_SIGNATURE = Symbol.for('@@toSignature')
 
 /**
  * The `Symbol.toStringTag` well-known symbol is a string valued property that
@@ -43,6 +53,6 @@ export const META = Symbol.for('@@meta')
  * @private
  * @type {Symbol}
  * @since v0.1.0
- * @category lang.constants
+ * @category lang.constants.Symbol
  */
 export const TO_STRING_TAG = Symbol.toStringTag

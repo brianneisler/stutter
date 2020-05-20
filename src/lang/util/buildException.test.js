@@ -33,7 +33,7 @@ describe('buildException', () => {
       })
     })
 
-    fnCall(source, testContext, null, 'foo')
+    fnCall(source, testContext, 'foo')
   })
 
   test('builds a new Expected:Argument:toMatchRegex Exception', () => {
@@ -63,7 +63,7 @@ describe('buildException', () => {
       })
     })
 
-    fnCall(source, testContext, null, 'foo')
+    fnCall(source, testContext, 'foo')
   })
 
   test('builds a new Expected:Arguments:toBeEmpty Exception', () => {
@@ -88,7 +88,7 @@ describe('buildException', () => {
       })
     })
 
-    fnCall(source, testContext, null, 'foo')
+    fnCall(source, testContext, 'foo')
   })
 
   test('builds a new Expected:Arguments:toBeOfMinLength Exception', () => {
@@ -116,7 +116,7 @@ describe('buildException', () => {
       })
     })
 
-    fnCall(source, testContext, null, 'foo')
+    fnCall(source, testContext, 'foo')
   })
 
   test('builds a new Expected:Returned:ToMatchReturns Exception', () => {
@@ -149,6 +149,6 @@ describe('buildException', () => {
       [() => String]
     )
 
-    fnCall(source, testContext, null, 'foo')
+    fnCall(source, testContext, 'foo')
   })
 })

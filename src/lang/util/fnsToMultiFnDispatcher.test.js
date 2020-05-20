@@ -1,4 +1,6 @@
 import { ErrorCode } from '../constants'
+import Dispatcher from './js/Dispatcher'
+import ImmutableList from './js/ImmutableList'
 import Number from '../types/Number'
 import String from '../types/String'
 import createContext from './createContext'
@@ -13,11 +15,10 @@ describe('fnsToMultiFnDispatcher', () => {
       },
       [Number, String]
     )
-    const multiFnDipatcher = fnsToMultiFnDispatcher([fn])
-    expect(multiFnDipatcher).toEqual({
-      dispatch: expect.any(Function),
-      getAllPossibleFns: expect.any(Function)
-    })
+    const fns = ImmutableList([fn])
+    const multiFnDipatcher = fnsToMultiFnDispatcher(fns)
+    expect(multiFnDipatcher).toBeInstanceOf(Dispatcher)
+    expect(multiFnDipatcher.fns).toBe(fns)
   })
 
   test('throws a NO_MATCH error if no function is matched in a multi false and partial false dispatch', () => {
@@ -27,15 +28,12 @@ describe('fnsToMultiFnDispatcher', () => {
       },
       [Number, String]
     )
-    const multiFnDipatcher = fnsToMultiFnDispatcher([fn])
+    const multiFnDipatcher = fnsToMultiFnDispatcher(ImmutableList([fn]))
     expect(() => {
-      multiFnDipatcher.dispatch(
-        createContext({
-          callee: this
-        }),
-        [],
-        { multi: false, partial: false }
-      )
+      multiFnDipatcher.dispatch(createContext({}), [], {
+        multi: false,
+        partial: false
+      })
     }).toThrowMatchingObject({ code: ErrorCode.NO_MATCH })
   })
 
@@ -58,7 +56,9 @@ describe('fnsToMultiFnDispatcher', () => {
       },
       [String, String]
     )
-    const multiFnDipatcher = fnsToMultiFnDispatcher([fn1, fn2, fn3])
+    const multiFnDipatcher = fnsToMultiFnDispatcher(
+      ImmutableList([fn1, fn2, fn3])
+    )
     const result = multiFnDipatcher.dispatch(
       createContext({
         callee: this
@@ -66,10 +66,12 @@ describe('fnsToMultiFnDispatcher', () => {
       ['foo'],
       { multi: true, partial: true }
     )
-    expect(result).toEqual([
-      { delta: -1, exact: false, fn: fn2, partial: true },
-      { delta: -1, exact: false, fn: fn3, partial: true }
-    ])
+    expect(result).toEqual(
+      ImmutableList([
+        { delta: -1, exact: false, fn: fn2, partial: true },
+        { delta: -1, exact: false, fn: fn3, partial: true }
+      ])
+    )
   })
 
   test('returns partial matches for multi true, partial true', () => {
@@ -91,7 +93,9 @@ describe('fnsToMultiFnDispatcher', () => {
       },
       [String, String, String]
     )
-    const multiFnDipatcher = fnsToMultiFnDispatcher([fn1, fn2, fn3])
+    const multiFnDipatcher = fnsToMultiFnDispatcher(
+      ImmutableList([fn1, fn2, fn3])
+    )
     const result = multiFnDipatcher.dispatch(
       createContext({
         callee: this
@@ -99,11 +103,13 @@ describe('fnsToMultiFnDispatcher', () => {
       ['foo', 'bar'],
       { multi: true, partial: true }
     )
-    expect(result).toEqual([
-      { delta: 1, exact: false, fn: fn1, partial: false },
-      { delta: 0, exact: true, fn: fn2, partial: false },
-      { delta: -1, exact: false, fn: fn3, partial: true }
-    ])
+    expect(result).toEqual(
+      ImmutableList([
+        { delta: 1, exact: false, fn: fn1, partial: false },
+        { delta: 0, exact: true, fn: fn2, partial: false },
+        { delta: -1, exact: false, fn: fn3, partial: true }
+      ])
+    )
   })
 
   test('Does not return partial matches for multi true, partial false', () => {
@@ -131,7 +137,9 @@ describe('fnsToMultiFnDispatcher', () => {
       },
       [String, String, String, String]
     )
-    const multiFnDipatcher = fnsToMultiFnDispatcher([fn1, fn2, fn3, fn4])
+    const multiFnDipatcher = fnsToMultiFnDispatcher(
+      ImmutableList([fn1, fn2, fn3, fn4])
+    )
     const result = multiFnDipatcher.dispatch(
       createContext({
         callee: this
@@ -139,10 +147,12 @@ describe('fnsToMultiFnDispatcher', () => {
       ['foo', 'bar', 'baz'],
       { multi: true, partial: false }
     )
-    expect(result).toEqual([
-      { delta: 2, exact: false, fn: fn1, partial: false },
-      { delta: 1, exact: false, fn: fn2, partial: false },
-      { delta: 0, exact: true, fn: fn3, partial: false }
-    ])
+    expect(result).toEqual(
+      ImmutableList([
+        { delta: 2, exact: false, fn: fn1, partial: false },
+        { delta: 1, exact: false, fn: fn2, partial: false },
+        { delta: 0, exact: true, fn: fn3, partial: false }
+      ])
+    )
   })
 })

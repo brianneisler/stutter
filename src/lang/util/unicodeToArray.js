@@ -1,4 +1,4 @@
-import { REGEX_UNICODE } from '../constants'
+import { UNICODE } from '../constants/Regex'
 
 /**
  * Converts a unicode `string` to an array.
@@ -13,6 +13,6 @@ import { REGEX_UNICODE } from '../constants'
  *
  * unicodeToArray('abc') //=> ['a', 'b', 'c']
  */
-const unicodeToArray = (string) => string.match(REGEX_UNICODE) || []
+const unicodeToArray = (string) => string.match(UNICODE) || []
 
 export default unicodeToArray

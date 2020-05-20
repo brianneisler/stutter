@@ -18,7 +18,6 @@ describe('fnApply', () => {
         createContext({
           callee: this
         }),
-        null,
         ['a', 'b', 'c']
       )
     ).toBe(0)
@@ -38,13 +37,12 @@ describe('fnApply', () => {
         createContext({
           callee: this
         }),
-        null,
         ['a', 'b', 'c']
       )
     ).toBe(0)
   })
 
-  test('defaults self to null and arguments to empty array', () => {
+  test('defaults jsContext to null and arguments to empty array', () => {
     const func = function () {
       expect(arguments.length).toBe(0)
       expect(this).toBe(null)
@@ -61,7 +59,7 @@ describe('fnApply', () => {
     ).toBe(0)
   })
 
-  test('accepts self as third parameter', () => {
+  test('accepts self as jsContext in Context parameter', () => {
     const self = {}
     const func = function () {
       expect(arguments.length).toBe(0)
@@ -73,9 +71,9 @@ describe('fnApply', () => {
       fnApply(
         fn,
         createContext({
-          callee: this
-        }),
-        self
+          callee: this,
+          jsContext: self
+        })
       )
     ).toBe(0)
   })

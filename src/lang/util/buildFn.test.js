@@ -141,4 +141,22 @@ describe('buildFn', () => {
     )
     expect(fn.call(context, 'foo')).toEqual('foo')
   })
+
+  test('defines the @@fn symbol', () => {
+    const fn = buildFn((argA, argB) => {
+      return argB
+    })
+    expect(fn[FN]).toBeInstanceOf(Fn)
+  })
+
+  test('defines the @@fn symbol', () => {
+    const fn = buildFn(() => 'foo', {
+      returns: String
+    })
+    const updatedFn = fn.update({
+      returns: String
+    })
+
+    expect(fn).toBe(updatedFn)
+  })
 })

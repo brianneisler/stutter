@@ -1,4 +1,5 @@
-import { DEBURRED_LETTERS, REGEX_COMBO_MARK, REGEX_LATIN } from '../lang/constants'
+import { COMBO_MARK, LATIN } from '../lang/constants/Regex'
+import { DEBURRED_LETTERS } from '../lang/constants'
 import DeburredString from '../lang/types/DeburredString'
 import String from '../lang/types/String'
 import defn from '../lang/defn'
@@ -28,7 +29,9 @@ const deburr = defn(
   [String, () => DeburredString],
   (string) => {
     string = toString(string)
-    return string && string.replace(REGEX_LATIN, DEBURRED_LETTERS).replace(REGEX_COMBO_MARK, '')
+    return (
+      string && string.replace(LATIN, DEBURRED_LETTERS).replace(COMBO_MARK, '')
+    )
   }
 )
 

@@ -3,10 +3,9 @@ import anyIsPlaceholder from './anyIsPlaceholder'
 import anyMatchesParameter from './anyMatchesParameter'
 import arrayClone from './arrayClone'
 import arrayConcat from './arrayConcat'
-import arrayMap from './arrayMap'
 import arraySlice from './arraySlice'
 import buildException from './buildException'
-import createContext from './createContext'
+import buildFnCaller from './buildFnCaller'
 import fnApply from './fnApply'
 import fnGetMeta from './fnGetMeta'
 import fnsToMultiFnDispatcher from './fnsToMultiFnDispatcher'
@@ -97,23 +96,31 @@ const curryParameterizedFn = (fn, handler) => {
     }
     if (length < parameters.length) {
       newParameters = arrayConcat(newParameters, arraySlice(parameters, length))
-      return fn.update({
-        curried: {
-          parameters: newParameters,
-          placeholders: newPlaceholders,
-          received: newReceived
-        },
-        curry: true
-      })
+      // TODO BRN: These updates will be sent down to the child Fns through the
+      // dispatch update. Not sure if that makes sense...
+      return buildFnCaller(
+        fn.update({
+          curried: {
+            parameters: newParameters,
+            placeholders: newPlaceholders,
+            received: newReceived
+          },
+          curry: true
+        })
+      )
     } else if (newPlaceholders.length > 0) {
-      return fn.update({
-        curried: {
-          parameters: newParameters,
-          placeholders: newPlaceholders,
-          received: newReceived
-        },
-        curry: true
-      })
+      // TODO BRN: These updates will be sent down to the child Fns through the
+      // dispatch update. Not sure if that makes sense...
+      return buildFnCaller(
+        fn.update({
+          curried: {
+            parameters: newParameters,
+            placeholders: newPlaceholders,
+            received: newReceived
+          },
+          curry: true
+        })
+      )
     }
     return handler.apply(this, newReceived)
   }
@@ -121,10 +128,10 @@ const curryParameterizedFn = (fn, handler) => {
 
 const findExactOrClosestCompletedMatch = (matches) => {
   let closestMatch
-  const { length } = matches
+  const { size } = matches
   let idx = -1
-  while (++idx < length) {
-    const match = matches[idx]
+  while (++idx < size) {
+    const match = matches.get(idx)
     if (!match.partial) {
       if (match.exact) {
         return match
@@ -140,17 +147,16 @@ const findExactOrClosestCompletedMatch = (matches) => {
 const curryMultiFn = (fn) => {
   // TODO BRN: Figure out how to pass down the context
   const func = function () {
-    const context = createContext({
-      callee: func
-    })
     const matches = fn.dispatch(
-      context,
+      this,
       arguments,
       { multi: true, partial: true }
       // TODO BRN: Figure out how to connect this to the invoking function
       // ("callee") context
     )
-    if (matches.length === 0) {
+    if (matches.size === 0) {
+      console.log('arguments:', arguments)
+      console.log('fn.meta:', fn.meta)
       throw buildException(fn)
         .expected.arguments(arguments)
         .toMatchDispatcher(fn.dispatcher)
@@ -162,21 +168,26 @@ const curryMultiFn = (fn) => {
       // moment that is only type checking (which does not happen on multi
       // methods) so there is nothing being skipped. But, if the composition
       // chain changes, we'll need to find a better method for this...
-      return fnApply(completedMatch.fn, context, this, arguments)
+      return fnApply(completedMatch.fn, this, arguments)
     }
 
-    const curriedFns = arrayMap(matches, (match) => {
+    // TODO BRN: Might be able to replace this part with an update call to the dispatcher
+    const curriedFns = matches.map((match) => {
       let matchFn = match.fn
       if (!fnGetMeta(matchFn).curry) {
+        // TODO BRN: Pass the context along here so that we can reconstruct the
+        // location that the curried function was created
         matchFn = matchFn.update({ curry: true })
       }
-      return fnApply(matchFn, context, this, arguments)
+      return fnApply(matchFn, this, arguments)
     })
 
-    return fn.update({
-      curry: true,
-      dispatcher: fnsToMultiFnDispatcher(curriedFns)
-    })
+    return buildFnCaller(
+      fn.update({
+        curry: true,
+        dispatcher: fnsToMultiFnDispatcher(curriedFns)
+      })
+    )
   }
   return func
 }

@@ -20,10 +20,10 @@ import fnGetMeta from './fnGetMeta'
  * //=> 10
  */
 const fnCurry = (fn) => {
-  if (!fnGetMeta(fn).curry) {
-    return fn.update({ curry: true })
-  }
-  return fn
+  // NOTE BRN: The update method does a shallow comparison on the updated
+  // options. If they are the same, the same fn instance will be returned, which
+  // is what we want for currying.
+  return fn.update({ curry: true })
 }
 
 export default fnCurry

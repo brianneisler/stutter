@@ -30,14 +30,14 @@ const definitionsToFn = (
   }
 ) => {
   const fns = definitionsToFns(definitions)
-  if (fns.length === 0) {
+  if (fns.size === 0) {
     throw new Error('fn method expects at least one function')
   }
   let fn
-  if (fns.length > 1) {
+  if (fns.size > 1) {
     fn = fnsToMultiFn(fns)
   } else {
-    fn = fns[0]
+    fn = fns.get(0)
   }
 
   return fn.update(options)

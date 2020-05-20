@@ -15,7 +15,7 @@ describe('fnCall', () => {
       return 0
     }
     const fn = buildFn(func)
-    expect(fnCall(fn, testContext, null, 'a', 'b', 'c')).toBe(0)
+    expect(fnCall(fn, testContext, 'a', 'b', 'c')).toBe(0)
   })
 
   test('executes if given the Fn class directly', () => {
@@ -29,7 +29,7 @@ describe('fnCall', () => {
       return 0
     }
     const fn = buildFn(func)
-    expect(fnCall(fn[FN], testContext, null, 'a', 'b', 'c')).toBe(0)
+    expect(fnCall(fn[FN], testContext, 'a', 'b', 'c')).toBe(0)
   })
 
   test('defaults context to null and arguments to empty array', () => {
@@ -45,17 +45,18 @@ describe('fnCall', () => {
     expect(fnCall(fn, testContext)).toBe(0)
   })
 
-  test('accepts self as second parameter', () => {
-    const testContext = createContext({
-      callee: this
-    })
+  test('sets js execution context from Context.jsContext', () => {
     const self = {}
+    const testContext = createContext({
+      callee: this,
+      jsContext: self
+    })
     const func = function () {
       expect(arguments.length).toBe(0)
       expect(this).toBe(self)
       return 0
     }
     const fn = buildFn(func)
-    expect(fnCall(fn, testContext, self)).toBe(0)
+    expect(fnCall(fn, testContext)).toBe(0)
   })
 })

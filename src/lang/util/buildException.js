@@ -66,6 +66,21 @@ const buildException = (source, { code, stack } = {}) => {
                 value: returned
               }
             })
+        ),
+      this: (_this) =>
+        buildExpected(
+          'This',
+          (expected) =>
+            new Exception({
+              code,
+              expected,
+              source,
+              stack,
+              target: {
+                type: 'This',
+                value: _this
+              }
+            })
         )
     }
   }

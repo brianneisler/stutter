@@ -1,9 +1,9 @@
+import { STACKTRACE_LINE } from '../constants/Regex'
 import { TO_STRING_TAG } from '../constants/Symbol'
 import buildCallstack from './buildCallstack'
 
-const STACKTRACE_LINE = /^\s*at\s([a-zA-Z0-9\._$\-:]*)\s*\(?([a-zA-Z0-9\/\._$]*):([0-9]*):([0-9]*)\)?$/
-
 const parseCallee = (callstack) => {
+  // console.log('callstack:', callstack)
   const line = callstack[5]
   const match = line.match(STACKTRACE_LINE)
   const name = match[1]

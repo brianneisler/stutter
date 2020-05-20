@@ -177,6 +177,8 @@ describe('argumentsMatchToFnParameters', () => {
     const fn = buildFn(() => {})
     expect(() =>
       argumentsMatchToFnParameters([123], fn, { multi: false, partial: false })
-    ).toThrowError(/^parameter 'fn' must be a parameterized/)
+    ).toThrowMatchingObject({
+      type: 'Expected:Fn:toHaveParameters'
+    })
   })
 })

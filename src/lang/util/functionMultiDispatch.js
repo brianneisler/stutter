@@ -1,19 +1,16 @@
 import buildException from './buildException'
-import createContext from './createContext'
 import fnApply from './fnApply'
 
 const functionMultiDispatch = function (fn) {
   const { meta } = fn
   const func = function () {
-    const context = createContext({
-      callee: func
-    })
+    const context = this
     // TODO BRN: In the event that this results in a no match error, we should
     // try to identify the closest match that was likely intended and do a
     // parameter validation error
     let match = fn.dispatch(context, arguments, meta)
     if (meta.multi) {
-      if (match.length === 0) {
+      if (match.size === 0) {
         // TODO BRN: In the event that this results in a no matches, we should
         // try to identify the closest match that was likely intended and do a
         // parameter validation error
@@ -22,9 +19,9 @@ const functionMultiDispatch = function (fn) {
           .toMatchDispatcher(fn.dispatcher)
       }
       // NOTE BRN: In the event of multiple matches, we execute the first match
-      match = match[0]
+      match = match.get(0)
     }
-    return fnApply(match.fn, context, this, arguments)
+    return fnApply(match.fn, context, arguments)
   }
   return func
 }

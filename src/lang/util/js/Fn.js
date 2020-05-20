@@ -1,9 +1,11 @@
-import { FN, META, TO_STRING_TAG } from '../../constants/Symbol'
+import { META, TO_SIGNATURE, TO_STRING_TAG } from '../../constants/Symbol'
 import { v4 as uuid } from 'uuid'
+import Context from './Context'
+import anyIsContext from '../anyIsContext'
 import anyIsNumber from '../anyIsNumber'
 import anyToName from '../anyToName'
-import buildCallstack from '../buildCallstack'
-import createContext from '../createContext'
+import anyToSignatureString from '../anyToSignatureString'
+import buildException from '../buildException'
 import createJSCallee from '../createJSCallee'
 import fnToSignatureString from '../fnToSignatureString'
 import functionAry from '../functionAry'
@@ -16,17 +18,17 @@ import functionMultiDispatch from '../functionMultiDispatch'
 import functionResolve from '../functionResolve'
 import functionTypeCheck from '../functionTypeCheck'
 import objectDefineProperty from '../objectDefineProperty'
-import sourceToString from '../sourceToString'
-
-const buildFnCaller = (fn) =>
-  function () {
-    return fn.apply(createContext({}), this, arguments)
-  }
+import objectKeys from '../objectKeys'
+import objectPickProps from '../objectPickProps'
+import objectShallowEquals from '../objectShallowEquals'
 
 const buildFnHandler = function (fn) {
   const { meta } = fn
   let handler = functionDefineSymbolFn(function () {
-    return fn.func.apply(this, arguments)
+    if (!anyIsContext(this)) {
+      throw buildException(handler).expected.this(this).toBeInstanceOf(Context)
+    }
+    return fn.func.apply(this.jsContext, arguments)
   }, fn)
 
   // NOTE BRN: the order of how we compose these functions matters.
@@ -81,121 +83,26 @@ const buildFnHandler = function (fn) {
   return handler
 }
 
-const functionDispatch = function (context, args, options) {
-  return this[FN].dispatch(context, args, options)
-}
-
-const functionLog = function (logger) {
-  return this[FN].log(logger)
-}
-
-const functionUpdate = function (updates) {
-  return this[FN].update(updates)
-}
-
-const fnCallerDefineProps = (caller, fn) => {
-  const { parameters } = fn.meta
-  if (parameters && parameters.length > 0) {
-    objectDefineProperty(caller, 'length', {
-      configurable: true,
-      value: parameters.length
-    })
-  }
-  objectDefineProperty(caller, META, {
-    configurable: true,
-    get() {
-      return this[FN].meta
-    }
-  })
-  objectDefineProperty(caller, 'dispatcher', {
-    configurable: true,
-    get() {
-      return this[FN].meta.dispatcher
-    }
-  })
-  objectDefineProperty(caller, 'parameters', {
-    configurable: true,
-    get() {
-      return this[FN].meta.parameters
-    }
-  })
-  objectDefineProperty(caller, 'returns', {
-    configurable: true,
-    get() {
-      return this[FN].meta.returns
-    }
-  })
-  objectDefineProperty(caller, 'dispatch', {
-    configurable: true,
-    value: functionDispatch
-  })
-  objectDefineProperty(caller, 'log', {
-    configurable: true,
-    value: functionLog
-  })
-  objectDefineProperty(caller, 'update', {
-    configurable: true,
-    value: functionUpdate
-  })
-  return functionDefineSymbolFn(caller, fn)
-}
-
 /**
  * Note: This class is **immutable**
  */
 class Fn {
-  /**
-   * Build a new Fn that will optionally...
-   * 1) check the Parameters and the return type if they exist.
-   * 2) curry
-   * 3) resolve incoming parameters
-   *
-   * @private
-   * @function
-   * @since v0.1.0
-   * @category lang.util
-   * @param {Function} func The function to wrap.
-   * @param {?Object} meta The meta properties to set on the new Fn.
-   * @return {Function} The new type checked function.
-   * @example
-   *
-   * const fn = buildFn((arg1, arg2) => arg1 + arg2, {
-   *   parameters: [
-   *     new Parameter('arg1', Number),
-   *     new Parameter('arg1', Number)
-   *   ],
-   *   returns: Number
-   * })
-   *
-   * fn(1, 2)
-   * //=> 3
-   *
-   * fn('foo', 123)
-   * //=> throws TypeError
-   *
-   * const fn = buildFn(() => 'foo', {
-   *   parameters: [],
-   *   returns: Number
-   * })
-   *
-   * fn()
-   * //=> throws TypeError
-   */
-  static build(func, meta = {}) {
-    const fn = new Fn(func, meta)
-    const caller = buildFnCaller(fn)
-    return fnCallerDefineProps(caller, fn)
-  }
-
   constructor(func, meta) {
+    // TODO BRN: A faster method of generation for the id would be to use an
+    // global increment counter. This would be problematic in a situation with
+    // more than one process though.
     this.id = uuid()
+
+    // TODO BRN: Not sure this is the right place for this assignment
     objectDefineProperty(func, 'name', {
       configurable: true,
       value: `Fn:${this.id}`
     })
-    // console.log('func.name:', func)
     this.func = func
     this.meta = meta
+    // TODO BRN: Figure out how to cache the generation of parts of this handler
+    // TODO BRN: Would be best to lazy generate this handler since it is likely
+    // that this Fn will never be executed in multiple successive `update` calls
     this.handler = buildFnHandler(this)
   }
 
@@ -205,6 +112,10 @@ class Fn {
 
   get [TO_STRING_TAG]() {
     return 'Fn'
+  }
+
+  get [TO_SIGNATURE]() {
+    return fnToSignatureString(this)
   }
 
   get curried() {
@@ -223,32 +134,31 @@ class Fn {
     return this.meta.returns
   }
 
-  apply(context, self, args) {
-    let { callee } = context
+  apply(context, args) {
     try {
-      return this.handler.apply(self, args)
+      return this.handler.apply(context, args)
     } catch (error) {
-      const jsCallee = createJSCallee()
-      if (!callee) {
-        callee = jsCallee
-      }
-      console.log(
-        `Error occurred while ${sourceToString(
-          callee
-        )} was invoking ${fnToSignatureString(this)} at (${jsCallee.file}:${
-          jsCallee.lineNumber
-        }:${jsCallee.columnNumber})`
-      )
+      // let { callee } = context
+      // const jsCallee = createJSCallee()
+      // if (!callee) {
+      //   callee = jsCallee
+      // }
+      // console.log(
+      //   `Error occurred while ${anyToSignatureString(
+      //     callee
+      //   )} was invoking ${anyToSignatureString(this)} at (${jsCallee.file}:${
+      //     jsCallee.lineNumber
+      //   }:${jsCallee.columnNumber})`
+      // )
       throw error
     }
   }
 
-  call(context, self, ...args) {
-    return this.apply(context, self, args)
+  call(context, ...args) {
+    return this.apply(context, args)
   }
 
   dispatch(context, args, options) {
-    const { callee } = context
     try {
       return this.dispatcher.dispatch(
         context
@@ -261,11 +171,18 @@ class Fn {
         options
       )
     } catch (error) {
-      console.log(
-        `Error occurred while ${fnToSignatureString(
-          callee
-        )} was dispatching to ${fnToSignatureString(this)}`
-      )
+      // let { callee } = context
+      // const jsCallee = createJSCallee()
+      // if (!callee) {
+      //   callee = jsCallee
+      // }
+      // console.log(
+      //   `Error occurred while ${anyToSignatureString(
+      //     callee
+      //   )} was dispatching to ${anyToSignatureString(this)} at (${
+      //     jsCallee.file
+      //   }:${jsCallee.lineNumber}:${jsCallee.columnNumber})`
+      // )
       throw error
     }
   }
@@ -287,7 +204,23 @@ class Fn {
     // TODO BRN: In the event that parameters are updated we should either wipe
     // out or persist any curried meta values. Not sure how to quite do this at
     // the moment...
-    return Fn.build(this.func, {
+    if (
+      objectShallowEquals(
+        objectPickProps(this.meta, objectKeys(updates)),
+        updates
+      )
+    ) {
+      return this
+    }
+
+    if (this.dispatcher && !updates.dispatcher) {
+      return new Fn(this.func, {
+        ...this.meta,
+        ...updates,
+        dispatcher: this.dispatcher.update(updates)
+      })
+    }
+    return new Fn(this.func, {
       ...this.meta,
       ...updates
     })

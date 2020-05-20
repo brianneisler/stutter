@@ -19,7 +19,7 @@ import argumentsResolveAllWith from './argumentsResolveAllWith'
  * await func(Promise.resolve('foo'), 123)
  */
 const functionResolve = (func) =>
-  function() {
+  function () {
     return argumentsResolveAllWith(arguments, func, this)
   }
 

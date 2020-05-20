@@ -18,7 +18,7 @@ const namespacesFilterTypesForProtocol = functionMemoizeWith(
  * @since v0.1.0
  * @category lang.util
  * @param {Protocol} protocol The `Protocol` to use to filter the `Type`s
- * @returns {List<Type>} a Sequence of `Type`s found for the `Protocol`.
+ * @returns {ImmutableList<Type>} a Sequence of `Type`s found for the `Protocol`.
  * @example
  *
  */

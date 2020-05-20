@@ -1,4 +1,6 @@
-import anyIsArray from './anyIsArray'
+import ImmutableList from './js/ImmutableList'
+import anyIsImmutableList from './anyIsImmutableList'
+import buildException from './buildException'
 import buildMultiFn from './buildMultiFn'
 import fnsToMultiFnDispatcher from './fnsToMultiFnDispatcher'
 
@@ -16,10 +18,10 @@ import fnsToMultiFnDispatcher from './fnsToMultiFnDispatcher'
  *
  */
 const fnsToMultiFn = (fns, meta = {}) => {
-  if (!anyIsArray(fns)) {
-    throw new TypeError(
-      `fnsToMultiFn expected 'fns' parameter to be an Array. Instead was given ${fns}`
-    )
+  if (!anyIsImmutableList(fns)) {
+    throw buildException(fnsToMultiFn)
+      .expected.arg(fns, 0)
+      .toBeInstanceOf(ImmutableList)
   }
   return buildMultiFn(fnsToMultiFnDispatcher(fns), meta)
 }

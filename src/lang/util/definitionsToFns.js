@@ -1,8 +1,8 @@
 import { ITERATOR } from '../constants/Symbol'
+import ImmutableList from './js/ImmutableList'
 import anyIsArray from './anyIsArray'
 import anyIsFn from './anyIsFn'
 import anyIsFunction from './anyIsFunction'
-import anyLog from './anyLog'
 import definitionToFn from './definitionToFn'
 import fnCastWithDefinition from './fnCastWithDefinition'
 
@@ -14,14 +14,14 @@ import fnCastWithDefinition from './fnCastWithDefinition'
  * @since v0.1.0
  * @category lang.util
  * @param {Array<(Array<Type> | Function)>} definitions
- * @return {Array<Fn>} A new Array of Fns with the given definitions attached.
+ * @return {ImmutableList<Fn>} A new `ImmutableList` of Fns with the given definitions attached.
  * @example
  *
  * definitionsToFns([
  *   [Any, String], (foo, bar) => {},
  *   [Number, String], (baz, bop) => {},
  * ])
- * //=> [
+ * //=> ImmutableList [
  * //   Fn {
  * //     paramters: [
  * //       { name: 'foo', type: Any },
@@ -45,7 +45,7 @@ const definitionsToFns = (definitions) => {
     )
   }
   const iter = definitions[ITERATOR]()
-  const fns = []
+  let fns = ImmutableList([])
   let next = iter.next()
   let func
   let definition
@@ -63,20 +63,13 @@ const definitionsToFns = (definitions) => {
     }
     if (anyIsFn(next.value)) {
       let fn = next.value
-
       if (definition) {
-        // anyLog(definitions).push()
-        // throw new Error('break')
-        // console.log('fn precast')
-        // anyLog(fn).push()
         fn = fnCastWithDefinition(fn, definition)
-        // console.log('fn postcast')
-        // anyLog(fn).push()
       }
-      fns.push(fn)
+      fns = fns.push(fn)
     } else if (anyIsFunction(next.value)) {
       func = next.value
-      fns.push(definitionToFn(func, definition))
+      fns = fns.push(definitionToFn(func, definition))
     } else {
       throw new Error(
         `definitionsToFns method expected a Function in the Array. Instead found ${next.value}`

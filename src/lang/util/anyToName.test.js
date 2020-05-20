@@ -1,5 +1,5 @@
-import Fn from './js/Fn'
 import anyToName from './anyToName'
+import buildFn from './buildFn'
 
 describe('anyToName', () => {
   it('converts null to "null"', () => {
@@ -43,7 +43,7 @@ describe('anyToName', () => {
   })
 
   it('converts an Fn to name contained in meta', () => {
-    const fn = Fn.build(() => {}, { name: 'foo' })
+    const fn = buildFn(() => {}, { name: 'foo' })
     expect(anyToName(fn)).toBe('foo')
   })
 })

@@ -51,7 +51,9 @@ const functionTypeCheck = (func, meta) => {
         const parameter = parameters[idx]
         if (parameter) {
           if (!anyMatchesParameter(arg, parameter, meta)) {
-            throw buildException(func).expected.arg(arguments, idx).toMatchParameter(parameter)
+            throw buildException(func)
+              .expected.arg(arguments, idx)
+              .toMatchParameter(parameter)
           }
         } else {
           done = true
@@ -59,7 +61,9 @@ const functionTypeCheck = (func, meta) => {
         idx += 1
       }
       if (arguments.length < parameters.length && !partial) {
-        throw buildException(func).expected.arguments(arguments).toBeOfMinLength(parameters.length)
+        throw buildException(func)
+          .expected.arguments(arguments)
+          .toBeOfMinLength(parameters.length)
       }
     }
     const returned = func.apply(this, arguments)
@@ -67,13 +71,17 @@ const functionTypeCheck = (func, meta) => {
       if (resolve) {
         return anyResolveWith(returned, (resolvedReturned) => {
           if (!returns.is(resolvedReturned, meta)) {
-            throw buildException(func).expected.returned(resolvedReturned).toMatchReturns(returns)
+            throw buildException(func)
+              .expected.returned(resolvedReturned)
+              .toMatchReturns(returns)
           }
           return resolvedReturned
         })
       }
       if (!returns.is(returned, meta)) {
-        throw buildException(func).expected.returned(returned).toMatchReturns(returns)
+        throw buildException(func)
+          .expected.returned(returned)
+          .toMatchReturns(returns)
       }
       return returned
     }

@@ -1,4 +1,4 @@
-import REGEX_PARAMETERS from '../constants/REGEX_PARAMETERS'
+import { PARAMETERS } from '../constants/Regex'
 
 // const STRIP_COMMENTS = /(\/\/.*$)|(\/\*[\s\S]*?\*\/)|(\s*=[^,\)]*(('(?:\\'|[^'\r\n])*')|("(?:\\"|[^"\r\n])*"))|(\s*=[^,\)]*))/gm
 const STRIP_COMMENTS = /(\/\/.*$)|(\/\*[\s\S]*?\*\/)/gm
@@ -9,7 +9,7 @@ const NAME = /^([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(?:,|$)/
 
 const functionGetParameterNames = (func) => {
   const funcStringWithoutComments = func.toString().replace(STRIP_COMMENTS, '')
-  const matches = funcStringWithoutComments.match(REGEX_PARAMETERS)
+  const matches = funcStringWithoutComments.match(PARAMETERS)
   if (!matches) {
     throw new Error(`Could not parse parameter names from function ${func}`)
   }

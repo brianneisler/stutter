@@ -1,4 +1,3 @@
-import { FN } from '../../constants/Symbol'
 import Any from '../../types/Any'
 import Fn from './Fn'
 import Parameter from './Parameter'
@@ -16,7 +15,7 @@ describe('js:Fn', () => {
   })
 
   test('updates parameters from empty value', () => {
-    const fn = Fn.build(() => {})
+    const fn = new Fn(() => {}, {})
     const result = fn.update({
       parameters: [new Parameter('argA', Any), new Parameter('argB', Any)]
     })
@@ -28,10 +27,16 @@ describe('js:Fn', () => {
     ])
   })
 
-  test('defines the @@fn symbol', () => {
-    const fn = Fn.build((argA, argB) => {
-      return argB
+  test('if meta is not change update returns same Fn', () => {
+    const parameters = [new Parameter('argA', Any)]
+    const fn = new Fn(() => {}, {
+      parameters
     })
-    expect(fn[FN]).toBeInstanceOf(Fn)
+
+    const updatedFn = fn.update({
+      parameters
+    })
+
+    expect(updatedFn).toBe(fn)
   })
 })

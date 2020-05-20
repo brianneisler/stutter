@@ -5,7 +5,7 @@ import functionDefineLength from './functionDefineLength'
 // indicate that simply using an array slice is actually faster
 // https://jsperf.com/direct-call-vs-slice
 const aryFunction = (func, number) => {
-  return function() {
+  return function () {
     return func.apply(this, arraySlice(arguments, 0, number))
   }
 }
@@ -41,6 +41,7 @@ const aryFunction = (func, number) => {
  * takesOneArg(1, 2)
  * //=> [1, undefined]
  */
-const functionAry = (func, number) => functionDefineLength(aryFunction(func, number), number)
+const functionAry = (func, number) =>
+  functionDefineLength(aryFunction(func, number), number)
 
 export default functionAry

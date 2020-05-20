@@ -1,4 +1,5 @@
-import { MAX_SAFE_INTEGER, REGEX_UINT } from '../constants'
+import { MAX_SAFE_INTEGER } from '../constants'
+import { UINT } from '../constants/Regex'
 
 /**
  * Checks if `value` is a valid array-like index.
@@ -25,7 +26,7 @@ const anyIsIndex = (any) => {
   // NOTE BRN: max safe length is exactly MAX_SAFE_INTEGER since the length of an array cannot safely be greater than the max integer.
   const type = typeof any
   return (
-    (type == 'number' || (type != 'symbol' && REGEX_UINT.test(any))) &&
+    (type == 'number' || (type != 'symbol' && UINT.test(any))) &&
     any > -1 &&
     any % 1 == 0 &&
     any < MAX_SAFE_INTEGER

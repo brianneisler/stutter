@@ -1,4 +1,4 @@
-import { REGEX_UNICODE } from '../constants'
+import { UNICODE } from '../constants/Regex'
 
 /**
  * Gets the size of a Unicode `string`.
@@ -12,12 +12,12 @@ import { REGEX_UNICODE } from '../constants'
  * @example
  */
 const unicodeSize = (string) => {
-  let result = (REGEX_UNICODE.lastIndex = 0)
-  while (REGEX_UNICODE.test(string)) {
+  let result = (UNICODE.lastIndex = 0)
+  while (UNICODE.test(string)) {
     result += 1
   }
   // NOTE BRN: Reset to prevent messing up any other uses of this regex
-  REGEX_UNICODE.lastIndex = 0
+  UNICODE.lastIndex = 0
   return result
 }
 

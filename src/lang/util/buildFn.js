@@ -1,4 +1,5 @@
 import Fn from './js/Fn'
+import buildFnCaller from './buildFnCaller'
 
 /**
  * Generate a new Fn that will check the Parameters and the return type if they exist.
@@ -34,6 +35,10 @@ import Fn from './js/Fn'
  * fn()
  * //=> throws TypeError
  */
-const buildFn = (func, meta) => Fn.build(func, meta)
+const buildFn = (func, meta = {}) => {
+  const fn = new Fn(func, meta)
+  // TODO BRN: Figure out how to cache the generation of the caller
+  return buildFnCaller(fn)
+}
 
 export default buildFn

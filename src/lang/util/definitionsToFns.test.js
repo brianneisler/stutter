@@ -1,4 +1,5 @@
 import Any from '../types/Any'
+import ImmutableList from './js/ImmutableList'
 import Number from '../types/Number'
 import Parameter from './js/Parameter'
 import String from '../types/String'
@@ -19,30 +20,34 @@ describe('definitionsToFns', () => {
         return any
       }
     ])
-    expect(fns).toBeInstanceOf(Array)
-    expect(fns.length).toBe(2)
-    expect(fnGetMeta(fns[0]).parameters).toEqual([
+    expect(fns).toBeInstanceOf(ImmutableList)
+    expect(fns.size).toBe(2)
+    expect(fnGetMeta(fns.get(0)).parameters).toEqual([
       new Parameter('num', Number),
       new Parameter('str', String)
     ])
 
-    expect(fnGetMeta(fns[1]).parameters).toEqual([new Parameter('any', Any)])
+    expect(fnGetMeta(fns.get(1)).parameters).toEqual([
+      new Parameter('any', Any)
+    ])
   })
 
   test('Returns Fns without modification', () => {
     const fn = definitionToFn(() => {})
     const fns = definitionsToFns([fn])
-    expect(fns).toBeInstanceOf(Array)
-    expect(fns.length).toBe(1)
-    expect(fns[0]).toBe(fn)
+    expect(fns).toBeInstanceOf(ImmutableList)
+    expect(fns.size).toBe(1)
+    expect(fns.get(0)).toBe(fn)
   })
 
   test('Allows for recasting of Fn with new definition', () => {
     const fn = definitionToFn((foo) => foo, [String])
     expect(fnGetMeta(fn).parameters).toEqual([new Parameter('foo', String)])
     const fns = definitionsToFns([[Number], fn])
-    expect(fns[0]).not.toBe(fn)
-    expect(fnGetMeta(fns[0]).parameters).toEqual([new Parameter('foo', Number)])
+    expect(fns.get(0)).not.toBe(fn)
+    expect(fnGetMeta(fns.get(0)).parameters).toEqual([
+      new Parameter('foo', Number)
+    ])
   })
 
   test('parameterizes functions with defaults', () => {
@@ -51,9 +56,9 @@ describe('definitionsToFns', () => {
         return bar
       }
     ])
-    expect(fns).toBeInstanceOf(Array)
-    expect(fns.length).toBe(1)
-    expect(fnGetMeta(fns[0]).parameters).toEqual([
+    expect(fns).toBeInstanceOf(ImmutableList)
+    expect(fns.size).toBe(1)
+    expect(fnGetMeta(fns.get(0)).parameters).toEqual([
       new Parameter('foo', Any),
       new Parameter('bar', Any)
     ])

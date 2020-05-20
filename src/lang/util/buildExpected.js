@@ -24,6 +24,23 @@ const toBeEmpty = (next, not = false) => () =>
     })
   )
 
+const toBeInstanceOf = (next, not = false) => (_class) =>
+  next(
+    new Expected({
+      data: {
+        class: _class
+      },
+      exceptionToError: (exception, expected) =>
+        new TypeError(
+          `${sourceToString(exception.source)} expected ${targetToString(
+            exception.target
+          )} to ${not ? 'NOT ' : ''}be an instance of ${anyToName(
+            expected.data.class
+          )}. Instead was given ${targetToString(exception.target)}.`
+        )
+    })
+  )
+
 const toBeOfMinLength = (next, not = false) => (length) =>
   next(
     new Expected({
@@ -89,7 +106,7 @@ const toMatchDispatcher = (next, not = false) => (dispatcher) =>
         dispatcher
       },
       exceptionToError: (exception, expected) => {
-        const allFns = expected.data.dispatcher.getAllPossibleFns()
+        const allFns = expected.data.dispatcher.getAllDispatchableFns()
         return new TypeError(
           `${sourceToString(exception.source)} expected ${targetToString(
             exception.target
@@ -186,10 +203,12 @@ const buildExpected = (type, next) => {
     case 'Argument':
       return {
         not: {
+          toBeInstanceOf: toBeInstanceOf(next, true),
           toMatchParameter: toMatchParameter(next, true),
           toMatchRegex: toMatchRegex(next, true),
           toSatisfyProtocol: toSatisfyProtocol(next, true)
         },
+        toBeInstanceOf: toBeInstanceOf(next),
         toMatchParameter: toMatchParameter(next),
         toMatchRegex: toMatchRegex(next),
         toSatisfyProtocol: toSatisfyProtocol(next)
@@ -221,6 +240,13 @@ const buildExpected = (type, next) => {
           toMatchReturns: toMatchReturns(next, true)
         },
         toMatchReturns: toMatchReturns(next)
+      }
+    case 'This':
+      return {
+        not: {
+          toBeInstanceOf: toBeInstanceOf(next, true)
+        },
+        toBeInstanceOf: toBeInstanceOf(next)
       }
   }
   throw new Error(`Unhandled type '${type}'in buildExpected`)

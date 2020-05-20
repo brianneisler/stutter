@@ -1,3 +1,5 @@
+import { FN } from '../constants/Symbol'
+
 /**
  * Calls the function of a given `Fn`
  *
@@ -7,7 +9,6 @@
  * @category lang.util
  * @param {Fn} fn The `Fn` to call.
  * @param {Context} context The stutter `Context` to execute the `Fn` with
- * @param {Object} self The javascript `Object` context to execute the `Fn` within
  * @param {...Any} args The `Arguments` to execute the `Fn` with
  * @returns {Any} The returned value from the execution of `fn`
  * @example
@@ -17,8 +18,11 @@
  * callFn(arrayWrap, 'bar')
  * // => [ 'bar' ]
  */
-const fnCall = (fn, context, self = null, ...args) => {
-  return fn.call(context, self, ...args)
+const fnCall = (fn, context, ...args) => {
+  if (fn[FN]) {
+    fn = fn[FN]
+  }
+  return fn.call(context, ...args)
 }
 
 export default fnCall

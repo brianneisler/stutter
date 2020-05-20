@@ -1,6 +1,4 @@
-import { REGEX_STRING_ASCII_RANGE } from '../constants'
-
-const regexAsciiOnly = new RegExp(`^[${REGEX_STRING_ASCII_RANGE}]*$`)
+import { ASCII_ONLY } from '../constants/Regex'
 
 /**
  * Checks if `value` is a string made entirely of ascii characters (U+0000 - U+007F)
@@ -22,6 +20,6 @@ const regexAsciiOnly = new RegExp(`^[${REGEX_STRING_ASCII_RANGE}]*$`)
  * stringIsAsciiString('æiou')
  * // => false
  */
-const stringIsAsciiString = (string) => regexAsciiOnly.test(string)
+const stringIsAsciiString = (string) => ASCII_ONLY.test(string)
 
 export default stringIsAsciiString
