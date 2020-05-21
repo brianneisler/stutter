@@ -1,4 +1,4 @@
-import Protocol from './js/Protocol'
+import anyToStringTag from './anyToStringTag'
 
 /**
  * Checks if `any` is classified as a `Protocol`
@@ -17,6 +17,6 @@ import Protocol from './js/Protocol'
  * anyIsProtocol('abc')
  * // => false
  */
-const anyIsProtocol = (any) => any instanceof Protocol
+const anyIsProtocol = (any) => anyToStringTag(any) === 'Protocol'
 
 export default anyIsProtocol

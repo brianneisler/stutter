@@ -99,14 +99,26 @@ const toHaveParametersOrDispatcher = (next, not = false) => () =>
     })
   )
 
-const toMatchDispatcher = (next, not = false) => (dispatcher) =>
-  next(
+const toMatchDispatcher = (next, not = false) => (dispatcher) => {
+  if (!dispatcher) {
+    throw new Error('Expected Dispatcher')
+  }
+  return next(
     new Expected({
       data: {
         dispatcher
       },
       exceptionToError: (exception, expected) => {
         const allFns = expected.data.dispatcher.getAllDispatchableFns()
+        if (allFns.isEmpty()) {
+          return new TypeError(
+            `${sourceToString(exception.source)} expected ${targetToString(
+              exception.target
+            )} ${
+              not ? 'NOT ' : ''
+            }to dispatch to at least one Fn. It's possible that no Fns have been defiend for this `
+          )
+        }
         return new TypeError(
           `${sourceToString(exception.source)} expected ${targetToString(
             exception.target
@@ -120,6 +132,7 @@ const toMatchDispatcher = (next, not = false) => (dispatcher) =>
       expectation: prefixNot(not, 'toMatchDispatcher')
     })
   )
+}
 
 const toMatchParameter = (next, not = false) => (parameter) =>
   next(

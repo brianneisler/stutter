@@ -13,6 +13,7 @@ describe('lang.types index', () => {
       Buffer: expect.any(Type),
       Character: expect.any(Type),
       Date: expect.any(Type),
+      Element: expect.any(Type),
       Error: expect.any(Type),
       Exception: expect.any(Type),
       Fn: expect.any(Type),

@@ -36,12 +36,12 @@ const apply = defn(
   'Applies function `func` to the argument list `args`.',
 
   [Function, Array, () => Any],
-  function(func, args) {
+  function (func, args) {
     return func.apply(this, args)
   },
 
   [Array, Function, () => Any],
-  function(args, func) {
+  function (args, func) {
     return func.apply(this, args)
   }
 )

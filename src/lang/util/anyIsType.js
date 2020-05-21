@@ -1,4 +1,4 @@
-import Type from './js/Type'
+import anyToStringTag from './anyToStringTag'
 
 /**
  * Checks if `any` is classified as a `Type`
@@ -17,6 +17,6 @@ import Type from './js/Type'
  * anyIsType('abc')
  * //=> false
  */
-const anyIsType = (any) => any instanceof Type
+const anyIsType = (any) => anyToStringTag(any) === 'Type'
 
 export default anyIsType

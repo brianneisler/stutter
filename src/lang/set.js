@@ -24,7 +24,7 @@ const set = defn(
   {
     definitions: [
       [Path, Any, Any, () => Any],
-      (path, any, value) =>
+      (path, value, any) =>
         anySetPathWith(any, path, value, contagion, get, set),
 
       [Any, Path, Any, () => Any],

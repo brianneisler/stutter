@@ -60,7 +60,10 @@ describe('js:Type', () => {
       })
       const testDef = {
         class: class {},
-        protocols: [protocol, { foo: definitionToFn((foo) => foo, [Self, () => Self]) }],
+        protocols: [
+          protocol,
+          { foo: definitionToFn((foo) => foo, [Self, () => Self]) }
+        ],
         to: () => {}
       }
       const instance = new Type(testDef)
@@ -82,7 +85,10 @@ describe('js:Type', () => {
       })
       const testDef = {
         class: class {},
-        protocols: [protocol, { foo: definitionToFn((foo) => foo, [Self, () => Self]) }],
+        protocols: [
+          protocol,
+          { foo: definitionToFn((foo) => foo, [Self, () => Self]) }
+        ],
         to: () => {}
       }
       const instance = new Type(testDef)

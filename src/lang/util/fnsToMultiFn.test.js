@@ -115,7 +115,7 @@ describe('fnsToMultiFn', () => {
       [Self, Number]
     )
     let multiFn = fnsToMultiFn(ImmutableList([fn1, fn2]))
-    multiFn = multiFn.update({ self: String })
+    multiFn = multiFn.update({ self: String }, { dispatch: true })
 
     expect(fnCall(multiFn, testContext, 'foo', 'bar')).toBe('func1-foo-bar')
     expect(fnCall(multiFn, testContext, 'foo', 123)).toBe('func2-foo-123')

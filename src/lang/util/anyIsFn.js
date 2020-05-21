@@ -1,6 +1,6 @@
 import { FN } from '../constants/Symbol'
-import Fn from './js/Fn'
 import anyIsObject from './anyIsObject'
+import anyToStringTag from './anyToStringTag'
 
 /**
  * Checks if `any` is an `Fn`.
@@ -27,9 +27,9 @@ const anyIsFn = (any) => {
     return false
   }
   if (any[FN]) {
-    return any[FN] instanceof Fn
+    return anyToStringTag(any[FN]) === 'Fn'
   }
-  return any instanceof Fn
+  return anyToStringTag(any) === 'Fn'
 }
 
 export default anyIsFn

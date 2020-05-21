@@ -1,3 +1,4 @@
+import anyIsOrSatisfies from './anyIsOrSatisfies'
 import anyMatchesParameter from './anyMatchesParameter'
 import anyResolveWith from './anyResolveWith'
 import buildException from './buildException'
@@ -70,7 +71,7 @@ const functionTypeCheck = (func, meta) => {
     if (returns) {
       if (resolve) {
         return anyResolveWith(returned, (resolvedReturned) => {
-          if (!returns.is(resolvedReturned, meta)) {
+          if (!anyIsOrSatisfies(resolvedReturned, returns, meta)) {
             throw buildException(func)
               .expected.returned(resolvedReturned)
               .toMatchReturns(returns)
@@ -78,7 +79,7 @@ const functionTypeCheck = (func, meta) => {
           return resolvedReturned
         })
       }
-      if (!returns.is(returned, meta)) {
+      if (!anyIsOrSatisfies(returned, returns, meta)) {
         throw buildException(func)
           .expected.returned(returned)
           .toMatchReturns(returns)

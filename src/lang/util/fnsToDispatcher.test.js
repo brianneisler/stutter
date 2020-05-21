@@ -5,9 +5,9 @@ import Number from '../types/Number'
 import String from '../types/String'
 import createContext from './createContext'
 import definitionToFn from './definitionToFn'
-import fnsToMultiFnDispatcher from './fnsToMultiFnDispatcher'
+import fnsToDispatcher from './fnsToDispatcher'
 
-describe('fnsToMultiFnDispatcher', () => {
+describe('fnsToDispatcher', () => {
   test('generates a simple multi function dipatcher', () => {
     const fn = definitionToFn(
       (num, str) => {
@@ -16,7 +16,7 @@ describe('fnsToMultiFnDispatcher', () => {
       [Number, String]
     )
     const fns = ImmutableList([fn])
-    const multiFnDipatcher = fnsToMultiFnDispatcher(fns)
+    const multiFnDipatcher = fnsToDispatcher(fns)
     expect(multiFnDipatcher).toBeInstanceOf(Dispatcher)
     expect(multiFnDipatcher.fns).toBe(fns)
   })
@@ -28,7 +28,7 @@ describe('fnsToMultiFnDispatcher', () => {
       },
       [Number, String]
     )
-    const multiFnDipatcher = fnsToMultiFnDispatcher(ImmutableList([fn]))
+    const multiFnDipatcher = fnsToDispatcher(ImmutableList([fn]))
     expect(() => {
       multiFnDipatcher.dispatch(createContext({}), [], {
         multi: false,
@@ -56,7 +56,7 @@ describe('fnsToMultiFnDispatcher', () => {
       },
       [String, String]
     )
-    const multiFnDipatcher = fnsToMultiFnDispatcher(
+    const multiFnDipatcher = fnsToDispatcher(
       ImmutableList([fn1, fn2, fn3])
     )
     const result = multiFnDipatcher.dispatch(
@@ -93,7 +93,7 @@ describe('fnsToMultiFnDispatcher', () => {
       },
       [String, String, String]
     )
-    const multiFnDipatcher = fnsToMultiFnDispatcher(
+    const multiFnDipatcher = fnsToDispatcher(
       ImmutableList([fn1, fn2, fn3])
     )
     const result = multiFnDipatcher.dispatch(
@@ -137,7 +137,7 @@ describe('fnsToMultiFnDispatcher', () => {
       },
       [String, String, String, String]
     )
-    const multiFnDipatcher = fnsToMultiFnDispatcher(
+    const multiFnDipatcher = fnsToDispatcher(
       ImmutableList([fn1, fn2, fn3, fn4])
     )
     const result = multiFnDipatcher.dispatch(

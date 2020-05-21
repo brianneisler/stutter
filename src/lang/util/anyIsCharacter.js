@@ -5,6 +5,8 @@ import anyIsString from './anyIsString'
  *
  * @private
  * @function
+ * @immutable
+ * @pure
  * @since v0.1.0
  * @category lang.util
  * @param {Any} any The value to check.

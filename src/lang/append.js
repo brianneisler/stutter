@@ -1,7 +1,7 @@
 import Any from './types/Any'
 import Arguments from './types/Arguments'
 import Array from './types/Array'
-import Character from './types/Character'
+import Element from './types/Element'
 import ImmutableList from './types/ImmutableList'
 import String from './types/String'
 import argumentsPush from './util/argumentsPush'
@@ -18,29 +18,41 @@ const append = defn(
     since: 'v0.2.0'
   },
 
+  // TODO BRN: Accepting both data first and data last get weird with append
+  // in cases where you may want to append an object (like an Array) to a List.
+  // Which one are you actually appending to? The List or the Array?
+
+  [Array, Element, () => Array],
+  (array, element) => arrayPush(array, element.valueOf()),
+
   [Array, Any, () => Array],
   arrayPush,
 
-  [Any, Array],
-  (any, array) => arrayPush(array, any),
+  [Element, Array, () => Array],
+  (element, array) => arrayPush(array, element.valueOf()),
 
-  [String, Character, () => String],
+  [String, String, () => String],
   stringPush,
 
-  [Character, String, () => String],
-  (character, string) => stringPush(string, character),
+  [Arguments, Element, () => Arguments],
+  (args, element) => argumentsPush(args, element.valueOf()),
 
   [Arguments, Any, () => Arguments],
   argumentsPush,
 
-  [Any, Arguments, () => Arguments],
-  (any, args) => argumentsPush(args, any),
+  [Element, Arguments, () => Arguments],
+  (element, args) => argumentsPush(args, element.valueOf()),
+
+  [ImmutableList, Element, () => ImmutableList],
+  (immutableList, element) =>
+    immutableListPush(immutableList, element.valueOf()),
 
   [ImmutableList, Any, () => ImmutableList],
   immutableListPush,
 
-  [Any, ImmutableList, () => ImmutableList],
-  (any, immutableList) => immutableListPush(immutableList, any)
+  [Element, ImmutableList, () => ImmutableList],
+  (element, immutableList) =>
+    immutableListPush(immutableList, element.valueOf())
 )
 
 export default append

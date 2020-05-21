@@ -221,16 +221,16 @@ describe('get', () => {
       }
       expect(get(path('foo.bar.bim'), value)).toBe('bop')
     })
-  })
 
-  test('empty array returns the value', () => {
-    expect(get(path([]), { a: 'b' })).toEqual({ a: 'b' })
-    expect(get(path([]), {})).toEqual({})
-    expect(get(path([]), [])).toEqual([])
-    expect(get(path([]), 'foo')).toBe('foo')
-    expect(get(path([]), 123)).toBe(123)
-    expect(get(path([]), null)).toBe(null)
-    expect(get(path([]), undefined)).toBe(undefined)
+    test('empty path returns the value', () => {
+      expect(get(path([]), { a: 'b' })).toEqual({ a: 'b' })
+      expect(get(path([]), {})).toEqual({})
+      expect(get(path([]), [])).toEqual([])
+      expect(get(path([]), 'foo')).toBe('foo')
+      expect(get(path([]), 123)).toBe(123)
+      expect(get(path([]), null)).toBe(null)
+      expect(get(path([]), undefined)).toBe(undefined)
+    })
   })
 
   test('curries the get method', () => {

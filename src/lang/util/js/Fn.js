@@ -200,7 +200,7 @@ class Fn {
     logger.log('}')
   }
 
-  update(updates) {
+  update(updates, options = {}) {
     // TODO BRN: In the event that parameters are updated we should either wipe
     // out or persist any curried meta values. Not sure how to quite do this at
     // the moment...
@@ -213,7 +213,7 @@ class Fn {
       return this
     }
 
-    if (this.dispatcher && !updates.dispatcher) {
+    if (this.dispatcher && !updates.dispatcher && options.dispatch) {
       return new Fn(this.func, {
         ...this.meta,
         ...updates,

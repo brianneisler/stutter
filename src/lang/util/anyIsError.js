@@ -27,7 +27,9 @@ const anyIsError = (any) => {
   return (
     tag == 'Error' ||
     tag == 'DOMException' ||
-    (typeof any.message == 'string' && typeof any.name == 'string' && !anyIsPlainObject(any))
+    (typeof any.message == 'string' &&
+      typeof any.name == 'string' &&
+      !anyIsPlainObject(any))
   )
 }
 

@@ -33,7 +33,6 @@ describe('lang.util.js index', () => {
       Path: expect.any(Function),
       Promise: expect.any(Function),
       Protocol: expect.any(Function),
-      ProtocolDispatcher: expect.any(Function),
       Proxy: expect.any(Function),
       Range: expect.any(Function),
       RangeError: expect.any(Function),

@@ -7,6 +7,8 @@ import anyIsNumber from './anyIsNumber'
  *
  * @private
  * @function
+ * @immutable
+ * @pure
  * @since v0.1.0
  * @category lang.util
  * @param {*} any The value to check.

@@ -8,7 +8,7 @@ import buildException from './buildException'
 import buildFnCaller from './buildFnCaller'
 import fnApply from './fnApply'
 import fnGetMeta from './fnGetMeta'
-import fnsToMultiFnDispatcher from './fnsToMultiFnDispatcher'
+import fnsToDispatcher from './fnsToDispatcher'
 import functionArity from './functionArity'
 import functionDefineSymbolFn from './functionDefineSymbolFn'
 
@@ -155,8 +155,6 @@ const curryMultiFn = (fn) => {
       // ("callee") context
     )
     if (matches.size === 0) {
-      console.log('arguments:', arguments)
-      console.log('fn.meta:', fn.meta)
       throw buildException(fn)
         .expected.arguments(arguments)
         .toMatchDispatcher(fn.dispatcher)
@@ -185,7 +183,7 @@ const curryMultiFn = (fn) => {
     return buildFnCaller(
       fn.update({
         curry: true,
-        dispatcher: fnsToMultiFnDispatcher(curriedFns)
+        dispatcher: fnsToDispatcher(curriedFns)
       })
     )
   }

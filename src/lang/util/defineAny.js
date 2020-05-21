@@ -1,5 +1,6 @@
-import { FN, META } from '../constants/Symbol'
+import { META } from '../constants/Symbol'
 import Namespace from './js/Namespace'
+import anyIsFunction from './anyIsFunction'
 import anyIsObject from './anyIsObject'
 import anyIsString from './anyIsString'
 import objectDefineProperty from './objectDefineProperty'
@@ -24,8 +25,16 @@ import stringParseNames from './stringParseNames'
  */
 const defineAny = (name, meta, any) => {
   const { namespaceName, valueName } = stringParseNames(name)
-  if (any[FN]) {
-    any[FN].meta.name = valueName
+  if (anyIsFunction(any.update)) {
+    any = any.update(
+      {
+        name: valueName,
+        namespace: namespaceName
+      },
+      {
+        dispatch: true
+      }
+    )
   }
 
   if (anyIsString(meta)) {

@@ -14,26 +14,35 @@ TASKS
   figure out how to add "clone" to the [regenerator-runtime](https://github.com/facebook/regenerator/blob/master/packages/regenerator-runtime)
 
 
+- [x] do not mutabaly assign name to Fns in def. Instead, invoke update with a
+  deep update to change the name
+- [x] implement assoc
+- [x] implement dissoc
+- [x] implement has
+- [x] implement get
+- [x] add support for use of Protocols as Type declarations of Fns 
+
 - [ ] refactor all methods to use `defn`
   - [ ] use namespaces names
   - [ ] add descriptions
-- [ ] implement assoc
-- [ ] implement dissoc
-- [ ] implement has
-- [ ] implement get
-- [ ] add support for use of Protocols as Type declarations of Fns 
+- [ ] remove this concept from `defn` 
+```
+buildMultiFn(protocolNameToDispatcher(name))
+```
+Instead, simply update the name and have the update sent down to the dispatcher
+as well. Dispatchers now support both fns and a protocol at the same time
+
 
 - [ ] add support for `extend` which should be able to extend an existing type
   with a new protocol (allows for existing types to be implemented with new
   protocols by third party libraries)
-
 
 - [ ] improve documentation
   - remove all jsdoc comments from primary methods and use code only
   - update autodoc generation to support gathering docs from code
 
 BUGS
-- [ ] currently names of functions are not properly propegated to errors. This is
+- [x] currently names of functions are not properly propegated to errors. This is
   happening because the function is constructed and the meta data is coppied to
   each layer before the call to `def` is made. Therefore only the top layer in a
   multi layer function is updated. 

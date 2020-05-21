@@ -1,7 +1,7 @@
-import ProtocolDispatcher from './js/ProtocolDispatcher'
+import Dispatcher from './js/Dispatcher'
 import root from './root'
 
 const protocolNameToDispatcher = (name, namespaces = root.namespaces) =>
-  new ProtocolDispatcher(name, namespaces)
+  new Dispatcher({ name, namespaces })
 
 export default protocolNameToDispatcher

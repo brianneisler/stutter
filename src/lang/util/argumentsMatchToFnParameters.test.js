@@ -131,7 +131,7 @@ describe('argumentsMatchToFnParameters', () => {
       },
       [Self]
     )
-    fn = fn.update({ self: String })
+    fn = fn.update({ self: String }, { dispatch: true })
     const result = argumentsMatchToFnParameters(['foo'], fn, { partial: true })
     expect(result).toEqual({
       delta: 0,

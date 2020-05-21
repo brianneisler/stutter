@@ -4,17 +4,17 @@ import createJSCallee from './createJSCallee'
 import functionDefineSymbolFn from './functionDefineSymbolFn'
 import objectDefineProperty from './objectDefineProperty'
 
-const fnCallerDispatch = function (context, args, options) {
-  return this[FN].dispatch(context, args, options)
+const fnCallerDispatch = function (...args) {
+  return this[FN].dispatch(...args)
 }
 
-const fnCallerLog = function (logger) {
-  return this[FN].log(logger)
+const fnCallerLog = function (...args) {
+  return this[FN].log(...args)
 }
 
-const fnCallerUpdate = function (updates) {
+const fnCallerUpdate = function (...args) {
   const fn = this[FN]
-  const updatedFn = this[FN].update(updates)
+  const updatedFn = this[FN].update(...args)
   if (fn !== updatedFn) {
     // HACK BRN: This should be fixed by using a class instead
     // eslint-disable-next-line no-use-before-define

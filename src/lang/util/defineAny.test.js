@@ -30,7 +30,11 @@ describe('defineAny', () => {
     const propGetNamespace = require('./propGetNamespace').default
     const defineAny = require('./defineAny').default
 
-    const result = defineAny('my-namespace.test', 'test description', 'test value')
+    const result = defineAny(
+      'my-namespace.test',
+      'test description',
+      'test value'
+    )
     expect(result).toBe('test value')
 
     const testNamespace = propGetNamespace('my-namespace')
@@ -41,6 +45,32 @@ describe('defineAny', () => {
         namespace: 'my-namespace'
       },
       value: 'test value'
+    })
+  })
+
+  test('if `any` has an `update` method. Execute the update method and return the result.', () => {
+    jest.mock('./root', () => ({}))
+    const defineAny = require('./defineAny').default
+
+    const testValue = {
+      update: (updates, options) => {
+        expect(updates).toEqual({
+          name: 'test',
+          namespace: 'my-namespace'
+        })
+        expect(options).toEqual({
+          dispatch: true
+        })
+        return {
+          name: 'test',
+          namespace: 'my-namespace'
+        }
+      }
+    }
+    const result = defineAny('my-namespace.test', 'test description', testValue)
+    expect(result).toEqual({
+      name: 'test',
+      namespace: 'my-namespace'
     })
   })
 })

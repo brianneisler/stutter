@@ -1,3 +1,4 @@
+import './types'
 import ImmutableList from './util/js/ImmutableList'
 import ImmutableMap from './util/js/ImmutableMap'
 import _delete from './delete'
@@ -184,7 +185,7 @@ describe('_delete', () => {
 
   test('automatically upgrades to async when the key is a Promise', async () => {
     const key = Promise.resolve('foo')
-    const result = _delete(key, 'baz', {
+    const result = _delete(key, {
       foo: 'bar'
     })
     expect(result).toBeInstanceOf(Promise)

@@ -37,7 +37,7 @@ const buildProtocols = (type, definitions) => {
       if (anyIsObject(next.value)) {
         // Map over the object. For each Fn value, set the "self" meta value
         implementation = objectMap(next.value, (fn) =>
-          fn.update({ self: type })
+          fn.update({ self: type }, { dispatch: true })
         )
       } else {
         throw new Error(

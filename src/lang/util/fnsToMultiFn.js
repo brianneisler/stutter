@@ -2,7 +2,7 @@ import ImmutableList from './js/ImmutableList'
 import anyIsImmutableList from './anyIsImmutableList'
 import buildException from './buildException'
 import buildMultiFn from './buildMultiFn'
-import fnsToMultiFnDispatcher from './fnsToMultiFnDispatcher'
+import fnsToDispatcher from './fnsToDispatcher'
 
 /**
  * Group multiple functions into a single function.
@@ -23,7 +23,7 @@ const fnsToMultiFn = (fns, meta = {}) => {
       .expected.arg(fns, 0)
       .toBeInstanceOf(ImmutableList)
   }
-  return buildMultiFn(fnsToMultiFnDispatcher(fns), meta)
+  return buildMultiFn(fnsToDispatcher(fns), meta)
 }
 
 export default fnsToMultiFn

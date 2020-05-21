@@ -1,4 +1,4 @@
-import Context from './js/Context'
+import anyToStringTag from './anyToStringTag'
 
 /**
  * Checks if `any` is classified as a `Context`
@@ -17,6 +17,6 @@ import Context from './js/Context'
  * anyIsContext('abc')
  * //=> false
  */
-const anyIsContext = (any) => any instanceof Context
+const anyIsContext = (any) => anyToStringTag(any) === 'Context'
 
 export default anyIsContext

@@ -120,7 +120,7 @@ describe('functionCurry', () => {
       },
       [Self, Self, Self]
     )
-    fn = fn.update({ self: String })
+    fn = fn.update({ self: String }, { dispatch: true })
     const curriedFn = functionCurry(fn)
     const result = curriedFn.call(context, 'a', 'b')
     expect(result).toBeInstanceOf(Function)

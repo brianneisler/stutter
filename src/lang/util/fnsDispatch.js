@@ -17,13 +17,14 @@ const getCallee = (context) =>
  * @since v0.2.0
  * @category lang.util
  * @param {ImmutableList<Fn>} fns
+ * @param {Dispatcher} dispatcher
  * @param {Context} context
  * @param {Array<Any>} args
  * @param {Object} options
  * @return {ImmutableList<Match>|Match}
  * @example
  */
-const fnsDispatch = (fns, context, args, options) => {
+const fnsDispatch = (fns, dispatcher, context, args, options) => {
   const { size } = fns
   if (options.multi) {
     let matches = ImmutableList([])
@@ -76,7 +77,7 @@ const fnsDispatch = (fns, context, args, options) => {
     stack: context.stack
   })
     .expected.arguments(args)
-    .toMatchDispatcher(this)
+    .toMatchDispatcher(dispatcher)
 }
 
 export default fnsDispatch
