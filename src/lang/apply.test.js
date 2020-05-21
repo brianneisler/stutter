@@ -28,7 +28,7 @@ describe('apply', () => {
 
   test('maintains context of function when curried, args last', () => {
     const testObject = {}
-    testObject.test = apply(function() {
+    testObject.test = apply(function () {
       expect(this).toBe(testObject)
       return 'baz'
     })
@@ -39,7 +39,7 @@ describe('apply', () => {
     const testObject = {}
     testObject.test = apply(['a'])
     expect(
-      testObject.test(function(arg1) {
+      testObject.test(function (arg1) {
         expect(arg1).toBe('a')
         expect(this).toBe(testObject)
         return 'baz'
