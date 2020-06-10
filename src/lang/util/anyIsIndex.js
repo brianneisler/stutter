@@ -26,7 +26,7 @@ const anyIsIndex = (any) => {
   // NOTE BRN: max safe length is exactly MAX_SAFE_INTEGER since the length of an array cannot safely be greater than the max integer.
   const type = typeof any
   return (
-    (type == 'number' || (type != 'symbol' && UINT.test(any))) &&
+    (type === 'number' || (type != 'symbol' && UINT.test(any))) &&
     any > -1 &&
     any % 1 == 0 &&
     any < MAX_SAFE_INTEGER

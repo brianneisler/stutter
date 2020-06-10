@@ -41,6 +41,11 @@ as well. Dispatchers now support both fns and a protocol at the same time
   - remove all jsdoc comments from primary methods and use code only
   - update autodoc generation to support gathering docs from code
 
+- [ ] package up this project with [pkg](https://www.npmjs.com/package/pkg) 
+- [ ] publish binary to homebrew as a separate tap
+  https://federicoterzi.com/blog/how-to-publish-your-rust-project-on-homebrew/
+- [ ] eventually try to publish this to homebrew core https://docs.brew.sh/Acceptable-Formulae#stable-versions
+
 BUGS
 - [x] currently names of functions are not properly propegated to errors. This is
   happening because the function is constructed and the meta data is coppied to

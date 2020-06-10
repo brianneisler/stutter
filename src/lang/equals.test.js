@@ -1,3 +1,4 @@
+import './types'
 import equals from './equals'
 
 describe('equals', () => {
@@ -89,16 +90,16 @@ describe('equals', () => {
   })
 
   it('considers equivalent Arguments objects equal', () => {
-    const argsA = (function() {
+    const argsA = (function () {
       return arguments
     })()
-    const argsB = (function() {
+    const argsB = (function () {
       return arguments
     })()
-    const argsC = (function() {
+    const argsC = (function () {
       return arguments
     })(1, 2, 3)
-    const argsD = (function() {
+    const argsD = (function () {
       return arguments
     })(1, 2, 3)
 
@@ -146,8 +147,12 @@ describe('equals', () => {
   })
 
   it('handles recursive data structures', () => {
-    expect(equals({ a: [1, 2, { c: 1 }], b: 1 }, { a: [1, 2, { c: 1 }], b: 1 })).toBe(true)
-    expect(equals({ a: [1, 2, { c: 1 }], b: 1 }, { a: [1, 2, { c: 2 }], b: 1 })).toBe(false)
+    expect(
+      equals({ a: [1, 2, { c: 1 }], b: 1 }, { a: [1, 2, { c: 1 }], b: 1 })
+    ).toBe(true)
+    expect(
+      equals({ a: [1, 2, { c: 1 }], b: 1 }, { a: [1, 2, { c: 2 }], b: 1 })
+    ).toBe(false)
   })
 
   it('handles dates', () => {
@@ -297,10 +302,16 @@ describe('equals', () => {
     expect(equals(new Set([1]), new Set([]))).toBe(false)
     expect(equals(new Set([1, 2]), new Set([2, 1]))).toBe(true)
     expect(
-      equals(new Set([1, new Set([2, new Set([3])])]), new Set([1, new Set([2, new Set([3])])]))
+      equals(
+        new Set([1, new Set([2, new Set([3])])]),
+        new Set([1, new Set([2, new Set([3])])])
+      )
     ).toBe(true)
     expect(
-      equals(new Set([1, new Set([2, new Set([3])])]), new Set([1, new Set([2, new Set([4])])]))
+      equals(
+        new Set([1, new Set([2, new Set([3])])]),
+        new Set([1, new Set([2, new Set([4])])])
+      )
     ).toBe(false)
     expect(
       equals(
@@ -355,14 +366,14 @@ describe('equals', () => {
     function Left(x) {
       this.value = x
     }
-    Left.prototype.equals = function(x) {
+    Left.prototype.equals = function (x) {
       return x instanceof Left && equals(x.value, this.value)
     }
 
     function Right(x) {
       this.value = x
     }
-    Right.prototype.equals = function(x) {
+    Right.prototype.equals = function (x) {
       return x instanceof Right && equals(x.value, this.value)
     }
 
@@ -384,7 +395,7 @@ describe('equals', () => {
       this.x = x
       this.y = y
     }
-    Point.prototype.equals = function(point) {
+    Point.prototype.equals = function (point) {
       return point instanceof Point && this.x === point.x && this.y === point.y
     }
 
@@ -394,7 +405,7 @@ describe('equals', () => {
       this.color = color
     }
     ColorPoint.prototype = new Point(0, 0)
-    ColorPoint.prototype.equals = function(point) {
+    ColorPoint.prototype.equals = function (point) {
       return (
         point instanceof ColorPoint &&
         this.x === point.x &&

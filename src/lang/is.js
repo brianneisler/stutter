@@ -9,7 +9,8 @@ import defn from './defn'
 const is = defn(
   'lang.is',
   {
-    description: 'Checks whether `Any` is classified as an instance of the given `Type`',
+    description:
+      'Checks whether `Any` is classified as an instance of the given `Type`',
     since: 'v0.2.0'
   },
 

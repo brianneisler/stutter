@@ -1,4 +1,7 @@
+export { default as Equatable } from './Equatable'
 export { default as Indexed } from './Indexed'
 export { default as Iterable } from './Iterable'
 export { default as Keyed } from './Keyed'
 export { default as Propertied } from './Propertied'
+export { default as Typed } from './Typed'
+export { default as Walkable } from './Walkable'

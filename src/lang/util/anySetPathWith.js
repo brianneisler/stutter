@@ -16,7 +16,14 @@ const anySetPathWith = (any, path, value, contagionFunc, getFunc, setFunc) => {
       headValue = contagionFunc(any, path.get(1))
     }
     return anyResolveWith(
-      anySetPathWith(headValue, pathTail, value, contagionFunc, getFunc, setFunc),
+      anySetPathWith(
+        headValue,
+        pathTail,
+        value,
+        contagionFunc,
+        getFunc,
+        setFunc
+      ),
       (setValue) => {
         return setFunc(any, pathHead, setValue)
       }

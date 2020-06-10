@@ -1,4 +1,6 @@
 import Any from './Any'
+import Boolean from './Boolean'
+import Equatable from '../protocols/Equatable'
 import Index from './IndexType'
 import Indexed from '../protocols/Indexed'
 import Integer from './Integer'
@@ -6,6 +8,7 @@ import Self from './Self'
 import anyIsArguments from '../util/anyIsArguments'
 import anyToArguments from '../util/anyToArguments'
 import argumentsDeleteIndex from '../util/argumentsDeleteIndex'
+import argumentsEquals from '../util/argumentsEquals'
 import argumentsGetIndex from '../util/argumentsGetIndex'
 import argumentsHasIndex from '../util/argumentsHasIndex'
 import argumentsLength from '../util/argumentsLength'
@@ -30,6 +33,17 @@ const Arguments = defineAny(
   definitionToType({
     is: anyIsArguments,
     protocols: [
+      Equatable,
+      {
+        'lang.equals': definitionsToFn([
+          [Self, Any, () => Boolean],
+          argumentsEquals,
+
+          [Any, Self, () => Boolean],
+          argumentsEquals
+        ])
+      },
+
       Indexed,
       {
         'lang.deleteIndex': definitionsToFn([

@@ -32,7 +32,10 @@ import objectHasOwnProperty from './objectHasOwnProperty'
  * //=> 1
  */
 const objectSetProperty = (object, property, value) => {
-  if (anyIdenticalWithAny(value, object[property]) && objectHasOwnProperty(object, property)) {
+  if (
+    anyIdenticalWithAny(value, object[property]) &&
+    objectHasOwnProperty(object, property)
+  ) {
     return object
   }
   const clone = objectClone(object)

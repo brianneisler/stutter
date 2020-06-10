@@ -19,6 +19,8 @@ import anyToStringTag from './anyToStringTag'
  * // => false
  */
 const anyIsBoolean = (any) =>
-  any === true || any === false || (anyIsObjectLike(any) && anyToStringTag(any) == 'Boolean')
+  any === true ||
+  any === false ||
+  (anyIsObjectLike(any) && anyToStringTag(any) == 'Boolean')
 
 export default anyIsBoolean

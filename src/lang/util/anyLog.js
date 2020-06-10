@@ -38,7 +38,10 @@ const createLogger = () => {
   }
 
   const write = (value, eol = true) => {
-    data += (previosEOL ? stringRepeat(' ', indentSize) : '') + value + (eol ? '\n' : '')
+    data +=
+      (previosEOL ? stringRepeat(' ', indentSize) : '') +
+      value +
+      (eol ? '\n' : '')
     previosEOL = eol
   }
 

@@ -9,6 +9,7 @@ const { map } = Array.prototype
  *
  * @private
  * @function
+ * @immutable
  * @since v0.1.0
  * @category lang.util
  * @param {Array} array The array to iterate over.

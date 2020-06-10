@@ -3,6 +3,7 @@ import Parameter from './js/Parameter'
 import anyIsFunction from './anyIsFunction'
 import anyIsProtocol from './anyIsProtocol'
 import anyIsType from './anyIsType'
+import anyLog from './anyLog'
 import findTypeForClass from './findTypeForClass'
 
 const definitionToParametersAndReturns = (definition, parameterNames) => {
@@ -42,6 +43,7 @@ const definitionToParametersAndReturns = (definition, parameterNames) => {
           // parameters. If the returned value is a type, then this is the return
           // type. Set the returned value as the return type.
           const returnedReturnType = type()
+          console.log('returnedReturnType:', returnedReturnType)
           if (
             anyIsFunction(returnedReturnType) &&
             !!returnedReturnType.prototype
@@ -51,12 +53,9 @@ const definitionToParametersAndReturns = (definition, parameterNames) => {
             returns = returnedReturnType
           }
           if (!anyIsType(returns) && !anyIsProtocol(returns)) {
+            const logger = anyLog(returnedReturnType)
             throw new Error(
-              `definitionToParametersAndReturns expected return type to be a function that returns a Type or a Protocol. Instead this value was returned ${JSON.stringify(
-                returnedReturnType,
-                null,
-                2
-              )}`
+              `definitionToParametersAndReturns expected return type to be a function that returns a Type or a Protocol. Instead this value was returned ${logger.toString()}`
             )
           }
           // If there are no more parameter names then this is not a parameter

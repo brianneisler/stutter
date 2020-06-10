@@ -13,7 +13,7 @@ const { forEach } = Array.prototype
  * @category lang.util
  * @template T
  * @param {T[]} array The array to iterate over.
- * @param {(value: T, index: Number) => void} fn The function to execute for each element
+ * @param {(value: T, index: Number) => void} func The function to execute for each element
  * @returns {T[]} The original array
  * @example
  *
@@ -25,6 +25,6 @@ const { forEach } = Array.prototype
  * }
  * //=> ['item1', 'item2', 'item3']
  */
-const arrayForEach = (array, fn) => forEach.call(array, fn)
+const arrayForEach = (array, func) => forEach.call(array, func)
 
 export default arrayForEach

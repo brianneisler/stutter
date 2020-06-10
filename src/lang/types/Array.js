@@ -1,5 +1,6 @@
 import Any from './Any'
 import Boolean from './Boolean'
+import Equatable from '../protocols/Equatable'
 import Index from './IndexType'
 import Indexed from '../protocols/Indexed'
 import Integer from './Integer'
@@ -8,22 +9,34 @@ import _Array from '../util/js/Array'
 import anyIsArray from '../util/anyIsArray'
 import anyToArray from '../util/anyToArray'
 import arrayDeleteIndex from '../util/arrayDeleteIndex'
+import arrayEquals from '../util/arrayEquals'
 import arrayGetIndex from '../util/arrayGetIndex'
 import arrayHasIndex from '../util/arrayHasIndex'
 import arrayLength from '../util/arrayLength'
 import arraySetIndex from '../util/arraySetIndex'
-import defineAny from '../util/defineAny'
-import definitionToType from '../util/definitionToType'
 import definitionsToFn from '../util/definitionsToFn'
+import deftype from '../deftype'
+import equals from '../equals'
 
-const Array = defineAny(
+const Array = deftype(
   'lang.Array',
   'A high-level, list-like object',
 
-  definitionToType({
+  {
     class: _Array,
     is: anyIsArray,
     protocols: [
+      Equatable,
+      {
+        'lang.equals': definitionsToFn([
+          [Self, Any, () => Boolean],
+          (self, any) => arrayEquals(self, any, equals),
+
+          [Any, Self, () => Boolean],
+          (any, self) => arrayEquals(self, any, equals)
+        ])
+      },
+
       Indexed,
       {
         'lang.deleteIndex': definitionsToFn([
@@ -58,7 +71,7 @@ const Array = defineAny(
       }
     ],
     to: anyToArray
-  })
+  }
 )
 
 export default Array

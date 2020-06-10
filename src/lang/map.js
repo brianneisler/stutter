@@ -1,5 +1,4 @@
-import curry from '../common/curry'
-import defn from '../common/defn'
+import defn from './defn.js'
 import isArrayLike from './isArrayLike'
 import pipe from '../common/pipe'
 import reduce from './reduce'
@@ -31,20 +30,23 @@ import reduce from './reduce'
  * map(double, {x: 1, y: 2, z: 3}) //=> {x: 2, y: 4, z: 6}
  */
 const map = defn(
-  'map',
+  'lang.map',
+  {
+    description:
+  },
 
   [Function, Array],
   (iteratee, collection) =>
     reduce(
       (accum, value, kdx) =>
         pipe(
-          () => iteratee(value, kdx),
+          () => iteratee(value, kdx, collection),
           (result) => {
             accum[kdx] = result
             return accum
           }
         )(),
-      isArrayLike(collection) ? [] : {},
+      [],
       collection
     ),
 

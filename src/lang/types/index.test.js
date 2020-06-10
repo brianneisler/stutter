@@ -56,6 +56,7 @@ describe('lang.types index', () => {
       Symbol: expect.any(Type),
       Type: expect.any(Type),
       Undefined: expect.any(Type),
+      Walker: expect.any(Type),
       WeakMap: expect.any(Type),
       WeakSet: expect.any(Type)
     })

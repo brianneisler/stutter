@@ -1,8 +1,13 @@
+import Any from './Any'
+import Equatable from '../protocols/Equatable'
+import Self from './Self'
 import _Boolean from '../util/js/Boolean'
 import anyIsBoolean from '../util/anyIsBoolean'
 import anyToBoolean from '../util/anyToBoolean'
+import booleanEquals from '../util/booleanEquals'
 import defineAny from '../util/defineAny'
 import definitionToType from '../util/definitionToType'
+import definitionsToFn from '../util/definitionsToFn'
 
 /**
  * A `Type` representing a javascript `Boolean`
@@ -20,6 +25,18 @@ const Boolean = defineAny(
   definitionToType({
     class: _Boolean,
     is: anyIsBoolean,
+    protocols: [
+      Equatable,
+      {
+        'lang.equals': definitionsToFn([
+          [Self, Any, () => Self],
+          booleanEquals,
+
+          [Any, Self, () => Self],
+          booleanEquals
+        ])
+      }
+    ],
     to: anyToBoolean
   })
 )

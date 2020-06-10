@@ -1,6 +1,5 @@
 import { flatten } from 'ramda'
 import arrays from './arrays'
-import booleanObjects from './booleanObjects'
 import booleans from './booleans'
 import errors from './errors'
 import functions from './functions'
@@ -18,7 +17,6 @@ import symbols from './symbols'
 const values = () =>
   flatten([
     arrays(),
-    booleanObjects(),
     booleans(),
     errors(),
     functions(),

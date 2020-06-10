@@ -1,7 +1,7 @@
 import objectKeys from './objectKeys'
 
 describe('objectKeys', () => {
-  test('returns an array of keys for an object', () => {
+  test('returns an Array of Strings for an Object', () => {
     expect(
       objectKeys({
         bim: 'bop',
@@ -10,14 +10,14 @@ describe('objectKeys', () => {
     ).toEqual(['bim', 'foo'])
   })
 
-  test('returns an array of keys for an args array with args enum bug', () => {
-    const result = (function() {
+  test('returns an Array of Strings for an args Array with args enum bug', () => {
+    const result = (function () {
       return objectKeys(arguments)
     })('foo', 'bar')
     expect(result).toEqual(['0', '1'])
   })
 
-  test('returns an array of keys for an object props that are part of the object enum bug', () => {
+  test('returns an Srray of Strings for an Object props that are part of the object enum bug', () => {
     expect(
       objectKeys({
         propertyIsEnumerable: 'bop',
@@ -26,7 +26,7 @@ describe('objectKeys', () => {
     ).toEqual(['propertyIsEnumerable', 'toString'])
   })
 
-  test('returns an empty array of keys for an empty object', () => {
+  test('returns an empty Array for an Object with no properties', () => {
     expect(objectKeys({})).toEqual([])
   })
 })
