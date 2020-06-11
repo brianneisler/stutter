@@ -16,6 +16,7 @@ const unicodeSize = (string) => {
   while (UNICODE.test(string)) {
     result += 1
   }
+
   // NOTE BRN: Reset to prevent messing up any other uses of this regex
   UNICODE.lastIndex = 0
   return result
