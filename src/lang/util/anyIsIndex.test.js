@@ -1,3 +1,4 @@
+import { Index, Key, Property } from './js'
 import { MAX_SAFE_INTEGER } from '../constants'
 import anyIsIndex from './anyIsIndex'
 
@@ -18,6 +19,18 @@ describe('anyIsIndex', () => {
     expect(anyIsIndex('0')).toBe(true)
     expect(anyIsIndex('3')).toBe(true)
     expect(anyIsIndex('' + (MAX_SAFE_INTEGER - 1))).toBe(true)
+  })
+
+  test('returns true for Index instance', () => {
+    expect(anyIsIndex(new Index(0))).toBe(true)
+  })
+
+  test('returns false for Key instance', () => {
+    expect(anyIsIndex(new Key(0))).toBe(false)
+  })
+
+  test('returns false for Property instance', () => {
+    expect(anyIsIndex(new Property('foo'))).toBe(false)
   })
 
   test('returns false for number greater than or equal to MAX_SAFE_INTEGER', () => {
@@ -78,9 +91,9 @@ describe('anyIsIndex', () => {
     expect(anyIsIndex({})).toBe(false)
     expect(anyIsIndex(async () => {})).toBe(false)
     expect(anyIsIndex(() => {})).toBe(false)
-    expect(anyIsIndex(function() {})).toBe(false)
-    expect(anyIsIndex(function*() {})).toBe(false)
-    expect(anyIsIndex((function*() {})())).toBe(false)
+    expect(anyIsIndex(function () {})).toBe(false)
+    expect(anyIsIndex(function* () {})).toBe(false)
+    expect(anyIsIndex((function* () {})())).toBe(false)
     expect(anyIsIndex(new Array(0))).toBe(false)
     expect(anyIsIndex(new ArrayBuffer(2))).toBe(false)
     expect(anyIsIndex(new Boolean(false))).toBe(false)

@@ -1,3 +1,4 @@
+import { Index } from './js'
 import { MAX_SAFE_INTEGER } from '../constants'
 import { UINT } from '../constants/Regex'
 
@@ -23,6 +24,9 @@ import { UINT } from '../constants/Regex'
  * //=> false
  */
 const anyIsIndex = (any) => {
+  if (any instanceof Index) {
+    return true
+  }
   // NOTE BRN: max safe length is exactly MAX_SAFE_INTEGER since the length of an array cannot safely be greater than the max integer.
   const type = typeof any
   return (

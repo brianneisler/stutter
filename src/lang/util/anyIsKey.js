@@ -1,3 +1,5 @@
+import { Index, Property } from './js'
+
 /**
  * Checks if `any` is a key.
  *
@@ -36,6 +38,6 @@
  * anyIsKey({})
  * //=> false
  */
-const anyIsKey = () => true
+const anyIsKey = (any) => !(any instanceof Property) && !(any instanceof Index)
 
 export default anyIsKey

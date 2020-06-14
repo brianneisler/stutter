@@ -43,7 +43,6 @@ const definitionToParametersAndReturns = (definition, parameterNames) => {
           // parameters. If the returned value is a type, then this is the return
           // type. Set the returned value as the return type.
           const returnedReturnType = type()
-          console.log('returnedReturnType:', returnedReturnType)
           if (
             anyIsFunction(returnedReturnType) &&
             !!returnedReturnType.prototype

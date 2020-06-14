@@ -1,7 +1,7 @@
 import { TO_STRING_TAG } from '../../constants/Symbol'
 
 class Key {
-  constructor({ value }) {
+  constructor(value) {
     this.value = value
   }
 
@@ -10,7 +10,7 @@ class Key {
   }
 
   valueOf() {
-    return this.vlaue
+    return this.value
   }
 }
 

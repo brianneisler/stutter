@@ -1,3 +1,4 @@
+import { Index, Key, Property } from './js'
 import anyIsProperty from './anyIsProperty'
 
 describe('anyIsProperty', () => {
@@ -26,9 +27,21 @@ describe('anyIsProperty', () => {
     expect(anyIsProperty(new String('1bar'))).toBe(true)
   })
 
+  test('returns true for Property instance', () => {
+    expect(anyIsProperty(new Property('foo'))).toBe(true)
+  })
+
   test('returns false for arrays', () => {
     expect(anyIsProperty([])).toBe(false)
     expect(anyIsProperty(new Array())).toBe(false)
+  })
+
+  test('returns false for Index instance', () => {
+    expect(anyIsProperty(new Index(0))).toBe(false)
+  })
+
+  test('returns false for Key instance', () => {
+    expect(anyIsProperty(new Key('foo'))).toBe(false)
   })
 
   test('returns false for all other values', () => {
@@ -45,8 +58,8 @@ describe('anyIsProperty', () => {
     expect(anyIsProperty(/abc/)).toBe(false)
     expect(anyIsProperty(async () => {})).toBe(false)
     expect(anyIsProperty(() => {})).toBe(false)
-    expect(anyIsProperty(function() {})).toBe(false)
-    expect(anyIsProperty(function*() {})).toBe(false)
+    expect(anyIsProperty(function () {})).toBe(false)
+    expect(anyIsProperty(function* () {})).toBe(false)
     expect(anyIsProperty(new ArrayBuffer(2))).toBe(false)
     expect(anyIsProperty(new Boolean(false))).toBe(false)
     expect(anyIsProperty(new Boolean(true))).toBe(false)
