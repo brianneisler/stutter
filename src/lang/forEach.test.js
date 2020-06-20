@@ -1,5 +1,5 @@
-import forEach from './forEach'
 import ImmutableMap from './util/js/ImmutableMap'
+import forEach from './forEach'
 
 describe('forEach', () => {
   describe('Array', () => {
@@ -7,7 +7,11 @@ describe('forEach', () => {
       const array = ['a', 'b', 'c']
       const acc = []
       const result = forEach((val, index) => acc.push([val, index]), array)
-      expect(acc).toEqual([['a', 0], ['b', 1], ['c', 2]])
+      expect(acc).toEqual([
+        ['a', 0],
+        ['b', 1],
+        ['c', 2]
+      ])
       expect(result).toBe(array)
     })
   })
@@ -17,7 +21,11 @@ describe('forEach', () => {
       const object = { a: 'valueA', b: 'valueB', c: 'valueC' }
       const acc = []
       const result = forEach((val, key) => acc.push([val, key]), object)
-      expect(acc).toEqual([['valueA', 'a'], ['valueB', 'b'], ['valueC', 'c']])
+      expect(acc).toEqual([
+        ['valueA', 'a'],
+        ['valueB', 'b'],
+        ['valueC', 'c']
+      ])
       expect(result).toBe(object)
     })
 
@@ -27,18 +35,25 @@ describe('forEach', () => {
       const object = { [symA]: 'valueA', [symB]: 'valueB' }
       const acc = []
       const result = forEach((val, key) => acc.push([val, key]), object)
-      expect(acc).toEqual([['valueA', symA], ['valueB', symB]])
+      expect(acc).toEqual([
+        ['valueA', symA],
+        ['valueB', symB]
+      ])
       expect(result).toBe(object)
     })
   })
 
-  describe('Object', () => {
+  describe('ImmutableMap', () => {
     test('forEach value in an ImmutableMap', () => {
-      const map = new ImmutableMap({ a: 'valueA', b: 'valueB', c: 'valueC' }
+      const map = new ImmutableMap({ a: 'valueA', b: 'valueB', c: 'valueC' })
       const acc = []
-      const result = forEach((val, key) => acc.push([val, key]), object)
-      expect(acc).toEqual([['valueA', 'a'], ['valueB', 'b'], ['valueC', 'c']])
-      expect(result).toBe(object)
+      const result = forEach((val, key) => acc.push([val, key]), map)
+      expect(acc).toEqual([
+        ['valueA', 'a'],
+        ['valueB', 'b'],
+        ['valueC', 'c']
+      ])
+      expect(result).toBe(map)
     })
   })
 
@@ -58,7 +73,11 @@ describe('forEach', () => {
 
     expect(result).toBeInstanceOf(Promise)
     result = await result
-    expect(acc).toEqual([['a', 0], ['b', 1], ['c', 2]])
+    expect(acc).toEqual([
+      ['a', 0],
+      ['b', 1],
+      ['c', 2]
+    ])
     expect(result).toBe(array)
   })
 
@@ -79,7 +98,11 @@ describe('forEach', () => {
     expect(iteratee).toHaveBeenCalledTimes(1)
     expect(result).toBeInstanceOf(Promise)
     result = await result
-    expect(acc).toEqual([['a', 0], ['b', 1], ['c', 2]])
+    expect(acc).toEqual([
+      ['a', 0],
+      ['b', 1],
+      ['c', 2]
+    ])
     expect(result).toBe(array)
   })
 })
