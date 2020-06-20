@@ -126,7 +126,7 @@ describe('equals', () => {
     expect(equals(/a/gi, /a/i)).toBe(false)
   })
 
-  it('handles lists', () => {
+  it('handles Arrays', () => {
     expect(equals([], {})).toBe(false)
     expect(equals([1, 2, 3], [1, 3, 2])).toBe(false)
     expect(equals([1, 2, 3], [1, 2, 3, 4])).toBe(false)
@@ -146,7 +146,7 @@ describe('equals', () => {
     expect(equals(valueE, valueF)).toBe(true)
   })
 
-  it('handles recursive data structures', () => {
+  it('handles nested data structures', () => {
     expect(
       equals({ a: [1, 2, { c: 1 }], b: 1 }, { a: [1, 2, { c: 1 }], b: 1 })
     ).toBe(true)

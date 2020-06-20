@@ -1,13 +1,11 @@
 import anyIsArguments from './anyIsArguments'
-import argumentsToArray from './argumentsToArray'
-import arrayEquals from './arrayEquals'
-import arrayToArguments from './arrayToArguments'
+import arrayLikeEquals from './arrayLikeEquals'
 
-const argumentsEquals = (args, value) => {
+const argumentsEquals = (args, value, ...rest) => {
   if (!anyIsArguments(value)) {
     return false
   }
-  arrayEquals(argumentsToArray(args))
+  return arrayLikeEquals(args, value, ...rest)
 }
 
 export default argumentsEquals

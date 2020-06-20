@@ -1,6 +1,7 @@
 import Any from './Any'
 import Boolean from './Boolean'
 import Equatable from '../protocols/Equatable'
+import ImmutableStack from '../util/js/ImmutableStack'
 import Index from './IndexType'
 import Indexed from '../protocols/Indexed'
 import Integer from './Integer'
@@ -30,10 +31,22 @@ const Array = deftype(
       {
         'lang.equals': definitionsToFn([
           [Self, Any, () => Boolean],
-          (self, any) => arrayEquals(self, any, equals),
+          (
+            self,
+            any,
+            equalsFunc = equals,
+            stackA = ImmutableStack([]),
+            stackB = ImmutableStack([])
+          ) => arrayEquals(self, any, equalsFunc, stackA, stackB),
 
           [Any, Self, () => Boolean],
-          (any, self) => arrayEquals(self, any, equals)
+          (
+            any,
+            self,
+            equalsFunc = equals,
+            stackA = ImmutableStack([]),
+            stackB = ImmutableStack([])
+          ) => arrayEquals(self, any, equalsFunc, stackA, stackB)
         ])
       },
 

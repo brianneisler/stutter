@@ -39,7 +39,8 @@ const arrayLikeKeys = (value, inherited) => {
         // Node.js 0.10 has enumerable non-index properties on buffers.
         (isBuff && (key == 'offset' || key == 'parent')) ||
         // PhantomJS 2 has enumerable non-index properties on typed arrays.
-        (isType && (key == 'buffer' || key == 'byteLength' || key == 'byteOffset')) || // Skip index properties.
+        (isType &&
+          (key == 'buffer' || key == 'byteLength' || key == 'byteOffset')) || // Skip index properties.
           anyIsIndex(key, length))
       )
     ) {
