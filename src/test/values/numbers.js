@@ -1,4 +1,4 @@
-import { Infinity, NaN } from '../../../src/lang/classes'
+import { Infinity, NaN } from '../../lang/classes'
 
 const values = [0, -0, 1, -1, 1.1, -1.1, Infinity, -Infinity, NaN]
 

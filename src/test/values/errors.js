@@ -5,7 +5,7 @@ import {
   SyntaxError,
   TypeError,
   URIError
-} from '../../../src/lang/classes'
+} from '../../lang/classes'
 
 const values = [
   new Error(),

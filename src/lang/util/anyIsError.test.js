@@ -1,4 +1,4 @@
-import { errors, values } from '../../../tests'
+import { errors, values } from '../../test'
 import anyIsError from './anyIsError'
 import arrayDifference from './arrayDifference'
 

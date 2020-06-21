@@ -21,7 +21,10 @@ import equals from '../equals'
 
 const Array = deftype(
   'lang.Array',
-  'A high-level, list-like object',
+  {
+    description: 'A high-level, list-like object',
+    since: 'v0.1.0'
+  },
 
   {
     class: _Array,

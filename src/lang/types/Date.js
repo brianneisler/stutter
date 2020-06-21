@@ -10,7 +10,12 @@ import fn from '../fn'
 
 const Date = deftype(
   'lang.Date',
-  'A type that represents a single moment in time. Date objects use a Unix Time Stamp, an integer value that is the number of milliseconds since 1 January 1970 UTC.',
+  {
+    description:
+      'A type that represents a single moment in time. Date objects use a Unix Time Stamp, an integer value that is the number of milliseconds since 1 January 1970 UTC.',
+    since: 'v0.1.0'
+  },
+
   {
     class: _Date,
     is: anyIsDate,

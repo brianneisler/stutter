@@ -9,7 +9,12 @@ import fn from '../fn'
 
 const ArrayBuffer = deftype(
   'lang.ArrayBuffer',
-  'A type that represents a generic, fixed-length raw binary data buffer.',
+  {
+    description:
+      'A type that represents a generic, fixed-length raw binary data buffer.',
+    since: 'v0.1.0'
+  },
+
   {
     is: anyIsArrayBuffer,
     protocols: [

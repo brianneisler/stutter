@@ -1,4 +1,4 @@
-import { Symbol } from '../../../src/lang/classes'
+import { Symbol } from '../../lang/classes'
 
 const values = [Symbol('a'), Symbol.for('b')]
 

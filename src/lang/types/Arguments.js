@@ -17,18 +17,12 @@ import defineAny from '../util/defineAny'
 import definitionToType from '../util/definitionToType'
 import definitionsToFn from '../util/definitionsToFn'
 
-/**
- * A `Type` representing a javascript `Arguments` object.
- *
- * @type Type
- * @since v0.1.0
- * @category lang
- * @example
- *
- */
 const Arguments = defineAny(
   'lang.Arguments',
-  'Arguments object in a function',
+  {
+    description: 'A `Type` representing a javascript `Arguments` object.',
+    since: 'v0.1.0'
+  },
 
   definitionToType({
     is: anyIsArguments,

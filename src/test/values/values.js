@@ -1,6 +1,7 @@
 import { flatten } from 'ramda'
 import arrays from './arrays'
 import booleans from './booleans'
+import dates from './dates'
 import errors from './errors'
 import functions from './functions'
 import generators from './generators'
@@ -18,6 +19,7 @@ const values = () =>
   flatten([
     arrays(),
     booleans(),
+    dates(),
     errors(),
     functions(),
     generators(),

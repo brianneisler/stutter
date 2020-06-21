@@ -1,6 +1,7 @@
 export { default as arrays } from './arrays'
 export { default as booleanObjects } from './booleanObjects'
 export { default as booleans } from './booleans'
+export { default as dates } from './dates'
 export { default as errors } from './errors'
 export { default as functions } from './functions'
 export { default as generators } from './generators'

@@ -1,5 +1,5 @@
 import { FN } from '../constants/Symbol'
-import { values } from '../../../tests'
+import { values } from '../../test'
 import anyIsFn from './anyIsFn'
 import definitionToFn from './definitionToFn'
 

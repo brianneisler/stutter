@@ -1,4 +1,4 @@
-import { booleans, values } from '../../../tests'
+import { booleans, values } from '../../test'
 import arrayDifference from './arrayDifference'
 import booleanEquals from './booleanEquals'
 

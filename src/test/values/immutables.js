@@ -6,7 +6,7 @@ import {
   ImmutableSet,
   ImmutableStack,
   Seq
-} from '../../../src/lang/classes'
+} from '../../lang/classes'
 import { keys, map } from 'ramda'
 
 const valueMap = {

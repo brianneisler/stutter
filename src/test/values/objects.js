@@ -1,4 +1,4 @@
-import { Object as _Object } from '../../../src/lang/classes'
+import { Object as _Object } from '../../lang/classes'
 
 const values = [{}, new _Object()]
 

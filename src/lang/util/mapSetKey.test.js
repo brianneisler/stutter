@@ -1,4 +1,4 @@
-import { values } from '../../../tests/util/values'
+import { values } from '../../test'
 import Map from '../classes/Map'
 import mapSetKey from './mapSetKey'
 

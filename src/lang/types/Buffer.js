@@ -10,7 +10,11 @@ import fn from '../fn'
 
 const Buffer = deftype(
   'lang.Buffer',
-  'A type for dealing with binary data directly.',
+  {
+    description: 'A type for dealing with binary data directly.',
+    since: 'v0.1.0'
+  },
+
   {
     class: _Buffer,
     is: anyIsBuffer,

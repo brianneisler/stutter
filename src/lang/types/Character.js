@@ -10,7 +10,10 @@ import definitionsToFn from '../util/definitionsToFn'
 
 const Character = defineAny(
   'lang.Character',
-  'A single String character.',
+  {
+    description: 'A single String character.',
+    since: 'v0.1.0'
+  },
 
   definitionToType({
     is: anyIsCharacter,

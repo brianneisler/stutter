@@ -110,6 +110,7 @@ describe('lang.util index', () => {
       anyToString: expect.any(Function),
       anyToStringTag: expect.any(Function),
       anyUpdatePathWith: expect.any(Function),
+      argumentsEquals: expect.any(Function),
       argumentsMatchToFnParameters: expect.any(Function),
       arrayClone: expect.any(Function),
       arrayConcat: expect.any(Function),
@@ -151,6 +152,7 @@ describe('lang.util index', () => {
       buildMultiFn: expect.any(Function),
       cacheChain: expect.any(Function),
       createContext: expect.any(Function),
+      dateEquals: expect.any(Function),
       defineAny: expect.any(Function),
       definitionToFn: expect.any(Function),
       definitionToType: expect.any(Function),
@@ -277,7 +279,8 @@ describe('lang.util index', () => {
       stringUpdateIndex: expect.any(Function),
       symbolToString: expect.any(Function),
       unicodeSize: expect.any(Function),
-      unicodeToArray: expect.any(Function)
+      unicodeToArray: expect.any(Function),
+      valueOfIdentical: expect.any(Function)
     })
   })
 })

@@ -9,18 +9,12 @@ import defineAny from '../util/defineAny'
 import definitionToType from '../util/definitionToType'
 import definitionsToFn from '../util/definitionsToFn'
 
-/**
- * A `Type` representing a javascript `Boolean`
- *
- * @type Type
- * @since v0.1.0
- * @category lang
- * @example
- *
- */
 const Boolean = defineAny(
   'lang.Boolean',
-  'A Boolean represents one of two values: `true` or `false`',
+  {
+    description: 'A Boolean represents one of two values: `true` or `false`',
+    since: 'v0.1.0'
+  },
 
   definitionToType({
     class: _Boolean,

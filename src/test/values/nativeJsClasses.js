@@ -1,19 +1,17 @@
 import {
   ArrayBuffer,
   Buffer,
-  Date,
   Map,
   Promise,
   Proxy,
   Set,
   WeakMap,
   WeakSet
-} from '../../../src/lang/classes'
+} from '../../lang/classes'
 
 const values = [
   new ArrayBuffer(2),
   new Buffer([]),
-  new Date(),
   new Map(),
   new Promise(() => {}),
   new Proxy({}, {}),

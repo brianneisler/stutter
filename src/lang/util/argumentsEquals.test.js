@@ -1,4 +1,4 @@
-import { arrays, values } from '../../../tests/util'
+import { arrays, values } from '../../test'
 import { without } from 'ramda'
 import anyIdenticalWithAny from './anyIdenticalWithAny'
 import anyIsArguments from './anyIsArguments'
