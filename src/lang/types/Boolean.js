@@ -27,7 +27,7 @@ const Boolean = defineAny(
           booleanEquals,
 
           [Any, Self, () => Self],
-          booleanEquals
+          (any, boolean) => booleanEquals(boolean, any)
         ])
       }
     ],

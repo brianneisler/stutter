@@ -1,5 +1,6 @@
-import { Any, Boolean } from './types'
 import { anyIdenticalWithAny } from './util'
+import Any from './types/Any'
+import Boolean from './types/Boolean'
 import defn from './defn'
 
 const equals = defn(

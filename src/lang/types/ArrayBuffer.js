@@ -25,7 +25,7 @@ const ArrayBuffer = deftype(
           arrayBufferEquals,
 
           [Any, Self, () => Boolean],
-          arrayBufferEquals
+          (any, arrayBuffer) => arrayBufferEquals(arrayBuffer, any)
         )
       }
     ]

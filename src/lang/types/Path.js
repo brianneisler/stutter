@@ -5,7 +5,11 @@ import deftype from '../deftype'
 
 const Path = deftype(
   'lang.Path',
-  'A type representing a path for accessing Keyed, Proped or Indexed values.',
+  {
+    description:
+      'A type representing a path for accessing Keyed, Proped or Indexed values.',
+    since: 'v0.2.0'
+  },
 
   {
     class: _Path,

@@ -52,11 +52,7 @@ const iterableForEach = (iterable, func) =>
  * @returns {Iterable} The original Iterable.
  * @example
  *
- * const printXPlusFive = x => console.log(x + 5);
- * forEach(printXPlusFive, [1, 2, 3]); //=> [1, 2, 3]
- * // logs 6
- * // logs 7
- * // logs 8
+
  */
 const forEach = defn(
   'forEach',

@@ -145,6 +145,7 @@ describe('lang.util index', () => {
       asciiSize: expect.any(Function),
       asciiToArray: expect.any(Function),
       booleanEquals: expect.any(Function),
+      bufferEquals: expect.any(Function),
       bufferFrom: expect.any(Function),
       buildException: expect.any(Function),
       buildExpected: expect.any(Function),

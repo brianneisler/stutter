@@ -1,6 +1,5 @@
 import {
   ArrayBuffer,
-  Buffer,
   Map,
   Promise,
   Proxy,
@@ -11,7 +10,6 @@ import {
 
 const values = [
   new ArrayBuffer(2),
-  new Buffer([]),
   new Map(),
   new Promise(() => {}),
   new Proxy({}, {}),

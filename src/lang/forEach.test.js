@@ -1,3 +1,4 @@
+import './types'
 import ImmutableMap from './classes/ImmutableMap'
 import forEach from './forEach'
 

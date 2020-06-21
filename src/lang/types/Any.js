@@ -7,6 +7,7 @@ const Any = defineAny(
     description: 'A type representing any value',
     since: 'v0.1.0'
   },
+
   definitionToType({
     is: () => true,
     to: (any) => any
