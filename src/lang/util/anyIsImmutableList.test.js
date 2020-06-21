@@ -1,10 +1,10 @@
-import ImmutableList from './js/ImmutableList'
-import ImmutableMap from './js/ImmutableMap'
-import ImmutableOrderedMap from './js/ImmutableOrderedMap'
-import ImmutableOrderedSet from './js/ImmutableOrderedSet'
-import ImmutableSet from './js/ImmutableSet'
-import ImmutableStack from './js/ImmutableStack'
-import Seq from './js/Seq'
+import ImmutableList from '../classes/ImmutableList'
+import ImmutableMap from '../classes/ImmutableMap'
+import ImmutableOrderedMap from '../classes/ImmutableOrderedMap'
+import ImmutableOrderedSet from '../classes/ImmutableOrderedSet'
+import ImmutableSet from '../classes/ImmutableSet'
+import ImmutableStack from '../classes/ImmutableStack'
+import Seq from '../classes/Seq'
 import anyIsImmutableList from './anyIsImmutableList'
 
 describe('anyIsImmutableList', () => {
@@ -56,8 +56,8 @@ describe('anyIsImmutableList', () => {
     expect(anyIsImmutableList(/abc/)).toBe(false)
     expect(anyIsImmutableList(async () => {})).toBe(false)
     expect(anyIsImmutableList(() => {})).toBe(false)
-    expect(anyIsImmutableList(function() {})).toBe(false)
-    expect(anyIsImmutableList((function*() {})())).toBe(false)
+    expect(anyIsImmutableList(function () {})).toBe(false)
+    expect(anyIsImmutableList((function* () {})())).toBe(false)
     expect(anyIsImmutableList(new ArrayBuffer(2))).toBe(false)
     expect(anyIsImmutableList(new Boolean(false))).toBe(false)
     expect(anyIsImmutableList(new Boolean(true))).toBe(false)

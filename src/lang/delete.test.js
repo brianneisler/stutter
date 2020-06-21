@@ -1,6 +1,6 @@
 import './types'
-import ImmutableList from './util/js/ImmutableList'
-import ImmutableMap from './util/js/ImmutableMap'
+import ImmutableList from './classes/ImmutableList'
+import ImmutableMap from './classes/ImmutableMap'
 import _delete from './delete'
 import path from './path'
 

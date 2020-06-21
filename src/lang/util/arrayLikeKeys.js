@@ -1,4 +1,4 @@
-import Array from './js/Array'
+import Array from '../classes/Array'
 import anyIsArguments from './anyIsArguments'
 import anyIsArray from './anyIsArray'
 import anyIsBuffer from './anyIsBuffer'

@@ -1,4 +1,4 @@
-import _Element from '../util/js/Element'
+import _Element from '../classes/Element'
 import anyIsElement from '../util/anyIsElement'
 import anyToElement from '../util/anyToElement'
 import defineAny from '../util/defineAny'

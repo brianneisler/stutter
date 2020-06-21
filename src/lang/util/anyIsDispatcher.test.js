@@ -1,4 +1,4 @@
-import Dispatcher from './js/Dispatcher'
+import Dispatcher from '../classes/Dispatcher'
 import anyIsDispatcher from './anyIsDispatcher'
 
 describe('anyIsDispatcher', () => {

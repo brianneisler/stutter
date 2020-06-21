@@ -1,4 +1,4 @@
-import _Exception from '../util/js/Exception'
+import _Exception from '../classes/Exception'
 import anyIsException from '../util/anyIsException'
 import deftype from '../deftype'
 

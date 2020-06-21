@@ -1,4 +1,4 @@
-import Path from './util/js/Path'
+import Path from './classes/Path'
 import path from './path'
 
 describe('path', () => {

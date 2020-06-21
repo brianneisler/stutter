@@ -1,4 +1,4 @@
-import WeakMap from './js/WeakMap'
+import WeakMap from '../classes/WeakMap'
 import cacheChain from './cacheChain'
 import functionDefineLength from './functionDefineLength'
 

@@ -1,5 +1,5 @@
 import { values } from '../../../tests/util/values'
-import Map from './js/Map'
+import Map from '../classes/Map'
 import mapSetKey from './mapSetKey'
 
 describe('mapSetKey', () => {

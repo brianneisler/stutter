@@ -1,4 +1,4 @@
-import Number from '../util/js/Number'
+import Number from '../classes/Number'
 
 /**
  * This constant represents the maximum safe integer in JavaScript (2^53 - 1 or 9007199254740991).

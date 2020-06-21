@@ -1,4 +1,4 @@
-import Path from './js/Path'
+import Path from '../classes/Path'
 import stringToPath from './stringToPath'
 
 describe('stringToPath', () => {

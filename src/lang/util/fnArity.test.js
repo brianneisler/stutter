@@ -1,5 +1,5 @@
 import Any from '../types/Any'
-import Parameter from './js/Parameter'
+import Parameter from '../classes/Parameter'
 import definitionToFn from './definitionToFn'
 import fnArity from './fnArity'
 

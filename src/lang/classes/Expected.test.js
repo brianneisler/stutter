@@ -1,6 +1,6 @@
 import Exception from './Exception'
 import Expected from './Expected'
-import anyToStringTag from '../anyToStringTag'
+import anyToStringTag from '../util/anyToStringTag'
 
 describe('js:Expected', () => {
   describe('constructor', () => {
@@ -38,7 +38,7 @@ describe('js:Expected', () => {
         exceptionToError,
         expectation: 'foo'
       })
-      const source = function() {}
+      const source = function () {}
       const target = {
         index: 0,
         type: 'Argument',

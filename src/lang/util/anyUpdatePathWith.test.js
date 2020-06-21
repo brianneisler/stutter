@@ -1,4 +1,4 @@
-import Path from './js/Path'
+import Path from '../classes/Path'
 import anyIsPath from './anyIsPath'
 import anySetPathWith from './anySetPathWith'
 import anyUpdatePathWith from './anyUpdatePathWith'
@@ -58,12 +58,26 @@ describe('anyUpdatePathWith', () => {
     const getFunc = jest.fn((target, key) => objectGetProperty(target, key))
     const setFunc = jest.fn((target, key, value) => {
       if (anyIsPath(key)) {
-        return anySetPathWith(target, key, value, contagionFunc, getFunc, setFunc)
+        return anySetPathWith(
+          target,
+          key,
+          value,
+          contagionFunc,
+          getFunc,
+          setFunc
+        )
       }
       return objectSetProperty(target, key, value)
     })
     const updater = jest.fn(() => 3)
-    const result = anyUpdatePathWith(any, path, updater, contagionFunc, getFunc, setFunc)
+    const result = anyUpdatePathWith(
+      any,
+      path,
+      updater,
+      contagionFunc,
+      getFunc,
+      setFunc
+    )
     expect(updater).toHaveBeenCalledTimes(1)
     expect(updater).toHaveBeenCalledWith(0)
     expect(result).toEqual({
@@ -77,19 +91,44 @@ describe('anyUpdatePathWith', () => {
     const getFunc = (target, key) => objectGetProperty(target, key)
     const setFunc = (target, key, value) => {
       if (anyIsPath(key)) {
-        return anySetPathWith(target, key, value, contagionFunc, getFunc, setFunc)
+        return anySetPathWith(
+          target,
+          key,
+          value,
+          contagionFunc,
+          getFunc,
+          setFunc
+        )
       }
       return objectSetProperty(target, key, value)
     }
 
     const objectA = { a: undefined }
-    expect(anyUpdatePathWith(objectA, path, () => 'foo', contagionFunc, getFunc, setFunc)).toEqual({
+    expect(
+      anyUpdatePathWith(
+        objectA,
+        path,
+        () => 'foo',
+        contagionFunc,
+        getFunc,
+        setFunc
+      )
+    ).toEqual({
       a: {
         b: 'foo'
       }
     })
     const objectB = { a: null }
-    expect(anyUpdatePathWith(objectB, path, () => 'foo', contagionFunc, getFunc, setFunc)).toEqual({
+    expect(
+      anyUpdatePathWith(
+        objectB,
+        path,
+        () => 'foo',
+        contagionFunc,
+        getFunc,
+        setFunc
+      )
+    ).toEqual({
       a: {
         b: 'foo'
       }
@@ -110,7 +149,14 @@ describe('anyUpdatePathWith', () => {
     const any = {
       a: { b: null }
     }
-    const promise = anyUpdatePathWith(any, path, () => 3, contagionFunc, getFunc, setFunc)
+    const promise = anyUpdatePathWith(
+      any,
+      path,
+      () => 3,
+      contagionFunc,
+      getFunc,
+      setFunc
+    )
     expect(promise).toBeInstanceOf(Promise)
     const result = await promise
     expect(result).toEqual({
@@ -132,7 +178,14 @@ describe('anyUpdatePathWith', () => {
     const any = {
       a: { b: null }
     }
-    const promise = anyUpdatePathWith(any, path, async () => 3, contagionFunc, getFunc, setFunc)
+    const promise = anyUpdatePathWith(
+      any,
+      path,
+      async () => 3,
+      contagionFunc,
+      getFunc,
+      setFunc
+    )
     expect(promise).toBeInstanceOf(Promise)
     const result = await promise
     expect(result).toEqual({
@@ -146,7 +199,14 @@ describe('anyUpdatePathWith', () => {
     const getFunc = (target, key) => objectGetProperty(target, key)
     const setFunc = (target, key, value) => {
       if (anyIsPath(key)) {
-        return anySetPathWith(target, key, value, contagionFunc, getFunc, setFunc)
+        return anySetPathWith(
+          target,
+          key,
+          value,
+          contagionFunc,
+          getFunc,
+          setFunc
+        )
       }
       return objectSetProperty(target, key, value)
     }
@@ -154,7 +214,14 @@ describe('anyUpdatePathWith', () => {
     const any = {
       a: Promise.resolve({ b: Promise.resolve(null) })
     }
-    const promise = anyUpdatePathWith(any, path, () => 3, contagionFunc, getFunc, setFunc)
+    const promise = anyUpdatePathWith(
+      any,
+      path,
+      () => 3,
+      contagionFunc,
+      getFunc,
+      setFunc
+    )
     expect(promise).toBeInstanceOf(Promise)
     const result = await promise
     expect(result).toEqual({

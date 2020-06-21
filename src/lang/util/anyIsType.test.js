@@ -1,4 +1,4 @@
-import Type from './js/Type'
+import Type from '../classes/Type'
 import anyIsType from './anyIsType'
 
 describe('anyIsType', () => {
@@ -29,8 +29,8 @@ describe('anyIsType', () => {
     expect(anyIsType(/abc/)).toBe(false)
     expect(anyIsType(async () => {})).toBe(false)
     expect(anyIsType(() => {})).toBe(false)
-    expect(anyIsType(function() {})).toBe(false)
-    expect(anyIsType((function*() {})())).toBe(false)
+    expect(anyIsType(function () {})).toBe(false)
+    expect(anyIsType((function* () {})())).toBe(false)
     expect(anyIsType(Symbol('abc'))).toBe(false)
     expect(anyIsType(Symbol.for('def'))).toBe(false)
     expect(anyIsType(new ArrayBuffer(2))).toBe(false)

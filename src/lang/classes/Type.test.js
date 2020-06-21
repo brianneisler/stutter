@@ -1,11 +1,11 @@
 import ImmutableMap from './ImmutableMap'
 import Parameter from './Parameter'
-import Self from '../../types/Self'
+import Self from '../types/Self'
 import Type from './Type'
-import anyIsFn from '../anyIsFn'
-import definitionToFn from '../definitionToFn'
-import definitionsToProtocol from '../definitionsToProtocol'
-import fnGetMeta from '../fnGetMeta'
+import anyIsFn from '../util/anyIsFn'
+import definitionToFn from '../util/definitionToFn'
+import definitionsToProtocol from '../util/definitionsToProtocol'
+import fnGetMeta from '../util/fnGetMeta'
 
 describe('js:Type', () => {
   describe('constructor', () => {

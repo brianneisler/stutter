@@ -1,4 +1,4 @@
-import Buffer from './js/Buffer'
+import Buffer from '../classes/Buffer'
 import bufferFrom from './bufferFrom'
 
 describe('bufferFrom', () => {

@@ -1,4 +1,4 @@
-import { Error } from './js'
+import { Error } from '../classes'
 import createError from './createError'
 
 describe('createError', () => {

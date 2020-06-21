@@ -1,5 +1,5 @@
 import { ITERATOR } from '../constants/Symbol'
-import ImmutableList from './js/ImmutableList'
+import ImmutableList from '../classes/ImmutableList'
 import anyIsArray from './anyIsArray'
 import anyIsFn from './anyIsFn'
 import anyIsFunction from './anyIsFunction'

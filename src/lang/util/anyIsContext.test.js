@@ -1,4 +1,4 @@
-import Context from './js/Context'
+import Context from '../classes/Context'
 import anyIsContext from './anyIsContext'
 
 describe('anyIsContext', () => {

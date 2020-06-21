@@ -1,4 +1,4 @@
-import Symbol from '../util/js/Symbol'
+import Symbol from '../classes/Symbol'
 
 /**
  * The `Symbol.for('@@fn')` defines an Fn attached to a function

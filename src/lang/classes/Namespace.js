@@ -1,4 +1,4 @@
-import { TO_STRING_TAG } from '../../constants/Symbol'
+import { TO_STRING_TAG } from '../constants/Symbol'
 import ImmutableMap from './ImmutableMap'
 
 /**

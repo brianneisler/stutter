@@ -1,4 +1,4 @@
-import { Index, Key, Property } from './js'
+import { Index, Key, Property } from '../classes'
 import anyIsProperty from './anyIsProperty'
 
 describe('anyIsProperty', () => {

@@ -1,4 +1,4 @@
-import _WeakSet from '../util/js/WeakSet'
+import _WeakSet from '../classes/WeakSet'
 import anyIsWeakSet from '../util/anyIsWeakSet'
 import deftype from '../deftype'
 

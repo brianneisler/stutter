@@ -1,12 +1,12 @@
-import { TO_STRING_TAG } from '../../constants/Symbol'
+import { TO_STRING_TAG } from '../constants/Symbol'
 
-class Index {
+class Property {
   constructor(value) {
     this.value = value
   }
 
   get [TO_STRING_TAG]() {
-    return 'Index'
+    return 'Property'
   }
 
   valueOf() {
@@ -14,4 +14,4 @@ class Index {
   }
 }
 
-export default Index
+export default Property

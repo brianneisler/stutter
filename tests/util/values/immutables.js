@@ -6,7 +6,7 @@ import {
   ImmutableSet,
   ImmutableStack,
   Seq
-} from '../../../src/lang/util/js'
+} from '../../../src/lang/classes'
 import { keys, map } from 'ramda'
 
 const valueMap = {
@@ -22,6 +22,7 @@ const valueMap = {
   ['Seq.Set']: Seq.Set()
 }
 
-const immutables = (selected = keys(valueMap)) => map((key) => valueMap[key], selected)
+const immutables = (selected = keys(valueMap)) =>
+  map((key) => valueMap[key], selected)
 
 export default immutables

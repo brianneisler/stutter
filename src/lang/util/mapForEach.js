@@ -1,4 +1,4 @@
-import Map from './js/Map'
+import Map from '../classes/Map'
 
 const { forEach } = Map.prototype
 

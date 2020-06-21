@@ -1,4 +1,4 @@
-import _Path from '../util/js/Path'
+import _Path from '../classes/Path'
 import anyIsPath from '../util/anyIsPath'
 import anyToPath from '../util/anyToPath'
 import deftype from '../deftype'

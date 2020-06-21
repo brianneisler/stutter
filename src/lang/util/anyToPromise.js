@@ -1,4 +1,4 @@
-import Promise from './js/Promise'
+import Promise from '../classes/Promise'
 import anyIsPromise from './anyIsPromise'
 
 /**

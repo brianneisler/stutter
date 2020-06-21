@@ -1,6 +1,6 @@
-import ImmutableMap from './util/js/ImmutableMap'
-import Map from './util/js/Map'
-import WeakMap from './util/js/WeakMap'
+import ImmutableMap from './classes/ImmutableMap'
+import Map from './classes/Map'
+import WeakMap from './classes/WeakMap'
 import getKey from './getKey'
 
 example('getKey', () => {

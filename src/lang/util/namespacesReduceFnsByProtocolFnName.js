@@ -1,4 +1,4 @@
-import ImmutableList from './js/ImmutableList'
+import ImmutableList from '../classes/ImmutableList'
 import filterProtocolsForFunctionName from './filterProtocolsForFunctionName'
 import filterTypesForProtocol from './filterTypesForProtocol'
 import functionMemoizeWith from './functionMemoizeWith'

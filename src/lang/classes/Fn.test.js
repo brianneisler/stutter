@@ -1,4 +1,4 @@
-import Any from '../../types/Any'
+import Any from '../types/Any'
 import Fn from './Fn'
 import Parameter from './Parameter'
 

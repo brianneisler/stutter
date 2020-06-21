@@ -1,4 +1,4 @@
-import RegExp from './js/RegExp'
+import RegExp from '../classes/RegExp'
 
 const regExpClone = (pattern) =>
   RegExp(

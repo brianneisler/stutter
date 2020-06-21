@@ -1,4 +1,4 @@
-import { Array } from '../../../src/lang/util/js'
+import { Array } from '../../../src/lang/classes'
 
 const values = [[], new Array()]
 

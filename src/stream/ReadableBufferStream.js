@@ -1,4 +1,4 @@
-import Buffer from '../lang/util/js/Buffer'
+import Buffer from '../lang/classes/Buffer'
 import Readable from './Readable'
 import isBuffer from '../lang/isBuffer'
 

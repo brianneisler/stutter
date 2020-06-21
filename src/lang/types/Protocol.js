@@ -1,4 +1,4 @@
-import _Protocol from '../util/js/Protocol'
+import _Protocol from '../classes/Protocol'
 import anyIsProtocol from '../util/anyIsProtocol'
 import deftype from '../deftype'
 

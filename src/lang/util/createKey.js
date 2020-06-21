@@ -1,4 +1,4 @@
-import { Key } from './js'
+import { Key } from '../classes'
 
 const createKey = (value) => new Key(value)
 

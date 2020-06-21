@@ -1,8 +1,8 @@
-import { TO_STRING_TAG } from '../../constants/Symbol'
+import { TO_STRING_TAG } from '../constants/Symbol'
 import ImmutableList from './ImmutableList'
-import fnsDispatch from '../fnsDispatch'
-import fnsGetAllDispatchableFns from '../fnsGetAllDispatchableFns'
-import namespacesReduceFnsByProtocolFnName from '../namespacesReduceFnsByProtocolFnName'
+import fnsDispatch from '../util/fnsDispatch'
+import fnsGetAllDispatchableFns from '../util/fnsGetAllDispatchableFns'
+import namespacesReduceFnsByProtocolFnName from '../util/namespacesReduceFnsByProtocolFnName'
 
 /**
  * Note: This class is **immutable**

@@ -1,4 +1,4 @@
-import Function from './js/Function'
+import Function from '../classes/Function'
 
 const { toString } = Function.prototype
 

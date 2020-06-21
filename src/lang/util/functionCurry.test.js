@@ -1,5 +1,5 @@
 import FUNCTIONAL_PLACEHOLDER from '../constants/FUNCTIONAL_PLACEHOLDER'
-import ImmutableList from './js/ImmutableList'
+import ImmutableList from '../classes/ImmutableList'
 import Number from '../types/Number'
 import Self from '../types/Self'
 import String from '../types/String'

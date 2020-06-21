@@ -1,7 +1,7 @@
-import { TO_STRING_TAG } from '../../constants/Symbol'
-import anyToStringTag from '../anyToStringTag'
-import buildCallstack from '../buildCallstack'
-import buildStackTrace from '../buildStackTrace'
+import { TO_STRING_TAG } from '../constants/Symbol'
+import anyToStringTag from '../util/anyToStringTag'
+import buildCallstack from '../util/buildCallstack'
+import buildStackTrace from '../util/buildStackTrace'
 
 class Exception {
   constructor({ code, expected, source, stack, target }) {

@@ -1,5 +1,5 @@
-import Expected from './js/Expected'
-import Parameter from './js/Parameter'
+import Expected from '../classes/Expected'
+import Parameter from '../classes/Parameter'
 import String from '../types/String'
 import buildExpected from './buildExpected'
 
@@ -74,7 +74,9 @@ describe('buildExpected', () => {
   it('builds a new Argument:not:toMatchParameter Expected', () => {
     const parameter = new Parameter('foo', String)
     const next = jest.fn((expected) => expected)
-    const result = buildExpected('Argument', next).not.toMatchParameter(parameter)
+    const result = buildExpected('Argument', next).not.toMatchParameter(
+      parameter
+    )
 
     expect(result).toBeInstanceOf(Expected)
     expect(result).toMatchObject({

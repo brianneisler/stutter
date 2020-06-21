@@ -1,4 +1,4 @@
-import ImmutableList from './js/ImmutableList'
+import ImmutableList from '../classes/ImmutableList'
 import anyIsArray from './anyIsArray'
 
 describe('anyIsArray', () => {
@@ -25,8 +25,8 @@ describe('anyIsArray', () => {
     expect(anyIsArray(/abc/)).toBe(false)
     expect(anyIsArray(async () => {})).toBe(false)
     expect(anyIsArray(() => {})).toBe(false)
-    expect(anyIsArray(function() {})).toBe(false)
-    expect(anyIsArray((function*() {})())).toBe(false)
+    expect(anyIsArray(function () {})).toBe(false)
+    expect(anyIsArray((function* () {})())).toBe(false)
     expect(anyIsArray(new ArrayBuffer(2))).toBe(false)
     expect(anyIsArray(new Boolean(false))).toBe(false)
     expect(anyIsArray(new Boolean(true))).toBe(false)

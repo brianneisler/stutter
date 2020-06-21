@@ -1,4 +1,4 @@
-import Object from './js/Object'
+import Object from '../classes/Object'
 
 const { hasOwnProperty } = Object.prototype
 
@@ -27,6 +27,7 @@ const { hasOwnProperty } = Object.prototype
  * objectHasOwnProperty(object, 'hasOwnProperty')
  * //=> false
  */
-const objectHasOwnProperty = (object, property) => hasOwnProperty.call(object, property)
+const objectHasOwnProperty = (object, property) =>
+  hasOwnProperty.call(object, property)
 
 export default objectHasOwnProperty

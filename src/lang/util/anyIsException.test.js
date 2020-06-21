@@ -1,6 +1,6 @@
 import { values } from '../../../tests'
-import Exception from './js/Exception'
-import Expected from './js/Expected'
+import Exception from '../classes/Exception'
+import Expected from '../classes/Expected'
 import anyIsException from './anyIsException'
 import arrayDifference from './arrayDifference'
 
@@ -17,10 +17,14 @@ describe('anyIsException', () => {
       exceptionToError: () => {},
       expectation: 'foo'
     })
-    expect(anyIsException(new Exception({ expected, source, target }))).toBe(true)
+    expect(anyIsException(new Exception({ expected, source, target }))).toBe(
+      true
+    )
   })
 
   test('returns false for all other values', () => {
-    expect(anyIsException).toHaveReturnedFalsyForValues(arrayDifference(values()))
+    expect(anyIsException).toHaveReturnedFalsyForValues(
+      arrayDifference(values())
+    )
   })
 })

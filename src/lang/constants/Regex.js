@@ -5,7 +5,7 @@ import {
   UTF_ZERO_WIDTH_JOINER,
   VARIATION_SELECTORS_RANGE
 } from './RegexString'
-import RegExp from '../util/js/RegExp'
+import RegExp from '../classes/RegExp'
 
 /**
  * This constant is used for identifying deep paths in strings

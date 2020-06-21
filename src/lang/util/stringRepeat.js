@@ -1,5 +1,5 @@
-import Math from './js/Math'
-import Number from './js/Number'
+import Math from '../classes/Math'
+import Number from '../classes/Number'
 import anyIsString from './anyIsString'
 
 /**

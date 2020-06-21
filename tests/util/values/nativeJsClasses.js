@@ -8,7 +8,7 @@ import {
   Set,
   WeakMap,
   WeakSet
-} from '../../../src/lang/util/js'
+} from '../../../src/lang/classes'
 
 const values = [
   new ArrayBuffer(2),

@@ -1,4 +1,4 @@
-import Array from './js/Array'
+import Array from '../classes/Array'
 
 /**
  * This method creates a new, shallow-copied Array instance from an array-like or iterable object.

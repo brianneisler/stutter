@@ -1,5 +1,5 @@
 import Number from './types/Number'
-import Protocol from './util/js/Protocol'
+import Protocol from './classes/Protocol'
 import Self from './types/Self'
 import protocol from './protocol'
 

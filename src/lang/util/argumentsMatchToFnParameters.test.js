@@ -1,7 +1,7 @@
 import { FN } from '../constants/Symbol'
 import FUNCTIONAL_PLACEHOLDER from '../constants/FUNCTIONAL_PLACEHOLDER'
 import Number from '../types/Number'
-import Parameter from './js/Parameter'
+import Parameter from '../classes/Parameter'
 import Self from '../types/Self'
 import String from '../types/String'
 import argumentsMatchToFnParameters from './argumentsMatchToFnParameters'

@@ -1,4 +1,4 @@
-import Math from './js/Math'
+import Math from '../classes/Math'
 import anyToInteger from './anyToInteger'
 
 /**

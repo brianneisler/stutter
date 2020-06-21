@@ -1,4 +1,4 @@
-import { Object, Protocol, String } from './util/js'
+import { Object, Protocol, String } from './classes'
 import def from './def'
 import fn from './fn'
 import protocol from './protocol'

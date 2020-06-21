@@ -1,4 +1,4 @@
-import String from './js/String'
+import String from '../classes/String'
 
 const { split } = String.prototype
 
@@ -18,6 +18,7 @@ const { split } = String.prototype
  * stringSplit('abc')
  * //=> ['abc']
  */
-const stringSplit = (string, separator, limit) => split.call(string, separator, limit)
+const stringSplit = (string, separator, limit) =>
+  split.call(string, separator, limit)
 
 export default stringSplit

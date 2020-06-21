@@ -1,8 +1,8 @@
-import ImmutableMap from './js/ImmutableMap'
-import Namespace from './js/Namespace'
+import ImmutableMap from '../classes/ImmutableMap'
+import Namespace from '../classes/Namespace'
 import Number from '../types/Number'
-import Protocol from './js/Protocol'
-import Seq from './js/Seq'
+import Protocol from '../classes/Protocol'
+import Seq from '../classes/Seq'
 import namespacesFilterProtocols from './namespacesFilterProtocols'
 
 describe('namespacesFilterProtocols', () => {

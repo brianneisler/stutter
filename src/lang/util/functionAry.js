@@ -3,7 +3,7 @@ import functionDefineLength from './functionDefineLength'
 
 // NOTE BRN: Originally had a dynamic method produced here but jsperf seems to
 // indicate that simply using an array slice is actually faster
-// https://jsperf.com/direct-call-vs-slice
+// https://classesperf.com/direct-call-vs-slice
 const aryFunction = (func, number) => {
   return function () {
     return func.apply(this, arraySlice(arguments, 0, number))

@@ -1,4 +1,4 @@
-import Context from './js/Context'
+import Context from '../classes/Context'
 
 const createContext = (props) => {
   return new Context(props)

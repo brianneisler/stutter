@@ -1,5 +1,5 @@
 import { ErrorCode } from '../constants'
-import ImmutableList from './js/ImmutableList'
+import ImmutableList from '../classes/ImmutableList'
 import argumentsMatchToFnParameters from './argumentsMatchToFnParameters'
 import buildException from './buildException'
 import fnGetMeta from './fnGetMeta'

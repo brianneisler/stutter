@@ -1,5 +1,5 @@
 import './types'
-import ImmutableMap from './util/js/ImmutableMap'
+import ImmutableMap from './classes/ImmutableMap'
 import path from './path'
 import set from './set'
 

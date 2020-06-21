@@ -1,5 +1,5 @@
 import Any from '../types/Any'
-import Boolean from '../util/js/Boolean'
+import Boolean from '../classes/Boolean'
 import Self from '../types/Self'
 import defineAny from '../util/defineAny'
 import definitionsToProtocol from '../util/definitionsToProtocol'

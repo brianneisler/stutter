@@ -1,8 +1,8 @@
-import ImmutableMap from './js/ImmutableMap'
-import Namespace from './js/Namespace'
-import Number from './js/Number'
-import String from './js/String'
-import Type from './js/Type'
+import ImmutableMap from '../classes/ImmutableMap'
+import Namespace from '../classes/Namespace'
+import Number from '../classes/Number'
+import String from '../classes/String'
+import Type from '../classes/Type'
 import findTypeForClass from './findTypeForClass'
 
 describe('findTypeForClass', () => {

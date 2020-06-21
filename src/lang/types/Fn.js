@@ -1,4 +1,4 @@
-import _Fn from '../util/js/Fn'
+import _Fn from '../classes/Fn'
 import anyIsFn from '../util/anyIsFn'
 import anyToFn from '../util/anyToFn'
 import defineAny from '../util/defineAny'

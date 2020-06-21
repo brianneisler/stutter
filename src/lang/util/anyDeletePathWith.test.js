@@ -1,4 +1,4 @@
-import Path from './js/Path'
+import Path from '../classes/Path'
 import anyDeletePathWith from './anyDeletePathWith'
 import anyIsPath from './anyIsPath'
 import anySetPathWith from './anySetPathWith'
@@ -66,12 +66,26 @@ describe('anyDeletePathWith', () => {
     })
     const deleteFunc = jest.fn((target, key) => {
       if (anyIsPath(key)) {
-        return anyDeletePathWith(target, key, getFunc, hasFunc, setFunc, deleteFunc)
+        return anyDeletePathWith(
+          target,
+          key,
+          getFunc,
+          hasFunc,
+          setFunc,
+          deleteFunc
+        )
       }
       return objectDeleteProperty(target, key)
     })
 
-    const result = anyDeletePathWith(any, path, getFunc, hasFunc, setFunc, deleteFunc)
+    const result = anyDeletePathWith(
+      any,
+      path,
+      getFunc,
+      hasFunc,
+      setFunc,
+      deleteFunc
+    )
     expect(getFunc).toHaveBeenNthCalledWith(1, any, 'a')
     expect(getFunc).toHaveBeenNthCalledWith(2, any.a, 'b')
     expect(getFunc).toHaveBeenCalledTimes(2)
@@ -100,14 +114,25 @@ describe('anyDeletePathWith', () => {
     }
     const deleteFunc = (target, key) => {
       if (anyIsPath(key)) {
-        return anyDeletePathWith(target, key, getFunc, hasFunc, setFunc, deleteFunc)
+        return anyDeletePathWith(
+          target,
+          key,
+          getFunc,
+          hasFunc,
+          setFunc,
+          deleteFunc
+        )
       }
       return objectDeleteProperty(target, key)
     }
     const objectA = { a: undefined }
-    expect(anyDeletePathWith(objectA, path, getFunc, hasFunc, setFunc, deleteFunc)).toBe(objectA)
+    expect(
+      anyDeletePathWith(objectA, path, getFunc, hasFunc, setFunc, deleteFunc)
+    ).toBe(objectA)
     const objectB = { b: null }
-    expect(anyDeletePathWith(objectB, path, getFunc, hasFunc, setFunc, deleteFunc)).toBe(objectB)
+    expect(
+      anyDeletePathWith(objectB, path, getFunc, hasFunc, setFunc, deleteFunc)
+    ).toBe(objectB)
   })
 
   test('upgrades to async when getFunc returns a promise', async () => {
@@ -122,7 +147,14 @@ describe('anyDeletePathWith', () => {
     }
     const deleteFunc = (target, key) => {
       if (anyIsPath(key)) {
-        return anyDeletePathWith(target, key, getFunc, hasFunc, setFunc, deleteFunc)
+        return anyDeletePathWith(
+          target,
+          key,
+          getFunc,
+          hasFunc,
+          setFunc,
+          deleteFunc
+        )
       }
       return objectDeleteProperty(target, key)
     }
@@ -130,7 +162,14 @@ describe('anyDeletePathWith', () => {
     const any = {
       a: { b: { c: 3 } }
     }
-    const promise = anyDeletePathWith(any, path, getFunc, hasFunc, setFunc, deleteFunc)
+    const promise = anyDeletePathWith(
+      any,
+      path,
+      getFunc,
+      hasFunc,
+      setFunc,
+      deleteFunc
+    )
     expect(promise).toBeInstanceOf(Promise)
     const result = await promise
     expect(result).toEqual({
@@ -150,7 +189,14 @@ describe('anyDeletePathWith', () => {
     }
     const deleteFunc = (target, key) => {
       if (anyIsPath(key)) {
-        return anyDeletePathWith(target, key, getFunc, hasFunc, setFunc, deleteFunc)
+        return anyDeletePathWith(
+          target,
+          key,
+          getFunc,
+          hasFunc,
+          setFunc,
+          deleteFunc
+        )
       }
       return objectDeleteProperty(target, key)
     }
@@ -158,7 +204,14 @@ describe('anyDeletePathWith', () => {
     const any = {
       a: Promise.resolve({ b: Promise.resolve(null) })
     }
-    const promise = anyDeletePathWith(any, path, getFunc, hasFunc, setFunc, deleteFunc)
+    const promise = anyDeletePathWith(
+      any,
+      path,
+      getFunc,
+      hasFunc,
+      setFunc,
+      deleteFunc
+    )
     expect(promise).toBeInstanceOf(Promise)
     const result = await promise
     expect(result).toEqual({
@@ -167,7 +220,11 @@ describe('anyDeletePathWith', () => {
   })
 
   test('handles async Path values', async () => {
-    const path = new Path([Promise.resolve('a'), Promise.resolve('b'), Promise.resolve('c')])
+    const path = new Path([
+      Promise.resolve('a'),
+      Promise.resolve('b'),
+      Promise.resolve('c')
+    ])
     const getFunc = (target, key) => objectGetProperty(target, key)
     const hasFunc = (target, key) => objectHasProperty(target, key)
     const setFunc = (target, key, value) => {
@@ -178,7 +235,14 @@ describe('anyDeletePathWith', () => {
     }
     const deleteFunc = (target, key) => {
       if (anyIsPath(key)) {
-        return anyDeletePathWith(target, key, getFunc, hasFunc, setFunc, deleteFunc)
+        return anyDeletePathWith(
+          target,
+          key,
+          getFunc,
+          hasFunc,
+          setFunc,
+          deleteFunc
+        )
       }
       return objectDeleteProperty(target, key)
     }
@@ -186,7 +250,14 @@ describe('anyDeletePathWith', () => {
     const any = {
       a: { b: { c: 3 } }
     }
-    const promise = anyDeletePathWith(any, path, getFunc, hasFunc, setFunc, deleteFunc)
+    const promise = anyDeletePathWith(
+      any,
+      path,
+      getFunc,
+      hasFunc,
+      setFunc,
+      deleteFunc
+    )
     expect(promise).toBeInstanceOf(Promise)
     const result = await promise
     expect(result).toEqual({

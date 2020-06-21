@@ -1,5 +1,5 @@
-import ImmutableMap from './js/ImmutableMap'
-import WeakMap from './js/WeakMap'
+import ImmutableMap from '../classes/ImmutableMap'
+import WeakMap from '../classes/WeakMap'
 import anyIsImmutable from './anyIsImmutable'
 import anyIsObject from './anyIsObject'
 import arrayForEach from './arrayForEach'

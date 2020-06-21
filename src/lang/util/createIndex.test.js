@@ -1,4 +1,4 @@
-import { Index } from './js'
+import { Index } from '../classes'
 import createIndex from './createIndex'
 
 describe('createIndex', () => {

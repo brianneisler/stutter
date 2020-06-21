@@ -1,4 +1,4 @@
-import ImmutableMap from './util/js/ImmutableMap'
+import ImmutableMap from './classes/ImmutableMap'
 import forEach from './forEach'
 
 describe('forEach', () => {

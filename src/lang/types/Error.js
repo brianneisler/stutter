@@ -1,4 +1,4 @@
-import _Error from '../util/js/Error'
+import _Error from '../classes/Error'
 import anyIsError from '../util/anyIsError'
 import deftype from '../deftype'
 

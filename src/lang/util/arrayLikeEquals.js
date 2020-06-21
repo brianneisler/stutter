@@ -1,4 +1,4 @@
-import ImmutableStack from './js/ImmutableStack'
+import ImmutableStack from '../classes/ImmutableStack'
 import anyIdenticalWithAny from './anyIdenticalWithAny'
 import objectHasOwnProperty from './objectHasOwnProperty'
 import objectKeys from './objectKeys'

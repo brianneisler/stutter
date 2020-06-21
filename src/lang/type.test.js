@@ -1,4 +1,4 @@
-import Type from './util/js/Type'
+import Type from './classes/Type'
 import type from './type'
 
 describe('type', () => {

@@ -1,4 +1,4 @@
-import { Index, Property } from './js'
+import { Index, Property } from '../classes'
 
 /**
  * Checks if `any` is a key.

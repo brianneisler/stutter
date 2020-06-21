@@ -1,5 +1,5 @@
-import ImmutableMap from './js/ImmutableMap'
-import Map from './js/Map'
+import ImmutableMap from '../classes/ImmutableMap'
+import Map from '../classes/Map'
 import anyHasKey from './anyHasKey'
 
 describe('anyHasKey', () => {

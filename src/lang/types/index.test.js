@@ -1,4 +1,4 @@
-import Type from '../util/js/Type'
+import Type from '../classes/Type'
 
 describe('lang.types index', () => {
   test('has expected methods', () => {

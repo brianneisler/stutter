@@ -1,4 +1,4 @@
-import Path from './js/Path'
+import Path from '../classes/Path'
 import anyGetPathWith from './anyGetPathWith'
 import objectGetProperty from './objectGetProperty'
 
@@ -47,7 +47,11 @@ describe('anyGetPathWith', () => {
   })
 
   test('handles async Path values', async () => {
-    const path = new Path([Promise.resolve('a'), Promise.resolve('b'), Promise.resolve('c')])
+    const path = new Path([
+      Promise.resolve('a'),
+      Promise.resolve('b'),
+      Promise.resolve('c')
+    ])
     const getFunc = objectGetProperty
     const any = {
       a: { b: { c: 3 } }

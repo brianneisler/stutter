@@ -8,8 +8,8 @@ describe('deftype', () => {
     jest.mock('./util/root', () => ({}))
     const propGetNamespace = require('./util/propGetNamespace').default
     const deftype = require('./deftype').default
-    const Type = require('./util/js/Type').default
-    const ImmutableMap = require('./util/js/ImmutableMap').default
+    const Type = require('./classes/Type').default
+    const ImmutableMap = require('./classes/ImmutableMap').default
     const testDef = {
       class: class {},
       protocols: []

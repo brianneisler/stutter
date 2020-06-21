@@ -1,4 +1,4 @@
-import _Set from '../util/js/Set'
+import _Set from '../classes/Set'
 import anyIsSet from '../util/anyIsSet'
 import deftype from '../deftype'
 

@@ -1,4 +1,4 @@
-import { Index, Key, Property } from './js'
+import { Index, Key, Property } from '../classes'
 import { MAX_SAFE_INTEGER } from '../constants'
 import anyIsIndex from './anyIsIndex'
 

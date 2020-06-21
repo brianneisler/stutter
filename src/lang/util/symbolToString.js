@@ -1,4 +1,4 @@
-import Symbol from './js/Symbol'
+import Symbol from '../classes/Symbol'
 
 const { toString } = Symbol.prototype
 

@@ -1,4 +1,4 @@
-import Dispatcher from './js/Dispatcher'
+import Dispatcher from '../classes/Dispatcher'
 
 const fnsToDispatcher = (fns) => new Dispatcher({ fns })
 

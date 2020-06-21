@@ -1,4 +1,4 @@
-import { TO_STRING_TAG } from '../../constants/Symbol'
+import { TO_STRING_TAG } from '../constants/Symbol'
 import ImmutableStack from './ImmutableStack'
 
 class Context {

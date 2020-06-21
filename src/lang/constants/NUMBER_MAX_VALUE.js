@@ -1,4 +1,4 @@
-import Number from '../util/js/Number'
+import Number from '../classes/Number'
 
 /**
  * This constant property represents the maximum numeric value representable in JavaScript (1.7976931348623157e+308)

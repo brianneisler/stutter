@@ -1,4 +1,4 @@
-import ImmutableList from './js/ImmutableList'
+import ImmutableList from '../classes/ImmutableList'
 import anyIsImmutableList from './anyIsImmutableList'
 import buildException from './buildException'
 import buildMultiFn from './buildMultiFn'

@@ -8,9 +8,9 @@ import Map from './types/Map'
 import Object from './types/Object'
 import PlainObject from './types/PlainObject'
 import Property from './types/Property'
-import _ImmutableList from './util/js/ImmutableList'
-import _ImmutableMap from './util/js/ImmutableMap'
-import _Map from './util/js/Map'
+import _ImmutableList from './classes/ImmutableList'
+import _ImmutableMap from './classes/ImmutableMap'
+import _Map from './classes/Map'
 import defn from './defn'
 
 // TODO BRN: Figure out how to turn this into a protocol (implementation will be

@@ -1,4 +1,4 @@
-import ImmutableSet from './js/ImmutableSet'
+import ImmutableSet from '../classes/ImmutableSet'
 
 /**
  * Returns an `Array` of all elements in the first `Array` not contained in the

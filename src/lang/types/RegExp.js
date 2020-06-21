@@ -1,4 +1,4 @@
-import _RegExp from '../util/js/RegExp'
+import _RegExp from '../classes/RegExp'
 import anyIsRegExp from '../util/anyIsRegExp'
 import deftype from '../deftype'
 

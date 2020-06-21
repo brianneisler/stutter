@@ -1,5 +1,5 @@
-import ImmutableList from './util/js/ImmutableList'
-import ImmutableStack from './util/js/ImmutableStack'
+import ImmutableList from './classes/ImmutableList'
+import ImmutableStack from './classes/ImmutableStack'
 import isImmutable from './isImmutable'
 
 example('isImmutable', () => {

@@ -1,8 +1,8 @@
-import ImmutableList from './js/ImmutableList'
-import ImmutableMap from './js/ImmutableMap'
-import Namespace from './js/Namespace'
+import ImmutableList from '../classes/ImmutableList'
+import ImmutableMap from '../classes/ImmutableMap'
+import Namespace from '../classes/Namespace'
 import Number from '../types/Number'
-import Protocol from './js/Protocol'
+import Protocol from '../classes/Protocol'
 import Self from '../types/Self'
 import filterProtocolsForFunctionName from './filterProtocolsForFunctionName'
 

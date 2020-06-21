@@ -1,4 +1,4 @@
-import Protocol from './js/Protocol'
+import Protocol from '../classes/Protocol'
 import anyIsProtocol from './anyIsProtocol'
 
 describe('anyIsProtocol', () => {
@@ -29,8 +29,8 @@ describe('anyIsProtocol', () => {
     expect(anyIsProtocol(/abc/)).toBe(false)
     expect(anyIsProtocol(async () => {})).toBe(false)
     expect(anyIsProtocol(() => {})).toBe(false)
-    expect(anyIsProtocol(function() {})).toBe(false)
-    expect(anyIsProtocol((function*() {})())).toBe(false)
+    expect(anyIsProtocol(function () {})).toBe(false)
+    expect(anyIsProtocol((function* () {})())).toBe(false)
     expect(anyIsProtocol(Symbol('abc'))).toBe(false)
     expect(anyIsProtocol(Symbol.for('def'))).toBe(false)
     expect(anyIsProtocol(new ArrayBuffer(2))).toBe(false)

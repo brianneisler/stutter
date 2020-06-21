@@ -1,5 +1,5 @@
-import Expected from './js/Expected'
-import TypeError from './js/TypeError'
+import Expected from '../classes/Expected'
+import TypeError from '../classes/TypeError'
 import anyToName from './anyToName'
 import anyToString from './anyToString'
 import fnToSignatureString from './fnToSignatureString'

@@ -1,4 +1,4 @@
-import { Index } from './js'
+import { Index } from '../classes'
 import { MAX_SAFE_INTEGER } from '../constants'
 import { UINT } from '../constants/Regex'
 

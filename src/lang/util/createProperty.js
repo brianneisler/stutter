@@ -1,4 +1,4 @@
-import { Property } from './js'
+import { Property } from '../classes'
 
 const createProperty = (value) => new Property(value)
 

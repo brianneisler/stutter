@@ -1,6 +1,6 @@
 import './types'
-import ImmutableList from './util/js/ImmutableList'
-import ImmutableMap from './util/js/ImmutableMap'
+import ImmutableList from './classes/ImmutableList'
+import ImmutableMap from './classes/ImmutableMap'
 import get from './get'
 import path from './path'
 

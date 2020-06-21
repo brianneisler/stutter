@@ -1,5 +1,5 @@
-import Seq from './js/Seq'
-import Type from './js/Type'
+import Seq from '../classes/Seq'
+import Type from '../classes/Type'
 import anyFilterTypes from './anyFilterTypes'
 
 describe('anyFilterTypes', () => {

@@ -1,4 +1,4 @@
-import Fn from './js/Fn'
+import Fn from '../classes/Fn'
 import buildFnCaller from './buildFnCaller'
 
 /**

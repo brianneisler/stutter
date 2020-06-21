@@ -1,4 +1,4 @@
-import _ImmutableOrderedMap from '../util/js/ImmutableOrderedMap'
+import _ImmutableOrderedMap from '../classes/ImmutableOrderedMap'
 import anyIsImmutableOrderedMap from '../util/anyIsImmutableOrderedMap'
 import deftype from '../deftype'
 

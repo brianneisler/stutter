@@ -1,9 +1,9 @@
-import ImmutableList from './js/ImmutableList'
-import ImmutableMap from './js/ImmutableMap'
+import ImmutableList from '../classes/ImmutableList'
+import ImmutableMap from '../classes/ImmutableMap'
 import Number from '../types/Number'
-import Protocol from './js/Protocol'
+import Protocol from '../classes/Protocol'
 import Self from '../types/Self'
-import Type from './js/Type'
+import Type from '../classes/Type'
 import definitionToType from './definitionToType'
 import fn from '../fn'
 
@@ -31,7 +31,9 @@ describe('definitionToType', () => {
   })
 
   it('corectly handles a defined Protocols', () => {
-    const FooProtocol = new Protocol(ImmutableMap({ foo: ImmutableList([Self, Number]) }))
+    const FooProtocol = new Protocol(
+      ImmutableMap({ foo: ImmutableList([Self, Number]) })
+    )
     const testDef = {
       class: class {},
       protocols: [

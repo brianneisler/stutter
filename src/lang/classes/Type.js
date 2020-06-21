@@ -1,9 +1,9 @@
-import { ITERATOR, TO_STRING_TAG } from '../../constants/Symbol'
+import { ITERATOR, TO_STRING_TAG } from '../constants/Symbol'
 import ImmutableMap from './ImmutableMap'
-import anyIsFunction from '../anyIsFunction'
-import anyIsObject from '../anyIsObject'
-import anyIsProtocol from '../anyIsProtocol'
-import objectMap from '../objectMap'
+import anyIsFunction from '../util/anyIsFunction'
+import anyIsObject from '../util/anyIsObject'
+import anyIsProtocol from '../util/anyIsProtocol'
+import objectMap from '../util/objectMap'
 
 const validateProtocols = (protocols) => {
   // TODO BRN: validate that the protocols have been implemented correctly

@@ -1,6 +1,6 @@
-import ImmutableMap from './js/ImmutableMap'
-import Namespace from './js/Namespace'
-import Seq from './js/Seq'
+import ImmutableMap from '../classes/ImmutableMap'
+import Namespace from '../classes/Namespace'
+import Seq from '../classes/Seq'
 import namespacesFilter from './namespacesFilter'
 
 describe('namespacesFilter', () => {
@@ -14,7 +14,10 @@ describe('namespacesFilter', () => {
         })
       )
     })
-    const results = namespacesFilter(namespaces, (value) => typeof value === 'string')
+    const results = namespacesFilter(
+      namespaces,
+      (value) => typeof value === 'string'
+    )
     expect(results).toBeInstanceOf(Seq)
     expect(results.toArray()).toEqual(['abc'])
   })
@@ -43,7 +46,10 @@ describe('namespacesFilter', () => {
         })
       )
     })
-    const results = namespacesFilter(namespaces, (value) => typeof value === 'string')
+    const results = namespacesFilter(
+      namespaces,
+      (value) => typeof value === 'string'
+    )
     expect(results).toBeInstanceOf(Seq)
     expect(results.toArray()).toEqual(['def', 'ghi', 'abc'])
   })

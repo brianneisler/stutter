@@ -11,7 +11,7 @@ describe('defprotocol', () => {
     jest.mock('./util/root', () => ({}))
     const propGetNamespace = require('./util/propGetNamespace').default
     const defprotocol = require('./defprotocol').default
-    const Protocol = require('./util/js/Protocol').default
+    const Protocol = require('./classes/Protocol').default
     const definitions = {
       foo: [Self, Number]
     }

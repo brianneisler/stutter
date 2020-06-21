@@ -1,4 +1,4 @@
-import Seq from './js/Seq'
+import Seq from '../classes/Seq'
 
 /**
  * Filter values from an iterable collection of namespaces

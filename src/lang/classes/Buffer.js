@@ -1,5 +1,5 @@
 import { Buffer } from 'buffer'
-import root from '../root'
+import root from '../util/root'
 
 /** Detect free variable `exports`. */
 const freeExports =

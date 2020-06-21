@@ -1,10 +1,10 @@
-import ImmutableList from './js/ImmutableList'
-import ImmutableMap from './js/ImmutableMap'
-import Namespace from './js/Namespace'
-import Protocol from './js/Protocol'
+import ImmutableList from '../classes/ImmutableList'
+import ImmutableMap from '../classes/ImmutableMap'
+import Namespace from '../classes/Namespace'
+import Protocol from '../classes/Protocol'
 import Self from '../types/Self'
-import String from './js/String'
-import Type from './js/Type'
+import String from '../classes/String'
+import Type from '../classes/Type'
 import anySatisfies from './anySatisfies'
 import fn from '../fn'
 
@@ -115,17 +115,25 @@ describe('anySatisfies', () => {
     expect(anySatisfies(new RegExp('abc'), BarProtocol, namespaces)).toBe(false)
     expect(anySatisfies(async () => {}, BarProtocol, namespaces)).toBe(false)
     expect(anySatisfies(() => {}, BarProtocol, namespaces)).toBe(false)
-    expect(anySatisfies(function() {}, BarProtocol, namespaces)).toBe(false)
-    expect(anySatisfies(function*() {}, BarProtocol, namespaces)).toBe(false)
-    expect(anySatisfies((function*() {})(), BarProtocol, namespaces)).toBe(false)
+    expect(anySatisfies(function () {}, BarProtocol, namespaces)).toBe(false)
+    expect(anySatisfies(function* () {}, BarProtocol, namespaces)).toBe(false)
+    expect(anySatisfies((function* () {})(), BarProtocol, namespaces)).toBe(
+      false
+    )
     expect(anySatisfies(new Array(0), BarProtocol, namespaces)).toBe(false)
-    expect(anySatisfies(new ArrayBuffer(2), BarProtocol, namespaces)).toBe(false)
-    expect(anySatisfies(new Boolean(false), BarProtocol, namespaces)).toBe(false)
+    expect(anySatisfies(new ArrayBuffer(2), BarProtocol, namespaces)).toBe(
+      false
+    )
+    expect(anySatisfies(new Boolean(false), BarProtocol, namespaces)).toBe(
+      false
+    )
     expect(anySatisfies(new Boolean(true), BarProtocol, namespaces)).toBe(false)
     expect(anySatisfies(new Date(), BarProtocol, namespaces)).toBe(false)
     expect(anySatisfies(new Error(), BarProtocol, namespaces)).toBe(false)
     expect(anySatisfies(new Number(1), BarProtocol, namespaces)).toBe(false)
-    expect(anySatisfies(new Promise(() => {}), BarProtocol, namespaces)).toBe(false)
+    expect(anySatisfies(new Promise(() => {}), BarProtocol, namespaces)).toBe(
+      false
+    )
     expect(anySatisfies(new Proxy({}, {}), BarProtocol, namespaces)).toBe(false)
     expect(anySatisfies(new Set(), BarProtocol, namespaces)).toBe(false)
     expect(anySatisfies(Symbol('abc'), BarProtocol, namespaces)).toBe(false)

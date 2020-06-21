@@ -1,4 +1,4 @@
-import _Op from '../util/js/Op'
+import _Op from '../classes/Op'
 import anyIsOp from '../util/anyIsOp'
 import deftype from '../deftype'
 

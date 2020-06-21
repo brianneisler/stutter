@@ -1,4 +1,4 @@
-import Set from './js/Set'
+import Set from '../classes/Set'
 
 const { forEach } = Set.prototype
 

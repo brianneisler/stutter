@@ -1,10 +1,10 @@
-import ImmutableList from './js/ImmutableList'
-import ImmutableMap from './js/ImmutableMap'
-import ImmutableOrderedMap from './js/ImmutableOrderedMap'
-import ImmutableOrderedSet from './js/ImmutableOrderedSet'
-import ImmutableSet from './js/ImmutableSet'
-import ImmutableStack from './js/ImmutableStack'
-import Seq from './js/Seq'
+import ImmutableList from '../classes/ImmutableList'
+import ImmutableMap from '../classes/ImmutableMap'
+import ImmutableOrderedMap from '../classes/ImmutableOrderedMap'
+import ImmutableOrderedSet from '../classes/ImmutableOrderedSet'
+import ImmutableSet from '../classes/ImmutableSet'
+import ImmutableStack from '../classes/ImmutableStack'
+import Seq from '../classes/Seq'
 import anyIsImmutableOrderedSet from './anyIsImmutableOrderedSet'
 
 describe('anyIsImmutableOrderedSet', () => {
@@ -56,8 +56,8 @@ describe('anyIsImmutableOrderedSet', () => {
     expect(anyIsImmutableOrderedSet(/abc/)).toBe(false)
     expect(anyIsImmutableOrderedSet(async () => {})).toBe(false)
     expect(anyIsImmutableOrderedSet(() => {})).toBe(false)
-    expect(anyIsImmutableOrderedSet(function() {})).toBe(false)
-    expect(anyIsImmutableOrderedSet((function*() {})())).toBe(false)
+    expect(anyIsImmutableOrderedSet(function () {})).toBe(false)
+    expect(anyIsImmutableOrderedSet((function* () {})())).toBe(false)
     expect(anyIsImmutableOrderedSet(new ArrayBuffer(2))).toBe(false)
     expect(anyIsImmutableOrderedSet(new Boolean(false))).toBe(false)
     expect(anyIsImmutableOrderedSet(new Boolean(true))).toBe(false)

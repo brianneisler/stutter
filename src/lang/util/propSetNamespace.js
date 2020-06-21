@@ -1,4 +1,4 @@
-import ImmutableMap from './js/ImmutableMap'
+import ImmutableMap from '../classes/ImmutableMap'
 import root from './root'
 
 /**

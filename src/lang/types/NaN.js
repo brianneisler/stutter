@@ -1,4 +1,4 @@
-import _NaN from '../util/js/NaN'
+import _NaN from '../classes/NaN'
 import anyIsNaN from '../util/anyIsNaN'
 import deftype from '../deftype'
 

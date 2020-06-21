@@ -1,4 +1,4 @@
-import Path from './js/Path'
+import Path from '../classes/Path'
 import anyHasPathWith from './anyHasPathWith'
 import objectGetProperty from './objectGetProperty'
 import objectHasProperty from './objectHasProperty'
@@ -85,7 +85,11 @@ describe('anyHasPathWith', () => {
   })
 
   test('handles async Path values', async () => {
-    const path = new Path([Promise.resolve('a'), Promise.resolve('b'), Promise.resolve('c')])
+    const path = new Path([
+      Promise.resolve('a'),
+      Promise.resolve('b'),
+      Promise.resolve('c')
+    ])
     const getFunc = objectGetProperty
     const hasFunc = objectHasProperty
     const any = {

@@ -1,5 +1,5 @@
-import Dispatcher from './js/Dispatcher'
-import ImmutableList from './js/ImmutableList'
+import Dispatcher from '../classes/Dispatcher'
+import ImmutableList from '../classes/ImmutableList'
 import Number from '../types/Number'
 import Self from '../types/Self'
 import String from '../types/String'

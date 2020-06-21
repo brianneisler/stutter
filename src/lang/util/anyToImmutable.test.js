@@ -1,5 +1,5 @@
-import ImmutableList from './js/ImmutableList'
-import ImmutableMap from './js/ImmutableMap'
+import ImmutableList from '../classes/ImmutableList'
+import ImmutableMap from '../classes/ImmutableMap'
 import anyToImmutable from './anyToImmutable'
 
 describe('anyToImmutable', () => {
@@ -8,7 +8,9 @@ describe('anyToImmutable', () => {
   })
 
   it('converts an Array to an ImmutableList', () => {
-    expect(anyToImmutable({ foo: ['bar'] })).toEqual(ImmutableMap({ foo: ImmutableList(['bar']) }))
+    expect(anyToImmutable({ foo: ['bar'] })).toEqual(
+      ImmutableMap({ foo: ImmutableList(['bar']) })
+    )
   })
 
   it('converts nested values', () => {

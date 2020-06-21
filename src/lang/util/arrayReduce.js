@@ -1,4 +1,4 @@
-import Array from './js/Array'
+import Array from '../classes/Array'
 
 const { reduce } = Array.prototype
 
@@ -25,7 +25,7 @@ const { reduce } = Array.prototype
  * arrayReduce(array, (x, y) => x + y, 10)
  * //=> 20
  */
-const arrayReduce = function(array, func, initialValue) {
+const arrayReduce = function (array, func, initialValue) {
   if (arguments.length < 3) {
     return reduce.call(array, func)
   }

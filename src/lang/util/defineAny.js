@@ -1,5 +1,5 @@
 import { META } from '../constants/Symbol'
-import Namespace from './js/Namespace'
+import Namespace from '../classes/Namespace'
 import anyIsFunction from './anyIsFunction'
 import anyIsObject from './anyIsObject'
 import anyIsString from './anyIsString'

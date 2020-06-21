@@ -1,4 +1,4 @@
-import Map from './js/Map'
+import Map from '../classes/Map'
 import anyIsArray from './anyIsArray'
 import anyIsFunction from './anyIsFunction'
 import anyIsImmutableList from './anyIsImmutableList'

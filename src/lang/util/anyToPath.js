@@ -1,6 +1,4 @@
-import Path from './js/Path'
-import anyHasKey from './anyHasKey'
-import anyHasProperty from './anyHasProperty'
+import Path from '../classes/Path'
 import anyIsArray from './anyIsArray'
 import anyIsString from './anyIsString'
 import stringToPath from './stringToPath'

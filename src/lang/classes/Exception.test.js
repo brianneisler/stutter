@@ -4,7 +4,7 @@ import Expected from './Expected'
 describe('js:Exception', () => {
   describe('constructor', () => {
     test('correctly constructs the Type instance', () => {
-      const source = function() {}
+      const source = function () {}
       const target = {
         index: 0,
         type: 'Argument',
@@ -28,7 +28,7 @@ describe('js:Exception', () => {
 
   describe('toError', () => {
     test('calls the toError method of the expected', () => {
-      const source = function() {}
+      const source = function () {}
       const target = {
         index: 0,
         type: 'Argument',

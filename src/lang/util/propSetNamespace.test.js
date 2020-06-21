@@ -1,4 +1,4 @@
-import Namespace from './js/Namespace'
+import Namespace from '../classes/Namespace'
 
 describe('propSetNamespace', () => {
   beforeEach(() => {

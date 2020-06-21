@@ -1,4 +1,4 @@
-import _Seq from '../util/js/Seq'
+import _Seq from '../classes/Seq'
 import anyIsSeq from '../util/anyIsSeq'
 import deftype from '../deftype'
 

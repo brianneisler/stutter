@@ -1,4 +1,4 @@
-import ImmutableList from './util/js/ImmutableList'
+import ImmutableList from './classes/ImmutableList'
 import deleteIndex from './deleteIndex'
 
 example('delete Index from Array', () => {

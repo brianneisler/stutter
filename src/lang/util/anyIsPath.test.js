@@ -1,4 +1,4 @@
-import Path from './js/Path'
+import Path from '../classes/Path'
 import anyIsPath from './anyIsPath'
 
 describe('anyIsPath', () => {
@@ -52,8 +52,8 @@ describe('anyIsPath', () => {
     expect(anyIsPath([])).toBe(false)
     expect(anyIsPath(async () => {})).toBe(false)
     expect(anyIsPath(() => {})).toBe(false)
-    expect(anyIsPath(function() {})).toBe(false)
-    expect(anyIsPath(function*() {})).toBe(false)
+    expect(anyIsPath(function () {})).toBe(false)
+    expect(anyIsPath(function* () {})).toBe(false)
     expect(anyIsPath(new Array())).toBe(false)
     expect(anyIsPath(new ArrayBuffer(2))).toBe(false)
     expect(anyIsPath(new Boolean(false))).toBe(false)

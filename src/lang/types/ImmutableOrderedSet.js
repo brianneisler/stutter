@@ -1,4 +1,4 @@
-import _ImmutableOrderedSet from '../util/js/ImmutableOrderedSet'
+import _ImmutableOrderedSet from '../classes/ImmutableOrderedSet'
 import anyIsImmutableOrderedSet from '../util/anyIsImmutableOrderedSet'
 import deftype from '../deftype'
 

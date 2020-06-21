@@ -1,4 +1,4 @@
-import ImmutableList from './util/js/ImmutableList'
+import ImmutableList from './classes/ImmutableList'
 import getIndex from './getIndex'
 
 example('getIndex', () => {

@@ -1,4 +1,4 @@
-import { Index } from './js'
+import { Index } from '../classes'
 
 const createIndex = (value) => new Index(value)
 

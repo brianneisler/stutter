@@ -1,4 +1,4 @@
-import _Function from '../util/js/Function'
+import _Function from '../classes/Function'
 import anyIsFunction from '../util/anyIsFunction'
 import anyToFunction from '../util/anyToFunction'
 import defineAny from '../util/defineAny'

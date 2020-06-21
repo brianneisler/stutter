@@ -1,4 +1,4 @@
-import ImmutableList from './js/ImmutableList'
+import ImmutableList from '../classes/ImmutableList'
 import fnGetMeta from './fnGetMeta'
 
 const fnsGetAllDispatchableFns = (fns) => {

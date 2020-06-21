@@ -1,4 +1,4 @@
-import _ImmutableStack from '../util/js/ImmutableStack'
+import _ImmutableStack from '../classes/ImmutableStack'
 import anyIsImmutableStack from '../util/anyIsImmutableStack'
 import deftype from '../deftype'
 

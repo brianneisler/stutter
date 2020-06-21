@@ -1,4 +1,4 @@
-import Infinity from './js/Infinity'
+import Infinity from '../classes/Infinity'
 import anyIsNumber from './anyIsNumber'
 
 /**
@@ -27,6 +27,7 @@ import anyIsNumber from './anyIsNumber'
  * anyIsInfinity(123)
  * // => false
  */
-const anyIsInfinity = (value) => anyIsNumber(value) && (Infinity === +value || -Infinity === +value)
+const anyIsInfinity = (value) =>
+  anyIsNumber(value) && (Infinity === +value || -Infinity === +value)
 
 export default anyIsInfinity

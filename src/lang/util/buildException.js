@@ -1,4 +1,4 @@
-import Exception from './js/Exception'
+import Exception from '../classes/Exception'
 import buildExpected from './buildExpected'
 
 const buildException = (source, { code, stack } = {}) => {

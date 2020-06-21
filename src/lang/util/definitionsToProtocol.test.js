@@ -1,7 +1,7 @@
 import Any from '../types/Any'
-import ImmutableList from './js/ImmutableList'
-import ImmutableMap from './js/ImmutableMap'
-import Protocol from './js/Protocol'
+import ImmutableList from '../classes/ImmutableList'
+import ImmutableMap from '../classes/ImmutableMap'
+import Protocol from '../classes/Protocol'
 import Self from '../types/Self'
 import definitionsToProtocol from './definitionsToProtocol'
 

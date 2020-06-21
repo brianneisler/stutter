@@ -1,4 +1,4 @@
-import Type from './js/Type'
+import Type from '../classes/Type'
 
 /**
  * Converts the given `definition` to an anonymous `Type`

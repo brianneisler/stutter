@@ -1,6 +1,6 @@
-import Infinity from './js/Infinity'
-import NaN from './js/NaN'
-import Number from './js/Number'
+import Infinity from '../classes/Infinity'
+import NaN from '../classes/NaN'
+import Number from '../classes/Number'
 import anyIsInteger from './anyIsInteger'
 
 describe('anyIsInteger', () => {
@@ -59,9 +59,9 @@ describe('anyIsInteger', () => {
     expect(anyIsInteger({})).toBe(false)
     expect(anyIsInteger(async () => {})).toBe(false)
     expect(anyIsInteger(() => {})).toBe(false)
-    expect(anyIsInteger(function() {})).toBe(false)
-    expect(anyIsInteger(function*() {})).toBe(false)
-    expect(anyIsInteger((function*() {})())).toBe(false)
+    expect(anyIsInteger(function () {})).toBe(false)
+    expect(anyIsInteger(function* () {})).toBe(false)
+    expect(anyIsInteger((function* () {})())).toBe(false)
     expect(anyIsInteger(new Array(0))).toBe(false)
     expect(anyIsInteger(new ArrayBuffer(2))).toBe(false)
     expect(anyIsInteger(new Boolean(false))).toBe(false)

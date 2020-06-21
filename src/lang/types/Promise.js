@@ -1,4 +1,4 @@
-import _Promise from '../util/js/Promise'
+import _Promise from '../classes/Promise'
 import anyIsPromise from '../util/anyIsPromise'
 import anyToPromise from '../util/anyToPromise'
 import deftype from '../deftype'

@@ -1,4 +1,4 @@
-import { Key } from './js'
+import { Key } from '../classes'
 import createKey from './createKey'
 
 describe('createKey', () => {

@@ -1,4 +1,4 @@
-import Protocol from './js/Protocol'
+import Protocol from '../classes/Protocol'
 import anyToImmutable from './anyToImmutable'
 
 /**
@@ -17,6 +17,7 @@ import anyToImmutable from './anyToImmutable'
  *   set: [Self, Key, Any, () => Self],
  * })
  */
-const definitionsToProtocol = (definitions) => new Protocol(anyToImmutable(definitions))
+const definitionsToProtocol = (definitions) =>
+  new Protocol(anyToImmutable(definitions))
 
 export default definitionsToProtocol

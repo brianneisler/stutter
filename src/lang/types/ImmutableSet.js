@@ -1,4 +1,4 @@
-import _ImmutableSet from '../util/js/ImmutableSet'
+import _ImmutableSet from '../classes/ImmutableSet'
 import anyIsImmutableSet from '../util/anyIsImmutableSet'
 import deftype from '../deftype'
 

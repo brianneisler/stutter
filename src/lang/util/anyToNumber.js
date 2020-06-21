@@ -1,4 +1,4 @@
-import NaN from './js/NaN'
+import NaN from '../classes/NaN'
 import anyIsFunction from './anyIsFunction'
 import anyIsObject from './anyIsObject'
 import anyIsSymbol from './anyIsSymbol'

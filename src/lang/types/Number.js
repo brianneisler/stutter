@@ -1,4 +1,4 @@
-import _Number from '../util/js/Number'
+import _Number from '../classes/Number'
 import anyIsNumber from '../util/anyIsNumber'
 import anyToNumber from '../util/anyToNumber'
 import defineAny from '../util/defineAny'

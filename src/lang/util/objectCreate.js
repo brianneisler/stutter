@@ -1,4 +1,4 @@
-import Object from './js/Object'
+import Object from '../classes/Object'
 
 /**
  * Creates a new object, using an existing object as the prototype of the newly created object.

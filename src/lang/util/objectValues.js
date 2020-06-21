@@ -1,4 +1,4 @@
-import Object from './js/Object'
+import Object from '../classes/Object'
 
 /**
  * Returns an array of a given object's own enumerable property values, in the same order as that provided by a for...in loop (the difference being that a for-in loop enumerates properties in the prototype chain as well).

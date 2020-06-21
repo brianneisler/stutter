@@ -1,7 +1,7 @@
-import ImmutableMap from './js/ImmutableMap'
-import Namespace from './js/Namespace'
-import Seq from './js/Seq'
-import Type from './js/Type'
+import ImmutableMap from '../classes/ImmutableMap'
+import Namespace from '../classes/Namespace'
+import Seq from '../classes/Seq'
+import Type from '../classes/Type'
 import namespacesFilterTypes from './namespacesFilterTypes'
 
 describe('namespacesFilterTypes', () => {

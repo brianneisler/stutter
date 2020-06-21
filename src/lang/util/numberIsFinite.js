@@ -1,4 +1,4 @@
-import Number from './js/Number'
+import Number from '../classes/Number'
 
 /**
  * Determines whether the passed value is a finite number. If  needed, the parameter is first converted to a number.

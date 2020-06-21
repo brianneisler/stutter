@@ -1,4 +1,4 @@
-import _Symbol from '../util/js/Symbol'
+import _Symbol from '../classes/Symbol'
 import anyIsSymbol from '../util/anyIsSymbol'
 import deftype from '../deftype'
 

@@ -1,4 +1,4 @@
-import Infinity from '../util/js/Infinity'
+import Infinity from '../classes/Infinity'
 
 /**
  * This constant represents the value Infinity in JavaScript `Infinity`

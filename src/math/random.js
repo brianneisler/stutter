@@ -1,5 +1,5 @@
 // required
-import Math from '../lang/util/js/Math'
+import Math from '../lang/classes/Math'
 import defn from '../lang/defn'
 
 const randomInteger = (lower, upper) => lower + Math.floor(Math.random() * (upper - lower + 1))

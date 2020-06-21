@@ -1,5 +1,5 @@
 import Any from '../types/Any'
-import Parameter from './js/Parameter'
+import Parameter from '../classes/Parameter'
 import anyIsFunction from './anyIsFunction'
 import anyIsProtocol from './anyIsProtocol'
 import anyIsType from './anyIsType'

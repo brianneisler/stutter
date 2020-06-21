@@ -1,4 +1,4 @@
-import { Context } from './js'
+import { Context } from '../classes'
 import createContext from './createContext'
 
 describe('createContext', () => {

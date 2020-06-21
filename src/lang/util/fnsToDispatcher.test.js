@@ -1,6 +1,6 @@
 import { ErrorCode } from '../constants'
-import Dispatcher from './js/Dispatcher'
-import ImmutableList from './js/ImmutableList'
+import Dispatcher from '../classes/Dispatcher'
+import ImmutableList from '../classes/ImmutableList'
 import Number from '../types/Number'
 import String from '../types/String'
 import createContext from './createContext'
@@ -56,9 +56,7 @@ describe('fnsToDispatcher', () => {
       },
       [String, String]
     )
-    const multiFnDipatcher = fnsToDispatcher(
-      ImmutableList([fn1, fn2, fn3])
-    )
+    const multiFnDipatcher = fnsToDispatcher(ImmutableList([fn1, fn2, fn3]))
     const result = multiFnDipatcher.dispatch(
       createContext({
         callee: this
@@ -93,9 +91,7 @@ describe('fnsToDispatcher', () => {
       },
       [String, String, String]
     )
-    const multiFnDipatcher = fnsToDispatcher(
-      ImmutableList([fn1, fn2, fn3])
-    )
+    const multiFnDipatcher = fnsToDispatcher(ImmutableList([fn1, fn2, fn3]))
     const result = multiFnDipatcher.dispatch(
       createContext({
         callee: this

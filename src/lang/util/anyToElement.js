@@ -1,4 +1,4 @@
-import Element from './js/Element'
+import Element from '../classes/Element'
 import anyIsElement from './anyIsElement'
 
 /**

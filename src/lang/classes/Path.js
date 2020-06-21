@@ -1,5 +1,5 @@
-import { ITERATOR, TO_STRING_TAG } from '../../constants/Symbol'
-import anyToImmutableList from '../anyToImmutableList'
+import { ITERATOR, TO_STRING_TAG } from '../constants/Symbol'
+import anyToImmutableList from '../util/anyToImmutableList'
 
 /**
  * Note: This class is **immutable**

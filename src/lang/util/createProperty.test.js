@@ -1,4 +1,4 @@
-import { Property } from './js'
+import { Property } from '../classes'
 import createProperty from './createProperty'
 
 describe('createProperty', () => {

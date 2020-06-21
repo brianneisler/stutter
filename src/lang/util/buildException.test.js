@@ -1,4 +1,4 @@
-import Exception from './js/Exception'
+import Exception from '../classes/Exception'
 import String from '../types/String'
 import buildException from './buildException'
 import createContext from './createContext'

@@ -1,8 +1,8 @@
 import ImmutableList from './ImmutableList'
 import ImmutableMap from './ImmutableMap'
-import Number from '../../types/Number'
+import Number from '../types/Number'
 import Protocol from './Protocol'
-import Self from '../../types/Self'
+import Self from '../types/Self'
 
 describe('js:Protocol', () => {
   describe('constructor', () => {

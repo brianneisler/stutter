@@ -1,7 +1,8 @@
-import Object from './js/Object'
+import Object from '../classes/Object'
 
 const { propertyIsEnumerable } = Object.prototype
 
-const objectPropertyIsEnumerable = (object, property) => propertyIsEnumerable.call(object, property)
+const objectPropertyIsEnumerable = (object, property) =>
+  propertyIsEnumerable.call(object, property)
 
 export default objectPropertyIsEnumerable
