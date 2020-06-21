@@ -23,6 +23,7 @@ describe('lang.util.js index', () => {
       ImmutableStack: expect.any(Function),
       Index: expect.any(Function),
       Infinity: Infinity,
+      Int8Array: expect.any(Function),
       Key: expect.any(Function),
       List: expect.any(Function),
       Map: expect.any(Function),
