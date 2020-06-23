@@ -23,10 +23,10 @@ const map = defn(
   [Function, Array],
   (iteratee, collection) =>
     reduce(
-      (accum, value, kdx) => {
+      (accum, value, pik) => {
         return pipe(
-          () => iteratee(value, kdx, collection),
-          (result) => set(kdx, result, accum)
+          () => iteratee(value, pik, collection),
+          (result) => set(pik, result, accum)
         )()
       },
       contagion(collection),

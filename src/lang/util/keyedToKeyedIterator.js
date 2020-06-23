@@ -6,8 +6,8 @@ const keyedToKeyedIterator = (keyed, start = START) => {
   const keysIterator = keyed.keys()
   return iteratorResolver(keysIterator, start, (next) => ({
     ...next,
-    kdx: next.value,
     key: next.value,
+    pik: next.value,
     value: keyedGetKey(keyed, next.value)
   }))
 }

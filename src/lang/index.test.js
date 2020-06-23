@@ -51,7 +51,7 @@ describe('lang index', () => {
       // filterAtIndex: expect.any(Function),
       // find: expect.any(Function),
       // findAtIndex: expect.any(Function),
-      // findKdx: expect.any(Function),
+      // findPik: expect.any(Function),
       // first: expect.any(Function),
       flatten: expect.any(Function),
       fn: expect.any(Function),

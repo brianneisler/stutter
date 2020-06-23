@@ -23,13 +23,13 @@ import objectToIterator from './objectToIterator'
  * @example
  *
  * anyToIterator(['a', 'b', 'c'])
- * //=> { next: () => { value: string, index: number, kdx: umber, done: boolean }}
+ * //=> { next: () => { value: string, index: number, pik: umber, done: boolean }}
  *
  * anyToIterator('abc')
- * //=> { next: () => { value: string, index: number, kdx: umber, done: boolean }}
+ * //=> { next: () => { value: string, index: number, pik: umber, done: boolean }}
  *
  * anyToIterator({ a: 1, b: 2, c: 3 })
- * //=> { next: () => { value: number, key: string, kdx: string, done: boolean }}
+ * //=> { next: () => { value: number, key: string, pik: string, done: boolean }}
  */
 const anyToIterator = (any, start = START) => {
   if (anyIsIterator(any)) {

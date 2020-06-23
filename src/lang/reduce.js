@@ -10,7 +10,7 @@ import pipe from '../common/pipe'
  * current value from the collection, and then passing the result to the next
  * call.
  *
- * The `iteratee` function receives three values: *(accum, value, kdx)*.
+ * The `iteratee` function receives three values: *(accum, value, pik)*.
  *
  * Note: This method automatically upgrades to async.
  * - If an async `iteratee` is given to this method it will return a `Promise`.
@@ -82,7 +82,7 @@ const reduce = defn(
             if (pNext.done) {
               return accum
             }
-            return iteratee(accum, pNext.value, pNext.kdx)
+            return iteratee(accum, pNext.value, pNext.pik)
           },
           (nextAccum) => {
             accum = nextAccum

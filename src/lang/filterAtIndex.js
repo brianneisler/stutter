@@ -40,7 +40,7 @@ const baseFilterAtIndex = (predicate, index, list) => {
           if (pNext.done) {
             return
           }
-          return predicate(pNext.value, pNext.kdx)
+          return predicate(pNext.value, pNext.pik)
         },
         (result) => {
           if (next.done) {

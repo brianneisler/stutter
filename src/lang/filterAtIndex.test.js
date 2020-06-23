@@ -3,7 +3,11 @@ import filterAtIndex from './filterAtIndex'
 describe('filterAtIndex', () => {
   test('returns true when value in array asserts true', () => {
     const array = ['a', 'b', 'c']
-    const result = filterAtIndex((val, index) => val === 'b' && index === 1, 0, array)
+    const result = filterAtIndex(
+      (val, index) => val === 'b' && index === 1,
+      0,
+      array
+    )
     expect(result).toEqual(['b'])
   })
 

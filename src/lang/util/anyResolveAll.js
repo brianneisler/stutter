@@ -56,7 +56,7 @@ const anyResolveAll = (any, iterateFunc, setFunc) =>
         }
       }
       return anyResolveWith(next.value, (nextValue) => {
-        result = setFunc(result, next.kdx, nextValue)
+        result = setFunc(result, next.pik, nextValue)
         return next
       })
     })

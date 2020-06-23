@@ -48,18 +48,18 @@ describe('iterateRight', () => {
       {
         done: false,
         index: 5,
-        kdx: 5,
+        pik: 5,
         prev: undefined,
         value: 'f'
       },
       {
         done: false,
         index: 4,
-        kdx: 4,
+        pik: 4,
         prev: {
           done: false,
           index: 5,
-          kdx: 5,
+          pik: 5,
           value: 'f'
         },
         value: null
@@ -90,18 +90,18 @@ describe('iterateRight', () => {
       {
         done: false,
         index: 5,
-        kdx: 5,
+        pik: 5,
         prev: undefined,
         value: 'f'
       },
       {
         done: false,
         index: 4,
-        kdx: 4,
+        pik: 4,
         prev: {
           done: false,
           index: 5,
-          kdx: 5,
+          pik: 5,
           value: 'f'
         },
         value: null
@@ -143,18 +143,18 @@ describe('iterateRight', () => {
       {
         done: false,
         index: 5,
-        kdx: 5,
+        pik: 5,
         prev: undefined,
         value: 'f'
       },
       {
         done: false,
         index: 4,
-        kdx: 4,
+        pik: 4,
         prev: {
           done: false,
           index: 5,
-          kdx: 5,
+          pik: 5,
           value: 'f'
         },
         value: null

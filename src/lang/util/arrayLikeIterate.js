@@ -18,18 +18,18 @@ import iteratorIterate from './iteratorIterate'
  * @returns {*} The final value returned when the iteratee returns done or `undefined`
  * @example
  *
- * arrayLikeIterate(['a', 'b', 'c'], (value, kdx) => {
+ * arrayLikeIterate(['a', 'b', 'c'], (value, pik) => {
  *   if (value === 'b') {
- *     return { done: true, value: kdx }
+ *     return { done: true, value: pik }
  *   }
  *   return { done: false }
  * })
  * //=> 1
  *
- * arrayLikeIterate(['a', 'b', 'c'], async (value, kdx) => new Promise((resolve, reject) => {
+ * arrayLikeIterate(['a', 'b', 'c'], async (value, pik) => new Promise((resolve, reject) => {
  *   setTimeout(() => {
  *     if (value === 'b') {
- *       return resolve({ done: true, value: kdx })
+ *       return resolve({ done: true, value: pik })
  *     }
  *     return resolve({ done: false })
  *   }, 0)

@@ -17,18 +17,18 @@ import defn from './defn'
  * @returns {*} The final value returned when the iteratee returns done or `undefined`
  * @example
  *
- * iterateRight((value, kdx) => {
+ * iterateRight((value, pik) => {
  *   if (value === 'b') {
- *     return { done: true, value: kdx }
+ *     return { done: true, value: pik }
  *   }
  *   return { done: false }
  * }, ['a', 'b', 'c'])
  * //=> 1
  *
- * iterateRight(async (value, kdx) => new Promise((resolve, reject) => {
+ * iterateRight(async (value, pik) => new Promise((resolve, reject) => {
  *   setTimeout(() => {
  *     if (value === 'b') {
- *       return resolve({ done: true, value: kdx })
+ *       return resolve({ done: true, value: pik })
  *     }
  *     return resolve({ done: false })
  *   }, 0)

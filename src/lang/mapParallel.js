@@ -39,8 +39,8 @@ const mapAll = curry(
   defn('mapAll', (iteratee, collection) =>
     pipe(
       reduce(
-        (accum, value, kdx) => {
-          accum[kdx] = iteratee(value, kdx)
+        (accum, value, pik) => {
+          accum[pik] = iteratee(value, pik)
           return accum
         },
         isArrayLike(collection) ? [] : {}

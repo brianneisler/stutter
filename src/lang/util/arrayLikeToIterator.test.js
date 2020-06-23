@@ -52,7 +52,7 @@ describe('arrayLikeToIterator', () => {
       next = iterator.next()
       if (!next.done) {
         expect(iterator.getIndex()).toBe(next.index)
-        expect(next.kdx).toBe(next.index)
+        expect(next.pik).toBe(next.index)
       }
     }
 
@@ -71,18 +71,18 @@ describe('arrayLikeToIterator', () => {
       {
         done: false,
         index: 0,
-        kdx: 0,
+        pik: 0,
         prev: undefined,
         value: 'foo'
       },
       {
         done: false,
         index: 1,
-        kdx: 1,
+        pik: 1,
         prev: {
           done: false,
           index: 0,
-          kdx: 0,
+          pik: 0,
           value: 'foo'
         },
         value: 'bar'
@@ -92,7 +92,7 @@ describe('arrayLikeToIterator', () => {
         prev: {
           done: false,
           index: 1,
-          kdx: 1,
+          pik: 1,
           value: 'bar'
         }
       }
@@ -111,11 +111,11 @@ describe('arrayLikeToIterator', () => {
       {
         done: false,
         index: 1,
-        kdx: 1,
+        pik: 1,
         prev: {
           done: false,
           index: 0,
-          kdx: 0,
+          pik: 0,
           value: 'foo'
         },
         value: 'bar'
@@ -125,7 +125,7 @@ describe('arrayLikeToIterator', () => {
         prev: {
           done: false,
           index: 1,
-          kdx: 1,
+          pik: 1,
           value: 'bar'
         }
       }
@@ -143,7 +143,7 @@ describe('arrayLikeToIterator', () => {
     expect(accum).toEqual([
       {
         done: true,
-        prev: { done: false, index: 1, kdx: 1, value: 'bar' }
+        prev: { done: false, index: 1, pik: 1, value: 'bar' }
       }
     ])
   })
@@ -159,7 +159,7 @@ describe('arrayLikeToIterator', () => {
     expect(accum).toEqual([
       {
         done: true,
-        prev: { done: false, index: 1, kdx: 1, value: 'bar' }
+        prev: { done: false, index: 1, pik: 1, value: 'bar' }
       }
     ])
   })
@@ -176,11 +176,11 @@ describe('arrayLikeToIterator', () => {
       {
         done: false,
         index: 1,
-        kdx: 1,
+        pik: 1,
         prev: {
           done: false,
           index: 0,
-          kdx: 0,
+          pik: 0,
           value: 'foo'
         },
         value: 'bar'
@@ -190,7 +190,7 @@ describe('arrayLikeToIterator', () => {
         prev: {
           done: false,
           index: 1,
-          kdx: 1,
+          pik: 1,
           value: 'bar'
         }
       }
@@ -209,18 +209,18 @@ describe('arrayLikeToIterator', () => {
       {
         done: false,
         index: 0,
-        kdx: 0,
+        pik: 0,
         prev: undefined,
         value: 'foo'
       },
       {
         done: false,
         index: 1,
-        kdx: 1,
+        pik: 1,
         prev: {
           done: false,
           index: 0,
-          kdx: 0,
+          pik: 0,
           value: 'foo'
         },
         value: 'bar'
@@ -230,7 +230,7 @@ describe('arrayLikeToIterator', () => {
         prev: {
           done: false,
           index: 1,
-          kdx: 1,
+          pik: 1,
           value: 'bar'
         }
       }
@@ -242,18 +242,18 @@ describe('arrayLikeToIterator', () => {
     expect(iterator.next()).toEqual({
       done: false,
       index: 0,
-      kdx: 0,
+      pik: 0,
       prev: undefined,
       value: 'foo'
     })
     expect(iterator.previous()).toEqual({
       done: false,
       index: 0,
-      kdx: 0,
+      pik: 0,
       prev: {
         done: false,
         index: 1,
-        kdx: 1,
+        pik: 1,
         value: 'bar'
       },
       value: 'foo'
@@ -272,18 +272,18 @@ describe('arrayLikeToIterator', () => {
       {
         done: false,
         index: 1,
-        kdx: 1,
+        pik: 1,
         prev: undefined,
         value: 'bar'
       },
       {
         done: false,
         index: 0,
-        kdx: 0,
+        pik: 0,
         prev: {
           done: false,
           index: 1,
-          kdx: 1,
+          pik: 1,
           value: 'bar'
         },
         value: 'foo'
@@ -293,7 +293,7 @@ describe('arrayLikeToIterator', () => {
         prev: {
           done: false,
           index: 0,
-          kdx: 0,
+          pik: 0,
           value: 'foo'
         }
       }
@@ -307,7 +307,7 @@ describe('arrayLikeToIterator', () => {
       prev: {
         done: false,
         index: 1,
-        kdx: 1,
+        pik: 1,
         value: 'bar'
       }
     })
@@ -316,7 +316,7 @@ describe('arrayLikeToIterator', () => {
       prev: {
         done: false,
         index: 1,
-        kdx: 1,
+        pik: 1,
         value: 'bar'
       }
     })

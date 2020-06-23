@@ -5,21 +5,20 @@ Stutter aims to make functional programming easier by introducing support for fu
 concepts while still maintaining direct compatibility with native javascript.
 
 
-
-
 ## Concepts
 
 There are some conceptual differences that you should be aware of while working
 with `stutter`
 
 
-### Props vs Keys vs Indexes
+### Properties vs Keys vs Indexes
 
-Properties and keys are two different concepts within stutter. Often these are
+Properties and Keys are two different concepts within stutter. Often these are
 conflated in some other libraries. We have separated them out to help keep
 things consistent and to more easily reason about the two concepts.
 
-#### Props
+
+#### Properties
 
 JavaScript is designed on a simple object-based paradigm. An object is a
 collection of properties, and a property is an association between a name and a
@@ -53,9 +52,20 @@ object[1]
 The above example works because the number is first typecast to a string before
 accessing the value.
 
-When using propertiy based methods in stutter (such as [`prop`](./API.md#prop)),
-we consider only 
+When using property based methods in stutter (such as [`getProperty`](./API.md#getProperty)),
+we consider only strings to be Properties.
 
+#### Keys
+
+Keys in javascript are used by such data structures as Map and WeakMap for
+storing and accessing values using the given Key. These are different from 
+
+
+#### Piks
+
+Properties, keys and indexes are commonly used in javascript for storing and accessing
+values. It is also common to iterate over these values. For this reason, we have
+introduced 
 
 ### Falsy and Truthy Values
 

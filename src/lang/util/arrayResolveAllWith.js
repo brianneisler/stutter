@@ -32,7 +32,7 @@ const arrayResolveAllWith = (array, func, context) => {
         }
       }
       return anyResolveWith(next.value, (nextValue) => {
-        result[next.kdx] = nextValue
+        result[next.pik] = nextValue
         return next
       })
     }),

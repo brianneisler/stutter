@@ -4,7 +4,7 @@ import defn from './defn'
 import iterate from './iterate'
 import pipe from './pipe'
 
-const iterableFindKdx = (iterable, func) =>
+const iterableFindPik = (iterable, func) =>
   iterate(
     (next) =>
       pipe(
@@ -12,14 +12,14 @@ const iterableFindKdx = (iterable, func) =>
           if (pNext.done) {
             return pNext
           }
-          return func(pNext.value, pNext.kdx)
+          return func(pNext.value, pNext.pik)
         },
         (result) => {
           if (result) {
             return {
               ...next,
               done: true,
-              value: next.kdx
+              value: next.pik
             }
           }
           return next
@@ -35,31 +35,32 @@ const iterableFindKdx = (iterable, func) =>
  * @returns {*|Promise} The key or index found, or `undefined`.
  * @example
  *
- * findKdx(
+ * findPik(
  *   (value, index) => value[index] == 2,
  *   [{a: 1}, {a: 2}, {a: 3}]
  * )
  * //=> 1
  *
- * findKdx(
+ * findPik(
  *   (value, key) => value[key] == 2,
  *   { a: 1, b: 2, c: 3 }
  * )
  * //=> 'b'
  */
-const findKdx = defn(
-  'lang.findKdx',
-  'Returns the kdx of the first element of the collection which matches the predicate, or `undefined` if no element matches.',
+const findPik = defn(
+  'lang.findPik',
+  'Returns the pik of the first element of the collection which matches the predicate, or `undefined` if no element matches.',
 
   [Function, Iterable, () => Index],
-  (func, iterable) => iterableFindKdx(iterable, func),
+  (func, iterable) => iterableFindPik(iterable, func),
 
   [Iterable, Function, () => Index],
-  (iterable, func) => iterableFindKdx(iterable, func)[(Iterable, Function, () => Index)],
-  (iterable, func) => iterableFindKdx(iterable, func)
+  (iterable, func) =>
+    iterableFindPik(iterable, func)[(Iterable, Function, () => Index)],
+  (iterable, func) => iterableFindPik(iterable, func)
 
   // TODO BRN: Iterable only matches values with [Symbol.iterator]. Need to
   // match basic objects and other objects
 )
 
-export default findKdx
+export default findPik

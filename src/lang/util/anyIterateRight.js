@@ -52,18 +52,18 @@ const doReverseSeriesIteration = (fn, iter) => {
  * @returns {*} The final value returned when the iteratee returns done or `undefined`
  * @example
  *
- * anyIterateRight((value, kdx) => {
+ * anyIterateRight((value, pik) => {
  *   if (value === 'b') {
- *     return { done: true, value: kdx }
+ *     return { done: true, value: pik }
  *   }
  *   return { done: false }
  * }, ['a', 'b', 'c'])
  * //=> 1
  *
- * anyIterateRight(async (value, kdx) => new Promise((resolve, reject) => {
+ * anyIterateRight(async (value, pik) => new Promise((resolve, reject) => {
  *   setTimeout(() => {
  *     if (value === 'b') {
- *       return resolve({ done: true, value: kdx })
+ *       return resolve({ done: true, value: pik })
  *     }
  *     return resolve({ done: false })
  *   }, 0)

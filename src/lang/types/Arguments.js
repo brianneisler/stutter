@@ -4,6 +4,8 @@ import Equatable from '../protocols/Equatable'
 import Index from './IndexType'
 import Indexed from '../protocols/Indexed'
 import Integer from './Integer'
+import Iterable from '../protocols/Iterable'
+import Iterator from './Iterator'
 import Self from './Self'
 import anyIsArguments from '../util/anyIsArguments'
 import anyToArguments from '../util/anyToArguments'
@@ -69,6 +71,14 @@ const Arguments = defineAny(
           (index, any, self) => argumentsSetIndex(self, index, any)
         ]),
         'lang.size': definitionsToFn([[Self, () => Integer], argumentsLength])
+      },
+
+      Iterable,
+      {
+        'lang.iterator': definitionsToFn([
+          [Self, () => Iterator],
+          argumentsHasIndex
+        ])
       }
     ],
     to: anyToArguments

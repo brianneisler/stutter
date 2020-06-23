@@ -97,18 +97,18 @@ describe('iteratorResolver', () => {
       {
         done: false,
         index: 0,
-        kdx: 0,
+        pik: 0,
         prev: undefined,
         value: 'foo'
       },
       {
         done: false,
         index: 1,
-        kdx: 1,
+        pik: 1,
         prev: {
           done: false,
           index: 0,
-          kdx: 0,
+          pik: 0,
           value: 'foo'
         },
         value: 'bar'
@@ -118,7 +118,7 @@ describe('iteratorResolver', () => {
         prev: {
           done: false,
           index: 1,
-          kdx: 1,
+          pik: 1,
           value: 'bar'
         }
       }
@@ -139,18 +139,18 @@ describe('iteratorResolver', () => {
       {
         done: false,
         index: 1,
-        kdx: 1,
+        pik: 1,
         prev: undefined,
         value: 'bar'
       },
       {
         done: false,
         index: 0,
-        kdx: 0,
+        pik: 0,
         prev: {
           done: false,
           index: 1,
-          kdx: 1,
+          pik: 1,
           value: 'bar'
         },
         value: 'foo'
@@ -160,7 +160,7 @@ describe('iteratorResolver', () => {
         prev: {
           done: false,
           index: 0,
-          kdx: 0,
+          pik: 0,
           value: 'foo'
         }
       }
@@ -181,18 +181,18 @@ describe('iteratorResolver', () => {
       {
         done: false,
         index: 0,
-        kdx: 0,
+        pik: 0,
         prev: undefined,
         value: 'foo'
       },
       {
         done: false,
         index: 1,
-        kdx: 1,
+        pik: 1,
         prev: {
           done: false,
           index: 0,
-          kdx: 0,
+          pik: 0,
           value: 'foo'
         },
         value: 'bar'
@@ -202,7 +202,7 @@ describe('iteratorResolver', () => {
         prev: {
           done: false,
           index: 1,
-          kdx: 1,
+          pik: 1,
           value: 'bar'
         }
       }
@@ -218,7 +218,7 @@ describe('iteratorResolver', () => {
     expect(await result).toEqual({
       done: false,
       index: 0,
-      kdx: 0,
+      pik: 0,
       prev: undefined,
       value: 'a'
     })
@@ -229,11 +229,11 @@ describe('iteratorResolver', () => {
     expect(await result).toEqual({
       done: false,
       index: 1,
-      kdx: 1,
+      pik: 1,
       prev: {
         done: false,
         index: 0,
-        kdx: 0,
+        pik: 0,
         value: 'a'
       },
       value: 'b'
@@ -244,11 +244,11 @@ describe('iteratorResolver', () => {
     expect(await result).toEqual({
       done: false,
       index: 2,
-      kdx: 2,
+      pik: 2,
       prev: {
         done: false,
         index: 1,
-        kdx: 1,
+        pik: 1,
         value: 'b'
       },
       value: 'c'
@@ -261,7 +261,7 @@ describe('iteratorResolver', () => {
       prev: {
         done: false,
         index: 2,
-        kdx: 2,
+        pik: 2,
         value: 'c'
       }
     })
@@ -276,7 +276,7 @@ describe('iteratorResolver', () => {
     expect(await result).toEqual({
       done: false,
       index: 2,
-      kdx: 2,
+      pik: 2,
       prev: undefined,
       value: 'c'
     })
@@ -285,11 +285,11 @@ describe('iteratorResolver', () => {
     expect(result).toEqual({
       done: false,
       index: 1,
-      kdx: 1,
+      pik: 1,
       prev: {
         done: false,
         index: 2,
-        kdx: 2,
+        pik: 2,
         value: 'c'
       },
       value: 'b'
@@ -299,11 +299,11 @@ describe('iteratorResolver', () => {
     expect(result).toEqual({
       done: false,
       index: 0,
-      kdx: 0,
+      pik: 0,
       prev: {
         done: false,
         index: 1,
-        kdx: 1,
+        pik: 1,
         value: 'b'
       },
       value: 'a'
@@ -315,7 +315,7 @@ describe('iteratorResolver', () => {
       prev: {
         done: false,
         index: 0,
-        kdx: 0,
+        pik: 0,
         value: 'a'
       }
     })

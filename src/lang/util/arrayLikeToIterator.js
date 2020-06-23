@@ -6,7 +6,7 @@ const iterAt = (index, arrayLike) => {
     return {
       done: false,
       index,
-      kdx: index,
+      pik: index,
       value: arrayLike[index]
     }
   }
@@ -20,7 +20,7 @@ const prevIterAt = (index, arrayLike) => {
     return {
       done: false,
       index,
-      kdx: index,
+      pik: index,
       value: arrayLike[index]
     }
   }
@@ -43,13 +43,13 @@ const prevIterAt = (index, arrayLike) => {
  * //   next: () => ({
  * //     value: *,
  * //     done: boolean,
- * //     kdx: integer,
+ * //     pik: integer,
  * //     index: integer
  * //   }),
  * //   previous: () => ({
  * //     value: *,
  * //     done: boolean,
- * //     kdx: integer,
+ * //     pik: integer,
  * //     index: integer
  * //   })
  * // }
@@ -58,13 +58,13 @@ const prevIterAt = (index, arrayLike) => {
  * //   next: () => ({
  * //     value: *,
  * //     done: boolean,
- * //     kdx: integer,
+ * //     pik: integer,
  * //     index: integer
  * //   })
  * //   previous: () => ({
  * //     value: *,
  * //     done: boolean,
- * //     kdx: integer,
+ * //     pik: integer,
  * //     index: integer
  * //   })
  * // }

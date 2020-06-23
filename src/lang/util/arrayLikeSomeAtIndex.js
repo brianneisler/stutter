@@ -44,7 +44,7 @@ const arrayLikeSomeAtIndex = (arrayLike, predicate, index) => {
           if (pNext.done) {
             return false
           }
-          return predicate(pNext.value, pNext.kdx)
+          return predicate(pNext.value, pNext.pik)
         },
         (result) => {
           if (result || next.done) {

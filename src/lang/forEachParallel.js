@@ -7,7 +7,7 @@ import reduce from './reduce'
 /**
  * Iterate over a collection calling a provided function `iteratee` for each element in the collection.
  *
- * `iteratee` receives two arguments: *(value, kdx)*
+ * `iteratee` receives two arguments: *(value, pik)*
  *
  * Note: `forEach` does not skip deleted or unassigned indices (sparse
  * arrays), unlike the native `Array.prototype.forEach` method. For more
@@ -42,8 +42,8 @@ import reduce from './reduce'
 const forEachAll = curry(
   defn('forEachAll', (iteratee, collection) =>
     pipe(
-      reduce((accum, value, kdx) => {
-        accum.push(iteratee(value, kdx))
+      reduce((accum, value, pik) => {
+        accum.push(iteratee(value, pik))
         return accum
       }, []),
       all,

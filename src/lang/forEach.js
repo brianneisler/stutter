@@ -14,7 +14,7 @@ const iterableForEach = (iterable, func) =>
               if (pNext.done) {
                 return pNext
               }
-              return func(pNext.value, pNext.kdx, iterable)
+              return func(pNext.value, pNext.pik, iterable)
             },
             () => next
           )(next),
@@ -26,7 +26,7 @@ const iterableForEach = (iterable, func) =>
 /**
  * Iterate over a collection calling a provided function `fn` for each element in the collection .
  *
- * `func` receives two arguments: *(value, kdx)*
+ * `func` receives two arguments: *(value, pik)*
  *
  * Note: `forEach` does not skip deleted or unassigned indices (sparse
  * arrays), unlike the native `Array.prototype.forEach` method. For more

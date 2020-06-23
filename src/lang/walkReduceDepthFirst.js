@@ -15,8 +15,8 @@ const reduceWalkee = () => {
         if (isObjectLike(resolvedValue) && !visited.has(resolvedValue)) {
           visited.add(resolvedValue)
           return reduce(
-            (accumResult, child, childKdx) => {
-              const newKeys = concat(keys, [childKdx])
+            (accumResult, child, childPik) => {
+              const newKeys = concat(keys, [childPik])
               return recur(accumResult, child, newKeys, iteratee)
             },
             result,

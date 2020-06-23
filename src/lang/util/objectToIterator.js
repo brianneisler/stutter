@@ -6,8 +6,8 @@ const iterAt = (index, keys, object) => {
     const key = keys[index]
     return {
       done: false,
-      kdx: key,
       key,
+      pik: key,
       value: object[key]
     }
   }
@@ -21,8 +21,8 @@ const prevIterAt = (index, keys, object) => {
     const key = keys[index]
     return {
       done: false,
-      kdx: key,
       key,
+      pik: key,
       value: object[key]
     }
   }
@@ -50,19 +50,19 @@ const prevIterAt = (index, keys, object) => {
  * //   next: () => ({
  * //     value: *,
  * //     done: boolean,
- * //     kdx: string,
+ * //     pik: string,
  * //     key: string
  * //   })
  * // }
  *
  * iter.next()
- * //=> { value: 'more', key: 'write', kdx: 'write', done: false }
+ * //=> { value: 'more', key: 'write', pik: 'write', done: false }
  *
  * iter.next()
- * //=> { value: 'asap', key: 'tests', kdx: 'tests', done: false }
+ * //=> { value: 'asap', key: 'tests', pik: 'tests', done: false }
  *
  * iter.next()
- * //=> { value: 'now', key: Symbol('like'), kdx: Symbol('like'), done: false }
+ * //=> { value: 'now', key: Symbol('like'), pik: Symbol('like'), done: false }
  *
  * iter.next()
  * //=> { done: true }

@@ -8,7 +8,7 @@ import pipe from '../common/pipe'
  *
  * Similar to [`reduce`](#reduce), except moves through the input list from the right to the left.
  *
- * The iterator function receives three values: *(acc, value, kdx)*.
+ * The iterator function receives three values: *(acc, value, pik)*.
  *
  * Supports async reducers. This method will automatically upgrade to async if given an async reducer.
  *
@@ -47,7 +47,7 @@ const reduceRight = curry(
             if (pNext.done) {
               return accum
             }
-            return iteratee(accum, pNext.value, pNext.kdx)
+            return iteratee(accum, pNext.value, pNext.pik)
           },
           (nextAccum) => {
             accum = nextAccum

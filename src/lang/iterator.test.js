@@ -29,18 +29,18 @@ describe('iterator', () => {
     expect(iter.next()).toEqual({
       done: false,
       index: 0,
-      kdx: 0,
+      pik: 0,
       prev: undefined,
       value: 'a'
     })
     expect(iter.next()).toEqual({
       done: false,
       index: 1,
-      kdx: 1,
+      pik: 1,
       prev: {
         done: false,
         index: 0,
-        kdx: 0,
+        pik: 0,
         value: 'a'
       },
       value: 'b'
@@ -48,11 +48,11 @@ describe('iterator', () => {
     expect(iter.next()).toEqual({
       done: false,
       index: 2,
-      kdx: 2,
+      pik: 2,
       prev: {
         done: false,
         index: 1,
-        kdx: 1,
+        pik: 1,
         value: 'b'
       },
       value: 'c'
@@ -62,7 +62,7 @@ describe('iterator', () => {
       prev: {
         done: false,
         index: 2,
-        kdx: 2,
+        pik: 2,
         value: 'c'
       },
       value: undefined
@@ -74,18 +74,18 @@ describe('iterator', () => {
     expect(iter.next()).toEqual({
       done: false,
       index: 0,
-      kdx: 0,
+      pik: 0,
       prev: undefined,
       value: 'abc'
     })
     expect(iter.next()).toEqual({
       done: false,
       index: 1,
-      kdx: 1,
+      pik: 1,
       prev: {
         done: false,
         index: 0,
-        kdx: 0,
+        pik: 0,
         value: 'abc'
       },
       value: 'foo'
@@ -93,11 +93,11 @@ describe('iterator', () => {
     expect(iter.next()).toEqual({
       done: false,
       index: 2,
-      kdx: 2,
+      pik: 2,
       prev: {
         done: false,
         index: 1,
-        kdx: 1,
+        pik: 1,
         value: 'foo'
       },
       value: 'bar'
@@ -107,7 +107,7 @@ describe('iterator', () => {
       prev: {
         done: false,
         index: 2,
-        kdx: 2,
+        pik: 2,
         value: 'bar'
       },
       value: undefined
@@ -122,31 +122,31 @@ describe('iterator', () => {
     })
     expect(iter.next()).toEqual({
       done: false,
-      kdx: 'abc',
       key: 'abc',
+      pik: 'abc',
       prev: undefined,
       value: 'def'
     })
     expect(iter.next()).toEqual({
       done: false,
-      kdx: 'bim',
       key: 'bim',
+      pik: 'bim',
       prev: {
         done: false,
-        kdx: 'abc',
         key: 'abc',
+        pik: 'abc',
         value: 'def'
       },
       value: 'bop'
     })
     expect(iter.next()).toEqual({
       done: false,
-      kdx: 'foo',
       key: 'foo',
+      pik: 'foo',
       prev: {
         done: false,
-        kdx: 'bim',
         key: 'bim',
+        pik: 'bim',
         value: 'bop'
       },
       value: 'bar'
@@ -155,8 +155,8 @@ describe('iterator', () => {
       done: true,
       prev: {
         done: false,
-        kdx: 'foo',
         key: 'foo',
+        pik: 'foo',
         value: 'bar'
       },
       value: undefined

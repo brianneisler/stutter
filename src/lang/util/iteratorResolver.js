@@ -45,7 +45,7 @@ const iterAt = (index, history) => {
     const iter = history[index]
     return {
       index,
-      kdx: index,
+      pik: index,
       ...iter
     }
   }
@@ -59,7 +59,7 @@ const prevIterAt = (index, history) => {
     const iter = history[index]
     return {
       index,
-      kdx: index,
+      pik: index,
       ...iter
     }
   }
@@ -123,13 +123,13 @@ const historicIterator = (iterator, start, withFunc) => {
  * //   next: () => ({
  * //     value: *,
  * //     done: boolean,
- * //     kdx: integer,
+ * //     pik: integer,
  * //     index: integer
  * //   }),
  * //   previous: () => ({
  * //     value: *,
  * //     done: boolean,
- * //     kdx: integer,
+ * //     pik: integer,
  * //     index: integer
  * //   })
  * // }
