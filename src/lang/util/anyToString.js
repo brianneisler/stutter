@@ -1,4 +1,4 @@
-import { INFINITY } from '../constants'
+import { INFINITY } from '../constants/Number'
 import anyIsArguments from './anyIsArguments'
 import anyIsArray from './anyIsArray'
 import anyIsSymbol from './anyIsSymbol'

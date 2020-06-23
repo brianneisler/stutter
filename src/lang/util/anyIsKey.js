@@ -33,10 +33,10 @@ import { Index, Property } from '../classes'
  * //=> true
  *
  * anyIsKey([])
- * //=> false
+ * //=> true
  *
  * anyIsKey({})
- * //=> false
+ * //=> true
  */
 const anyIsKey = (any) => !(any instanceof Property) && !(any instanceof Index)
 

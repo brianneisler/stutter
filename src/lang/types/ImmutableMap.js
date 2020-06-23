@@ -7,10 +7,10 @@ import _ImmutableMap from '../classes/ImmutableMap'
 import anyIsImmutableMap from '../util/anyIsImmutableMap'
 import deftype from '../deftype'
 import fn from '../fn'
-import immutableMapDeleteKey from '../util/immutableMapDeleteKey'
-import immutableMapGetKey from '../util/immutableMapGetKey'
-import immutableMapHasKey from '../util/immutableMapHasKey'
-import immutableMapSetKey from '../util/immutableMapSetKey'
+import keyedDeleteKey from '../util/keyedDeleteKey'
+import keyedGetKey from '../util/keyedGetKey'
+import keyedHasKey from '../util/keyedHasKey'
+import keyedSetKey from '../util/keyedSetKey'
 
 const ImmutableMap = deftype(
   'lang.ImmutableMap',
@@ -26,31 +26,31 @@ const ImmutableMap = deftype(
       {
         'lang.deleteKey': fn(
           [Self, Key, () => Self],
-          immutableMapDeleteKey,
+          keyedDeleteKey,
 
           [Key, Self, () => Self],
-          (key, self) => immutableMapDeleteKey(self, key)
+          (key, self) => keyedDeleteKey(self, key)
         ),
         'lang.getKey': fn(
           [Self, Key, () => Any],
-          immutableMapGetKey,
+          keyedGetKey,
 
           [Key, Self, () => Any],
-          (key, self) => immutableMapGetKey(self, key)
+          (key, self) => keyedGetKey(self, key)
         ),
         'lang.hasKey': fn(
           [Self, Key, () => Boolean],
-          immutableMapHasKey,
+          keyedHasKey,
 
           [Key, Self, () => Boolean],
-          (key, self) => immutableMapHasKey(self, key)
+          (key, self) => keyedHasKey(self, key)
         ),
         'lang.setKey': fn(
           [Self, Key, Any, () => Self],
-          immutableMapSetKey,
+          keyedSetKey,
 
           [Key, Any, Self, () => Self],
-          (key, any, self) => immutableMapSetKey(self, key, any)
+          (key, any, self) => keyedSetKey(self, key, any)
         )
       }
     ]

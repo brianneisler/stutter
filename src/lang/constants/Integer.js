@@ -10,6 +10,4 @@ import Number from '../classes/Number'
  * @since v0.1.0
  * @category lang.constants
  */
-const { MAX_SAFE_INTEGER } = Number
-
-export default MAX_SAFE_INTEGER
+export const MAX_SAFE = Number.MAX_SAFE_INTEGER

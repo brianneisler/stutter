@@ -24,6 +24,6 @@ import to from './to'
  * toArray(null)
  * // => []
  */
-const toArray = defn('toArray', to(Array))
+const toArray = defn('lang.toArray', to(Array))
 
 export default toArray

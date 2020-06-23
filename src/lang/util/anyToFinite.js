@@ -1,4 +1,4 @@
-import { INFINITY, NUMBER_MAX_VALUE } from '../constants'
+import { INFINITY, MAX_VALUE } from '../constants/Number'
 import anyToNumber from './anyToNumber'
 
 /**
@@ -31,7 +31,7 @@ const anyToFinite = (any) => {
   any = anyToNumber(any)
   if (any === INFINITY || any === -INFINITY) {
     const sign = any < 0 ? -1 : 1
-    return sign * NUMBER_MAX_VALUE
+    return sign * MAX_VALUE
   }
   return any === any ? any : 0
 }

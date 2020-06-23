@@ -153,7 +153,8 @@ describe('anyToIterator', () => {
     const result = anyToIterator(iterable)
     expect(result).toEqual({
       next: expect.any(Function),
-      previous: expect.any(Function)
+      previous: expect.any(Function),
+      resolver: true
     })
   })
 
@@ -164,7 +165,8 @@ describe('anyToIterator', () => {
     const result = anyToIterator(iter)
     expect(result).toEqual({
       next: expect.any(Function),
-      previous: expect.any(Function)
+      previous: expect.any(Function),
+      resolver: true
     })
   })
 

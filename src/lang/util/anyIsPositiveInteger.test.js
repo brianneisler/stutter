@@ -1,4 +1,4 @@
-import MAX_SAFE_INTEGER from '../constants/MAX_SAFE_INTEGER'
+import { MAX_SAFE } from '../constants/Integer'
 import anyIsPositiveInteger from './anyIsPositiveInteger'
 
 describe('anyIsPositiveInteger', () => {
@@ -8,7 +8,7 @@ describe('anyIsPositiveInteger', () => {
 
   test('returns true for primitive numbers that are positive integers', () => {
     expect(anyIsPositiveInteger(1)).toBe(true)
-    expect(anyIsPositiveInteger(MAX_SAFE_INTEGER)).toBe(true)
+    expect(anyIsPositiveInteger(MAX_SAFE)).toBe(true)
   })
 
   test('returns true for Number objects that are integers', () => {
@@ -58,9 +58,9 @@ describe('anyIsPositiveInteger', () => {
     expect(anyIsPositiveInteger({})).toBe(false)
     expect(anyIsPositiveInteger(async () => {})).toBe(false)
     expect(anyIsPositiveInteger(() => {})).toBe(false)
-    expect(anyIsPositiveInteger(function() {})).toBe(false)
-    expect(anyIsPositiveInteger(function*() {})).toBe(false)
-    expect(anyIsPositiveInteger((function*() {})())).toBe(false)
+    expect(anyIsPositiveInteger(function () {})).toBe(false)
+    expect(anyIsPositiveInteger(function* () {})).toBe(false)
+    expect(anyIsPositiveInteger((function* () {})())).toBe(false)
     expect(anyIsPositiveInteger(new Array(0))).toBe(false)
     expect(anyIsPositiveInteger(new ArrayBuffer(2))).toBe(false)
     expect(anyIsPositiveInteger(new Boolean(false))).toBe(false)

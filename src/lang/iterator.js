@@ -1,6 +1,4 @@
-// required
 import { Any, Iterator } from './types'
-import { ITERATOR_END, ITERATOR_START } from './constants'
 import { anyToIterator } from './util'
 import defn from './defn'
 
@@ -26,13 +24,13 @@ import defn from './defn'
  */
 const iterator = defn(
   'lang.iterator',
-  'This method generates an iterator for the given value',
+  {
+    description: 'This method generates an iterator for the given value',
+    since: 'v0.1.0'
+  },
 
   [Any, () => Iterator],
   anyToIterator
 )
-
-iterator.END = ITERATOR_END
-iterator.START = ITERATOR_START
 
 export default iterator

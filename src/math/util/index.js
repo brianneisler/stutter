@@ -1,0 +1,6 @@
+export { default as generateRandomFloat } from './generateRandomFloat'
+export { default as generateRandomInteger } from './generateRandomInteger'
+export { default as numberFloor } from './numberFloor'
+export { default as numbersMax } from './numbersMax'
+export { default as numbersMin } from './numbersMin'
+export { default as parseFloat } from './parseFloat'

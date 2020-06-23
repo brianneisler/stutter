@@ -9,12 +9,20 @@ describe('constants index', () => {
         NO_MATCH: expect.any(String)
       },
       FUNCTIONAL_PLACEHOLDER: expect.any(Object),
-      FUNCTION_IDENTITY: expect.any(Function),
-      INFINITY: expect.any(Number),
-      ITERATOR_END: expect.any(String),
-      ITERATOR_START: expect.any(String),
-      MAX_SAFE_INTEGER: expect.any(Number),
-      NUMBER_MAX_VALUE: expect.any(Number),
+      Function: {
+        IDENTITY: expect.any(Function)
+      },
+      Integer: {
+        MAX_SAFE: expect.any(Number)
+      },
+      Iterator: {
+        END: expect.any(String),
+        START: expect.any(String)
+      },
+      Number: {
+        INFINITY: expect.any(Number),
+        MAX_VALUE: expect.any(Number)
+      },
       Regex: {
         COMBO_MARK: expect.any(RegExp),
         DEEP_PATH: expect.any(RegExp),

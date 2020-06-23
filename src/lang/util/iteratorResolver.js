@@ -1,10 +1,10 @@
-import ITERATOR_END from '../constants/ITERATOR_END'
-import ITERATOR_START from '../constants/ITERATOR_START'
+import { END, START } from '../constants/Iterator'
+import { IDENTITY } from '../constants/Function'
 import anyIsResolved from './anyIsResolved'
 import anyResolveWith from './anyResolveWith'
 import unresolvedResolveWith from './unresolvedResolveWith'
 
-const iterateAt = (iterator, history, pending, index) => {
+const iterateAt = (iterator, history, pending, index, withFunc) => {
   if (history[index]) {
     return history[index]
   }
@@ -15,6 +15,7 @@ const iterateAt = (iterator, history, pending, index) => {
   pending[index] = next
   history[index] = null
   return anyResolveWith(next, (resolvedNext) => {
+    resolvedNext = withFunc(resolvedNext)
     pending[index] = null
     if (!resolvedNext.done) {
       history[index] = resolvedNext
@@ -43,9 +44,9 @@ const iterAt = (index, history) => {
   if (index >= 0 && history[index]) {
     const iter = history[index]
     return {
-      ...iter,
       index,
-      kdx: index
+      kdx: index,
+      ...iter
     }
   }
   return {
@@ -57,21 +58,21 @@ const prevIterAt = (index, history) => {
   if (index >= 0 && history[index]) {
     const iter = history[index]
     return {
-      ...iter,
       index,
-      kdx: index
+      kdx: index,
+      ...iter
     }
   }
 }
 
-const historicIterator = (iterator, start = ITERATOR_START) => {
+const historicIterator = (iterator, start, withFunc) => {
   const history = []
   const pending = []
   let index = 0
 
   const histIterator = {
     next: () => {
-      const iter = iterateAt(iterator, history, pending, index)
+      const iter = iterateAt(iterator, history, pending, index, withFunc)
       return anyResolveWith(iter, (resolvedIter) => {
         const prev = prevIterAt(index - 1, history)
         if (!resolvedIter.done) {
@@ -97,7 +98,7 @@ const historicIterator = (iterator, start = ITERATOR_START) => {
     }
   }
 
-  if (start === ITERATOR_END) {
+  if (start === END) {
     return fastForward(histIterator)
   }
   return histIterator
@@ -133,19 +134,31 @@ const historicIterator = (iterator, start = ITERATOR_START) => {
  * //   })
  * // }
  */
-const iteratorResolver = (iterator, start = ITERATOR_START) => {
+const iteratorResolver = (iterator, start = START, withFunc = IDENTITY) => {
+  // TODO BRN: Break apart the historic iterator and the resolver portion of the
+  // iterator so that both can be separately reused
   // NOTE BRN: Optimization here of reassigning histIterator so that we don't have to resolve it on every iteration.
   let histIterator
-  histIterator = anyResolveWith(historicIterator(iterator, start), (resolvedIterator) => {
-    histIterator = resolvedIterator
-    return histIterator
-  })
+  histIterator = anyResolveWith(
+    historicIterator(iterator, start, withFunc),
+    (resolvedIterator) => {
+      histIterator = resolvedIterator
+      return histIterator
+    }
+  )
 
   // TODO BRN: Figure out a more efficient way of doing this rather than
   // resolving the iterator every time
   return {
-    next: () => anyResolveWith(histIterator, (resolvedIterator) => resolvedIterator.next()),
-    previous: () => anyResolveWith(histIterator, (resolvedIterator) => resolvedIterator.previous())
+    next: () =>
+      anyResolveWith(histIterator, (resolvedIterator) =>
+        resolvedIterator.next()
+      ),
+    previous: () =>
+      anyResolveWith(histIterator, (resolvedIterator) =>
+        resolvedIterator.previous()
+      ),
+    resolver: true
   }
 }
 

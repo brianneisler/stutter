@@ -1,4 +1,4 @@
-import { FUNCTION_IDENTITY } from '../constants'
+import { IDENTITY } from '../constants/Function'
 import arrayFlatten from './arrayFlatten'
 import arrayLikeReduce from './arrayLikeReduce'
 import arrayLikeSlice from './arrayLikeSlice'
@@ -22,7 +22,7 @@ const functionsPipe = (...functions) => {
   functions = arrayFlatten(functions)
   const { length } = functions
   if (length === 0) {
-    return FUNCTION_IDENTITY
+    return IDENTITY
   }
 
   if (length === 1) {
@@ -32,7 +32,8 @@ const functionsPipe = (...functions) => {
   const firstFunc = functions[0]
   const rest = arrayLikeSlice(functions, 1)
 
-  return (...args) => arrayLikeReduce(rest, firstFunc(...args), (piped, func) => func(piped))
+  return (...args) =>
+    arrayLikeReduce(rest, firstFunc(...args), (piped, func) => func(piped))
 }
 
 export default functionsPipe

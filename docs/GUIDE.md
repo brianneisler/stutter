@@ -80,8 +80,13 @@ NaN
 ```
 
 
+### Default return value from Fn is `Null`
 
 
+
+
+
+TODO BRN: Move this section into the METHODS_BY_COMPARISON.md file
 
 ## Methods by comparison
 

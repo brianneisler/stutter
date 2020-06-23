@@ -1,3 +1,4 @@
+import { MAX_SAFE } from '../constants/Integer'
 import Math from '../classes/Math'
 import Number from '../classes/Number'
 import anyIsString from './anyIsString'
@@ -21,7 +22,7 @@ const stringRepeat = (string, n) => {
   if (!anyIsString(string)) {
     throw new TypeError('stringRepeat expected "string" to be a String')
   }
-  if (!string || n < 1 || n > Number.MAX_SAFE_INTEGER) {
+  if (!string || n < 1 || n > MAX_SAFE) {
     return result
   }
   // Leverage the exponentiation by squaring algorithm for a faster repeat.

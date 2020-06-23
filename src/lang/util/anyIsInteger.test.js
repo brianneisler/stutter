@@ -1,3 +1,4 @@
+import { MAX_SAFE } from '../constants/Integer'
 import Infinity from '../classes/Infinity'
 import NaN from '../classes/NaN'
 import Number from '../classes/Number'
@@ -8,7 +9,7 @@ describe('anyIsInteger', () => {
     expect(anyIsInteger(0)).toBe(true)
     expect(anyIsInteger(-1)).toBe(true)
     expect(anyIsInteger(1)).toBe(true)
-    expect(anyIsInteger(Number.MAX_SAFE_INTEGER))
+    expect(anyIsInteger(MAX_SAFE))
   })
 
   test('returns true for Number objects that are integers', () => {

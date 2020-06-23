@@ -6,7 +6,8 @@ import defn from './defn'
 const to = defn(
   'lang.to',
   {
-    description: 'Convert `any` to an instance of the supplied constructor',
+    description:
+      'Convert `any` to an instance of the supplied `Type` or `Constructor`',
     since: 'v0.2.0'
   },
 
@@ -14,7 +15,7 @@ const to = defn(
   (type, any) => type.to(any),
 
   [Function, Any],
-  (fn, any) => new fn(any)
+  (func, any) => new func(any)
 )
 
 export default to

@@ -1,4 +1,4 @@
-import FUNCTION_IDENTITY from '../constants/FUNCTION_IDENTITY'
+import { IDENTITY } from '../constants/Function'
 import buildFn from './buildFn'
 
 /**
@@ -16,7 +16,7 @@ import buildFn from './buildFn'
  *
  */
 const buildMultiFn = (dispatcher, meta = {}) => {
-  return buildFn(FUNCTION_IDENTITY, {
+  return buildFn(IDENTITY, {
     ...meta,
     dispatcher
   })

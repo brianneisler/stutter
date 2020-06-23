@@ -1,2 +1,2 @@
-export { default as random } from './random'
-export { default as randomInt } from './randomInt'
+export { default as randomNumber } from './randomNumber'
+export { default as randomInteger } from './randomInteger'

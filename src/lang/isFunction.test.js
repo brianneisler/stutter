@@ -4,8 +4,8 @@ describe('isFunction', () => {
   test('returns true for functions', () => {
     expect(isFunction(async () => {})).toBe(true)
     expect(isFunction(() => {})).toBe(true)
-    expect(isFunction(function() {})).toBe(true)
-    expect(isFunction(function*() {})).toBe(true)
+    expect(isFunction(function () {})).toBe(true)
+    expect(isFunction(function* () {})).toBe(true)
   })
 
   test('returns false for all other values', () => {
@@ -24,7 +24,7 @@ describe('isFunction', () => {
     expect(isFunction({})).toBe(false)
     expect(isFunction([])).toBe(false)
     expect(isFunction(/abc/)).toBe(false)
-    expect(isFunction((function*() {})())).toBe(false)
+    expect(isFunction((function* () {})())).toBe(false)
     expect(isFunction(new Array(0))).toBe(false)
     expect(isFunction(new ArrayBuffer(2))).toBe(false)
     expect(isFunction(new Boolean(false))).toBe(false)
