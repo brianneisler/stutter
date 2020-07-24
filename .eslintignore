@@ -1,6 +1,11 @@
-node_modules
-tmp
-dist
-coverage
-examples/blog/*
 !.*
+coverage
+dist
+examples/blog/*
+node_modules
+private
+public
+tmp
+web-build/
+web-report/
+
