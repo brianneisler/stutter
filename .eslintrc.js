@@ -17,13 +17,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
-  plugins: [
-    'import',
-    'prettier',
-    'sort-destructure-keys',
-    'sort-imports-es6-autofix',
-    'sort-keys-fix'
-  ],
+  plugins: ['import', 'prettier', 'sort-destructure-keys', 'sort-keys-fix'],
   root: true,
   rules: {
     'array-bracket-spacing': [
@@ -52,19 +46,51 @@ module.exports = {
       }
     ],
     'import/default': 'error',
+    'import/export': 'error',
+    'import/exports-last': 'error',
+    'import/extensions': [
+      'error',
+      'never',
+      {
+        json: 'always'
+      }
+    ],
     'import/first': 'error',
+    'import/named': 'error',
+    'import/namespace': 'error',
+    'import/newline-after-import': 'error',
+    'import/no-absolute-path': 'error',
     'import/no-cycle': 'error',
+    'import/no-deprecated': 'error',
     'import/no-duplicates': 'error',
+    'import/no-extraneous-dependencies': 'error',
+    'import/no-mutable-exports': 'error',
+    'import/no-named-as-default': 'error',
+    'import/no-named-as-default-member': 'error',
     'import/no-self-import': 'error',
-    'import/no-unresolved': 'error',
+    'import/no-unresolved': [
+      'error',
+      {
+        ignore: ['react-native']
+      }
+    ],
     'import/no-useless-path-segments': 'error',
+    'import/order': [
+      'error',
+      {
+        alphabetize: { caseInsensitive: false, order: 'asc' },
+        'newlines-between': 'always'
+      }
+    ],
     'no-alert': 'error',
     'no-async-promise-executor': 'error',
+    'no-class-assign': 'error',
     'no-compare-neg-zero': 'error',
     'no-cond-assign': 'error',
     'no-console': 'error',
     'no-const-assign': 'error',
     'no-debugger': 'error',
+    'no-delete-var': 'error',
     'no-dupe-args': 'error',
     'no-dupe-class-members': 'error',
     'no-dupe-keys': 'error',
@@ -78,8 +104,13 @@ module.exports = {
     'no-irregular-whitespace': 'error',
     'no-misleading-character-class': 'error',
     'no-obj-calls': 'error',
+    'no-return-assign': 'error',
+    'no-setter-return': 'error',
     'no-shadow': 'error',
     'no-undef': 'error',
+    'no-unreachable': 'error',
+    'no-unsafe-finally': 'error',
+    'no-unsafe-negation': 'error',
     'no-unused-vars': 'error',
     'no-use-before-define': 'error',
     'no-useless-constructor': 'error',
@@ -100,14 +131,6 @@ module.exports = {
     ],
     semi: ['error', 'never'],
     'sort-destructure-keys/sort-destructure-keys': 'error',
-    'sort-imports-es6-autofix/sort-imports-es6': [
-      'error',
-      {
-        ignoreCase: false,
-        ignoreMemberSort: false,
-        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single']
-      }
-    ],
     'sort-keys-fix/sort-keys-fix': 'error',
     'spaced-comment': 'error',
     strict: ['error', 'never']
