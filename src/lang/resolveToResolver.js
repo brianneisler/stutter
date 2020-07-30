@@ -1,10 +1,11 @@
-import anyResolveToGenerator from './util/anyResolveToGenerator'
 import externalPromise from './externalPromise'
+import anyResolveToGenerator from './util/anyResolveToGenerator'
 
-const doResolve = function*(value, promise) {
+const doResolve = function* (value, promise) {
   try {
     const result = yield* anyResolveToGenerator(value)
     promise.resolve(result)
+    return result
   } catch (error) {
     promise.reject(error)
   }
