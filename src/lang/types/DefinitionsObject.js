@@ -4,7 +4,10 @@ import definitionToType from '../util/definitionToType'
 
 const DefinitionsObject = defineAny(
   'lang.DefinitionsObject',
-  'A type representing an Object with definitions for Fns',
+  {
+    description: 'A type representing an Object with definitions for Fns',
+    since: 'v0.1.0'
+  },
 
   definitionToType({
     is: (any) => anyIsObject(any) && anyIsObject(any.definitions)

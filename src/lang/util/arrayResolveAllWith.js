@@ -1,5 +1,5 @@
 import anyResolveWith from './anyResolveWith'
-import arrayLikeIterate from './arrayLikeIterate'
+import arrayLikeIterateInSeries from './arrayLikeIterateInSeries'
 
 /**
  * Resolves all async values in an Array and executes the given with
@@ -24,7 +24,7 @@ import arrayLikeIterate from './arrayLikeIterate'
 const arrayResolveAllWith = (array, func, context) => {
   const result = []
   return anyResolveWith(
-    arrayLikeIterate(array, (next) => {
+    arrayLikeIterateInSeries(array, (next) => {
       if (next.done) {
         return {
           ...next,

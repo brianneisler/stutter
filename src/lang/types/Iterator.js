@@ -1,10 +1,17 @@
+import deftype from '../deftype'
 import anyIsIterator from '../util/anyIsIterator'
 import anyToIterator from '../util/anyToIterator'
-import deftype from '../deftype'
 
-const Iterator = deftype('lang.Iterator', 'A type representing an Iterator.', {
-  is: anyIsIterator,
-  to: anyToIterator
-})
+const Iterator = deftype(
+  'lang.Iterator',
+  {
+    description: 'A type representing an Iterator.',
+    since: 'v0.1.0'
+  },
+  {
+    is: anyIsIterator,
+    to: anyToIterator
+  }
+)
 
 export default Iterator

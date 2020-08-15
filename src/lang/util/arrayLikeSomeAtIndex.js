@@ -1,4 +1,4 @@
-import arrayLikeIterate from './arrayLikeIterate'
+import arrayLikeIterateInSeries from './arrayLikeIterateInSeries'
 import functionsPipe from './functionsPipe'
 
 /**
@@ -36,7 +36,7 @@ const arrayLikeSomeAtIndex = (arrayLike, predicate, index) => {
     idx = 0
   }
 
-  return arrayLikeIterate(
+  return arrayLikeIterateInSeries(
     arrayLike,
     (next) => {
       return functionsPipe(

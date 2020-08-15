@@ -1,5 +1,5 @@
-import { Null } from './types'
 import defn from './defn'
+import { Null } from './types'
 
 const noop = defn(
   'lang.noop',

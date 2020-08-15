@@ -1,10 +1,10 @@
-import arrayLikeIterate from './arrayLikeIterate'
+import arrayLikeIterateInSeries from './arrayLikeIterateInSeries'
 
-describe('arrayLikeIterate', () => {
+describe('arrayLikeIterateInSeries', () => {
   test('iterates array until done is true', () => {
     const values = ['a', 'b', 'c', 'd', null, 'f']
     const acc = []
-    const result = arrayLikeIterate(values, (next) => {
+    const result = arrayLikeIterateInSeries(values, (next) => {
       acc.push(next)
       return {
         ...next,
@@ -74,7 +74,7 @@ describe('arrayLikeIterate', () => {
   test('upgrades to Promise when async iteratee is used', async () => {
     const values = ['a', 'b', 'c', 'd', null, 'f']
     const acc = []
-    let result = arrayLikeIterate(
+    let result = arrayLikeIterateInSeries(
       values,
       (next) =>
         new Promise((resolve) => {
@@ -152,7 +152,7 @@ describe('arrayLikeIterate', () => {
   test('iterates a string', () => {
     const value = 'abcd'
     const acc = []
-    const result = arrayLikeIterate(value, (next) => {
+    const result = arrayLikeIterateInSeries(value, (next) => {
       acc.push(next.value)
       return {
         ...next,

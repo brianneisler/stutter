@@ -1,4 +1,4 @@
-import __ from '../common/__'
+import __ from './_'
 import tail from './tail'
 
 describe('tail', () => {

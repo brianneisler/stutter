@@ -1,12 +1,13 @@
-import Any from './Any'
-import Boolean from './Boolean'
-import Equatable from '../protocols/Equatable'
-import Self from './Self'
 import _Date from '../classes/Date'
-import anyIsDate from '../util/anyIsDate'
-import dateEquals from '../util/dateEquals'
 import deftype from '../deftype'
 import fn from '../fn'
+import Equatable from '../protocols/Equatable'
+import anyIsDate from '../util/anyIsDate'
+import dateEquals from '../util/dateEquals'
+
+import Any from './Any'
+import Boolean from './Boolean'
+import Self from './Self'
 
 const Date = deftype(
   'lang.Date',

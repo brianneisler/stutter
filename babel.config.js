@@ -2,7 +2,6 @@ module.exports = (api) => {
   if (api.env('test')) {
     return {
       ignore: [/(node_modules)/],
-      plugins: [['@babel/plugin-proposal-object-rest-spread']],
       presets: [
         [
           '@babel/preset-env',
@@ -19,7 +18,6 @@ module.exports = (api) => {
   }
   return {
     ignore: [/(node_modules)/],
-    plugins: [['@babel/plugin-proposal-object-rest-spread']],
     presets: [
       [
         '@babel/preset-env',

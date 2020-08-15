@@ -1,5 +1,5 @@
 import anyToIterator from './anyToIterator'
-import iteratorIterate from './iteratorIterate'
+import iteratorIterateInSeries from './iteratorIterateInSeries'
 
 /**
  * This method iterates over the given collection or iterator in **series**. If the `iteratee` method returns `{ done: true }` then the iteration will complete.
@@ -35,6 +35,7 @@ import iteratorIterate from './iteratorIterate'
  * }))
  * //=> 1
  */
-const anyIterate = (any, func) => iteratorIterate(anyToIterator(any), func)
+const anyIterate = (any, func) =>
+  iteratorIterateInSeries(anyToIterator(any), func)
 
 export default anyIterate

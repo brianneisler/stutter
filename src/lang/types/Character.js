@@ -1,12 +1,13 @@
-import Any from './Any'
-import Boolean from './Boolean'
 import Equatable from '../protocols/Equatable'
-import Self from './Self'
 import anyIdenticalWithAny from '../util/anyIdenticalWithAny'
 import anyIsCharacter from '../util/anyIsCharacter'
 import defineAny from '../util/defineAny'
 import definitionToType from '../util/definitionToType'
 import definitionsToFn from '../util/definitionsToFn'
+
+import Any from './Any'
+import Boolean from './Boolean'
+import Self from './Self'
 
 const Character = defineAny(
   'lang.Character',

@@ -1,9 +1,9 @@
 // required
+import defn from './defn'
+import fn from './fn'
 import Any from './types/Any'
 import Fn from './types/Fn'
 import anyAlways from './util/anyAlways'
-import defn from './defn'
-import fn from './fn'
 
 const always = defn(
   'lang.always',

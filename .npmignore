@@ -31,6 +31,9 @@ npm-debug.log
 .babelrc
 babel.config.js
 
+# browserlist
+.browserlistrc
+
 # codecov
 .codecov.yml
 

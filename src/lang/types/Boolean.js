@@ -1,13 +1,14 @@
-import Any from './Any'
-import Equatable from '../protocols/Equatable'
-import Self from './Self'
 import _Boolean from '../classes/Boolean'
+import Equatable from '../protocols/Equatable'
 import anyIsBoolean from '../util/anyIsBoolean'
 import anyToBoolean from '../util/anyToBoolean'
 import booleanEquals from '../util/booleanEquals'
 import defineAny from '../util/defineAny'
 import definitionToType from '../util/definitionToType'
 import definitionsToFn from '../util/definitionsToFn'
+
+import Any from './Any'
+import Self from './Self'
 
 const Boolean = defineAny(
   'lang.Boolean',

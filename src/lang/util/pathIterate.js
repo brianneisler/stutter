@@ -1,6 +1,7 @@
 import { ITERATOR } from '../constants/Symbol'
-import iteratorIterate from './iteratorIterate'
+import iteratorIterateInSeries from './iteratorIterateInSeries'
 
-const pathIterate = (path, func) => iteratorIterate(path[ITERATOR](), func)
+const pathIterate = (path, func) =>
+  iteratorIterateInSeries(path[ITERATOR](), func)
 
 export default pathIterate

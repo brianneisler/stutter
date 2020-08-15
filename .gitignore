@@ -22,14 +22,16 @@ npm-debug.log
 *.iws
 .idea
 
-# mac
+# OSX
 .DS_Store
+
+# eslint
+.eslintcache
 
 # development
 tmp
 dist
 .env
-.eslintcache
 yarn.lock
 
 *.sample

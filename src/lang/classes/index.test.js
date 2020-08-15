@@ -22,13 +22,13 @@ describe('lang.util.js index', () => {
       ImmutableSet: expect.any(Function),
       ImmutableStack: expect.any(Function),
       Index: expect.any(Function),
-      Infinity: Infinity,
+      Infinity,
       Int8Array: expect.any(Function),
       Key: expect.any(Function),
       List: expect.any(Function),
       Map: expect.any(Function),
       Math: expect.any(Object),
-      NaN: NaN,
+      NaN,
       Namespace: expect.any(Function),
       Number: expect.any(Function),
       Object: expect.any(Function),
@@ -45,6 +45,7 @@ describe('lang.util.js index', () => {
       Reflect: expect.any(Object),
       RegExp: expect.any(Function),
       Repeat: expect.any(Function),
+      RingBuffer: expect.any(Function),
       Seq: expect.any(Function),
       Set: expect.any(Function),
       Stack: expect.any(Function),
@@ -56,7 +57,8 @@ describe('lang.util.js index', () => {
       TypeError: expect.any(Function),
       URIError: expect.any(Function),
       WeakMap: expect.any(Function),
-      WeakSet: expect.any(Function)
+      WeakSet: expect.any(Function),
+      ZeroBuffer: expect.any(Function)
     })
   })
 })

@@ -1,5 +1,5 @@
 import arrayLikeToIterator from './arrayLikeToIterator'
-import iteratorIterate from './iteratorIterate'
+import iteratorIterateInSeries from './iteratorIterateInSeries'
 
 /**
  * This method iterates over the given Array in **series**. If the `iteratee` method returns `{ done: true }` then the iteration will complete.
@@ -18,7 +18,7 @@ import iteratorIterate from './iteratorIterate'
  * @returns {*} The final value returned when the iteratee returns done or `undefined`
  * @example
  *
- * arrayLikeIterate(['a', 'b', 'c'], (value, pik) => {
+ * arrayLikeIterateInSeries(['a', 'b', 'c'], (value, pik) => {
  *   if (value === 'b') {
  *     return { done: true, value: pik }
  *   }
@@ -26,7 +26,7 @@ import iteratorIterate from './iteratorIterate'
  * })
  * //=> 1
  *
- * arrayLikeIterate(['a', 'b', 'c'], async (value, pik) => new Promise((resolve, reject) => {
+ * arrayLikeIterateInSeries(['a', 'b', 'c'], async (value, pik) => new Promise((resolve, reject) => {
  *   setTimeout(() => {
  *     if (value === 'b') {
  *       return resolve({ done: true, value: pik })
@@ -36,7 +36,7 @@ import iteratorIterate from './iteratorIterate'
  * }))
  * //=> 1
  */
-const arrayLikeIterate = (array, func, index = 0) =>
-  iteratorIterate(arrayLikeToIterator(array, index), func)
+const arrayLikeIterateInSeries = (array, func, index = 0) =>
+  iteratorIterateInSeries(arrayLikeToIterator(array, index), func)
 
-export default arrayLikeIterate
+export default arrayLikeIterateInSeries

@@ -15,7 +15,10 @@ import definitionToType from '../util/definitionToType'
  */
 const Element = defineAny(
   'lang.Element',
-  'An item contained within an Indexed value',
+  {
+    description: 'An item contained within an Indexed value',
+    since: 'v0.1.0'
+  },
 
   definitionToType({
     class: _Element,
