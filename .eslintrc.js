@@ -131,6 +131,16 @@ module.exports = {
     ],
     semi: ['error', 'never'],
     'sort-destructure-keys/sort-destructure-keys': 'error',
+    'sort-imports': [
+      'error',
+      {
+        allowSeparatedGroups: true,
+        ignoreCase: false,
+        ignoreDeclarationSort: true,
+        ignoreMemberSort: false,
+        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single']
+      }
+    ],
     'sort-keys-fix/sort-keys-fix': 'error',
     'spaced-comment': 'error',
     strict: ['error', 'never']

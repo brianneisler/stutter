@@ -1,24 +1,51 @@
 language: node_js
 sudo: false
+
 node_js:
+- 14
 - 12
 - 10
+
 os:
 - linux
 - osx
 - windows
+
 install:
 - npm run setup
+
 script:
-- npm run lint
 - npm run test:ci
-deploy:
-  provider: npm
-  email: me@brianneisler.com
-  skip_cleanup: true
-  on:
-    branch: master
-    tags: true
-    repo: brianneisler/stutter
-  api_key:
-    secure: FVtH5qL9OHJMMipCsMwr5HhsA+wbMU/0z/pEupT1pPBtkaDUJhfqKnJZo8/oiZUjKOQm3vLL/jE9fyx5hE/VnpXBEW/cs9Iw49v7MEjpTHjm3FBihOExJ2XOIv8+qis/nqmu08xSdzZZQWiUxLCvOrzZ9iUvUor0YO6LV2Jlh/UAMHJOdMFl4kTLfk3sifUZ29eIGBm41u5xiqyGY/ss2J/WJDzL/rM41m05rzQlgbyvy0Y7N7589ib0iDrF2CWlR+v8m7463aZtFVlwoEOBQZzp970AmQxBQuAjBBfc6qrPIukOYPmif1M/O9djJhIXqUlJNtYOLKXyelM2dZGrc37PKDZEFC7MyoVjOj5Q8qRhRcEfwbpXLsECJN0Px3NVoGnP0ohwT6bjarE7Dk6V9EA+DW48djh9J3/H5RwgZ2JysR3CkdJz+GrxpEYrvrlnwyOMB4UrOEEG3UsXbr4UPYJFQppK8b5u6CHm6lbrxRAO658ndiKPdUiWXI1wOrPxjSXV5svF/TaSMcZIntWWa7LtsW9uF0bIkq0gstCBr4WBALB7BC4TlXPbD/MfyWJlySyh16lkXiqroAXpw+R6b3YpEq0PMmM/k9kBH1pE66lkuLV6l1hcN7cm5knQ5c8bl/e0y6xEi0b2nrz2boyA8zkmL+EiLT+JaZHLacCSlmk=
+
+stages:
+- audit
+- lint
+- test
+- name: deploy
+  if: tag=~^v AND repo=brianneisler/stutter
+
+jobs:
+  include:
+  - stage: audit
+    node_js: 14
+    os: linux
+    script: npm run security:audit
+  - stage: lint
+    node_js: 14
+    os: linux
+    script: npm run lint
+  - stage: deploy
+    node_js: 14
+    os: linux
+    script: echo "Deploying to npm ..."
+    deploy:
+      provider: npm
+      skip_cleanup: true
+      email: me@brianneisler.com
+      api_key: "$NPM_TOKEN"
+      on:
+        tags: true
+
+env:
+  global:
+    secure: oG0ZERRlRQAg0bENsXxUFNRhGs5kPqzNWlacgHJxFEOPwQ8E6aBZsCqcja0Fy5StYntawf6fX+6PHyXpyVUvzoLjSeSwc6z2S/ofbZ6+Y4y6P7m8915EbeT5vFh8lAefqVh/s+KwVGTKcIzHvn2dKgwg7Qxk1FQA21dDkZaZPsfV0djMuC+Nvx4tpeqAUQQ8g6xolr9CJ7lnwG7k8S43RSBmBswV284TQB0W5VckjWGNVGY77oj0QtyEwmFzxyOy1ZmY+Fy0paBHJkZirnIg2s5LuGgekung4vPHkoBq3E/deGkodG3MPFfZF+FI6GxcZF0Zp/1qCKSAJxEF/pLmeF6jBGC0a5MimnEzDtAF93GtOy6yltYRaU/2ZrkWHh0s8uQ272eUI1xmEQFuThf2DmfttCPY7YbdiCoUyEvReY7a0tfmMmoL45KKTbXRnki7BTFA3sfZdqPurj6FxMup6Ub5Uv1uT+p6WzUiV6m4YkTIyCPRirZxozNnriaGLzrGzl71V9x2IyzqKFITl0wAL/t07Y1iU5iEnLXLC7GfwRQLUfwVf0jnNr/pl9aDN1ZnLHdjGKOEU4N28eIsPeP1cbDtMRvOueiYRhH0kKR1EqmzeaTIXk4lAa1/X+DjSAjLWcHw8Pqe21OtXa8LEaiIDE9zRWlQf8tMaFU02/pwl74=

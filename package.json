@@ -31,6 +31,7 @@
     "docs:generate": "bash ./scripts/docs-generate.sh",
     "lint": "bash ./scripts/lint.sh",
     "lint:staged": "bash ./scripts/lint-staged.sh",
+    "security:audit": "bash ./scripts/security-audit.sh",
     "setup": "bash ./scripts/setup.sh",
     "test": "bash ./scripts/test.sh",
     "test:ci": "bash ./scripts/test-ci.sh",
