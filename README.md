@@ -2,6 +2,7 @@
 
 [Website](https://stutter.io) • [Guide](docs/GUIDE.md) • [Full API documentation](docs/API.md)
 
+**PLEASE NOTE: THIS PROJECT IS STILL UNDER DEVELOPMENT**
 
 ## Why?
 
