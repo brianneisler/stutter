@@ -1,4 +1,5 @@
 import Path from '../classes/Path'
+
 import anyIsPath from './anyIsPath'
 
 describe('anyIsPath', () => {

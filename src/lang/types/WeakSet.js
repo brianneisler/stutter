@@ -1,10 +1,18 @@
 import _WeakSet from '../classes/WeakSet'
 import anyIsWeakSet from '../util/anyIsWeakSet'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-const WeakSet = deftype('lang.WeakSet', 'A type representing a WeakSet.', {
-  class: _WeakSet,
-  is: anyIsWeakSet
-})
+const WeakSet = defineAny(
+  'lang.WeakSet',
+  {
+    description: 'A type representing a WeakSet.',
+    since: 'v0.1.0'
+  },
+  definitionToType({
+    class: _WeakSet,
+    is: anyIsWeakSet
+  })
+)
 
 export default WeakSet

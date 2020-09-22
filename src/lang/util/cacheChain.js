@@ -1,5 +1,6 @@
 import ImmutableMap from '../classes/ImmutableMap'
 import WeakMap from '../classes/WeakMap'
+
 import anyIsImmutable from './anyIsImmutable'
 import anyIsObject from './anyIsObject'
 import arrayForEach from './arrayForEach'

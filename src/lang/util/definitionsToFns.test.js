@@ -1,8 +1,9 @@
-import Any from '../types/Any'
 import ImmutableList from '../classes/ImmutableList'
-import Number from '../types/Number'
 import Parameter from '../classes/Parameter'
+import Any from '../types/Any'
+import Number from '../types/Number'
 import String from '../types/String'
+
 import definitionToFn from './definitionToFn'
 import definitionsToFns from './definitionsToFns'
 import fnGetMeta from './fnGetMeta'

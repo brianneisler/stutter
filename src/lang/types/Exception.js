@@ -1,14 +1,19 @@
 import _Exception from '../classes/Exception'
 import anyIsException from '../util/anyIsException'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-const Exception = deftype(
+const Exception = defineAny(
   'lang.Exception',
-  'A type representing a throwable that is expected and should be properly handled by application code.',
   {
+    description:
+      'A type representing a throwable that is expected and should be properly handled by application code.',
+    since: 'v0.1.0'
+  },
+  definitionToType({
     class: _Exception,
     is: anyIsException
-  }
+  })
 )
 
 export default Exception

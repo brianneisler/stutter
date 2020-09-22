@@ -8,7 +8,10 @@ import definitionsToProtocol from '../util/definitionsToProtocol'
 
 const Indexed = defineAny(
   'lang.Indexed',
-  'A protocol for accessing values stored using Indexes',
+  {
+    description: 'A protocol for accessing values stored using Indexes',
+    since: 'v0.2.0'
+  },
 
   definitionsToProtocol({
     'lang.deleteIndex': [Self, Index, () => Self],

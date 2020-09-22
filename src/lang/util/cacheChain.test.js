@@ -1,4 +1,5 @@
 import ImmutableMap from '../classes/ImmutableMap'
+
 import cacheChain from './cacheChain'
 
 describe('cacheChain', () => {

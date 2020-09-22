@@ -1,10 +1,18 @@
 import _RegExp from '../classes/RegExp'
 import anyIsRegExp from '../util/anyIsRegExp'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-const RegExp = deftype('lang.RegExp', 'A type representing a RegExp.', {
-  class: _RegExp,
-  is: anyIsRegExp
-})
+const RegExp = defineAny(
+  'lang.RegExp',
+  {
+    description: 'A type representing a RegExp.',
+    since: 'v0.1.0'
+  },
+  definitionToType({
+    class: _RegExp,
+    is: anyIsRegExp
+  })
+)
 
 export default RegExp

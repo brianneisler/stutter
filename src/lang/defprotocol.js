@@ -1,7 +1,7 @@
-import { Object, Protocol, String } from './classes'
 import def from './def'
 import fn from './fn'
 import protocol from './protocol'
+import { Object, Protocol, String } from './types'
 
 const defprotocol = def(
   'lang.defprotocol',

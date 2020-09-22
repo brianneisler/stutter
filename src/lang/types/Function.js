@@ -4,18 +4,12 @@ import anyToFunction from '../util/anyToFunction'
 import defineAny from '../util/defineAny'
 import definitionToType from '../util/definitionToType'
 
-/**
- * A `Type` representing a javascript `Function`
- *
- * @type Type
- * @since v0.1.0
- * @category lang
- * @example
- *
- */
 const Function = defineAny(
   'lang.Function',
-  'A low-level, Javascript bit of code',
+  {
+    description: 'A low-level, Javascript bit of code',
+    since: 'v0.1.0'
+  },
 
   definitionToType({
     class: _Function,

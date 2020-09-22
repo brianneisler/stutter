@@ -1,10 +1,18 @@
 import _Symbol from '../classes/Symbol'
 import anyIsSymbol from '../util/anyIsSymbol'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-const Symbol = deftype('lang.Symbol', 'A type representing a Symbol.', {
-  class: _Symbol,
-  is: anyIsSymbol
-})
+const Symbol = defineAny(
+  'lang.Symbol',
+  {
+    description: 'A type representing a Symbol.',
+    since: 'v0.1.0'
+  },
+  definitionToType({
+    class: _Symbol,
+    is: anyIsSymbol
+  })
+)
 
 export default Symbol

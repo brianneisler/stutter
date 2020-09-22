@@ -1,8 +1,16 @@
 import anyIsGenerator from '../util/anyIsGenerator'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-const Generator = deftype('lang.Generator', 'A type representing a Generator.', {
-  is: anyIsGenerator
-})
+const Generator = defineAny(
+  'lang.Generator',
+  {
+    description: 'A type representing a Generator.',
+    since: 'v0.1.0'
+  },
+  definitionToType({
+    is: anyIsGenerator
+  })
+)
 
 export default Generator

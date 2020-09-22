@@ -1,13 +1,17 @@
 import anyIsKey from '../util/anyIsKey'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-const Key = deftype(
+const Key = defineAny(
   'lang.Key',
-  'A type representing a key for a Keyed value.',
-
   {
+    description: 'A type representing a key for a Keyed value.',
+    since: 'v0.1.0'
+  },
+
+  definitionToType({
     is: anyIsKey
-  }
+  })
 )
 
 export default Key

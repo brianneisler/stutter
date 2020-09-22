@@ -4,7 +4,10 @@ import definitionToType from '../util/definitionToType'
 
 const Property = defineAny(
   'lang.Property',
-  'A type representing a key for a Proped value.',
+  {
+    description: 'A type representing a key for a Proped value.',
+    since: 'v0.1.0'
+  },
 
   definitionToType({
     is: anyIsProperty

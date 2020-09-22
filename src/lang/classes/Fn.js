@@ -1,6 +1,6 @@
-import { META, TO_SIGNATURE, TO_STRING_TAG } from '../constants/Symbol'
 import { v4 as uuid } from 'uuid'
-import Context from './Context'
+
+import { META, TO_SIGNATURE, TO_STRING_TAG } from '../constants/Symbol'
 import anyIsContext from '../util/anyIsContext'
 import anyIsNumber from '../util/anyIsNumber'
 import anyToName from '../util/anyToName'
@@ -21,6 +21,8 @@ import objectDefineProperty from '../util/objectDefineProperty'
 import objectKeys from '../util/objectKeys'
 import objectPickProps from '../util/objectPickProps'
 import objectShallowEquals from '../util/objectShallowEquals'
+
+import Context from './Context'
 
 const buildFnHandler = function (fn) {
   const { meta } = fn

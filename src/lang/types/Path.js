@@ -1,9 +1,10 @@
 import _Path from '../classes/Path'
 import anyIsPath from '../util/anyIsPath'
 import anyToPath from '../util/anyToPath'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-const Path = deftype(
+const Path = defineAny(
   'lang.Path',
   {
     description:
@@ -11,11 +12,11 @@ const Path = deftype(
     since: 'v0.2.0'
   },
 
-  {
+  definitionToType({
     class: _Path,
     is: anyIsPath,
     to: anyToPath
-  }
+  })
 )
 
 export default Path

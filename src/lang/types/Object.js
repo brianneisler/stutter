@@ -1,14 +1,10 @@
-import Any from './Any'
-import Boolean from './Boolean'
+import jsObject from '../classes/Object'
 import Propertied from '../protocols/Propertied'
-import Property from './Property'
-import Self from './Self'
 import anyIsObject from '../util/anyIsObject'
 import anyToObject from '../util/anyToObject'
 import defineAny from '../util/defineAny'
 import definitionToType from '../util/definitionToType'
 import definitionsToFn from '../util/definitionsToFn'
-import jsObject from '../classes/Object'
 import objectDeleteProperty from '../util/objectDeleteProperty'
 import objectGetProperty from '../util/objectGetProperty'
 import objectHasOwnProperty from '../util/objectHasOwnProperty'
@@ -16,9 +12,17 @@ import objectHasProperty from '../util/objectHasProperty'
 import objectPropertyIsEnumerable from '../util/objectPropertyIsEnumerable'
 import objectSetProperty from '../util/objectSetProperty'
 
+import Any from './Any'
+import Boolean from './Boolean'
+import Property from './Property'
+import Self from './Self'
+
 const _Object = defineAny(
   'lang.Object',
-  'A generic object',
+  {
+    description: 'A generic object',
+    since: 'v0.1.0'
+  },
 
   definitionToType({
     class: jsObject,

@@ -1,21 +1,18 @@
 import _ImmutableOrderedSet from '../classes/ImmutableOrderedSet'
 import anyIsImmutableOrderedSet from '../util/anyIsImmutableOrderedSet'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-/**
- *
- * @type {Type}
- * @since v0.1.0
- * @category lang
- * @example
- */
-const ImmutableOrderedSet = deftype(
+const ImmutableOrderedSet = defineAny(
   'lang.ImmutableOrderedSet',
-  'A type representing a ImmutableOrderedSet.',
   {
+    description: 'A type representing a ImmutableOrderedSet.',
+    since: 'v0.1.0'
+  },
+  definitionToType({
     class: _ImmutableOrderedSet,
     is: anyIsImmutableOrderedSet
-  }
+  })
 )
 
 export default ImmutableOrderedSet

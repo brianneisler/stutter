@@ -4,7 +4,10 @@ import definitionToType from '../util/definitionToType'
 
 const Nil = defineAny(
   'lang.Nil',
-  'A type representing a null or undefined value.',
+  {
+    description: 'A type representing a null or undefined value.',
+    since: 'v0.1.0'
+  },
 
   definitionToType({
     is: anyIsNil

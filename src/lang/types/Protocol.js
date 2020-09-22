@@ -1,17 +1,21 @@
 import _Protocol from '../classes/Protocol'
 import anyIsProtocol from '../util/anyIsProtocol'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-const Protocol = deftype(
+const Protocol = defineAny(
   'lang.Protocol',
-  'A type representing a Protocol of functions',
   {
+    description: 'A type representing a Protocol of functions',
+    since: 'v0.1.0'
+  },
+  definitionToType({
     class: _Protocol,
     is: (any) => anyIsProtocol(any),
     to: () => {
       throw new Error('Cannot convert Protocol to any other type')
     }
-  }
+  })
 )
 
 export default Protocol

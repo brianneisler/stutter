@@ -6,7 +6,10 @@ import definitionToType from '../util/definitionToType'
 
 const Number = defineAny(
   'lang.Number',
-  'A numeric value',
+  {
+    description: 'A numeric value',
+    since: 'v0.1.0'
+  },
 
   definitionToType({
     class: _Number,

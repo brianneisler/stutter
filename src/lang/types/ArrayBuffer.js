@@ -1,13 +1,15 @@
-import Any from './Any'
-import Boolean from './Boolean'
 import Equatable from '../protocols/Equatable'
-import Self from './Self'
 import anyIsArrayBuffer from '../util/anyIsArrayBuffer'
 import arrayBufferEquals from '../util/arrayBufferEquals'
-import deftype from '../deftype'
-import fn from '../fn'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
+import definitionsToFn from '../util/definitionsToFn'
 
-const ArrayBuffer = deftype(
+import Any from './Any'
+import Boolean from './Boolean'
+import Self from './Self'
+
+const ArrayBuffer = defineAny(
   'lang.ArrayBuffer',
   {
     description:
@@ -15,21 +17,21 @@ const ArrayBuffer = deftype(
     since: 'v0.1.0'
   },
 
-  {
+  definitionToType({
     is: anyIsArrayBuffer,
     protocols: [
       Equatable,
       {
-        'lang.equals': fn(
+        'lang.equals': definitionsToFn([
           [Self, Any, () => Boolean],
           arrayBufferEquals,
 
           [Any, Self, () => Boolean],
           (any, arrayBuffer) => arrayBufferEquals(arrayBuffer, any)
-        )
+        ])
       }
     ]
-  }
+  })
 )
 
 export default ArrayBuffer

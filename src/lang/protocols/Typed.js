@@ -6,7 +6,10 @@ import definitionsToProtocol from '../util/definitionsToProtocol'
 
 const Typed = defineAny(
   'lang.Typed',
-  'A protocol for handling the typing of a value',
+  {
+    description: 'A protocol for handling the typing of a value',
+    since: 'v0.1.0'
+  },
 
   definitionsToProtocol({
     is: [Self, Any, () => Boolean],

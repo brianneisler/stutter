@@ -1,5 +1,7 @@
 import Path from '../classes/Path'
+
 import anyIsArray from './anyIsArray'
+import anyIsImmutableList from './anyIsImmutableList'
 import anyIsString from './anyIsString'
 import stringToPath from './stringToPath'
 
@@ -20,7 +22,7 @@ import stringToPath from './stringToPath'
  */
 const anyToPath = (any) => {
   if (!anyIsString(any)) {
-    if (anyIsArray(any)) {
+    if (anyIsArray(any) || anyIsImmutableList(any)) {
       return new Path(any)
     }
     return new Path([any])

@@ -8,7 +8,10 @@ import definitionsToProtocol from '../util/definitionsToProtocol'
 
 const Keyed = defineAny(
   'lang.Keyed',
-  'A protocol for accessing values stored using keys',
+  {
+    description: 'A protocol for accessing values stored using keys',
+    since: 'v0.2.0'
+  },
 
   definitionsToProtocol({
     'lang.deleteKey': [Self, Key, () => Self],

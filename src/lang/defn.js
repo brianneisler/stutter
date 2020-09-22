@@ -1,10 +1,10 @@
+import def from './def'
+import fn from './fn'
 import Any from './types/Any'
 import DefinitionsObject from './types/DefinitionsObject'
 import MetaObject from './types/MetaObject'
 import String from './types/String'
 import buildMultiFn from './util/buildMultiFn'
-import def from './def'
-import fn from './fn'
 import protocolNameToDispatcher from './util/protocolNameToDispatcher'
 
 const defn = def(

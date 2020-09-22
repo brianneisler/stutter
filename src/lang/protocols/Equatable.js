@@ -6,7 +6,10 @@ import definitionsToProtocol from '../util/definitionsToProtocol'
 
 const Equatable = defineAny(
   'lang.Equatable',
-  'A protocol for assessing equality',
+  {
+    description: 'A protocol for assessing equality',
+    since: 'v0.2.0'
+  },
 
   definitionsToProtocol({
     'lang.equals': [Self, Any, () => Boolean]

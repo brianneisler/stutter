@@ -1,4 +1,5 @@
 import ImmutableList from '../classes/ImmutableList'
+
 import anyIsImmutableList from './anyIsImmutableList'
 
 const anyToImmutableList = (any) => {

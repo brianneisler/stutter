@@ -1,11 +1,5 @@
-import Any from './Any'
-import Boolean from './Boolean'
-import Character from './Character'
-import Index from './IndexType'
-import Indexed from '../protocols/Indexed'
-import Integer from './Integer'
-import Self from './Self'
 import _String from '../classes/String'
+import Indexed from '../protocols/Indexed'
 import anyIsString from '../util/anyIsString'
 import anyToString from '../util/anyToString'
 import defineAny from '../util/defineAny'
@@ -17,9 +11,19 @@ import stringHasIndex from '../util/stringHasIndex'
 import stringLength from '../util/stringLength'
 import stringSetIndex from '../util/stringSetIndex'
 
+import Any from './Any'
+import Boolean from './Boolean'
+import Character from './Character'
+import Index from './IndexType'
+import Integer from './Integer'
+import Self from './Self'
+
 const String = defineAny(
   'lang.String',
-  'A text value',
+  {
+    description: 'A text value',
+    since: 'v0.1.0'
+  },
 
   definitionToType({
     class: _String,

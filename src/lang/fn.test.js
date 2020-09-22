@@ -1,5 +1,5 @@
-import { Any, Number, String } from './types'
 import fn from './fn'
+import * as types from './types'
 
 describe('fn', () => {
   it('maintains context of function', () => {
@@ -23,7 +23,7 @@ describe('fn', () => {
   })
 
   it('Accepts an Array of types to apply to the function', () => {
-    const foo = fn([Number], (num) => {
+    const foo = fn([types.Number], (num) => {
       expect(num).toBe(123)
       return num
     })
@@ -31,11 +31,11 @@ describe('fn', () => {
   })
 
   it('Returns a Parameterized function', () => {
-    const method = fn([Number], (num) => num)
+    const method = fn([types.Number], (num) => num)
     expect(method.parameters).toEqual([
       expect.objectContaining({
         name: 'num',
-        type: Number
+        type: types.Number
       })
     ])
   })
@@ -45,23 +45,23 @@ describe('fn', () => {
     expect(method.parameters).toEqual([
       expect.objectContaining({
         name: 'foo',
-        type: Any
+        type: types.Any
       })
     ])
   })
 
   it('Throws a TypeError when argument does not match expected Type and function is last in stack', async () => {
-    const foo = fn([Number], (num) => num)
+    const foo = fn([types.Number], (num) => num)
     expect(() => foo('foo')).toThrow(TypeError)
   })
 
   it('Throws a TypeError when return value does not match expected Type and function is last in stack', async () => {
-    const foo = fn([Number, () => Number], (num) => `foo-${num}`)
+    const foo = fn([types.Number, () => types.Number], (num) => `foo-${num}`)
     expect(() => foo(123)).toThrow(TypeError)
   })
 
   it('throws a TypeError when argument does not match expected Type and function is last in stack after async value is resolved', async () => {
-    const foo = fn([Number], (num) => {
+    const foo = fn([types.Number], (num) => {
       expect(num).toBe(123)
       return num
     })
@@ -69,7 +69,7 @@ describe('fn', () => {
   })
 
   it('throws an Exception when argument does not match expected Type', async () => {
-    const foo = fn([Number], (num) => num)
+    const foo = fn([types.Number], (num) => num)
     try {
       foo('foo')
     } catch (error) {
@@ -82,7 +82,7 @@ describe('fn', () => {
   })
 
   it('throws an Exception when argument does not match expected Type after async value is resolved', async () => {
-    const foo = fn([Number], (num) => {
+    const foo = fn([types.Number], (num) => {
       expect(num).toBe(123)
       return num
     })

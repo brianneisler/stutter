@@ -1,18 +1,17 @@
 import anyIsInfinity from '../util/anyIsInfinity'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-/**
- * @type {Type}
- * @since v0.1.0
- * @category lang
- * @example
- */
-const Infinity = deftype(
+const Infinity = defineAny(
   'lang.Infinity',
-  'A type representing an inifnity numeber (positive or negative).',
   {
+    description:
+      'A type representing an inifnity numeber (positive or negative).',
+    since: 'v0.1.0'
+  },
+  definitionToType({
     is: anyIsInfinity
-  }
+  })
 )
 
 export default Infinity

@@ -1,7 +1,5 @@
+import { Any, MetaObject, String } from './types'
 import { defineAny, definitionsToFn } from './util'
-import Any from './types/Any'
-import MetaObject from './types/MetaObject'
-import String from './types/String'
 
 const def = defineAny(
   'lang.def',

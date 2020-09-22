@@ -16,7 +16,7 @@
  *   bar: 2
  * }
  *
- * const result = objectSetProperty(object, 'foo', 3)
+ * const result = objectMutateSetProperty(object, 'foo', 3)
  *
  * result.foo
  * //=> 3

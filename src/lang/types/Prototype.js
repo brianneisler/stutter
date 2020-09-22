@@ -1,12 +1,16 @@
 import anyIsPrototype from '../util/anyIsPrototype'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-const Prototype = deftype(
+const Prototype = defineAny(
   'lang.Prototype',
-  'A Prototype object is the object representing an object instances prototype chain',
   {
+    description:
+      'A Prototype object is the object representing an object instances prototype chain'
+  },
+  definitionToType({
     is: anyIsPrototype
-  }
+  })
 )
 
 export default Prototype

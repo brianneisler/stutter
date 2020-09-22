@@ -1,5 +1,5 @@
 import contagion from './contagion'
-import defn from './defn.js'
+import defn from './defn'
 import pipe from './pipe'
 import reduce from './reduce'
 import set from './set'

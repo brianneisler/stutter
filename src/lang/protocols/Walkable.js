@@ -1,13 +1,18 @@
 import Self from '../types/Self'
 import Walker from '../types/Walker'
-import defprotocol from '../defprotocol'
+import defineAny from '../util/defineAny'
+import definitionsToProtocol from '../util/definitionsToProtocol'
 
-const Walkable = defprotocol(
+const Walkable = defineAny(
   'lang.Walkable',
-  'A protocol for walking a given Keyed, Indexed or Propertied',
   {
+    description: 'A protocol for walking a given Keyed, Indexed or Propertied',
+    since: 'v0.2.0'
+  },
+
+  definitionsToProtocol({
     'lang.walker': [Self, () => Walker]
-  }
+  })
 )
 
 export default Walkable

@@ -1,7 +1,6 @@
-import { definitionsToProtocol } from './util'
-import PlainObject from './types/PlainObject'
-import Protocol from './types/Protocol'
 import defn from './defn'
+import { PlainObject, Protocol } from './types'
+import { definitionsToProtocol } from './util'
 
 /**
  * Returns a new anonymous `Protocol` with the given `definitions`.

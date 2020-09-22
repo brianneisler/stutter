@@ -1,10 +1,8 @@
-import { definitionsToFn } from './util'
-import Any from './types/Any'
-// import Array from './types/Array'
-import Fn from './types/Fn'
-// import Function from './types/Function'
-import DefinitionsObject from './types/DefinitionsObject'
 import def from './def'
+import { Any, DefinitionsObject, Fn } from './types'
+import { definitionsToFn } from './util'
+// import Array from './types/Array'
+// import Function from './types/Function'
 
 const fn = def(
   'lang.fn',

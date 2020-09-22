@@ -1,4 +1,5 @@
 import Any from '../types/Any'
+
 import Fn from './Fn'
 import Parameter from './Parameter'
 
@@ -27,7 +28,7 @@ describe('js:Fn', () => {
     ])
   })
 
-  test('if meta is not change update returns same Fn', () => {
+  test('if meta has not changed, update should return the same Fn', () => {
     const parameters = [new Parameter('argA', Any)]
     const fn = new Fn(() => {}, {
       parameters

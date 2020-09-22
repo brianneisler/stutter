@@ -5,7 +5,10 @@ import definitionToType from '../util/definitionToType'
 
 const PlainObject = defineAny(
   'lang.PlainObject',
-  'A value that is a basic Object',
+  {
+    description: 'A value that is a basic Object',
+    since: 'v0.2.0'
+  },
 
   definitionToType({
     is: anyIsPlainObject,

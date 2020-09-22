@@ -4,7 +4,10 @@ import definitionToType from '../util/definitionToType'
 
 const Self = defineAny(
   'lang.Self',
-  "A context object which represents a Protocol's current value",
+  {
+    description: "A context object which represents a Protocol's current value",
+    since: 'v0.1.0'
+  },
   definitionToType({
     is: anyIsSelf
   })

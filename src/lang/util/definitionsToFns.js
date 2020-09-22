@@ -1,5 +1,6 @@
-import { ITERATOR } from '../constants/Symbol'
 import ImmutableList from '../classes/ImmutableList'
+import { ITERATOR } from '../constants/Symbol'
+
 import anyIsArray from './anyIsArray'
 import anyIsFn from './anyIsFn'
 import anyIsFunction from './anyIsFunction'

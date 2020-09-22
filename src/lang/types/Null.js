@@ -4,7 +4,10 @@ import definitionToType from '../util/definitionToType'
 
 const Null = defineAny(
   'lang.Null',
-  'A type representing a `null` value.',
+  {
+    description: 'A type representing a `null` value.',
+    since: 'v0.1.0'
+  },
 
   definitionToType({
     is: anyIsNull

@@ -1,12 +1,6 @@
-import Any from './Any'
-import Boolean from './Boolean'
 import Equatable from '../protocols/Equatable'
-import Index from './IndexType'
 import Indexed from '../protocols/Indexed'
-import Integer from './Integer'
 import Iterable from '../protocols/Iterable'
-import Iterator from './Iterator'
-import Self from './Self'
 import anyIsArguments from '../util/anyIsArguments'
 import anyToArguments from '../util/anyToArguments'
 import argumentsDeleteIndex from '../util/argumentsDeleteIndex'
@@ -18,6 +12,13 @@ import argumentsSetIndex from '../util/argumentsSetIndex'
 import defineAny from '../util/defineAny'
 import definitionToType from '../util/definitionToType'
 import definitionsToFn from '../util/definitionsToFn'
+
+import Any from './Any'
+import Boolean from './Boolean'
+import Index from './IndexType'
+import Integer from './Integer'
+import Iterator from './Iterator'
+import Self from './Self'
 
 const Arguments = defineAny(
   'lang.Arguments',

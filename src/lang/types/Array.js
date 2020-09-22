@@ -1,7 +1,5 @@
 import _Array from '../classes/Array'
 import ImmutableStack from '../classes/ImmutableStack'
-import deftype from '../deftype'
-import equals from '../equals'
 import Equatable from '../protocols/Equatable'
 import Indexed from '../protocols/Indexed'
 import anyIsArray from '../util/anyIsArray'
@@ -12,6 +10,8 @@ import arrayGetIndex from '../util/arrayGetIndex'
 import arrayHasIndex from '../util/arrayHasIndex'
 import arrayLength from '../util/arrayLength'
 import arraySetIndex from '../util/arraySetIndex'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 import definitionsToFn from '../util/definitionsToFn'
 
 import Any from './Any'
@@ -20,14 +20,14 @@ import Index from './IndexType'
 import Integer from './Integer'
 import Self from './Self'
 
-const Array = deftype(
+const Array = defineAny(
   'lang.Array',
   {
     description: 'A high-level, list-like object',
     since: 'v0.1.0'
   },
 
-  {
+  definitionToType({
     class: _Array,
     is: anyIsArray,
     protocols: [
@@ -38,7 +38,7 @@ const Array = deftype(
           (
             self,
             any,
-            equalsFunc = equals,
+            equalsFunc = require('../equals'),
             stackA = ImmutableStack([]),
             stackB = ImmutableStack([])
           ) => arrayEquals(self, any, equalsFunc, stackA, stackB),
@@ -47,7 +47,7 @@ const Array = deftype(
           (
             any,
             self,
-            equalsFunc = equals,
+            equalsFunc = require('../equals'),
             stackA = ImmutableStack([]),
             stackB = ImmutableStack([])
           ) => arrayEquals(self, any, equalsFunc, stackA, stackB)
@@ -88,7 +88,7 @@ const Array = deftype(
       }
     ],
     to: anyToArray
-  }
+  })
 )
 
 export default Array

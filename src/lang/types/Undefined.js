@@ -4,7 +4,10 @@ import definitionToType from '../util/definitionToType'
 
 const Undefined = defineAny(
   'lang.Undefined',
-  'A type representing an `undefined` value.',
+  {
+    description: 'A type representing an `undefined` value.',
+    since: 'v0.1.0'
+  },
 
   definitionToType({
     is: anyIsUndefined

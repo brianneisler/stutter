@@ -4,18 +4,12 @@ import anyToFn from '../util/anyToFn'
 import defineAny from '../util/defineAny'
 import definitionToType from '../util/definitionToType'
 
-/**
- * A `Type` representing a Stutter `Fn`
- *
- * @type Type
- * @since v0.1.0
- * @category lang
- * @example
- *
- */
 const Fn = defineAny(
   'lang.Fn',
-  'A high-level, Stutter executable bit of code',
+  {
+    description: 'A high-level, Stutter executable bit of code',
+    since: 'v0.1.0'
+  },
 
   definitionToType({
     class: _Fn,

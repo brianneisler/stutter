@@ -1,15 +1,19 @@
 import _NaN from '../classes/NaN'
 import anyIsNaN from '../util/anyIsNaN'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-const NaN = deftype(
+const NaN = defineAny(
   'lang.NaN',
-  'A type representing javascript NaN.',
-
   {
+    description: 'A type representing javascript NaN.',
+    since: 'v0.1.0'
+  },
+
+  definitionToType({
     class: _NaN,
     is: anyIsNaN
-  }
+  })
 )
 
 export default NaN

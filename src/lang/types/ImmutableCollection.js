@@ -1,19 +1,16 @@
 import anyIsImmutableCollection from '../util/anyIsImmutableCollection'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-/**
- *
- * @type {Type}
- * @since v0.1.0
- * @category lang
- * @example
- */
-const ImmutableCollection = deftype(
+const ImmutableCollection = defineAny(
   'lang.ImmutableCollection',
-  'A type representing a ImmutableCollection.',
   {
+    description: 'A type representing a ImmutableCollection.',
+    since: 'v0.1.0'
+  },
+  definitionToType({
     is: anyIsImmutableCollection
-  }
+  })
 )
 
 export default ImmutableCollection

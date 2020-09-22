@@ -8,7 +8,10 @@ import definitionsToProtocol from '../util/definitionsToProtocol'
 
 const Propertied = defineAny(
   'lang.Propertied',
-  'A protocol for accessing values stored using Properties',
+  {
+    description: 'A protocol for accessing values stored using Properties',
+    since: 'v0.2.0'
+  },
 
   definitionsToProtocol({
     'lang.deleteProperty': [Self, Property, () => Self],

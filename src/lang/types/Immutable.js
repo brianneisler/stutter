@@ -1,11 +1,16 @@
 import anyIsImmutable from '../util/anyIsImmutable'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-/**
- * @since v0.1.0
- */
-const Immutable = deftype('lang.Immutable', 'A type representing a value that is Immutable.', {
-  is: anyIsImmutable
-})
+const Immutable = defineAny(
+  'lang.Immutable',
+  {
+    description: 'A type representing a value that is Immutable.',
+    since: 'v0.1.0'
+  },
+  definitionToType({
+    is: anyIsImmutable
+  })
+)
 
 export default Immutable

@@ -1,8 +1,16 @@
 import anyIsObjectLike from '../util/anyIsObjectLike'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-const ObjectLike = deftype('lang.ObjectLike', 'A value that is indexed and has a length', {
-  is: anyIsObjectLike
-})
+const ObjectLike = defineAny(
+  'lang.ObjectLike',
+  {
+    description: 'A value that is indexed and has a length',
+    since: 'v0.1.0'
+  },
+  definitionToType({
+    is: anyIsObjectLike
+  })
+)
 
 export default ObjectLike

@@ -5,7 +5,11 @@ import definitionToType from '../util/definitionToType'
 
 const Integer = defineAny(
   'lang.Integer',
-  'A type representing an number that is divisible by 1 with no remainder.',
+  {
+    description:
+      'A type representing an number that is divisible by 1 with no remainder.',
+    since: 'v0.1.0'
+  },
 
   definitionToType({
     is: anyIsInteger,

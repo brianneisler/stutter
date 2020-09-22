@@ -1,6 +1,6 @@
 import './Map'
-import { Keyed } from '../protocols'
 import { Map } from '../classes'
+import { Keyed } from '../protocols'
 import { anySatisfies } from '../util'
 
 describe('Map', () => {

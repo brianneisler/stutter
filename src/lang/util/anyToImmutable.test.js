@@ -1,5 +1,6 @@
 import ImmutableList from '../classes/ImmutableList'
 import ImmutableMap from '../classes/ImmutableMap'
+
 import anyToImmutable from './anyToImmutable'
 
 describe('anyToImmutable', () => {

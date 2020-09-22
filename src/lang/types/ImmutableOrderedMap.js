@@ -1,21 +1,18 @@
 import _ImmutableOrderedMap from '../classes/ImmutableOrderedMap'
 import anyIsImmutableOrderedMap from '../util/anyIsImmutableOrderedMap'
-import deftype from '../deftype'
+import defineAny from '../util/defineAny'
+import definitionToType from '../util/definitionToType'
 
-/**
- *
- * @type {Type}
- * @since v0.1.0
- * @category lang
- * @example
- */
-const ImmutableOrderedMap = deftype(
+const ImmutableOrderedMap = defineAny(
   'lang.ImmutableOrderedMap',
-  'A type representing a ImmutableOrderedMap.',
   {
+    description: 'A type representing a ImmutableOrderedMap.',
+    since: 'v0.1.0'
+  },
+  definitionToType({
     class: _ImmutableOrderedMap,
     is: anyIsImmutableOrderedMap
-  }
+  })
 )
 
 export default ImmutableOrderedMap
